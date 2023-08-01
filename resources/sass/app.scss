@@ -1,0 +1,15 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Lato');
+
+// Variables
+@import 'variables';
+
+$fa-font-path: '../webfonts';
+// Bootstrap
+@import '../../node_modules/bootstrap/scss/bootstrap';
+
+// Fontawesome
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
+@import '../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
+
