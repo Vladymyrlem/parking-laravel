@@ -3,7 +3,6 @@
     namespace App\Http\Controllers;
 
     use App\Models\Information;
-    use App\Models\VideoInformation;
     use HTMLPurifier_Config;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\File;

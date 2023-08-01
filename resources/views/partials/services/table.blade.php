@@ -49,9 +49,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="postStoreForm" enctype="multipart/form-data" action="{{route('admin.create.service')}}">
+                <form id="postStoreForm" enctype="multipart/form-data">
                     <!-- Add your form fields here, e.g., post title and image input -->
-                    {{ csrf_field() }}
+                    @csrf
+                    @method('post')
                     <input type="text" id="service-title" name="service-title" class="form-control" placeholder="Post Title">
                     <textarea id="service-content" name="service-content" class="form-control"></textarea>
                     <input type="file" name="image" id="image" class="form-control-file">

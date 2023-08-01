@@ -12,6 +12,7 @@
     use App\Models\SectionTitle;
     use App\Models\Services;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Storage;
     use Illuminate\Validation\Validator;
     use Laracasts\Flash\Flash;
     use Yajra\DataTables\DataTables;
@@ -153,7 +154,14 @@
 
         public function uploadImage(Request $request)
         {
-            $imgpath = request()->file('file')->store('uploads', 'public');
-            return response()->json(['location' => "/storage/$imgpath"]);
+            $uploadedFile = $request->file('file');
+
+            // Save the file to the "public/c" directory
+            $imagePath = $request->file('file')->storePublicly('images', 'custom');
+
+            // Extract the filename from the stored path
+            $imageName = basename($imagePath);
+            // Get the public URL for the file
+            return response()->json(['location' => "/images/$imageName"]);
         }
     }

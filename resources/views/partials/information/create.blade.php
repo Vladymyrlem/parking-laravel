@@ -10,7 +10,7 @@
         <div class="form-group">
             <label for="inputPrice" class="col-sm-3 control-label">Media Content</label>
             <div class="col-sm-9">
-                <textarea name="content" id="service" cols="30" rows="10"></textarea>
+                <textarea name="content" id="media-editor" cols="30" rows="10"></textarea>
             </div>
         </div>
     </form>
