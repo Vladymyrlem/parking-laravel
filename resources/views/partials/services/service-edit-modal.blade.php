@@ -12,17 +12,18 @@
             <div class="modal-body">
                 <form id="editPostForm">
                     <!-- Add your form fields here for editing, e.g., post title -->
-                    {{ csrf_field() }}
-                    {{ method_field('PUT') }}
+                    @csrf
+                    @method('PUT')
                     <input type="text" name="service_title" id="service-title" class="form-control" placeholder="Post Title">
-                    <textarea type="service_content" name="service_content" class="form-control"></textarea>
-                    <input type="file" name="image" class="form-control-file">
-                    <input type="hidden" name="post_id" id="editPostId">
+                    <textarea type="service_content" id="service-content" name="service_content" class="form-control"></textarea>
+                    {{--                    <input type="file" id="image" name="image">--}}
+                    <input type="hidden" id="service_id" name="service_id" value="0">
                 </form>
+                <div id="resultMessage"></div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="updatePost()">Save Changes</button>
+                <button type="button" class="btn btn-primary" onclick="updateService()">Save Changes</button>
             </div>
         </div>
     </div>

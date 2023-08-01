@@ -22,6 +22,6 @@
 
         public function getImageUrlAttribute()
         {
-            return asset('storage/' . $this->image);
+            return asset('/' . $this->image);
         }
     }

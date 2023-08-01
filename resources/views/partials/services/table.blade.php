@@ -24,10 +24,10 @@
                 <tr>
                     <td>{{ $post->service_title }}</td>
                     <td>{{ $post->service_content }}</td>
-                    <td><img width="70" src="{{ $post->image_url }}" alt=""></td>
+                    <td><img width="70" src="{{ asset("$post->image_url") }}" alt=""></td>
                     <td>
                         <!-- Edit button -->
-                        <button type="button" class="btn btn-primary btn-sm" onclick="editService({{ $post->id }})">Edit</button>
+                        <button type="button" class="btn btn-primary btn-sm" data-post-id="{{ $post->id }}" onclick="editService({{ $post->id }})">Edit</button>
 
                         <!-- Delete button -->
                         <button type="button" class="btn btn-danger btn-sm" onclick="deleteService({{ $post->id }})">Delete</button>
@@ -55,8 +55,9 @@
                     @method('post')
                     <input type="text" id="service-title" name="service-title" class="form-control" placeholder="Post Title">
                     <textarea id="service-content" name="service-content" class="form-control"></textarea>
-                    <input type="file" name="image" id="image" class="form-control-file">
+                    <input type="file" name="image" id="image" class="form-control-file" data-file-name="">
                     <button type="submit" class="btn btn-primary">Save</button>
+                    <div id="resultMessage"></div>
                 </form>
             </div>
             <div class="modal-footer">
@@ -65,6 +66,7 @@
         </div>
     </div>
 </div>
+{{--@include('partials.services.service-edit-modal')--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 
 <script>
@@ -95,19 +97,20 @@
             $.ajax({
                 url: modifiedUrl,
                 type: 'POST',
-                data: formData,
+                data: new FormData(this),
                 processData: false,
                 contentType: false,
                 success: function (response) {
                     // Handle the response, e.g., show success message
-                    alert('Post saved successfully!');
+                    $('input[name="image"]').attr('data-file-name', response.file_name);
+                    $('#resultMessage').html('<div class="alert alert-success">' + response.message + '</div>');
                     // Close the modal
                     $('#postStoreModal').modal('hide');
-                    console.log(data);
+                    location.reload();
                 },
                 error: function (error) {
                     // Handle the error, e.g., show error message
-                    alert('Failed to save post.');
+                    $('#resultMessage').html('<div class="alert alert-success">' + error.message + '</div>');
                 }
             });
         })
@@ -124,11 +127,14 @@
             type: 'GET',
             success: function (response) {
                 // Load the edit form into the modal
-                $('#postEditModal').html(response);
                 $('#postEditModal').modal('show');
+                console.log(response);
+                $('#file-name-display').text(response.image); // Assuming the image is the file name returned in the response
+                $('#editPostForm input[id="service-title"]').val(response.service_title);
+                $('#editPostForm textarea[id="service-content"]').val(response.service_content);
             },
             error: function (error) {
-                alert('Failed to load the edit form.');
+                $('#resultMessage').html('<div class="alert alert-success">' + error.message + '</div>');
             }
         });
     }
@@ -136,16 +142,19 @@
     function updateService() {
         var formData = new FormData($('#editPostForm')[0]);
         var url = $('#url').val();
+        var postId = $('.btn-edit').data('post-id');
 
+        // Set the value of the hidden input field
+        $('#service_id').val(postId);
         var modifiedUrl = url + '/services';
         $.ajax({
-            url: modifiedUrl + '/update/' + $('#editPostId').val(),
+            url: modifiedUrl + '/update/' + $('#service_id').val(),
             type: 'PUT',
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
-                alert('Post updated successfully!');
+                $('#resultMessage').html('<div class="alert alert-success">' + response.message + '</div>');
                 $('#postEditModal').modal('hide');
                 window.location.reload();
             },
