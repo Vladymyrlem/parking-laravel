@@ -26,7 +26,6 @@
         {
             Schema::table('information', function (Blueprint $table) {
                 $table->dropColumn('deleted_at');
-
             });
         }
     };

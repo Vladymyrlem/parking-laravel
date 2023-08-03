@@ -15,6 +15,7 @@
             Schema::table('information', function (Blueprint $table) {
                 $table->text('description')->nullable();
                 $table->text('media')->nullable();
+
             });
         }
 
