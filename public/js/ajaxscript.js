@@ -505,6 +505,129 @@ $(document).ready(function () {
 
 /***/ }),
 
+/***/ "./resources/js/ajax_query/newsletter_ajax.js":
+/*!****************************************************!*\
+  !*** ./resources/js/ajax_query/newsletter_ajax.js ***!
+  \****************************************************/
+/***/ (() => {
+
+$(document).ready(function () {
+  //get base URL *********************
+  var url = $('#url').val();
+  var modifiedUrl = url + '/newsletter';
+  //display modal form for creating new product *********************
+  $('#btn_add_newsletter').click(function () {
+    $('#btn-save-newsletter').val("add");
+    $('#frmNewsletterBlock').trigger("reset");
+    $('#newsletterModal').modal('show');
+  });
+  $(document).on('click', '.close-newsletter-editor', function () {
+    $('#newsletterModal').modal('hide');
+  });
+  //display modal form for product EDIT ***************************
+  $(document).on('click', '.open_newsletter_modal', function () {
+    var newsletter_id = $(this).val();
+
+    // Populate Data in Edit Modal Form
+    $.ajax({
+      type: "GET",
+      url: modifiedUrl + '/' + newsletter_id,
+      success: function success(data) {
+        console.log(data);
+        $('#newsletter_id').val(data.id);
+        $('#frmNewsletterBlock #title').val(data.title);
+        $('#frmNewsletterBlock #subtitle').val(data.subtitle);
+        $('#approval_rodo').val(data.approval_rodo);
+        $('#approval_title').val(data.approval_title);
+        $('#approval_subtitle').val(data.approval_subtitle);
+        $('#btn-save-newsletter').val("update");
+        $('#newsletterModal').modal('show');
+      },
+      error: function error(data) {
+        console.log('Error:', data);
+      }
+    });
+  });
+
+  //create new product / update existing product ***************************
+  $("#btn-save-newsletter").click(function (e) {
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+      }
+    });
+    e.preventDefault();
+    var formData = {
+      title: $('#frmNewsletterBlock #title').val(),
+      subtitle: $('#frmNewsletterBlock #subtitle').val(),
+      approval_rodo: $('#approval_rodo').val(),
+      approval_title: $('#approval_title').val(),
+      approval_subtitle: $('#approval_subtitle').val()
+    };
+
+    //used to determine the http verb to use [add=POST], [update=PUT]
+    var state = $('#btn-save-newsletter').val();
+    var type = "POST"; //for creating new resource
+    var newsletter_id = $('#newsletter_id').val();
+    ;
+    var my_url = modifiedUrl;
+    if (state == "update") {
+      type = "PUT"; //for updating existing resource
+      my_url += '/' + newsletter_id;
+    }
+    console.log(formData);
+    $.ajax({
+      type: type,
+      url: my_url,
+      data: formData,
+      dataType: 'json',
+      success: function success(data) {
+        console.log(data);
+        var product = '<tr id="newsletter' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.subtitle + '</td><td>' + data.approval_rodo + '</td><td>' + data.approval_title + '</td><td>' + data.approval_subtitle + '</td>';
+        product += '<td><button class="btn btn-warning btn-detail open_newsletter_modal" value="' + data.id + '">Edit</button>';
+        product += ' <button class="btn btn-danger btn-delete delete-newsletter" value="' + data.id + '">Delete</button></td></tr>';
+        if (state == "add") {
+          //if user added a new record
+          $('#newsletter-list').append(product);
+        } else {
+          //if user updated an existing record
+          $("#newsletter" + newsletter_id).replaceWith(product);
+        }
+        $('#frmNewsletterBlock').trigger("reset");
+        $('#newsletterModal').modal('hide');
+        location.reload();
+      },
+      error: function error(data) {
+        console.log('Error:', data);
+      }
+    });
+  });
+
+  //delete product and remove it from TABLE list ***************************
+  $(document).on('click', '.delete-newsletter', function () {
+    var newsletter_id = $(this).val();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+      }
+    });
+    $.ajax({
+      type: "DELETE",
+      url: modifiedUrl + '/' + newsletter_id,
+      success: function success(data) {
+        console.log(data);
+        $("#newsletter" + newsletter_id).remove();
+        location.reload();
+      },
+      error: function error(data) {
+        console.log('Error:', data);
+      }
+    });
+  });
+});
+
+/***/ }),
+
 /***/ "./resources/js/ajax_query/prices_ajax.js":
 /*!************************************************!*\
   !*** ./resources/js/ajax_query/prices_ajax.js ***!
@@ -797,6 +920,7 @@ $(document).ready(function () {
         console.log(data);
         $('#sectiontitle_id').val(data.id);
         $('#section-title').val(data.title);
+        $('#section-subtitle').val(data.subtitle);
         $('#slug').val(data.slug);
         $('#btn-save-title').val("update");
         $('#sectionTitleModal').modal('show');
@@ -817,11 +941,12 @@ $(document).ready(function () {
     e.preventDefault();
     var formData = {
       title: $('#section-title').val(),
+      subtitle: $('#section-subtitle').val(),
       slug: $('#slug').val()
     };
 
     //used to determine the http verb to use [add=POST], [update=PUT]
-    var state = $('#btn-save').val();
+    var state = $('#btn-save-title').val();
     var type = "POST"; //for creating new resource
     var sectiontitle_id = $('#sectiontitle_id').val();
     ;
@@ -838,7 +963,7 @@ $(document).ready(function () {
       dataType: 'json',
       success: function success(data) {
         console.log(data);
-        var sectiontitle = '<tr id="sectiontitle' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.slug + '</td>';
+        var sectiontitle = '<tr id="sectiontitle' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.subtitle + '</td><td>' + data.slug + '</td>';
         sectiontitle += '<td><button class="btn btn-warning btn-detail open_section_title_modal" value="' + data.id + '">Edit</button>';
         sectiontitle += ' <button class="btn btn-danger btn-delete delete-section-title" value="' + data.id + '">Delete</button></td></tr>';
         if (state == "add") {
@@ -872,6 +997,138 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         $("#sectiontitle" + sectiontitle_id).remove();
+        location.reload();
+      },
+      error: function error(data) {
+        console.log('Error:', data);
+      }
+    });
+  });
+});
+
+/***/ }),
+
+/***/ "./resources/js/ajax_query/text_content_ajax.js":
+/*!******************************************************!*\
+  !*** ./resources/js/ajax_query/text_content_ajax.js ***!
+  \******************************************************/
+/***/ (() => {
+
+function scrollToBlock() {
+  var targetOffset = $(".hide-edit-content").offset().top;
+  // Smooth scroll to the target block
+  $("html, body").animate({
+    scrollTop: targetOffset
+  }, 1000 // Adjust the duration of the scroll animation as needed
+  );
+}
+
+$(document).ready(function () {
+  //get base URL *********************
+  var url = $('#url').val();
+  $.ajaxSetup({
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+    }
+  });
+  var modifiedUrl = url + '/contents';
+  //display modal form for creating new product *********************
+  $('#btn_add_content').click(function () {
+    $('#save-content').val("add");
+    $('#frmContentBlock').trigger("reset");
+    $('.hide-edit-content').slideDown();
+    scrollToBlock();
+  });
+  $(document).on('click', '.close-content-editor', function () {
+    $(this).parent().css('display', 'none');
+  });
+
+  //display modal form for product EDIT ***************************
+  $(document).on('click', '.open_content', function () {
+    var content_id = $(this).val();
+    // Populate Data in Edit Modal Form
+    $.ajax({
+      type: "GET",
+      url: modifiedUrl + '/' + content_id,
+      success: function success(data) {
+        //console.log(data);
+        $('#content_id').val(data.id);
+        // Check if the editors are initialized before setting the content
+        if (tinymce.activeEditor && tinymce.get('text-editor')) {
+          tinymce.get('text-editor').setContent(data.content);
+        }
+        $('#content_slug').val(data.slug);
+        $('#save-content').val("update");
+        $('.hide-edit-content').slideDown();
+        scrollToBlock();
+      },
+      error: function error(data) {
+        console.log('Error:', data);
+      }
+    });
+  });
+
+  //create new product / update existing product ***************************
+  $("#save-content").click(function (e) {
+    e.preventDefault();
+    var textContent = tinymce.get('text-editor').getContent();
+    var formData = {
+      content: textContent,
+      slug: $('#content_slug').val()
+    };
+    var state = $('#save-content').val();
+    var type = "POST";
+    var content_id = $('#content_id').val();
+    var my_url = modifiedUrl;
+    if (state == "update") {
+      type = "PUT";
+      my_url += '/' + content_id;
+    }
+
+    // console.log(formData);
+    $.ajax({
+      type: type,
+      url: my_url,
+      data: formData,
+      dataType: 'json',
+      success: function success(data) {
+        console.log(data);
+        var textContent = tinymce.get('text-editor').getContent();
+        var text_content = '<tr id="contentrow' + data.id + '"><td>' + data.id + '</td><td>' + textContent + '</td><td>' + data.slug + '</td>';
+        text_content += '<td><button class="btn btn-warning btn-detail open_content" value="' + data.id + '">Edit content</button>';
+        text_content += ' <button class="btn btn-danger btn-delete delete-content" value="' + data.id + '">Delete content</button></td></tr>';
+        if (state == "add") {
+          //if user added a new record
+          $('#contents-list').append(text_content);
+        } else {
+          //if user updated an existing record
+          $("#contentrow" + content_id).replaceWith(content);
+        }
+        $('#contents-list').append(text_content);
+        $('#frmContentBlock').trigger("reset");
+        $('.hide-edit-content').slideUp();
+        location.reload();
+      },
+      error: function error(data) {
+        console.log('Error:', data);
+      }
+    });
+  });
+
+  //delete product and remove it from TABLE list ***************************
+  $(document).on('click', '.delete-content', function () {
+    var content_id = $(this).val();
+    $.ajaxSetup({
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+      }
+    });
+    $.ajax({
+      type: "DELETE",
+      url: modifiedUrl + '/' + content_id,
+      success: function success(data) {
+        console.log(data);
+        $("#contentrow" + content_id).remove();
         location.reload();
       },
       error: function error(data) {
@@ -971,13 +1228,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ajax_query_contacts_ajax__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_ajax_query_contacts_ajax__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _ajax_query_section_title_ajax__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./ajax_query/section_title_ajax */ "./resources/js/ajax_query/section_title_ajax.js");
 /* harmony import */ var _ajax_query_section_title_ajax__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_ajax_query_section_title_ajax__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _ajax_query_text_content_ajax__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./ajax_query/text_content_ajax */ "./resources/js/ajax_query/text_content_ajax.js");
+/* harmony import */ var _ajax_query_text_content_ajax__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(_ajax_query_text_content_ajax__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _ajax_query_newsletter_ajax__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./ajax_query/newsletter_ajax */ "./resources/js/ajax_query/newsletter_ajax.js");
+/* harmony import */ var _ajax_query_newsletter_ajax__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_ajax_query_newsletter_ajax__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
 
 
 
-// import './ajax_query/services_ajax';
+
+
 })();
 
 /******/ })()

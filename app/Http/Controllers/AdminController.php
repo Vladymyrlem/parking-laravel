@@ -6,15 +6,19 @@
     use App\Models\Content;
     use App\Models\HeadBlock;
     use App\Models\Information;
+    use App\Models\Newsletter;
     use App\Models\Price;
     use App\Models\Reservation;
     use App\Models\Reviews;
     use App\Models\SectionTitle;
     use App\Models\Services;
+    use GuzzleHttp\Client;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Mail;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Validation\Validator;
     use Laracasts\Flash\Flash;
+    use SubscriptionConfirmation;
     use Yajra\DataTables\DataTables;
     use Yajra\DataTables\Exceptions\Exception;
 
@@ -46,19 +50,21 @@
             $section_title = SectionTitle::all();
             $reservations = Reservation::all('new_date');
             $services = Services::all();
-            if (request()->ajax()) {
-                return datatables()->of(Services::latest()->get())
-                    ->addColumn('action', function ($data) {
-                        $button = '<button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm">Edit</button>';
-                        $button .= '&nbsp;&nbsp;';
-                        $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete</button>';
-                        return $button;
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
-            }
+            $newsletter = Newsletter::all();
+            $text_content = Content::all();
+//            if (request()->ajax()) {
+//                return datatables()->of(Services::latest()->get())
+//                    ->addColumn('action', function ($data) {
+//                        $button = '<button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm">Edit</button>';
+//                        $button .= '&nbsp;&nbsp;';
+//                        $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete</button>';
+//                        return $button;
+//                    })
+//                    ->rawColumns(['action'])
+//                    ->make(true);
+//            }
             return view('admin', compact('prices', 'headBlocks', 'information', 'reviews', 'contacts',
-                'section_title', 'reservations', 'services'));
+                'section_title', 'reservations', 'services', 'newsletter', 'text_content'));
         }
 
         public function storeHeaderBlock(Request $request)
@@ -104,21 +110,44 @@
 
         public function subscribe(Request $request)
         {
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email|unique:subscribes,email',
-                'agree' => 'required|accepted',
-                'g-recaptcha-response' => 'required|captcha'
-            ], [
-                'agree.accepted' => 'You must agree to the terms and conditions.',
-                'g-recaptcha-response.required' => 'Please complete the reCAPTCHA.'
+            $request->validate([
+                'email' => 'required|email',
+                'agree' => 'required',
+                'recaptcha' => 'required'
             ]);
 
-            if ($validator->fails()) {
-                return redirect()->back()->withErrors($validator)->withInput();
+            // Implement Google reCAPTCHA v3 verification
+            $recaptcha_token = $request->input('recaptcha');
+            $recaptcha_secret_key = '6LcivXInAAAAAOSU4FzhvY87QghSlLPDMnuTOlt7';
+            $client = new Client();
+            $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+                'form_params' => [
+                    'secret' => $recaptcha_secret_key,
+                    'response' => $recaptcha_token
+                ]
+            ]);
+
+            $body = json_decode((string)$response->getBody());
+            if (!$body->success || $body->score < 0.5) {
+                return redirect()->back()->withInput()->withErrors(['recaptcha' => 'Failed to verify reCAPTCHA.']);
             }
 
-            return redirect()->back()->with('success', 'Thank you for subscribing!');
+            // Send the email
+            $email = $request->input('email');
+            // Implement your email sending logic here, using Laravel's Mail class or any other email package.
+            // For simplicity, I'll use the `mail()` function.
+            mail($email, 'Subscription Successful', 'Thank you for subscribing.');
 
+            // Save the email to a text file
+            $this->saveToTextFile($email);
+
+            return redirect()->back()->with('success', 'Subscription successful.');
+        }
+
+        private function saveToTextFile($email)
+        {
+            $filename = public_path('subscribers.txt');
+            file_put_contents($filename, $email . PHP_EOL, FILE_APPEND);
         }
 
         public function reservations()

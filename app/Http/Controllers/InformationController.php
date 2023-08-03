@@ -56,7 +56,6 @@
             return response()->json($yourModel);
         }
 
-
         /**
          * Display the specified Prices.
          *
@@ -89,7 +88,6 @@
             return response()->json($yourModel);
         }
 
-
         /**
          * Remove the specified infos from storage.
          *
@@ -99,6 +97,7 @@
          * @throws \Exception
          *
          */
+
         public function destroyInformation($info_id)
         {
             $info = Information::destroy($info_id);

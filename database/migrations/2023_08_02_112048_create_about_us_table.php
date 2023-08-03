@@ -12,8 +12,10 @@
          */
         public function up()
         {
-            Schema::table('sections_title', function (Blueprint $table) {
-                $table->string('subtitle');
+            Schema::create('about_us', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
+                $table->string('content');
             });
         }
 
@@ -24,8 +26,8 @@
          */
         public function down()
         {
-            Schema::table('sections_title', function (Blueprint $table) {
-                $table->dropColumn('subtitle');
+            Schema::table('about_us', function (Blueprint $table) {
+                //
             });
         }
     };

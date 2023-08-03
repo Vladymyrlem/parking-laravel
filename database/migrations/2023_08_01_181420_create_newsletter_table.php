@@ -12,8 +12,14 @@
          */
         public function up()
         {
-            Schema::table('sections_title', function (Blueprint $table) {
+            Schema::create('newsletter', function (Blueprint $table) {
+                $table->id();
+                $table->string('title');
                 $table->string('subtitle');
+                $table->string('approval_rodo');
+                $table->string('approval_title');
+                $table->string('approval_subtitle');
+                $table->timestamps();
             });
         }
 
@@ -24,8 +30,8 @@
          */
         public function down()
         {
-            Schema::table('sections_title', function (Blueprint $table) {
-                $table->dropColumn('subtitle');
+            Schema::table('newsletter', function (Blueprint $table) {
+                $table->dropIfExists('newsletter');
             });
         }
     };

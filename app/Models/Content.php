@@ -14,6 +14,7 @@
 
         public $fillable = [
             'id',
-            'content'
+            'content',
+            'slug'
         ];
     }

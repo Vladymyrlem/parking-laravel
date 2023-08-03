@@ -149,6 +149,13 @@
                         @include('partials.services.table')
                         @include('partials.services.create')
                     </div>
+                    @include('partials.newsletter.create')
+
+                    <div class="section-text-content">
+                        <h2 class="fs-2 text-center">Text Content Section</h2>
+                        @include('partials.text-content.table')
+                        @include('partials.text-content.create')
+                    </div>
                 </div>
             </div>
             <div id="tdd"></div>

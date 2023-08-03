@@ -48,9 +48,114 @@
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/calendar.js') }}"></script>
+<script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
+<script src="{{ asset('js/gmap3.min.js') }}"></script>
 
 <script>
     jQuery(function () {
+
+        var companyName = "PARKING RONDO";
+
+        function loadMap(addressData) {
+
+            var path = document.URL;
+            path = path.substring(0, path.lastIndexOf("/") + 1)
+
+            var locationContent = "<h2>" + companyName + "</h2><p>" + addressData.value + "</p>";
+
+            var locationData = {
+                map: {
+                    options: {
+                        center: [51.109251, 16.902584],
+                        zoom: 14,
+                        maxZoom: 18,
+                        scrollwheel: false,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        mapTypeControl: true,
+                        mapTypeControlOptions: {
+                            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                        },
+                        navigationControl: true,
+                        scrollwheel: true,
+                        streetViewControl: true
+                    }
+                },
+                infowindow: {
+                    options: {
+                        content: locationContent
+                    },
+                    events: {
+                        closeclick: function (infowindow) {
+                            //alert("closing : " + infowindow.getContent());
+                        }
+                    }
+                },
+                marker: {
+                    options: {
+                        icon: new google.maps.MarkerImage(
+                            path + "img/mapmarker.png",
+                            new google.maps.Size(59, 58, "px", "px"),
+                            new google.maps.Point(0, 0),    //sets the origin point of the icon
+                            new google.maps.Point(29, 34)   //sets the anchor point for the icon
+                        ),
+                        draggable: false
+                    },
+                    events: {
+                        click: function (marker) {
+
+                        },
+                        mouseover: function (marker, event, context) {
+                            $(this).gmap3(
+                                {clear: "overlay"},
+                                {
+                                    overlay: {
+                                        latLng: marker.getPosition(),
+                                        options: {
+                                            content: ".",
+                                            offset: {
+                                                x: -50,
+                                                y: -50
+                                            }
+                                        }
+                                    }
+                                });
+                        },
+                        mouseout: function () {
+                            $(this).gmap3({clear: "overlay"});
+                        }
+                    }
+                }
+            };
+
+            if ($.isEmptyObject(addressData.latLng)) {
+                locationData.infowindow.address = addressData.value;
+                locationData.marker.address = addressData.value;
+            } else {
+                locationData.infowindow.latLng = addressData.latLng;
+                locationData.marker.latLng = addressData.latLng;
+            }
+
+            $('#locations .map').gmap3(locationData, "autofit");
+
+        }
+
+        var locations = [
+            {value: "ul. Skarżyńskiego 2, 54-530 Wrocław", latLng: [51.109251, 16.902584]},
+        ];
+        loadMap(locations[0]);
+
+        $("#location-map-select").append('<option value="' + locations[0].value + '">Please select a location</option>');
+        $.each(locations, function (index, value) {
+            //console.log(index);
+            var option = '<option value="' + index + '">' + value.value + '</option>';
+            $("#location-map-select").append(option);
+        });
+
+        $('#location-map-select').on('change', function () {
+            $('#locations .map').gmap3('destroy');
+            loadMap(locations[this.value]);
+        });
+
 
         var data = [];
         // var disableddates = ['26/07/2023', '27/07/2023', '28/07/2023', '29/07/2023', '30/07/2023', '31/07/2023', '01/08/2023', '02/08/2023', '03/08/2023', '04/08/2023', '05/08/2023', '06/08/2023',];

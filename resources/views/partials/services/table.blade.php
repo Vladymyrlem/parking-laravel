@@ -27,7 +27,7 @@
                     <td><img width="70" src="{{ asset("$post->image_url") }}" alt=""></td>
                     <td>
                         <!-- Edit button -->
-                        <button type="button" class="btn btn-primary btn-sm" data-post-id="{{ $post->id }}" onclick="editService({{ $post->id }})">Edit</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-edit" data-post-id="{{ $post->id }}" onclick="editService({{ $post->id }})">Edit</button>
 
                         <!-- Delete button -->
                         <button type="button" class="btn btn-danger btn-sm" onclick="deleteService({{ $post->id }})">Delete</button>
@@ -106,7 +106,7 @@
                     $('#resultMessage').html('<div class="alert alert-success">' + response.message + '</div>');
                     // Close the modal
                     $('#postStoreModal').modal('hide');
-                    location.reload();
+                    // location.reload();
                 },
                 error: function (error) {
                     // Handle the error, e.g., show error message
@@ -121,6 +121,8 @@
     function editService(postId) {
         var url = $('#url').val();
 
+        // Set the value of the hidden input field
+        $('#service_id').val(postId);
         var modifiedUrl = url + '/services';
         $.ajax({
             url: modifiedUrl + '/edit/' + postId,
@@ -139,30 +141,46 @@
         });
     }
 
-    function updateService() {
+    //function updateService() {
+    jQuery('#editPostForm').submit(function (e) {
+        e.preventDefault(); // Prevent the default form submission behavior
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+            }
+        });
         var formData = new FormData($('#editPostForm')[0]);
         var url = $('#url').val();
+
+        // Fetch the postId from the "Edit" button's data attribute
         var postId = $('.btn-edit').data('post-id');
 
         // Set the value of the hidden input field
         $('#service_id').val(postId);
-        var modifiedUrl = url + '/services';
+
+        var modifiedUrl = url + '/admin/services'; // Make sure this matches your Laravel route
         $.ajax({
             url: modifiedUrl + '/update/' + $('#service_id').val(),
-            type: 'PUT',
+            type: 'PUT', // Make sure you are using the PUT method
             data: formData,
             processData: false,
             contentType: false,
             success: function (response) {
                 $('#resultMessage').html('<div class="alert alert-success">' + response.message + '</div>');
-                $('#postEditModal').modal('hide');
-                window.location.reload();
+                console.log(response); // Log the success response in the console
+                // $('#postEditModal').modal('hide');
+                // window.location.reload();
             },
             error: function (error) {
+                console.error(error); // Log the error response in the console
                 alert('Failed to update the post.');
             }
         });
-    }
+    });
+
+
+    // }
+
 
     function deleteService(postId) {
         var url = $('#url').val();

@@ -256,7 +256,7 @@ $(document).ready(function () {
         tinymce.init({
             selector: '#' + editorId,
             // Additional TinyMCE settings...
-            plugins: 'advlist code table lists link image media emoticons codesample save visualblocks ImageGallery',
+            plugins: 'advlist code table lists link image media emoticons codesample save visualblocks',
             menubar: 'insert',
             setup: function (editor) {
                 editor.on('init change', function () {
@@ -265,7 +265,7 @@ $(document).ready(function () {
             },
             images_file_types: 'jpg,svg,webp,png',
             toolbar: 'undo redo | formatselect| bold italic | alignleft aligncenter alignright | indent outdent | bullist numlist advlist | code codesample | table | '
-                + 'link image save visualblocks ImageGallery',
+                + 'link image save visualblocks',
             image_title: true,
             automatic_uploads: true,
             images_upload_url: '/admin/upload/images',
@@ -294,6 +294,8 @@ $(document).ready(function () {
     }
 
     initializeTinyMCE('description-editor');
+    initializeTinyMCE('text-editor');
+    initializeTinyMCE('gallery');
     initializeTinyMCE('media-editor');
     initializeFullTinyMCE('terms-content');
 

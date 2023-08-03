@@ -25,18 +25,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
-                        <div class="modal fade" id="myModal">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-body">
-                                        <input type="text" name="checkout_pick_up_date" value="" id="pick-up-date">
-                                        <input type="text" name="checkout_pick_up_time" value="" id="pick-up-time">
-                                        <!-- Custom block to display form data -->
-                                        <div id="displayData"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        @include('partials.modal.reservation-modal')
                     </div>
                     <div class="col-md-6 col-12">
                         <div id="headblockCarousel" class="slick">
@@ -56,12 +45,37 @@
         <!-- Prices Section begin-->
         @include('partials.home-page.prices')
         <!-- Prices Section end-->
+        <section id="partners">
+            {!! getTitleBySlug('partners') !!}
+            <div class="row">
+                <div class="container">
+                    {!! getContentBySlug('partners') !!}
+                </div>
+            </div>
+        </section>
+        <section id="gallery" name="#galeria" class="container">
+            <h2>{{ getTitleBySlug('gallery') }}</h2>
+            <div class="row text-center">
+                {!! getContentBySlug('gallery') !!}
+            </div>
+        </section>
         <!-- Reviews Section begin-->
         @include('partials.home-page.reviews')
         <!-- Reviews Section end-->
+
         <!-- Information Section begin-->
         @include('partials.home-page.information')
         <!-- Information Section end-->
+        @include('partials.home-page.newsletter')
+
+        @include('partials.home-page.contacts-content')
+        <section id="terms" name="#regulamin" class="wow fadeIn animated" data-wow-offset="100" style="visibility: visible; animation-name: fadeIn;">
+            <div id="regulamin" class="container">
+                <div class="row">
+                    {!! getContentBySlug('privacy-policy') !!}
+                </div>
+            </div>
+        </section>
     </div>
     <!-- /.content -->
 @endsection

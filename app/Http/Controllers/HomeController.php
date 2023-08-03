@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Models\Contacts;
     use App\Models\HeadBlock;
     use App\Models\Information;
     use App\Models\Price;
@@ -35,6 +36,7 @@
             $information = Information::all();
             $reservations = Reservation::all();
             $reviews = Reviews::all();
+            $contacts = Contacts::all();
             $blockedDates = [];
             // Loop through each reservation and get the custom date value
             foreach ($reservations as $reservation) {
@@ -43,6 +45,6 @@
             }
             $blockedDatesJson = json_encode($blockedDates);
             // Pass the $blockedDates variable to the view
-            return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson', 'reviews'));
+            return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson', 'reviews', 'contacts'));
         }
     }

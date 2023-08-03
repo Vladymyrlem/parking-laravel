@@ -36,6 +36,7 @@
         {
             $sectiontitle = SectionTitle::find($sectiontitle_id);
             $sectiontitle->title = $request->title;
+            $sectiontitle->subtitle = $request->subtitle;
             $sectiontitle->slug = $request->slug;
             $sectiontitle->save();
             return response()->json($sectiontitle);

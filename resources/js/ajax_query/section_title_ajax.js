@@ -26,6 +26,7 @@ $(document).ready(function () {
                 console.log(data);
                 $('#sectiontitle_id').val(data.id);
                 $('#section-title').val(data.title);
+                $('#section-subtitle').val(data.subtitle);
                 $('#slug').val(data.slug);
                 $('#btn-save-title').val("update");
                 $('#sectionTitleModal').modal('show');
@@ -48,11 +49,12 @@ $(document).ready(function () {
         e.preventDefault();
         var formData = {
             title: $('#section-title').val(),
+            subtitle: $('#section-subtitle').val(),
             slug: $('#slug').val(),
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]
-        var state = $('#btn-save').val();
+        var state = $('#btn-save-title').val();
         var type = "POST"; //for creating new resource
         var sectiontitle_id = $('#sectiontitle_id').val();
         ;
@@ -69,7 +71,7 @@ $(document).ready(function () {
             dataType: 'json',
             success: function (data) {
                 console.log(data);
-                var sectiontitle = '<tr id="sectiontitle' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.slug + '</td>';
+                var sectiontitle = '<tr id="sectiontitle' + data.id + '"><td>' + data.id + '</td><td>' + data.title + '</td><td>' + data.subtitle + '</td><td>' + data.slug + '</td>';
                 sectiontitle += '<td><button class="btn btn-warning btn-detail open_section_title_modal" value="' + data.id + '">Edit</button>';
                 sectiontitle += ' <button class="btn btn-danger btn-delete delete-section-title" value="' + data.id + '">Delete</button></td></tr>';
                 if (state == "add") { //if user added a new record

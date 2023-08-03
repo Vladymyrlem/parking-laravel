@@ -152,12 +152,58 @@
 @include('partials.modal.contacts-modal')
 <!-- Section title Modal-->
 @include('partials.modal.section-title-modal')
+@include('partials.modal.newsletter-modal')
 {{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>--}}
 {{--<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/calendar.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    // Check if both checkbox and CAPTCHA are validated
+    // function checkValidation() {
+    //     var isCaptchaVerified = grecaptcha.getResponse().length !== 0;
+    //     var isAgreeChecked = document.getElementById('agree').checked;
+    //
+    //     if (isCaptchaVerified && isAgreeChecked) {
+    //         document.getElementById('subscribeButton').disabled = false;
+    //     } else {
+    //         document.getElementById('subscribeButton').disabled = true;
+    //     }
+    // }
+    //
+    // // Enable form submission on checkbox change
+    // document.getElementById('agree').addEventListener('change', checkValidation);
+    //
+    // // Enable form submission on CAPTCHA verification
+    // function captchaCallback() {
+    //     checkValidation();
+    // }
 
+    // AJAX form submission
+    $('#subscribeForm').submit(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var formData = $(this).serialize(); // Serialize form data
+        var url = $(this).attr('action'); // Form action URL
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            dataType: 'json', // Change to 'html' if the response is not JSON
+            success: function (response) {
+                // Handle the success response, e.g., show success message or close modal
+                $('#subscribeModal').modal('hide');
+                alert('You have subscribed successfully!');
+            },
+            error: function (error) {
+                // Handle the error response, e.g., show error message
+                alert('Failed to subscribe. Please try again later.');
+            }
+        });
+    });
+</script>
 <script>
     @if(isset($arrayData))
     jQuery(function () {

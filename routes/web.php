@@ -14,6 +14,8 @@
     use App\Http\Controllers\KontaktsController;
     use App\Http\Controllers\SectionTitleController;
     use App\Http\Controllers\ServicesController;
+    use App\Http\Controllers\NewsletterController;
+    use App\Http\Controllers\ContentController;
 
     /*
     |--------------------------------------------------------------------------
@@ -75,7 +77,7 @@
         Route::get('/admin/services/{service_id}', [ServicesController::class, 'show']);
         Route::post('/admin/services', [ServicesController::class, 'store'])->name('admin.create.service');
         Route::get('/admin/services/edit/{service_id}', [ServicesController::class, 'edit'])->name('admin.edit.services');
-        Route::put('/admin/services/update/{id}', [ServicesController::class, 'update'])->name('admin.update.services');
+        Route::put('/admin/services/update/{service_id}', [ServicesController::class, 'update'])->name('admin.update.services');
         Route::delete('/admin/services/delete/{service_id}', [ServicesController::class, 'destroy']);
         /*Reviews*/
         Route::get('admin/reviews', [AdminController::class, 'index']);
@@ -95,6 +97,18 @@
         Route::post('/admin/contacts', [KontaktsController::class, 'storeContact']);
 // update Contacts
         Route::put('/admin/contacts/{contact_id}', [KontaktsController::class, 'updateContact']);
+        /*Text Content*/
+        Route::get('admin/contents', [AdminController::class, 'index']);
+// Populate Data in Edit Modal Form
+        Route::get('/admin/contents/{content_id}', [ContentController::class, 'showContent']);
+//create New Text Content
+        Route::post('/admin/contents', [ContentController::class, 'storeContent']);
+
+        Route::delete('/admin/contents/{content_id}', [ContentController::class, 'destroyContent']);
+
+// update Contents
+        Route::put('/admin/contents/{content_id}', [ContentController::class, 'updateContent']);
+
         /*Section Title*/
         Route::get('admin/sectiontitle', [AdminController::class, 'index']);
 // Populate Data in Edit Modal Form
@@ -109,4 +123,13 @@
         Route::get('/admin/reservation-dates', [AdminController::class, 'getReservationDates']);
         Route::post('/admin', [AdminController::class, 'storeContent'])->name('admin.content');
         Route::post('/admin/upload/images', [AdminController::class, 'uploadImage'])->name('upload.post.image');
+        Route::post('/subscribe', [AdminController::class, 'subscribe'])->name('subscribe');
+        /*Newsletter*/
+        Route::get('admin/newsletter', [AdminController::class, 'index']);
+// Populate Data in Edit Modal Form
+        Route::get('/admin/newsletter/{newsletter_id}', [NewsletterController::class, 'showNewsletter']);
+//create New review
+        Route::post('/admin/newsletter', [NewsletterController::class, 'storeNewsletter']);
+// update Contacts
+        Route::put('/admin/newsletter/{newsletter_id}', [NewsletterController::class, 'updateNewsletter']);
     });

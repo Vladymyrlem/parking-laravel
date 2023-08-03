@@ -96,22 +96,35 @@
          */
         public function update($service_id, Request $request)
         {
-            $service = Services::findOrFail($request->id);
+            $service = Services::findOrFail($service_id);
+
             $service->service_title = $request->service_title;
-            $service->image = $request->image;
             $service->service_content = $request->service_content;
 
+            if ($request->hasFile('image')) {
+                // Image was uploaded, proceed with saving
+                $imagePath = $request->file('image')->storePublicly('images', 'custom');
+
+                // Extract the filename from the stored path
+                $imageName = basename($imagePath);
+            } else {
+                // Image was not uploaded, handle the situation (e.g., display an error message)
+                // For example:
+                return response()->json(['error' => 'No image uploaded'], 400);
+            }
             // Assuming you have a model and database table to save the data
+            $service->image = 'images/' . $imageName;
 
             $service->save();
+            Log::info('Request data:', $request->all());
             return response()->json($service);
         }
 
         public function edit($id)
         {
-            $post = Services::findOrFail($id);
+            $service = Services::findOrFail($id);
 
-            return response()->json($post);
+            return response()->json($service);
         }
 
         /**
