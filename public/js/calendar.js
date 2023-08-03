@@ -1,6 +1,6 @@
 (function (root, factory) {
     if (typeof define === 'function' && define.amd) {
-        define('mycalendar', ['jquery'], factory);
+        define('calendar', ['jquery'], factory);
     } else if (typeof exports === 'object') {
         module.exports = factory(require('jquery'));
     } else {
@@ -12,52 +12,52 @@
 
     var defaults = {
 
-            width: 300,
-            height: 300,
+        width: 280,
+        height: 280,
 
-            zIndex: 1,
+        zIndex: 1,
 
-            trigger: null,
+        trigger: null,
 
-            offset: [0, 1],
+        offset: [0, 1],
 
-            customClass: '',
+        customClass: '',
 
-            view: 'date',
+        view: 'date',
 
-            date: new Date(),
-            format: 'dd/mm/yyyy',
+        date: new Date(),
+        format: 'yyyy/mm/dd',
 
-            startWeek: 1,
+        startWeek: 1,
 
-            weekArray: ['NIE', 'PON', 'WTO', 'ŚRO', 'CZW', 'PIĄ', 'SOB'],
+        weekArray: ['NIE', 'PON', 'WTO', 'ŚRO', 'CZW', 'PIĄ', 'SOB'],
 
-            monthArray: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
+        monthArray: ['Styczeń', 'Luty', 'Marzec', 'Kwiecień', 'Maj', 'Czerwiec', 'Lipiec', 'Sierpień', 'Wrzesień', 'Październik', 'Listopad', 'Grudzień'],
 
-            selectedRang: null,
+        selectedRang: null,
 
-            data: null,
+        data: null,
 
-            label: '{d}\n{v}',
+        label: '{d}\n{v}',
 
-            prev: '&#171;',
-            next: '&#187;',
+        prev: '&#171;',
+        next: '&#187;',
+        
+        separator: '/',
+		
+        disableddates: [],
 
-            separator: '/',
+        viewChange: $.noop,
 
-            disabledDates: [],
-
-            viewChange: $.noop,
-
-            onSelected: function (view, date, value) {
-                // body...
-            },
-
-            onMouseenter: $.noop,
-
-            onClose: $.noop
-
+        onSelected: function (view, date, value) {
+            // body...
         },
+
+        onMouseenter: $.noop,
+
+        onClose: $.noop
+        
+    },
 
         // static variable
 
@@ -127,7 +127,7 @@
         OS = Object.prototype.toString;
 
     // utils
-
+    
     function isDate(obj) {
         return OS.call(obj) === '[object Date]';
     }
@@ -159,7 +159,7 @@
     }
 
     Date.prototype.format = function (exp) {
-
+		
         var y = this.getFullYear(),
             m = this.getMonth() + 1,
             d = this.getDate();
@@ -249,7 +249,7 @@
         this.height = this.options.height;
         this.date = this.options.date;
         this.selectedRang = this.options.selectedRang;
-        this.disabledDates = this.options.disabledDates;
+	this.disableddates = this.options.disableddates;
         this.separator = this.options.separator;
         this.data = this.options.data;
         this.init();
@@ -260,25 +260,25 @@
         getDayAction: function (day) {
             var action = ITEM_DAY;
             if (this.selectedRang) {
-
+				
                 var start = Date.tryParse(this.selectedRang[0]),
                     end = Date.tryParse(this.selectedRang[1])
-
+					
 //                    nday = day.getDate() + '-' + (day.getMonth() + 1) + '-' +  day.getFullYear();
-//
-                // MOD
-                nday = ("0" + day.getDate()).slice(-2) + this.separator + ("0" + (day.getMonth() + 1)).slice(-2) + this.separator + day.getFullYear();
+//                    
+                    // MOD
+                    nday = ("0" + day.getDate()).slice(-2) + this.separator + ("0" + (day.getMonth() + 1)).slice(-2) + this.separator +  day.getFullYear();
 
                 if ((start && day < start.clearTime()) || (end && day > end.clearTime())) {
                     action = DISABLED;
                 }
-
+				
 //				console.log(nday);
-
-                if ($.inArray(nday, this.disabledDates) != -1) {
+				
+		if ($.inArray(nday, this.disableddates) != -1 ) {
                     action = DISABLED;
-                }
-
+		}
+				
             }
 
             return action;
@@ -466,15 +466,15 @@
         hide: function (view, date, data) {
             //this.$trigger.val(date.format(this.options.format));
             // MOD
-            this.$trigger.val(("0" + date.getDate()).slice(-2) + this.separator + ("0" + (date.getMonth() + 1)).slice(-2) + this.separator + date.getFullYear());
+            this.$trigger.val(("0" + date.getDate()).slice(-2) + this.separator + ("0" + (date.getMonth() + 1)).slice(-2) + this.separator +  date.getFullYear());
             this.options.onClose.call(this, view, date, data);
             this.$element.hide();
         },
         setPosition: function () {
-
+            
             var post = this.$trigger.offset();
             var offs = this.options.offset;
-
+            
 //            console.log(post);
 //            console.log(offs);
 
@@ -635,7 +635,7 @@
             $lbl.find('p').html(this.options.label.repeat({
                 m: view,
                 // MOD
-                d: ("0" + date.getDate()).slice(-2) + this.separator + ("0" + (date.getMonth() + 1)).slice(-2) + this.separator + date.getFullYear(),
+                d: ("0" + date.getDate()).slice(-2) + this.separator + ("0" + (date.getMonth() + 1)).slice(-2) + this.separator +  date.getFullYear(),
                 v: data
             }).replace(/\n/g, '<br>'));
 
@@ -735,9 +735,9 @@
                 hdH = this.$element.find('.calendar-hd').outerHeight();
 
             // MOD
-            this.$element.width(w + 20).height(h + 42 + hdH)
+            this.$element.width(w+20).height(h+42 + hdH)
                 .find('.calendar-inner, .view')
-                .css('width', w - 2 + 'px').css('height', h + 50 + 'px');
+                .css('width', w-2 + 'px').css('height', h+50 + 'px');
 
             this.$element.find('.calendar-ct').width(w).height(h);
 
@@ -771,7 +771,7 @@
             var dateObj = Date.tryParse(this.selectedRang[0])
             this.updateDateView(dateObj.getFullYear(), dateObj.getMonth() + 1);
             this.selectedDay(dateObj.getDate());
-            this.$trigger.val(("0" + dateObj.getDate()).slice(-2) + this.separator + ("0" + (dateObj.getMonth() + 1)).slice(-2) + this.separator + dateObj.getFullYear());
+            this.$trigger.val(("0" + dateObj.getDate()).slice(-2) + this.separator + ("0" + (dateObj.getMonth() + 1)).slice(-2) + this.separator +  dateObj.getFullYear());
         },
         methods: function (name, args) {
             if (OS.call(this[name]) === '[object Function]') {

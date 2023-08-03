@@ -12,7 +12,8 @@
         "build": "vite build",
         "gulp-watch": "gulp watch",
         "gulp-scss": "gulp sass",
-        "gulp": "gulp default"
+        "gulp": "gulp default",
+        "gulp-js": "gulp js"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
