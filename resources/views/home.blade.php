@@ -67,7 +67,7 @@
         @include('partials.home-page.information')
         <!-- Information Section end-->
         @include('partials.home-page.newsletter')
-
+        @include('partials.home-page.locations')
         @include('partials.home-page.contacts-content')
         <section id="terms" name="#regulamin" class="wow fadeIn animated" data-wow-offset="100" style="visibility: visible; animation-name: fadeIn;">
             <div id="regulamin" class="container">

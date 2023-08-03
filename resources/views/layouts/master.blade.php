@@ -9,41 +9,29 @@
 
     <title>@yield('title', 'Parking Rondo')</title>
 
-    @vite(['resources/sass/app.css','resources/sass/style.scss','resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
+    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     @yield('styles')
 
-
 </head>
-<body>
+<body name="#start">
 <div id="app">
     <!-- Top Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-            <!-- Brand Logo -->
-            <a href="{{ url('/') }}" class="navbar-brand">{{ config('app.name', 'Laravel') }}</a>
-
-            <!-- Search Form -->
-            <form class="form-inline my-2 my-lg-0" id="searchForm" action="#" method="GET">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-
-            <!-- Other Navbar items -->
-            <!-- ... -->
-
-        </div>
-    </nav>
+    @include('partials.header')
 
     <main class="py-4">
         @yield('content')
     </main>
+    @include('partials.footer')
 </div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="{{ asset('js/slick.min.js') }}"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script src="{{ asset('js/slick.min.js') }}"></script>
+
+
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
@@ -53,7 +41,15 @@
 
 <script>
     jQuery(function () {
-
+        $('.navbar-toggler').click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('collapsed')) {
+                $(this).addClass('collapsed');
+            } else {
+                $(this).removeClass('collapse');
+            }
+            $('.navbar-collapse').toggleClass('show');
+        })
         var companyName = "PARKING RONDO";
 
         function loadMap(addressData) {
@@ -62,7 +58,7 @@
             path = path.substring(0, path.lastIndexOf("/") + 1)
 
             var locationContent = "<h2>" + companyName + "</h2><p>" + addressData.value + "</p>";
-
+                                                                                                                                                                                                                                                                       
             var locationData = {
                 map: {
                     options: {
@@ -93,7 +89,7 @@
                 marker: {
                     options: {
                         icon: new google.maps.MarkerImage(
-                            path + "img/mapmarker.png",
+                            path + "images/mapmarker.png",
                             new google.maps.Size(59, 58, "px", "px"),
                             new google.maps.Point(0, 0),    //sets the origin point of the icon
                             new google.maps.Point(29, 34)   //sets the anchor point for the icon

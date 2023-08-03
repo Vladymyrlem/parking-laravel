@@ -1,5 +1,6 @@
 <section id="locations" name="#dojazd">
-    <div id="dojazd" class="container location-select-container wow bounceInDown animated" data-wow-offset="200" style="visibility: visible; animation-name: bounceInDown;">
+    <div id="dojazd" class="container location-select-container wow bounceInDown animated" data-wow-offset="200"
+         style="visibility: visible; animation-name: bounceInDown;">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
                 <div class="location-select">

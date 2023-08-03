@@ -153,8 +153,6 @@
 <!-- Section title Modal-->
 @include('partials.modal.section-title-modal')
 @include('partials.modal.newsletter-modal')
-{{--<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>--}}
-{{--<script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/calendar.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
