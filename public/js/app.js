@@ -27990,6 +27990,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+// import './navbar/fastclick';
+// import './navbar/fixed-responsive-nav';
+// import './navbar/responsive-nav';
+// import './navbar/scroll';
+
 window.$ = (jquery__WEBPACK_IMPORTED_MODULE_1___default());
 jquery__WEBPACK_IMPORTED_MODULE_1___default()(function () {
   jquery__WEBPACK_IMPORTED_MODULE_1___default()('#myForm').submit(function (e) {

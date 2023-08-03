@@ -1,23 +1,24 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-            </ul>
-
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <a href="#start" class="logo">
+                <img src="{{ asset('images/parking-logo.png') }}" alt="">
+            </a>
+            <div class="header-menu position-relative d-flex flex-column">
+                <a href="#" class="nav-toggle" aria-hidden="false">Menu</a>
+                <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
+position: relative;" aria-hidden="true">
+                    <ul>
+                        <li class="menu-item active"><a href="#header-block" data-scroll>Start</a></li>
+                        <li class="menu-item"><a href="#about" data-scroll>O Nas</a></li>
+                        <li class="menu-item"><a href="#prices" data-scroll>Cennik</a></li>
+                        <li class="menu-item"><a href="#gallery" data-scroll>Galeria</a></li>
+                        <li class="menu-item"><a href="#locations" data-scroll>Dojazrd</a></li>
+                        <li class="menu-item"><a href="#contacts-section" data-scroll>Kontakt</a></li>
+                        <li class="menu-item"><a href="#terms" data-scroll>Regulamin</a></li>
+                    </ul>
+                </nav>
+            </div>
         </div>
     </div>
-</nav>
+</header>

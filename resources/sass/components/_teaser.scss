@@ -1,0 +1,331 @@
+/* Teaser
+-------------------------------------*/
+#teaser {
+    min-height: 600px;
+    padding: 60px 0;
+    background-color: #303131;
+    background: linear-gradient(to bottom, #303131 0%, #4d4f4f 50%, #303131 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='@mainColor', endColorstr='@mainColor', GradientType=0);
+    heaight: 100%;
+}
+
+#teaser .reservation-form-shadow {
+    min-height: 480px;
+    background-color: #fff;
+    box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3);
+}
+
+#teaser form {
+    padding: 30px;
+}
+
+#teaser form .alert {
+    margin-top: -20px;
+    padding: 10px 15px;
+}
+
+#teaser form ::-webkit-input-placeholder {
+    color: #0074b7 !important;
+}
+
+#teaser form :-moz-placeholder {
+    color: #0074b7 !important;
+}
+
+#teaser form ::-moz-placeholder {
+    color: #0074b7 !important;
+}
+
+#teaser form :-ms-input-placeholder {
+    color: #0074b7 !important;
+}
+
+#teaser form .styled-select-car {
+    border: 2px solid #efe9e9;
+    height: 55px;
+    position: relative;
+    margin-bottom: 23px;
+}
+
+#teaser form .styled-select-car:after {
+    content: '';
+    background: #ffffff url('../img/dropdown-icon.png') no-repeat 5px 23px;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    height: 51px;
+    position: absolute;
+    pointer-events: none;
+}
+
+#teaser form .styled-select-car select {
+    border: none;
+    font-size: 18px;
+    font-weight: normal;
+    width: 100%;
+    background-image: none;
+    background: #fff;
+    -webkit-appearance: none;
+    padding: 9px 10px;
+    height: 51px;
+    outline: none;
+    color: #0074b7;
+}
+
+#teaser form .styled-input-car {
+    border: 2px solid #efe9e9;
+    min-height: 55px;
+    position: relative;
+    margin-bottom: 23px;
+}
+
+#teaser form .styled-input-car:after {
+    content: '';
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    height: 51px;
+    position: absolute;
+    pointer-events: none;
+}
+
+#teaser form .styled-input-car input {
+    border: none;
+    font-size: 18px;
+    font-weight: normal;
+    width: 100%;
+    background-image: none;
+    background: #fff;
+    -webkit-appearance: none;
+    padding: 9px 10px;
+    height: 51px;
+    outline: none;
+    color: #0074b7;
+}
+
+#teaser form .location {
+    margin-bottom: 27px;
+}
+
+#teaser form .datetime {
+    margin-bottom: 11px;
+}
+
+#teaser form .form-control {
+    height: 43px;
+    border: 2px solid #efe9e9;
+    box-shadow: none;
+}
+
+#teaser form .input-group {
+    width: 100%;
+}
+
+#teaser form .input-group input {
+    border-radius: 0;
+    color: #0074b7;
+    font-size: 16px;
+    padding-left: 15px;
+    box-shadow: none;
+    background: none;
+    -webkit-appearance: none;
+}
+
+#teaser form .input-group-addon {
+    border-radius: 0;
+    border: none;
+    background-color: #efe9e9;
+    font-weight: bold;
+    font-size: 16px;
+    color: #716d6e;
+    width: 110px;
+    text-align: left;
+}
+
+#teaser form .input-group-addon .glyphicon {
+    font-size: 17px;
+    margin: 0 2px 0 -2px;
+}
+
+#teaser form .different-drop-off {
+    color: #716d6e;
+    font-weight: bold;
+    margin: 10px 0;
+    display: block;
+}
+
+#teaser form .date {
+    width: 240px;
+}
+
+#teaser form .time {
+    width: 140px;
+}
+
+#teaser form .pixelfix {
+    border-top: 1px solid #fff;
+}
+
+#teaser form .styled-select-time {
+    border: 2px solid #efe9e9;
+    height: 43px;
+    position: relative;
+}
+
+#teaser form .styled-select-time:after {
+    content: '';
+    background: #ffffff url('../img/dropdown-icon.png') no-repeat 5px 18px;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    height: 39px;
+    position: absolute;
+    pointer-events: none;
+}
+
+#teaser form .styled-select-time select {
+    border: none;
+    font-size: 16px;
+    width: 100%;
+    background-image: none;
+    background: #fff;
+    -webkit-appearance: none;
+    padding: 10px 10px;
+    height: 39px;
+    color: #0074b7;
+}
+
+#teaser form .submit {
+    width: 100%;
+    background-color: #0074b7;
+    color: #fff;
+    border: none;
+    border-radius: 0;
+    box-shadow: 6px 6px 0 #efe9e9;
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 10px 0;
+    /*margin-top: 30px;*/
+    transition: 0.2s;
+}
+
+#teaser form .submit:hover {
+    background-color: #716d6e;
+}
+
+#teaser .title {
+    color: #fff;
+
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0;
+}
+
+#teaser .subtitle {
+    font-size: 24px;
+    color: #dbdbdb;
+    text-transform: none;
+    display: block;
+    font-weight: normal;
+    margin-top: 10px;
+}
+
+#teaser .car-img {
+    height: 375px;
+    text-align: center;
+    line-height: 400px;
+}
+
+#teaser .car-img img {
+    display: inline-block;
+}
+
+#teaser .carousel-control {
+    position: relative;
+}
+
+#teaser .carousel-control.left,
+#teaser .carousel-control.right {
+    background-image: none;
+    margin: 0;
+    width: 30px;
+}
+
+#teaser .carousel-control.left {
+    left: 90%;
+}
+
+#teaser .carousel-control.right {
+    left: 95%;
+}
+
+#teaser .carousel-control .glyphicon-chevron-left,
+#teaser .carousel-control .glyphicon-chevron-right {
+    margin: 0;
+}
+
+#teaser .carousel-control .glyphicon-chevron-right {
+    right: auto;
+}
+
+.arrow-down {
+    width: 0;
+    height: 0;
+    border-left: 37px solid transparent;
+    border-right: 37px solid transparent;
+    border-top: 37px solid #303131;
+    margin: 0 auto;
+}
+
+/* Teaser Blog
+-------------------------------------*/
+#teaser-blog {
+    height: 145px;
+    padding: 60px 0;
+    background-color: #0074b7;
+}
+
+#teaser-blog .title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0;
+}
+
+#teaser-blog .title {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 24px;
+    font-weight: 900;
+    margin: 0;
+}
+
+#teaser-blog .breadcrumbs {
+    color: #fff;
+    list-style: none;
+    padding: 0;
+    text-align: right;
+    margin-top: 9px;
+}
+
+#teaser-blog .breadcrumbs li {
+    display: inline-block;
+    text-transform: uppercase;
+}
+
+#teaser-blog .breadcrumbs li:after {
+    content: ">";
+    padding: 0 2px 0 4px;
+}
+
+#teaser-blog .breadcrumbs li:last-of-type:after {
+    content: "";
+    padding: 0 0 0 5px;
+}
+
+#teaser-blog .breadcrumbs a {
+    color: #fff;
+}

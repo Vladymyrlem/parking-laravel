@@ -1,0 +1,79 @@
+/* Locations
+--------------------------------------------*/
+#locations {
+    margin-top: 90px;
+    position: relative;
+    z-index: 2;
+}
+
+#locations .location-select-container {
+    z-index: 1;
+    position: relative;
+}
+
+#locations .location-select {
+    background-color: #0074b7;
+    height: 93px;
+}
+
+#locations .location-select h2 {
+    font-size: 35px;
+    font-weight: 900;
+    color: #fff;
+    margin: 26px 0 0 21px;
+}
+
+#locations .styled-select-location {
+    height: 47px;
+    position: relative;
+    margin: 22px 21px 0 0;
+    background-color: #fff;
+}
+
+#locations .styled-select-location:after {
+    content: '';
+    background: #ffffff url('../img/dropdown-icon.png') no-repeat 5px 21px;
+    right: 0px;
+    top: 0px;
+    width: 30px;
+    height: 43px;
+    position: absolute;
+    pointer-events: none;
+}
+
+#locations .styled-select-location select {
+    border: none;
+    font-size: 18px;
+    width: 100%;
+    background-image: none;
+    background: #fff;
+    -webkit-appearance: none;
+    padding: 11px 10px;
+    height: 43px;
+}
+
+#locations .map {
+    height: 550px;
+    background-color: #ccc;
+    top: -70px;
+}
+
+#locations .map h2 {
+    color: #0074b7;
+    padding: 0 10px;
+    margin-bottom: 4px;
+}
+
+#locations .map p {
+    font-size: 16px;
+    padding: 0 10px;
+}
+
+.arrow-down-location {
+    width: 0;
+    height: 0;
+    border-left: 37px solid transparent;
+    border-right: 37px solid transparent;
+    border-top: 37px solid #0074b7;
+    margin: 0 auto;
+}

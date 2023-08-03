@@ -8,30 +8,40 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'Parking Rondo')</title>
-
+    <!-- Fav and touch icons -->
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="img/favicon.png">
     @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">
+    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
+
     @yield('styles')
 
 </head>
-<body name="#start">
-<div id="app">
-    <!-- Top Navbar -->
-    @include('partials.header')
+<body name="#start" class="js">
+<!-- Top Navbar -->
+@include('partials.header')
 
-    <main class="py-4">
-        @yield('content')
-    </main>
-    @include('partials.footer')
-</div>
+<main class="py-4">
+    @yield('content')
+</main>
+@include('partials.footer')
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+{{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="{{ asset('js/slick.min.js') }}"></script>
-
-
+<script src="{{ asset('js/navbar/fastclick.js') }}" defer></script>
+<script src="{{ asset('js/navbar/scroll.js') }}" defer></script>
+<script src="{{ asset('js/slick.min.js') }}" defer></script>
+<script src="{{ asset('js/wow.min.js') }}"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
 <script src="{{ asset('js/app.js') }}"></script>
@@ -58,7 +68,7 @@
             path = path.substring(0, path.lastIndexOf("/") + 1)
 
             var locationContent = "<h2>" + companyName + "</h2><p>" + addressData.value + "</p>";
-                                                                                                                                                                                                                                                                       
+
             var locationData = {
                 map: {
                     options: {

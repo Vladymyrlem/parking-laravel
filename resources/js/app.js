@@ -3,6 +3,10 @@
 import './bootstrap';
 import jQuery from 'jquery';
 import slick from './slick';
+// import './navbar/fastclick';
+// import './navbar/fixed-responsive-nav';
+// import './navbar/responsive-nav';
+// import './navbar/scroll';
 
 window.$ = jQuery;
 jQuery(function () {
