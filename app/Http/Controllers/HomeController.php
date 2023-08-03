@@ -12,6 +12,7 @@
     use DatePeriod;
     use DateTime;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\DB;
 
     class HomeController extends Controller
     {
@@ -37,6 +38,9 @@
             $reservations = Reservation::all();
             $reviews = Reviews::all();
             $contacts = Contacts::all();
+            $phoneNumber = DB::table('contacts')->value('phone_number_1');
+            $address = DB::table('contacts')->value('address');
+            $map_link = DB::table('contacts')->value('map_link');
             $blockedDates = [];
             // Loop through each reservation and get the custom date value
             foreach ($reservations as $reservation) {
@@ -45,6 +49,7 @@
             }
             $blockedDatesJson = json_encode($blockedDates);
             // Pass the $blockedDates variable to the view
-            return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson', 'reviews', 'contacts'));
+            return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
+                'reviews', 'phoneNumber', 'address', 'map_link'));
         }
     }

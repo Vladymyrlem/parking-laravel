@@ -9,23 +9,24 @@
 
     <title>@yield('title', 'Parking Rondo')</title>
     <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="img/favicon.png">
+    {{--    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">--}}
+    {{--    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">--}}
+    {{--    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">--}}
+    {{--    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">--}}
+    {{--    <link rel="shortcut icon" href="img/favicon.png">--}}
     @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
 
     @yield('styles')
 
 </head>
-<body name="#start" class="js">
+<body name="#start" id="top" class="js">
 <!-- Top Navbar -->
 @include('partials.header')
 

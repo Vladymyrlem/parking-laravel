@@ -3,31 +3,35 @@
 @section('content')
     <!-- Main content -->
     <div class="content">
-        <div class="header-block" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 100%), url('{{asset('images/head-bkg.png')}}'), lightgray 50% / cover no-repeat;
-">
+        <div class="header-block" id="header-block" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 100%), url('{{asset('images/head-bkg.png')}}'), lightgray
+        50% / cover
+        no-repeat;
+margin-top: 94px">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-6 col-12">
-                        <form id="myForm">
-                            <!-- Form fields -->
-                            <input type="text" name="name" placeholder="Name">
-                            <input type="email" name="email" placeholder="Email">
-                            <!-- Other fields -->
-                            <div class="form-group">
-                                <label for="start_date">Start Date:</label>
-                                <input type="date" class="form-control" name="order_pick_up_date" id="start_date">
-                                <input type="time" class="form-control" name="order_pick_up_time" id="start_time">
-                            </div>
-                            <div class="form-group">
-                                <label for="end_date">End Date:</label>
-                                <input type="date" class="form-control" name="order_drop_off_date" id="end_date">
-                                <input type="time" class="form-control" name="order_drop_off_time" id="end_time">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
+                    <div class="col-md-5 col-12">
+                        <div class="reservation" id="rezerwui">
+                            <form id="myForm">
+                                <!-- Form fields -->
+                                <input type="text" name="name" placeholder="Name">
+                                <input type="email" name="email" placeholder="Email">
+                                <!-- Other fields -->
+                                <div class="form-group">
+                                    <label for="start_date">Start Date:</label>
+                                    <input type="date" class="form-control" name="order_pick_up_date" id="start_date">
+                                    <input type="time" class="form-control" name="order_pick_up_time" id="start_time">
+                                </div>
+                                <div class="form-group">
+                                    <label for="end_date">End Date:</label>
+                                    <input type="date" class="form-control" name="order_drop_off_date" id="end_date">
+                                    <input type="time" class="form-control" name="order_drop_off_time" id="end_time">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
                         @include('partials.modal.reservation-modal')
                     </div>
-                    <div class="col-md-6 col-12">
+                    <div class="col-md-7 col-12">
                         <div id="headblockCarousel" class="slick">
                             @foreach($headBlocks as $headBlock)
                                 <div class="">

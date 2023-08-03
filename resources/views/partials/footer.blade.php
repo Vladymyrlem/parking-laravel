@@ -1,4 +1,4 @@
-<a href="#start" class="scrollup fadeInRight animated" style="display: inline;">na górę strony</a>
+<a href="#top" class="scrollup fadeInRight animated" style="display: inline;">na górę strony</a>
 <footer class="footer">
 
     <div class="bottom-footer">
