@@ -11,28 +11,48 @@
     margin-bottom: 90px;
 }
 
+#information img {
+    width: auto;
+    max-width: 470px;
+    height: auto;
+}
+
 #information .row:nth-child(even) {
     flex-flow: row-reverse;
 }
 
 #information .title {
-    font-size: 36px;
+    font-size: 30px;
     font-weight: 900;
-    margin: 0 0 30px 0;
+    margin: 0 0 20px 0;
     padding: 0;
+    text-align: left;
+    width: auto;
+    max-width: 330px;
 }
 
 #information .subtitle {
-    font-size: 24px;
-    font-weight: normal;
-    margin: 0 0 30px 0;
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 300;
+    margin: 0 0 20px 0;
     padding: 0;
+    text-align: left;
+}
+
+#information .media-column p {
+    margin: 0 0 0 auto;
+    text-align: right;
 }
 
 #information p {
+    font-family: Lato, sans-serif;
     font-size: 18px;
-    line-height: 1.7;
-    margin-bottom: 30px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    text-align: left;
+    margin: 0 auto 0 0;
 }
 
 #information .btn-border {

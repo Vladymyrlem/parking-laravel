@@ -5,6 +5,7 @@
     use Illuminate\Support\Facades\Auth;
     use App\Http\Controllers\AdminController;
     use App\Http\Controllers\InformationController;
+    use App\Http\Controllers\AboutusController;
 
 //    use App\Http\Controllers\PriceControler;
     use App\Http\Controllers\PricesController;
@@ -65,6 +66,11 @@
 // delete headblock
         Route::delete('/admin/headblock/{headblock_id}', [AdminController::class, 'destroyHeaderBlock']);
 
+        /*About Us Block*/
+        Route::get('admin/aboutus', [AboutusController::class, 'index']);
+        Route::get('/admin/aboutus/{aboutus_id}', [AboutusController::class, 'showAboutAsBlock']);
+        Route::post('/admin/aboutus', [AboutusController::class, 'storeAboutAsBlock'])->name('admin.aboutus');
+        Route::put('/admin/aboutus/{aboutus_id}', [AboutusController::class, 'updateAboutAsBlock']);
         /*Info block*/
         Route::get('admin/infos', [InformationController::class, 'index']);
         Route::get('/admin/infos/{info_id}', [InformationController::class, 'showInformation']);

@@ -18,15 +18,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <p class="card-text">
-                                {{ __('You are logged in!') }}
-                            </p>
-                        </div>
-                    </div>
                     <!--Header Block-->
-                    <div class="header-block">
+                    <div class="header-block" id="header-block" name="#header-block">
                         <h2 class="fs-2">Header block</h2>
                         <div class="row">
                             <div class="col-lg-12 margin-tb">
@@ -63,8 +56,11 @@
                             </div>
                         </div>
                     </div>
+                    <div class="about-us-block" id="about-us" name="#about-us">
+                        @include('partials.about-us-block.table')
+                    </div>
                     <!-- Prices Block -->
-                    <div class="prices-block">
+                    <div class="prices-block" id="prices" name="#prices">
                         <h2 class="fs-2">Prices block</h2>
 
                         @include('partials.prices-block.table')
@@ -90,13 +86,13 @@
                         </div>
                     </div>
                     <!-- Information Block-->
-                    <div class="info-block">
+                    <div class="info-block" id="info" name="#info">
                         <h2 class="fs-2">Information block</h2>
                         @include('partials.information.table')
                         @include('partials.information.create')
                     </div>
                     <!-- Reviews Block-->
-                    <div class="reviews-section">
+                    <div class="reviews-section" id="reviews" name="#reviews">
                         <h2 class="fs-2">Reviews</h2>
                         <div class="row">
                             <div class="col-lg-12 margin-tb">
@@ -134,24 +130,24 @@
                         </div>
                     </div>
                     <!-- Contacts Block-->
-                    <div class="contacts-block">
+                    <div class="contacts-block" id="contacts" name="#contacts">
                         <h2 class="fs-2">Contacts block</h2>
                         @include('partials.contacts.table')
                     </div>
                     <!--Header Block-->
-                    <div class="section-title-block">
+                    <div class="section-title-block" id="titles" name="#titles">
                         <h2 class="fs-2">Sections title block</h2>
                         @include('partials.sections-title.section-title')
                     </div>
                     <!-- Services Block-->
-                    <div class="services-block">
+                    <div class="services-block" id="services" name="#services">
                         <h2 class="fs-2">Services block</h2>
                         @include('partials.services.table')
                         @include('partials.services.create')
                     </div>
                     @include('partials.newsletter.create')
 
-                    <div class="section-text-content">
+                    <div class="section-text-content" id="text-content" name="#services">
                         <h2 class="fs-2 text-center">Text Content Section</h2>
                         @include('partials.text-content.table')
                         @include('partials.text-content.create')

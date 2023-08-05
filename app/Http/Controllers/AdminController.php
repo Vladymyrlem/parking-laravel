@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Models\AboutUs;
     use App\Models\Contacts;
     use App\Models\Content;
     use App\Models\HeadBlock;
@@ -14,6 +15,7 @@
     use App\Models\Services;
     use GuzzleHttp\Client;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Mail;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Validation\Validator;
@@ -52,6 +54,9 @@
             $services = Services::all();
             $newsletter = Newsletter::all();
             $text_content = Content::all();
+            $about_us = AboutUs::all();
+            $about_us_title = DB::table('about_us')->value('title');;
+            $about_us_content = DB::table('about_us')->value('content');;
 //            if (request()->ajax()) {
 //                return datatables()->of(Services::latest()->get())
 //                    ->addColumn('action', function ($data) {
@@ -64,7 +69,7 @@
 //                    ->make(true);
 //            }
             return view('admin', compact('prices', 'headBlocks', 'information', 'reviews', 'contacts',
-                'section_title', 'reservations', 'services', 'newsletter', 'text_content'));
+                'section_title', 'reservations', 'services', 'newsletter', 'text_content', 'about_us', 'about_us_title', 'about_us_content'));
         }
 
         public function storeHeaderBlock(Request $request)
@@ -113,24 +118,24 @@
             $request->validate([
                 'email' => 'required|email',
                 'agree' => 'required',
-                'recaptcha' => 'required'
+                'g-recaptcha-response' => 'required|recaptchav3:subscribe,0.5'
             ]);
 
             // Implement Google reCAPTCHA v3 verification
-            $recaptcha_token = $request->input('recaptcha');
-            $recaptcha_secret_key = '6LcivXInAAAAAOSU4FzhvY87QghSlLPDMnuTOlt7';
-            $client = new Client();
-            $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
-                'form_params' => [
-                    'secret' => $recaptcha_secret_key,
-                    'response' => $recaptcha_token
-                ]
-            ]);
-
-            $body = json_decode((string)$response->getBody());
-            if (!$body->success || $body->score < 0.5) {
-                return redirect()->back()->withInput()->withErrors(['recaptcha' => 'Failed to verify reCAPTCHA.']);
-            }
+//            $recaptcha_token = $request->input('recaptcha');
+//            $recaptcha_secret_key = '6LcivXInAAAAAOSU4FzhvY87QghSlLPDMnuTOlt7';
+//            $client = new Client();
+//            $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
+//                'form_params' => [
+//                    'secret' => $recaptcha_secret_key,
+//                    'response' => $recaptcha_token
+//                ]
+//            ]);
+//
+//            $body = json_decode((string)$response->getBody());
+//            if (!$body->success || $body->score < 0.5) {
+//                return redirect()->back()->withInput()->withErrors(['recaptcha' => 'Failed to verify reCAPTCHA.']);
+//            }
 
             // Send the email
             $email = $request->input('email');
@@ -141,7 +146,7 @@
             // Save the email to a text file
             $this->saveToTextFile($email);
 
-            return redirect()->back()->with('success', 'Subscription successful.');
+            return response()->json(['message' => 'You have been subscribed successfully!']);
         }
 
         private function saveToTextFile($email)

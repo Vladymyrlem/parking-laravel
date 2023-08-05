@@ -12,12 +12,24 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
 
     @yield('styles')
     <style>
+        header {
+            background: #fff;
+            position: fixed;
+            z-index: 3;
+            width: 100%;
+            left: 0;
+            top: 0;
+
+        }
+
         .hidden-textarea {
             position: absolute;
             top: -9999px;
@@ -26,6 +38,10 @@
             height: 1px;
             opacity: 0;
         }
+
+        nav ul > li a {
+            height: auto;
+        }
     </style>
 
 </head>
@@ -33,31 +49,24 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <a href="/" class="brand-link">
+    <header class="main-header navbar navbar-expand navbar-white navbar-light">
+        <a href="/admin" class="brand-link">
             <img src="{{ asset('images/parking-logo.png') }}" alt="Parking Rondo Logo"
-                 class="brand-image img-circle elevation-3"
+                 class="brand-image"
                  style="opacity: 1">
         </a>
-        <a data-widget="navbar-search" href="#" role="button">
-            <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-            <form class="form-inline">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
+        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
+position: relative;" aria-hidden="true">
+            <ul>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#aboutus" data-scroll>O Nas</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#gallery" data-scroll>Galeria</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#locations" data-scroll>Dojazrd</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts-section" data-scroll>Kontakt</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>
+            </ul>
+        </nav>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
@@ -81,7 +90,7 @@
                 </div>
             </li>
         </ul>
-    </nav>
+    </header>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -93,7 +102,18 @@
                  style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
-
+        {{--        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;--}}
+        {{--position: relative;" aria-hidden="true">--}}
+        {{--            <ul>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#aboutus" data-scroll>O Nas</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#gallery" data-scroll>Galeria</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#locations" data-scroll>Dojazrd</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts-section" data-scroll>Kontakt</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>--}}
+        {{--            </ul>--}}
+        {{--        </nav>--}}
         @include('layouts.navigation')
     </aside>
 
@@ -146,6 +166,7 @@
 <!-- MODAL SECTION -->
 <!-- Head Block Modal-->
 @include('partials.modal.head-modal')
+@include('partials.modal.about-us-modal')
 <!-- Reviews Modal-->
 @include('partials.modal.review-modal')
 <!-- Contacts Modal-->
@@ -156,6 +177,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/calendar.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
+<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
+<script src="{{ asset('js/navbar/scroll.js') }}" async></script>
+<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
     // Check if both checkbox and CAPTCHA are validated
