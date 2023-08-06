@@ -150,6 +150,8 @@ position: relative;" aria-hidden="true">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
 <script src="{{asset('js/calendar.js')}}"></script>
 <script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
@@ -233,56 +235,9 @@ position: relative;" aria-hidden="true">
 
             var dataArray = <?php echo json_encode($arrayData); ?>;
             // Now 'dataArray' contains the array values in JavaScript format
-            //console.log(dataArray);
+            console.log(dataArray);
             var data = [];
-            var disabledDates = ['26/7/2023', '27/7/2023', '28/7/2023', '29/7/2023', '30/7/2023', '31/7/2023', '01/9/2023', '02/9/2023', '03/9/2023', '04/9/2023', '05/9/2023', '06/9/2023',];
 
-            $('#tdd').calendar({
-                zIndex: 999,
-                date: new Date(),
-                disabledDates: dataArray,
-                separator: '.'
-
-            }).show();
-            var myList = document.querySelector('.calendar-views .days');
-            var listItems = myList.getElementsByTagName('li');
-
-            for (var i = 0; i < listItems.length; i++) {
-                var listItem = listItems[i];
-                var value = parseInt(listItem.getAttribute('value'));
-                if (dataArray.includes(value)) {
-                    listItem.classList.add('disabled');
-                }
-            }
-            var $doff = $('#doff');
-            var UID = 1;
-            {{--var table = $('#datatable-ajax-crud');--}}
-            {{--var siteUrl = "{{ url('/') }}";--}}
-            {{--if (!table.DataTable().data().any()) {--}}
-            {{--    table.DataTable({--}}
-            {{--        processing: true,--}}
-            {{--        serverSide: true,--}}
-            {{--        ajax: "/admin/services",--}}
-            {{--        columns: [--}}
-            {{--            {data: 'id', name: 'id', 'visible': false},--}}
-            {{--            {data: 'service_title', name: 'services_title'},--}}
-            {{--            {data: 'service_content', name: 'service_content'},--}}
-            {{--            {--}}
-            {{--                data: 'service_icon',--}}
-            {{--                name: 'service_icon',--}}
-            {{--                render: function (data, type, full, meta) {--}}
-            {{--                    // 'data' is the value of 'service_icon' from the database--}}
-            {{--                    // type, full, and meta can be used to handle different scenarios if needed--}}
-            {{--                    var imageUrl = "/" + data;--}}
-            {{--                    var imgTag = '<img src="' + imageUrl + '" alt="Service Icon" height="auto" width="auto">';--}}
-            {{--                }--}}
-            {{--            },--}}
-            {{--            {data: 'created_at', name: 'created_at'},--}}
-            {{--            {data: 'action', name: 'action', orderable: false},--}}
-            {{--        ],--}}
-            {{--        order: [[0, 'desc']]--}}
-            {{--    });--}}
-            {{--}--}}
             // var modifiedUrl = url + '/reservations'
             //
             // // Fetch reserved dates from the backend using AJAX
@@ -301,23 +256,6 @@ position: relative;" aria-hidden="true">
             //     });
             // }
             //
-            // // Function to add the calendar with reserved dates
-            // function addCalendarWithReservedDates(reservedDates) {
-            //     $doff.append('<input class="calendar form-control form_element" placeholder="wybierz datę..." autocomplete="off" id="input-' + UID + '" name="daysoff[]"><div id="ca-' + UID + '"></div>');
-            //     $('#ca-' + UID).calendar({
-            //         zIndex: 999,
-            //         date: new Date(),
-            //         disableddates: reservedDates, // Set the reserved dates as disabled dates on the calendar
-            //         selectedRang: [new Date()],
-            //         data: data,
-            //         trigger: '#input-' + UID++
-            //     });
-            // }
-            //
-            // // Add calendar input on button click
-            // $('#add').click(function () {
-            //     fetchReservedDates(); // Fetch the reserved dates from the backend and add the calendar
-            // });
         }
     )
     ;

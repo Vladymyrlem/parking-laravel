@@ -166,19 +166,6 @@
             $('#locations .map').gmap3('destroy');
             loadMap(locations[this.value]);
         });
-
-
-        var data = [];
-        // var disableddates = ['26/07/2023', '27/07/2023', '28/07/2023', '29/07/2023', '30/07/2023', '31/07/2023', '01/08/2023', '02/08/2023', '03/08/2023', '04/08/2023', '05/08/2023', '06/08/2023',];
-
-        $('#tdd').calendar({
-            zIndex: 999,
-            date: new Date(),
-            selectedRang: [new Date()]
-        }).show();
-
-        var $doff = $('#doff');
-        var UID = 1;
         var url = $('#url').val();
 
         // var modifiedUrl = url + '/reservations'
@@ -199,18 +186,6 @@
         //     });
         // }
         //
-        // // Function to add the calendar with reserved dates
-        // function addCalendarWithReservedDates(reservedDates) {
-        //     $doff.append('<input class="calendar form-control form_element" placeholder="wybierz datę..." autocomplete="off" id="input-' + UID + '" name="daysoff[]"><div id="ca-' + UID + '"></div>');
-        //     $('#ca-' + UID).calendar({
-        //         zIndex: 999,
-        //         date: new Date(),
-        //         disableddates: reservedDates, // Set the reserved dates as disabled dates on the calendar
-        //         selectedRang: [new Date()],
-        //         data: data,
-        //         trigger: '#input-' + UID++
-        //     });
-        // }
         //
         // // Add calendar input on button click
         // $('#add').click(function () {
