@@ -14,6 +14,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>

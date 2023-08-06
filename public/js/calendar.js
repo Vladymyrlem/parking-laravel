@@ -1,4 +1,4 @@
-let disabledDates = [
+var disabledDates = [
     {"new_date": "02/08/2023"},
     {"new_date": "03/08/2023"},
     {"new_date": "04/08/2023"},
