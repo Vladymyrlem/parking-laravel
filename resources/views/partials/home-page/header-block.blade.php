@@ -7,7 +7,9 @@ margin-top: 94px">
         <div class="row">
             <div class="col-md-7 col-12">
                 <div class="reservation" id="rezerwui">
-                    <form id="orderForm">
+                    <form id="orderForm" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
                         <!-- Form fields -->
                         <select name="order_car_select" id="order_car_select" class="strtoupper form_element" data-rule="required" data-msg="to pole jest wymagane">
                             <optgroup label="Wybierz typ pojazdu">

@@ -41,4 +41,8 @@
             'standart_price' => 'required'
         ];
 
+        public function scopeByCountDays($query, $countDays)
+        {
+            return $query->where('count_days', $countDays);
+        }
     }

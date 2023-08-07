@@ -28019,51 +28019,33 @@ jquery__WEBPACK_IMPORTED_MODULE_1___default()(function () {
 
     // Get form data
     var formData = $(this).serializeArray();
+    var selectedCar = $('#order_car_select').val();
 
     // Create an empty string to store the HTML markup
     formData.forEach(function (data) {
-      var selectedCar = $('#order_car_select').val();
-      var pickUpDate = moment($('input#checkout_pick_up_date').val(), 'YYYY-MM-DD');
-      var dropOffDate = moment($('input#checkout_drop_off_date').val(), 'YYYY-MM-DD');
-      var daysDifference = dropOffDate.diff(pickUpDate, 'days');
-
-      // Set the count_days input field with the calculated difference
-      $('input#checkout_days').val(daysDifference);
-      $('#checkout_days_desc').html(daysDifference);
-      if (data.name === 'order_car_select') {
-        // Wrap the email value in a div tag with a specific style
-        $('input#checkout_car').val(data.value);
-        $('#checkout_car_desc').html(data.value);
-      }
       if (data.name === 'order_pick_up_date') {
         // Wrap the email value in a div tag with a specific style
         $('input#checkout_pick_up_date').val(data.value);
-        $('#checkout_pick_up_date_desc').html(data.value);
       }
       if (data.name === 'order_pick_up_time') {
         // Wrap the name value in a b tag
         $('input#checkout_pick_up_time').val(data.value);
-        $('#checkout_pick_up_time_desc').html(data.value);
       }
       if (data.name === 'order_drop_off_date') {
         // Wrap the name value in a b tag
-        $('input#checkout_drop_off_date').val(data.value);
-        $('span#checkout_drop_off_date_desc').html(data.value);
+        $('input#checkout_pick_up_time').val(data.value);
       }
       if (data.name === 'order_drop_off_time') {
         // Wrap the name value in a b tag
-        $('input#checkout_drop_off_time').val(data.value);
-        $('#checkout_drop_off_time_desc').html(data.value);
+        $('input#checkout_pick_up_time').val(data.value);
       }
       if (data.name === 'client_phone') {
         // Wrap the name value in a b tag
         $('input#checkout_phone').val(data.value);
-        $('#checkout_phone_desc').html(data.value);
       }
       if (data.name === 'client_email') {
         // Wrap the name value in a b tag
         $('input#checkout_email').val(data.value);
-        $('#checkout_email_desc').html(data.value);
       }
       // Add other conditions for additional fields if needed
     });

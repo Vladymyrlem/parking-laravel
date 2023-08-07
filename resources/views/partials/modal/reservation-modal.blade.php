@@ -7,8 +7,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="row m-0">
-                <form action="#" method="post" id="form_checkout" name="form_checkout">
-
+                <form method="post" id="form_checkout" name="form_checkout">
+                    @csrf
+                    @method('POST')
                     <!-- Modal header end -->
                     <!-- Modal body start -->
                     <div class="modal-body">

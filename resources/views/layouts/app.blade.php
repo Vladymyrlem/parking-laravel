@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="_token" content="{!! csrf_token() !!}"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -229,38 +230,35 @@ position: relative;" aria-hidden="true">
         });
     });
 </script>
-<script>
-    @if(isset($arrayData))
-    jQuery(function () {
-            var url = $('#url').val();
+@if(isset($arrayData))
+    <script>
+        jQuery(function () {
+            setTimeout(() => {
+                var url = $('#url').val();
+                $('.js_calendar').data('calendar_dates', <?php echo json_encode($arrayData); ?>);
 
-            var dataArray = <?php echo json_encode($arrayData); ?>;
-            // Now 'dataArray' contains the array values in JavaScript format
-            console.log(dataArray);
-            var data = [];
-
-            // var modifiedUrl = url + '/reservations'
-            //
-            // // Fetch reserved dates from the backend using AJAX
-            // function fetchReservedDates() {
-            //     // Replace 'your_endpoint_url' with the actual endpoint URL to fetch the reserved dates
-            //     $.ajax({
-            //         type: "GET",
-            //         url: modifiedUrl,
-            //         success: function (data) {
-            //             // Call the function to add the calendar with reserved dates
-            //             addCalendarWithReservedDates(data.reservedDates);
-            //         },
-            //         error: function (error) {
-            //             console.log('Error:', error);
-            //         }
-            //     });
-            // }
-            //
-        }
-    )
-    ;
-</script>
+                // var modifiedUrl = url + '/reservations'
+                //
+                // // Fetch reserved dates from the backend using AJAX
+                // function fetchReservedDates() {
+                //     // Replace 'your_endpoint_url' with the actual endpoint URL to fetch the reserved dates
+                //     $.ajax({
+                //         type: "GET",
+                //         url: modifiedUrl,
+                //         success: function (data) {
+                //             // Call the function to add the calendar with reserved dates
+                //             addCalendarWithReservedDates(data.reservedDates);
+                //         },
+                //         error: function (error) {
+                //             console.log('Error:', error);
+                //         }
+                //     });
+                // }
+                //
+            }, 0);
+        });
+    </script>
 @endif
+
 </body>
 </html>

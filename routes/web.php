@@ -17,6 +17,7 @@
     use App\Http\Controllers\ServicesController;
     use App\Http\Controllers\NewsletterController;
     use App\Http\Controllers\ContentController;
+    use App\Http\Controllers\ParkingController;
 
     /*
     |--------------------------------------------------------------------------
@@ -49,6 +50,11 @@
         Route::post('/admin/reservations', [AdminController::class, 'reservations']);
         Route::post('/save-reservations', [ReservationController::class, 'saveReservations'])->name('save-reservations');
 
+        Route::post('/send-order', [ParkingController::class, 'orderParking']);
+        Route::get('/get-order', [ParkingController::class, 'orderParking']);
+        Route::post('/submit-order', [ParkingController::class, 'storeParking']);
+        Route::post('/submit-order/{order_id}', [ParkingController::class, 'showParking']);
+        Route::delete('/submit-order/{order_id}', [ParkingController::class, 'destroy']);
         /*Header block*/
         Route::get('/headblock', 'AdminController@index');
 

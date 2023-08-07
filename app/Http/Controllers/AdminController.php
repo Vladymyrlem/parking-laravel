@@ -74,7 +74,6 @@
 
         public function storeHeaderBlock(Request $request)
         {
-
             $product = HeadBlock::create($request->input());
             return response()->json($product);
         }
