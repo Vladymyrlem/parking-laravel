@@ -154,6 +154,7 @@
                     </div>
                 </div>
             </div>
+
             <section class="calendar">
                 <h2 class="calendar__title">Dni w których wyłączona jest możliwość złożenia zamówienia</h2>
                 <div class="calendar__container">
@@ -162,12 +163,7 @@
                     </div>
                     <div class="calendar__date_list_wrapper">
                         <ul class="calendar__date_list js_list_blocked_dates">
-                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>
-                            <li class="calendar__date_item"><span>08/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>
-                            <li class="calendar__date_item"><span>09/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>
-                            <li class="calendar__date_item"><span>10/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>
-                            <li class="calendar__date_item"><span>11/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>
-                            <li class="calendar__date_item"><span>12/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>
+{{--                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>--}}
                         </ul>
                         <div class="calendar__add_date_w">
                             <ul class="calendar__add_date_list"></ul>
@@ -181,7 +177,6 @@
                 <div class="calendar__btn_submit_w">
                     <button type="submit" class="calendar__btn_submit js_btn_submit">zapisz</button>
                 </div>
-
             </section>
 
 
