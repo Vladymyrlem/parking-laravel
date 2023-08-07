@@ -39,6 +39,7 @@
             'phone_number',
             'email',
             'car_number',
+            'type_car',
             'car_mark',
             'car_model',
         ];

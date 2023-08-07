@@ -84,7 +84,8 @@
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                     <h4 class="info-box-title">Rodzaj auta:</h4>
                                     <p class="info-box-description" id="checkout_car_desc">...</p>
-                                    <input type="hidden" name="checkout_car" id="checkout_car" value="" class="form_element" data-rule="required" data-msg="rodzaj pojazdu jest polem wymaganym">
+                                    <input type="hidden" id="checkout_car" name="checkout_car" value="Car Type Value" class="form_element" data-rule="required" data-msg="rodzaj pojazdu jest polem
+                                    wymaganym">
                                     <div id="validation_checkout_car" class="validation"></div>
                                 </div>
                                 <div class="info-box">
