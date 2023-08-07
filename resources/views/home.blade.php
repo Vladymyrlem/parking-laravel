@@ -8,6 +8,9 @@
         <!-- Prices Section begin-->
         @include('partials.home-page.prices')
         <!-- Prices Section end-->
+        <!-- Information Section begin-->
+        @include('partials.home-page.information')
+        <!-- Information Section end-->
         <!-- Partners Section begin-->
         @include('partials.home-page.partners')
         <!-- Partners Section end-->
@@ -17,9 +20,7 @@
         <!-- Reviews Section begin-->
         @include('partials.home-page.reviews')
         <!-- Reviews Section end-->
-        <!-- Information Section begin-->
-        @include('partials.home-page.information')
-        <!-- Information Section end-->
+
         <!-- Newsletter Section begin-->
         @include('partials.home-page.newsletter')
         <!-- Newsletter Section end-->
