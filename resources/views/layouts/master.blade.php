@@ -52,7 +52,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/calendar.js') }}"></script>
+{{--TODO: olbor --}}
+{{--<script src="{{ asset('js/calendar.js') }}"></script>--}}
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
 

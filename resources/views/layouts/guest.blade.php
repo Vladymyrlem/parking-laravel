@@ -28,6 +28,7 @@
 <!-- /.login-box -->
 {{-- TODO: olbor temp --}}
 <script src="{{ asset('resources/js/app.js') }}"></script>
+{{-- TODO: olbor temp--}}
 {{--@vite('resources/js/app.js')--}}
 
 <!-- Bootstrap 4 -->

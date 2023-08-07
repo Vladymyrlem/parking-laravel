@@ -178,7 +178,8 @@ position: relative;" aria-hidden="true">
 @include('partials.modal.section-title-modal')
 @include('partials.modal.newsletter-modal')
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/calendar.js') }}"></script>
+{{-- TODO: olbor --}}
+{{--<script src="{{ asset('js/calendar.js') }}"></script>--}}
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
@@ -233,10 +234,11 @@ position: relative;" aria-hidden="true">
     @if(isset($arrayData))
     jQuery(function () {
             var url = $('#url').val();
+            {{--var dataArray = <?php echo json_encode($arrayData); ?>;--}}
 
-            var dataArray = <?php echo json_encode($arrayData); ?>;
             // Now 'dataArray' contains the array values in JavaScript format
-            console.log(dataArray);
+            $('.js_calendar').data('calendar_dates', <?php echo json_encode($arrayData); ?>);
+
             var data = [];
 
             // var modifiedUrl = url + '/reservations'
