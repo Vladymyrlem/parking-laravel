@@ -14,14 +14,8 @@
         {
             Schema::create('reservation_date', function (Blueprint $table) {
                 $table->id();
-                $table->integer('user_id');
-                $table->date('reservation_date');
                 $table->timestamps();
-
-                // olbor
-                $table->string('new_date')->change();
-                $table->dropColumn('user_id');
-                // - olbor
+                $table->string('new_date');
             });
         }
 

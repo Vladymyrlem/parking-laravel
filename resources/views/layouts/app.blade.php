@@ -13,7 +13,15 @@
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">--}}
+
+    <link rel="stylesheet" href="{{ asset('css/jsCalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/jsCalendar_general.css') }}">
+
+    <link href="css/jsCalendar.min.css" rel="stylesheet">
+    <link href="../../css/jsCalendar_general.css" rel="stylesheet">
+
+
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
 
     @yield('styles')
@@ -130,7 +138,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-<script src="{{asset('js/calendar.js')}}"></script>
+
+
 <script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{mix('js/ajaxscript.js')}}"></script>
@@ -207,19 +216,35 @@
     jQuery(function () {
             var url = $('#url').val();
 
-            var dataArray = <?php echo json_encode($arrayData); ?>;
-            // Now 'dataArray' contains the array values in JavaScript format
-            //console.log(dataArray);
-            var data = [];
-            var disabledDates = ['26/7/2023', '27/7/2023', '28/7/2023', '29/7/2023', '30/7/2023', '31/7/2023', '01/9/2023', '02/9/2023', '03/9/2023', '04/9/2023', '05/9/2023', '06/9/2023',];
+            var disabledDates = <?php echo json_encode($arrayData); ?>;
 
-            $('#tdd').calendar({
+            // Now 'dataArray' contains the array values in JavaScript format
+            var data = [];
+            // var disabledDates = [ '01/08/2023', '02/08/2023', '03/08/2023', '04/08/2023' ];
+            // var disabledDates = [ {new_date: '01/08/2023'}, {new_date: '02/08/2023'}, {new_date: '03/08/2023'} ];
+
+            const cal = $('#tdd').calendar({
                 zIndex: 999,
                 date: new Date(),
-                disabledDates: dataArray,
-                separator: '.'
+                disabledDates,
+                // separator: '.'
 
-            }).show();
+            }).show().data('calendar');
+
+            // cal.getDayAction();
+
+
+        var calendarInstance1 = calendarJs( "calendar_js", {
+            manualEditingEnabled: true,
+
+
+        } );
+
+
+
+        console.log(disabledDates)
+
+
             var myList = document.querySelector('.calendar-views .days');
             var listItems = myList.getElementsByTagName('li');
 

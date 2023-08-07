@@ -42,9 +42,9 @@
 
         prev: '&#171;',
         next: '&#187;',
-        
+
         separator: '/',
-		
+
         disableddates: [],
 
         viewChange: $.noop,
@@ -56,7 +56,7 @@
         onMouseenter: $.noop,
 
         onClose: $.noop
-        
+
     },
 
         // static variable
@@ -127,7 +127,7 @@
         OS = Object.prototype.toString;
 
     // utils
-    
+
     function isDate(obj) {
         return OS.call(obj) === '[object Date]';
     }
@@ -159,7 +159,7 @@
     }
 
     Date.prototype.format = function (exp) {
-		
+
         var y = this.getFullYear(),
             m = this.getMonth() + 1,
             d = this.getDate();
@@ -260,25 +260,25 @@
         getDayAction: function (day) {
             var action = ITEM_DAY;
             if (this.selectedRang) {
-				
+
                 var start = Date.tryParse(this.selectedRang[0]),
                     end = Date.tryParse(this.selectedRang[1])
-					
+
 //                    nday = day.getDate() + '-' + (day.getMonth() + 1) + '-' +  day.getFullYear();
-//                    
+//
                     // MOD
                     nday = ("0" + day.getDate()).slice(-2) + this.separator + ("0" + (day.getMonth() + 1)).slice(-2) + this.separator +  day.getFullYear();
 
                 if ((start && day < start.clearTime()) || (end && day > end.clearTime())) {
                     action = DISABLED;
                 }
-				
+
 //				console.log(nday);
-				
+
 		if ($.inArray(nday, this.disableddates) != -1 ) {
                     action = DISABLED;
 		}
-				
+
             }
 
             return action;
@@ -471,10 +471,10 @@
             this.$element.hide();
         },
         setPosition: function () {
-            
+
             var post = this.$trigger.offset();
             var offs = this.options.offset;
-            
+
 //            console.log(post);
 //            console.log(offs);
 
