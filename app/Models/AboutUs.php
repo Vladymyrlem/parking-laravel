@@ -1,11 +1,19 @@
 <?php
 
-namespace App\Models;
+    namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Factories\HasFactory;
+    use Illuminate\Database\Eloquent\Model;
 
-class AboutUs extends Model
-{
-    use HasFactory;
-}
+    class AboutUs extends Model
+    {
+        use HasFactory;
+
+        protected $table = "about_us";
+
+        protected $fillable = [
+            'id',
+            'title',
+            'content'
+        ];
+    }

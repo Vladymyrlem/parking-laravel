@@ -10,27 +10,82 @@ import slick from './slick';
 
 window.$ = jQuery;
 jQuery(function () {
-    jQuery('#myForm').submit(function (e) {
+    $(window).scroll(function () {
+        var sections = $('section'); // Assuming your sections have the 'section' selector
+        var navLinks = $('.nav-link'); // Assuming your menu links have the 'nav-link' class
+
+        sections.each(function () {
+            var sectionTop = $(this).offset().top - 50; // Adjust 50 to your preference for offset
+            var sectionBottom = sectionTop + $(this).outerHeight();
+
+            if ($(window).scrollTop() >= sectionTop && $(window).scrollTop() <= sectionBottom) {
+                // Remove active class from all menu links
+                navLinks.removeClass('active');
+
+                // Find the corresponding menu link based on the section ID and add the active class
+                var currentSectionId = $(this).attr('id');
+                $('a[href="#' + currentSectionId + '"]').addClass('active');
+            }
+        });
+    });
+    jQuery('#orderForm').submit(function (e) {
         e.preventDefault(); // Prevent form submission
 
         // Get form data
         var formData = $(this).serializeArray();
 
+
         // Create an empty string to store the HTML markup
         formData.forEach(function (data) {
+            var selectedCar = $('#order_car_select').val();
+
+            var pickUpDate = moment($('input#checkout_pick_up_date').val(), 'YYYY-MM-DD');
+            var dropOffDate = moment($('input#checkout_drop_off_date').val(), 'YYYY-MM-DD');
+            var daysDifference = dropOffDate.diff(pickUpDate, 'days');
+
+            // Set the count_days input field with the calculated difference
+            $('input#checkout_days').val(daysDifference);
+            $('#checkout_days_desc').html(daysDifference);
+            if (data.name === 'order_car_select') {
+                // Wrap the email value in a div tag with a specific style
+                $('input#checkout_car').val(data.value);
+                $('#checkout_car_desc').html(data.value);
+            }
             if (data.name === 'order_pick_up_date') {
                 // Wrap the email value in a div tag with a specific style
-                $('input#pick-up-date').val(data.value);
+                $('input#checkout_pick_up_date').val(data.value);
+                $('#checkout_pick_up_date_desc').html(data.value);
             }
             if (data.name === 'order_pick_up_time') {
                 // Wrap the name value in a b tag
-                $('input#pick-up-time').val(data.value);
+                $('input#checkout_pick_up_time').val(data.value);
+                $('#checkout_pick_up_time_desc').html(data.value);
+            }
+            if (data.name === 'order_drop_off_date') {
+                // Wrap the name value in a b tag
+                $('input#checkout_drop_off_date').val(data.value);
+                $('span#checkout_drop_off_date_desc').html(data.value);
+            }
+            if (data.name === 'order_drop_off_time') {
+                // Wrap the name value in a b tag
+                $('input#checkout_drop_off_time').val(data.value);
+                $('#checkout_drop_off_time_desc').html(data.value);
+            }
+            if (data.name === 'client_phone') {
+                // Wrap the name value in a b tag
+                $('input#checkout_phone').val(data.value);
+                $('#checkout_phone_desc').html(data.value);
+            }
+            if (data.name === 'client_email') {
+                // Wrap the name value in a b tag
+                $('input#checkout_email').val(data.value);
+                $('#checkout_email_desc').html(data.value);
             }
             // Add other conditions for additional fields if needed
         });
 
         // Show the modal
-        $('#myModal').modal('show');
+        $('#checkoutModal').modal('show');
     });
 
     $("#headblockCarousel").slick({
@@ -39,7 +94,8 @@ jQuery(function () {
         variableWidth: false,
         centerMode: false,
         slidesToShow: 1,
-        slidesToScroll: 1
+        slidesToScroll: 1,
+        arrows: false
     });
     $("#reviews-carousel").slick({
         dots: true,
@@ -88,4 +144,63 @@ $(document).ready(function () {
     //         console.log(JSON.stringify(error));
     //     }
     // });
+
+});
+jQuery(window).on('load', function () {
+
+    $('.scrollup, .navbar-brand').click(function () {
+        var new_hash = $(this).attr('href');
+        $("html, body").animate({scrollTop: 0}, 'slow', function () {
+            $("nav li a").removeClass('active');
+            var hash = $(location).attr('hash');
+            if (!hash) {
+                var new_anchor = $(location).attr('href') + new_hash;
+            } else {
+                var new_anchor = $(location).attr('href').replace(hash, new_hash);
+            }
+            $(location).attr('href', new_anchor);
+        });
+        return false;
+    });
+
+    $(".scroll-to").click(function (event) {
+        $('.modal').modal('hide');
+        var position = $(document).scrollTop();
+        var scrollOffset = 110;
+        if (position < 39) {
+            scrollOffset = 260;
+        }
+        var marker = $(this).attr('href');
+        console.log(marker);
+        $('html, body').animate({scrollTop: $(marker).offset().top - scrollOffset}, 'slow');
+
+        var hash = $(location).attr('hash');
+        if (!hash) {
+            var new_anchor = $(location).attr('href') + marker;
+        } else {
+            var new_anchor = $(location).attr('href').replace(hash, marker);
+        }
+        $(location).attr('href', new_anchor);
+
+        return false;
+    });
+
+    var hash = $(location).attr('hash');
+    if (hash) {
+        console.log('hash: ' + hash);
+        var g = $(hash).offset();
+        if (g) {
+            console.log('hash top: ' + g.top);
+            var h_position = $(document).scrollTop();
+            console.log('h position: ' + h_position);
+            var h_scrollOffset = 300;
+            $('html, body').animate({scrollTop: g.top - h_scrollOffset}, 'slow');
+        } else {
+            console.log('no hash offset');
+        }
+    } else {
+        console.log('no hash');
+    }
+
+
 });

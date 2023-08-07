@@ -42,7 +42,7 @@
     top: 0;
     left: 0;
     background: #fff;
-    overflow: hidden;
+    *overflow: hidden;
     -webkit-transition: .6s;
     transition: .6s;
 }

@@ -16,11 +16,6 @@
                 $table->id();
                 $table->text('description')->nullable();
                 $table->text('media')->nullable();
-
-                // olbor
-                $table->text('video')->nullable();
-                // - olbor
-
                 $table->softDeletes();
                 $table->timestamps();
             });

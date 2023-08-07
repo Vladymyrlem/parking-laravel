@@ -33,46 +33,82 @@
                 </div>
             </div>
             <div class="col-md-5 col-xs-12">
-                <form id="subscribe-form" method="post">
-                    @csrf
-                    <label for="email">Email:</label>
-                    <input type="email" name="email" id="email" required>
+                <form id="subscribe-form" method="post" action="/subscribe">
+                    {{--                    @csrf--}}
+                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <label class="col-md-4 control-label">E-Mail Address</label>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                            @if ($errors->has('email'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
                     <br>
-                    <input type="checkbox" name="agree" id="agree" required>
-                    <label for="agree">I agree to the terms and conditions</label>
-                    <br>
-                    <!-- Implement Google reCAPTCHA v3 here. -->
-                    <input type="hidden" name="recaptcha" id="recaptcha" value="6LcivXInAAAAAOSU4FzhvY87QghSlLPDMnuTOlt7">
+                    <!-- ReCAPTCHA v3 checkbox -->
+                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
+                        <div class="col-md-6">
+{{--                            TODO: olbor temp --}}
+{{--                            {!! RecaptchaV3::field('subscribe') !!}--}}
+                            @if ($errors->has('g-recaptcha-response'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
+                                    </span>
+                            @endif
+                        </div>
+                    </div>
+                    <!-- "I agree" checkbox -->
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" name="agree" id="agree" class="checkbox" required>
+                            I agree to the terms and conditions.
+                        </label>
+                    </div>
                     <br>
                     <button type="submit">Subscribe</button>
+                    <div id="successMessage" style="display: none;">You have been subscribed successfully!</div>
                 </form>
             </div>
         </div>
     </div>
 </section>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
-    // $(document).ready(function () {
-    //     $('#subscribe-form').submit(function (event) {
-    //         event.preventDefault();
-    //         var gtoken = grecaptcha.getResponse();
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: '/subscribe',
-    //             data: $(this).serialize(),
-    //             dataType: 'json',
-    //             success: function (response) {
-    //                 console.log($(this).serialize());
-    //                 alert(response.message);
-    //                 console.log(response);
-    //                 // Optionally, update the page content or show a success message
-    //             },
-    //             error: function (error) {
-    //                 console.error(error);
-    //                 alert('Failed to subscribe. Please try again later.');
-    //             }
-    //         });
-    //     });
-    // });
+    $(document).ready(function () {
+        // Submit the form using Ajax
+        $('#subscribe-form').submit(function (event) {
+            event.preventDefault();
+            const form = this; // Store a reference to the form element
+
+            // Get the reCAPTCHA response
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {
+                    // Add the CSRF token and reCAPTCHA response to form data
+                    const formData = new FormData(form); // Use the stored reference to the form element
+                    formData.append('_token', '{{ csrf_token() }}');
+                    formData.append('g-recaptcha-response', token);
+
+                    // Submit the form
+                    $.ajax({
+                        type: 'POST',
+                        url: '/subscribe',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            $('#successMessage').show();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            // Handle error response if needed
+                        }
+                    });
+                }.bind(this)); // Explicitly bind the context to the promise callback
+            });
+        });
+    });
 </script>

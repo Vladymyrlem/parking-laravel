@@ -13,9 +13,7 @@
         public function up()
         {
             Schema::table('information', function (Blueprint $table) {
-                $table->text('description')->nullable();
-                $table->text('media')->nullable();
-
+                $table->softDeletes();
             });
         }
 
@@ -27,7 +25,8 @@
         public function down()
         {
             Schema::table('information', function (Blueprint $table) {
-                //
+                $table->dropColumn('deleted_at');
+
             });
         }
     };

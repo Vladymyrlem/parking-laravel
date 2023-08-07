@@ -12,20 +12,25 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('css/fontawesome.min.css') }}">
     <!-- Theme style -->
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
-{{--    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">--}}
-
-    <link rel="stylesheet" href="{{ asset('css/jsCalendar.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/jsCalendar_general.css') }}">
-
-    <link href="css/jsCalendar.min.css" rel="stylesheet">
-    <link href="../../css/jsCalendar_general.css" rel="stylesheet">
-
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
 
     @yield('styles')
     <style>
+        header {
+            background: #fff;
+            position: fixed;
+            z-index: 3;
+            width: 100%;
+            left: 0;
+            top: 0;
+
+        }
+
         .hidden-textarea {
             position: absolute;
             top: -9999px;
@@ -34,6 +39,10 @@
             height: 1px;
             opacity: 0;
         }
+
+        nav ul > li a {
+            height: auto;
+        }
     </style>
 
 </head>
@@ -41,31 +50,24 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <a href="/" class="brand-link">
+    <header class="main-header navbar navbar-expand navbar-white navbar-light">
+        <a href="/admin" class="brand-link">
             <img src="{{ asset('images/parking-logo.png') }}" alt="Parking Rondo Logo"
-                 class="brand-image img-circle elevation-3"
+                 class="brand-image"
                  style="opacity: 1">
         </a>
-        <a data-widget="navbar-search" href="#" role="button">
-            <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-            <form class="form-inline">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
+        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
+position: relative;" aria-hidden="true">
+            <ul>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#aboutus" data-scroll>O Nas</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#gallery" data-scroll>Galeria</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#locations" data-scroll>Dojazrd</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts-section" data-scroll>Kontakt</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>
+            </ul>
+        </nav>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
@@ -89,7 +91,7 @@
                 </div>
             </li>
         </ul>
-    </nav>
+    </header>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -101,7 +103,18 @@
                  style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
-
+        {{--        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;--}}
+        {{--position: relative;" aria-hidden="true">--}}
+        {{--            <ul>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#aboutus" data-scroll>O Nas</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#gallery" data-scroll>Galeria</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#locations" data-scroll>Dojazrd</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts-section" data-scroll>Kontakt</a></li>--}}
+        {{--                <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>--}}
+        {{--            </ul>--}}
+        {{--        </nav>--}}
         @include('layouts.navigation')
     </aside>
 
@@ -138,8 +151,9 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
-
-
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
+<script src="{{asset('js/calendar.js')}}"></script>
 <script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{mix('js/ajaxscript.js')}}"></script>
@@ -155,6 +169,7 @@
 <!-- MODAL SECTION -->
 <!-- Head Block Modal-->
 @include('partials.modal.head-modal')
+@include('partials.modal.about-us-modal')
 <!-- Reviews Modal-->
 @include('partials.modal.review-modal')
 <!-- Contacts Modal-->
@@ -165,6 +180,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/calendar.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
+<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
+<script src="{{ asset('js/navbar/scroll.js') }}" async></script>
+<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
     // Check if both checkbox and CAPTCHA are validated
@@ -216,74 +234,11 @@
     jQuery(function () {
             var url = $('#url').val();
 
-            var disabledDates = <?php echo json_encode($arrayData); ?>;
-
+            var dataArray = <?php echo json_encode($arrayData); ?>;
             // Now 'dataArray' contains the array values in JavaScript format
+            console.log(dataArray);
             var data = [];
-            // var disabledDates = [ '01/08/2023', '02/08/2023', '03/08/2023', '04/08/2023' ];
-            // var disabledDates = [ {new_date: '01/08/2023'}, {new_date: '02/08/2023'}, {new_date: '03/08/2023'} ];
 
-            const cal = $('#tdd').calendar({
-                zIndex: 999,
-                date: new Date(),
-                disabledDates,
-                // separator: '.'
-
-            }).show().data('calendar');
-
-            // cal.getDayAction();
-
-
-        var calendarInstance1 = calendarJs( "calendar_js", {
-            manualEditingEnabled: true,
-
-
-        } );
-
-
-
-        console.log(disabledDates)
-
-
-            var myList = document.querySelector('.calendar-views .days');
-            var listItems = myList.getElementsByTagName('li');
-
-            for (var i = 0; i < listItems.length; i++) {
-                var listItem = listItems[i];
-                var value = parseInt(listItem.getAttribute('value'));
-                if (dataArray.includes(value)) {
-                    listItem.classList.add('disabled');
-                }
-            }
-            var $doff = $('#doff');
-            var UID = 1;
-            {{--var table = $('#datatable-ajax-crud');--}}
-            {{--var siteUrl = "{{ url('/') }}";--}}
-            {{--if (!table.DataTable().data().any()) {--}}
-            {{--    table.DataTable({--}}
-            {{--        processing: true,--}}
-            {{--        serverSide: true,--}}
-            {{--        ajax: "/admin/services",--}}
-            {{--        columns: [--}}
-            {{--            {data: 'id', name: 'id', 'visible': false},--}}
-            {{--            {data: 'service_title', name: 'services_title'},--}}
-            {{--            {data: 'service_content', name: 'service_content'},--}}
-            {{--            {--}}
-            {{--                data: 'service_icon',--}}
-            {{--                name: 'service_icon',--}}
-            {{--                render: function (data, type, full, meta) {--}}
-            {{--                    // 'data' is the value of 'service_icon' from the database--}}
-            {{--                    // type, full, and meta can be used to handle different scenarios if needed--}}
-            {{--                    var imageUrl = "/" + data;--}}
-            {{--                    var imgTag = '<img src="' + imageUrl + '" alt="Service Icon" height="auto" width="auto">';--}}
-            {{--                }--}}
-            {{--            },--}}
-            {{--            {data: 'created_at', name: 'created_at'},--}}
-            {{--            {data: 'action', name: 'action', orderable: false},--}}
-            {{--        ],--}}
-            {{--        order: [[0, 'desc']]--}}
-            {{--    });--}}
-            {{--}--}}
             // var modifiedUrl = url + '/reservations'
             //
             // // Fetch reserved dates from the backend using AJAX
@@ -302,23 +257,6 @@
             //     });
             // }
             //
-            // // Function to add the calendar with reserved dates
-            // function addCalendarWithReservedDates(reservedDates) {
-            //     $doff.append('<input class="calendar form-control form_element" placeholder="wybierz datę..." autocomplete="off" id="input-' + UID + '" name="daysoff[]"><div id="ca-' + UID + '"></div>');
-            //     $('#ca-' + UID).calendar({
-            //         zIndex: 999,
-            //         date: new Date(),
-            //         disableddates: reservedDates, // Set the reserved dates as disabled dates on the calendar
-            //         selectedRang: [new Date()],
-            //         data: data,
-            //         trigger: '#input-' + UID++
-            //     });
-            // }
-            //
-            // // Add calendar input on button click
-            // $('#add').click(function () {
-            //     fetchReservedDates(); // Fetch the reserved dates from the backend and add the calendar
-            // });
         }
     )
     ;

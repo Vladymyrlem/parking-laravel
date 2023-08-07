@@ -41,6 +41,8 @@
             $phoneNumber = DB::table('contacts')->value('phone_number_1');
             $address = DB::table('contacts')->value('address');
             $map_link = DB::table('contacts')->value('map_link');
+            $about_us_title = DB::table('about_us')->value('title');;
+            $about_us_content = DB::table('about_us')->value('content');;
             $blockedDates = [];
             // Loop through each reservation and get the custom date value
             foreach ($reservations as $reservation) {
@@ -50,6 +52,6 @@
             $blockedDatesJson = json_encode($blockedDates);
             // Pass the $blockedDates variable to the view
             return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
-                'reviews', 'phoneNumber', 'address', 'map_link'));
+                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content'));
         }
     }

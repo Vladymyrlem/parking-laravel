@@ -12,8 +12,8 @@
          */
         public function up()
         {
-            Schema::table('information', function (Blueprint $table) {
-                $table->softDeletes();
+            Schema::table('about_us', function (Blueprint $table) {
+                $table->timestamps();
             });
         }
 
@@ -24,8 +24,9 @@
          */
         public function down()
         {
-            Schema::table('information', function (Blueprint $table) {
-                $table->dropColumn('deleted_at');
+            Schema::table('about_us', function (Blueprint $table) {
+                $table->dropColumn('created_at');
+                $table->dropColumn('updated_at');
             });
         }
     };

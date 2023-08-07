@@ -107,10 +107,9 @@ body {
 }
 
 section {
-    border-bottom: 1px solid #999;
     text-align: center;
-    padding: 100px 0 0;
-    height: 800px;
+    height: auto;
+    max-height: 100%;
     width: 100%;
 }
 
@@ -237,25 +236,28 @@ header {
 }
 
 .nav-collapse a {
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    border-top: 1px solid white;
     text-decoration: none;
-    background: #f4421a;
-    padding: 0.7em 1em;
-    color: #fff;
+    padding: 8px 10px 7px 11px !important;
+    color: #151616;
     width: 100%;
     float: left;
 }
 
+.nav-collapse a:hover {
+    color: #555;
+    text-decoration: underline;
+    background-color: #e7e7e7;
+}
+
 .nav-collapse a:active,
-.nav-collapse .active a {
-    background: #b73214;
+.nav-collapse li a.active {
+    border: 2px solid #b8b6b6;
+    color: #716d6e;
+    background-color: transparent;
 }
 
 @media screen and (min-width: 40em) {
     .nav-collapse a {
-        border-left: 1px solid white;
-        padding: 1.02em 2em;
         text-align: center;
         border-top: 0;
         float: left;
@@ -264,7 +266,7 @@ header {
 }
 
 .nav-collapse ul ul a {
-    background: #ca3716;
+    background: transparent;
     padding-left: 2em;
 }
 

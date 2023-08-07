@@ -2,6 +2,7 @@
 
     use App\Models\SectionTitle;
     use App\Models\Content;
+    use Illuminate\Support\Facades\DB;
 
     /**
      * Write code on Method
@@ -34,5 +35,15 @@
             $subtitle = SectionTitle::where('slug', $slug)->value('subtitle');
             // You can now use the $title variable for further processing or return it in your response
             return $subtitle;
+        }
+    }
+    if (!function_exists('getContact')) {
+        function getContact($name)
+        {
+            // Retrieve the 'title' column value based on the provided 'slug'
+            $contact = DB::table('contacts')->value($name);
+
+            // You can now use the $title variable for further processing or return it in your response
+            return $contact;
         }
     }
