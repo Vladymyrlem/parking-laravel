@@ -170,6 +170,8 @@ position: relative;" aria-hidden="true">
 <!-- MODAL SECTION -->
 <!-- Head Block Modal-->
 @include('partials.modal.head-modal')
+@include('partials.modal.services-modal')
+
 @include('partials.modal.about-us-modal')
 <!-- Reviews Modal-->
 @include('partials.modal.review-modal')

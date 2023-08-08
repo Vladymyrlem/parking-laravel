@@ -143,7 +143,6 @@
                     <div class="services-block" id="services" name="#services">
                         <h2 class="fs-2">Services block</h2>
                         @include('partials.services.table')
-                        @include('partials.services.create')
                     </div>
                     @include('partials.newsletter.create')
 

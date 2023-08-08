@@ -86,9 +86,8 @@
         Route::get('admin/services', [AdminController::class, 'index']);
         Route::get('/admin/services/{service_id}', [ServicesController::class, 'show']);
         Route::post('/admin/services', [ServicesController::class, 'store'])->name('admin.create.service');
-        Route::get('/admin/services/edit/{service_id}', [ServicesController::class, 'edit'])->name('admin.edit.services');
-        Route::put('/admin/services/update/{service_id}', [ServicesController::class, 'update'])->name('admin.update.services');
-        Route::delete('/admin/services/delete/{service_id}', [ServicesController::class, 'destroy']);
+        Route::put('/admin/services/{service_id}', [ServicesController::class, 'update'])->name('admin.update.services');
+        Route::delete('/admin/services/{service_id}', [ServicesController::class, 'destroy']);
         /*Reviews*/
         Route::get('admin/reviews', [AdminController::class, 'index']);
 // Populate Data in Edit Modal Form

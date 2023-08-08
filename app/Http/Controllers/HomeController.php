@@ -8,6 +8,7 @@
     use App\Models\Price;
     use App\Models\Reservation;
     use App\Models\Reviews;
+    use App\Models\Services;
     use DateInterval;
     use DatePeriod;
     use DateTime;
@@ -38,6 +39,7 @@
             $reservations = Reservation::all();
             $reviews = Reviews::all();
             $contacts = Contacts::all();
+            $services = Services::all();
             $phoneNumber = DB::table('contacts')->value('phone_number_1');
             $address = DB::table('contacts')->value('address');
             $map_link = DB::table('contacts')->value('map_link');
@@ -52,6 +54,6 @@
             $blockedDatesJson = json_encode($blockedDates);
             // Pass the $blockedDates variable to the view
             return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
-                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content'));
+                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services'));
         }
     }

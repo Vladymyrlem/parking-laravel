@@ -4,6 +4,7 @@
 
     use App\Models\Reservation;
     use Illuminate\Pagination\Paginator;
+    use Illuminate\Support\Facades\Blade;
     use Illuminate\Support\ServiceProvider;
     use Illuminate\Support\Facades\View;
 
@@ -30,6 +31,9 @@
             View::composer('layouts.app', function ($view) {
                 $arrayData = Reservation::all('new_date');
                 $view->with('arrayData', $arrayData);
+            });
+            Blade::directive('getIconSVG', function ($expression) {
+                return "<?php echo App\Helpers\getIconSVG$expression; ?>";
             });
         }
     }

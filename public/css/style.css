@@ -2584,6 +2584,68 @@ h2.prices {
   margin: 0 auto;
 }
 
+/* Services
+--------------------------------------------*/
+#services {
+  margin-top: 65px;
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+#services .title {
+  margin-bottom: 38px;
+}
+
+#services h2 {
+  font-size: 46px;
+  font-weight: 900;
+  text-align: center;
+  margin: 0 0 25px 0;
+  padding: 0;
+}
+
+.underline {
+  height: 4px;
+  width: 135px;
+  display: block;
+  background-color: #0074b7;
+  margin: 20px auto 40px auto;
+}
+
+#services .service-box {
+  background-color: #ededed;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+#services .service-box .service-icon {
+  height: 43px;
+  width: 43px;
+  background-color: #0074b7;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+  font-size: 41px;
+  font-weight: 900;
+  float: left;
+  margin-right: 15px;
+}
+
+#services .service-box .service-title {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-weight: 900;
+  padding-top: 5px;
+}
+
+#services .service-box .service-content {
+  margin-top: 25px;
+  font-size: 18px;
+  line-height: 1.7;
+}
+
 /* Locations
 --------------------------------------------*/
 #locations {

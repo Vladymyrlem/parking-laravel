@@ -1,13 +1,13 @@
 // noinspection JSUnresolvedFunction
 
-import './bootstrap';
-import jQuery from 'jquery';
+// import './bootstrap';
+// import jQuery from 'jquery';
 // import './navbar/fastclick';
 // import './navbar/fixed-responsive-nav';
 // import './navbar/responsive-nav';
 // import './navbar/scroll';
-
-window.$ = jQuery;
+import 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js';
+// window.$ = jQuery;
 jQuery(function () {
     $(window).scroll(function () {
         var sections = $('section'); // Assuming your sections have the 'section' selector
@@ -192,64 +192,10 @@ jQuery(function () {
             }
         });
     });
-    $("#headblockCarousel").slick({
-        dots: true,
-        infinite: false,
-        variableWidth: false,
-        centerMode: false,
-        slidesToShow: 1,
-        slidesToScroll: 1,
-        arrows: false
-    });
-    $("#reviews-carousel").slick({
-        dots: true,
-        infinite: false,
-        variableWidth: false,
-        variableHeight: true,
-        centerMode: false,
-        slidesToShow: 1,
-        slidesToScroll: 1
-    });
-});
-
-$(document).ready(function () {
-    // Get all ol elements with class 'days'
-    const olElements = $('ol.days');
-    // var url = $('#url').val();
-    //
-    // var modifiedUrl = url + '/reservation-dates'
-    // // Fetch reservation dates from the backend using jQuery AJAX
-    // $.ajax({
-    //     url: modifiedUrl, // Update the route here
-    //     type: 'GET',
-    //     success: function (data) {
-    //         var datesArray = [];
-    //         $.each(data, function (index, value) {
-    //             datesArray.push(value.new_date);
-    //         });
-    //         console.log(datesArray);
-    //
-    //         // Loop through each ol element and its li elements
-    //         olElements.each(function () {
-    //             const liElements = $(this).find('li');
-    //             console.log(liElements);
-    //
-    //             // Loop through each li element and check if its data-calendar-day attribute matches any date from the database
-    //             liElements.each(function () {
-    //                 const calendarDay = $(this).attr('data-calendar-day');
-    //                 if (datesArray.includes(calendarDay)) {
-    //                     $(this).addClass('block-date');
-    //                 }
-    //             });
-    //         });
-    //     },
-    //     error: function (xhr, status, error) {
-    //         // console.error('Error fetching reservation dates:', error);
-    //         console.log(JSON.stringify(error));
-    //     }
-    // });
 
 });
+
+
 jQuery(window).on('load', function () {
 
     $('.scrollup, .navbar-brand').click(function () {

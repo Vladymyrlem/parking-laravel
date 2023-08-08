@@ -3,8 +3,18 @@
 @section('content')
     <!-- Main content -->
     <div class="content">
+        <!-- Header Block Section begin -->
         @include('partials.home-page.header-block')
+        <!-- Header Block Section end -->
+        <!-- About Us Section begin -->
         @include('partials.home-page.about-us')
+        <!-- About Us Section end -->
+        <!-- Services Section begin -->
+        @include('partials.home-page.services')
+        <!-- Services Section end -->
+        <!-- Newsletter Section begin-->
+        @include('partials.home-page.newsletter')
+        <!-- Newsletter Section end-->
         <!-- Prices Section begin-->
         @include('partials.home-page.prices')
         <!-- Prices Section end-->
@@ -20,18 +30,15 @@
         <!-- Reviews Section begin-->
         @include('partials.home-page.reviews')
         <!-- Reviews Section end-->
-
-        <!-- Newsletter Section begin-->
-        @include('partials.home-page.newsletter')
-        <!-- Newsletter Section end-->
+        <!-- Contacts Section begin -->
         @include('partials.home-page.contacts-content')
-
+        <!-- Contacts Section end -->
         <!-- Locations Section begin-->
         @include('partials.home-page.locations')
         <!-- Locations Section end-->
-        <!-- Contacts Section begin-->
+        <!-- Contact Us Section begin-->
         @include('partials.home-page.contacts-us')
-        <!-- Contacts Section end-->
+        <!-- Contact Us Section end-->
         <!-- Privacy policy Section begin-->
         @include('partials.home-page.terms')
         <!-- Privacy Policy Section end-->
