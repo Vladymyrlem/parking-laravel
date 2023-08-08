@@ -8,10 +8,10 @@
                 <!-- Service Box start -->
                 <div class="col-md-6">
                     <div class="service-box wow fadeInLeft animated" data-wow-offset="100" style="visibility: visible; animation-name: fadeInLeft;">
-                        <div class="service-icon">                        {!! getIconHtml("$service->image", 58, 58) !!} <!-- Width and height set to 58x58 -->
+                        <div class="service-icon">
+                            {!! getIconHtml("$service->image", 58, 58) !!} <!-- Width and height set to 58x58 -->
                         </div>
                         <h3 class="service-title">{{ $service->service_title }}</h3>
-                        <div class="clearfix"></div>
                         <p class="service-content">
                             {{ $service->service_content }}
                         </p>

@@ -4,9 +4,12 @@
 
     use App\Models\Parking;
     use App\Models\Price;
+    use Barryvdh\DomPDF\Facade\Pdf;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Mail;
+    use App\Mail\OrderConfirmation;
 
     class ParkingController extends Controller
     {
@@ -33,6 +36,8 @@
 //            $combinedEndDateTime = $endDate . ' ' . $endTime;
             // Create a new order record in the database and save the calculated price
             $order = Parking::create($request->input());
+            $order->fill($request->all());
+
 //            $order->arrival = $combinedStartDateTime;
 //            $order->departure = $combinedEndDateTime;
 //            $order->number_days = $differenceInDays;
@@ -47,11 +52,48 @@
 //            $order->car_model = $request->input('checkout_car_model');
             // Add other form fields as needed
 //            $order->save();
+            $order["email"] = $order->email;
+            $order["title"] = "Laravel 8 send email with attachment - Techsolutionstuff";
+            $order["body"] = "Laravel 8 send email with attachment";
 
+            $pdf = PDF::loadView('pdf-template', compact('order'));
+
+// Generate a unique filename based on the order ID
+            $filename = 'order_' . $order->id . '.pdf';
+
+// Save the PDF file to the "order" folder
+            $pdf->save(public_path('order/' . $filename));
+
+//            Mail::send('email.order_confirmation', [], function ($message) use ($order, $filename) {
+//                $message->to($order->email)
+//                    ->subject('Your Order Details and Invoice')
+//                    ->attach(public_path('order/' . $filename), ['as' => 'invoice.pdf', 'mime' => 'application/pdf']);
+//            });
+            $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
+            Mail::mailer('ukrnet')->to($order->email)->send(new OrderConfirmation($order, $filename));
+            Mail::mailer('ukrnet')->to($adminEmail)->send(new OrderConfirmation($order, $filename));
             // Return the total price as a JSON response (optional)
-            return response()->json($order);
+            return response()->json([
+                'message' => 'Order created successfully!',
+                'order' => $order,
+                'pdf_url' => url('order/' . $order->id . '.pdf'), // Replace with the actual path to your PDF
+            ]);
 
         }
+
+        public function generatePdfContent(Parking $order_data)
+        {
+
+            // Example: Create a PDF using SnappyPDF
+            $pdf = PDF::loadView('pdf-template', compact('order_data'));
+
+            // Save the PDF to a file
+            $pdfPath = public_path('order/' . $order_data->id . '.pdf');
+            $pdf->output();
+
+            return $pdfPath;
+        }
+
 
         public function getParking(Request $request)
         {
