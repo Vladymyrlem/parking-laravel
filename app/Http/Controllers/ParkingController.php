@@ -55,20 +55,15 @@
             $order["email"] = $order->email;
             $order["title"] = "Laravel 8 send email with attachment - Techsolutionstuff";
             $order["body"] = "Laravel 8 send email with attachment";
+            $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->arrival)->format('d/m/Y H:i');
+            $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->departure)->format('d/m/Y H:i');
+            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate'));
+            $pdf->setOption('encoding', 'utf-8');
 
-            $pdf = PDF::loadView('pdf-template', compact('order'));
-
-// Generate a unique filename based on the order ID
             $filename = 'order_' . $order->id . '.pdf';
 
-// Save the PDF file to the "order" folder
             $pdf->save(public_path('order/' . $filename));
 
-//            Mail::send('email.order_confirmation', [], function ($message) use ($order, $filename) {
-//                $message->to($order->email)
-//                    ->subject('Your Order Details and Invoice')
-//                    ->attach(public_path('order/' . $filename), ['as' => 'invoice.pdf', 'mime' => 'application/pdf']);
-//            });
             $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
             Mail::mailer('ukrnet')->to($order->email)->send(new OrderConfirmation($order, $filename));
             Mail::mailer('ukrnet')->to($adminEmail)->send(new OrderConfirmation($order, $filename));

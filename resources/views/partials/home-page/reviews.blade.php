@@ -19,7 +19,7 @@
                     fill="#D9D9D9"/>
             </svg>
         </div>
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-12 col-md-offset-1">
             <div id="reviews-carousel" class="slick">
                 @foreach($reviews as $review)
                     <div class="item">

@@ -21,6 +21,7 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^4.0",
         "laravelcollective/html": "^6.4",
+        "nesbot/carbon": "^2.68",
         "phpmailer/phpmailer": "^6.8",
         "tinymce/tinymce": "^6.6",
         "yajra/laravel-datatables-oracle": "^10.6"
@@ -51,12 +52,6 @@
             "Tests\\": "tests/"
         }
     },
-    "repositories": [
-        {
-            "type": "path",
-            "url": "vendor/iconic-master"
-        }
-    ],
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",

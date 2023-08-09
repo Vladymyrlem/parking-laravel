@@ -1,13 +1,13 @@
 // noinspection JSUnresolvedFunction
 
-// import './bootstrap';
-// import jQuery from 'jquery';
+//import './bootstrap';
+//import jQuery from 'jquery';
 // import './navbar/fastclick';
 // import './navbar/fixed-responsive-nav';
 // import './navbar/responsive-nav';
 // import './navbar/scroll';
-import 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js';
-// window.$ = jQuery;
+// import 'https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js';
+window.$ = jQuery;
 jQuery(function () {
     $(window).scroll(function () {
         var sections = $('section'); // Assuming your sections have the 'section' selector
@@ -176,6 +176,7 @@ jQuery(function () {
             type_car: $('input#checkout_car').val(),
             car_mark: $('input#checkout_car_brand').val(),
             car_model: $('input#checkout_car_model').val(),
+            car_number: $('input#checkout_plate').val(),
         };
         console.log(data);
         $.ajax({
@@ -184,6 +185,8 @@ jQuery(function () {
             data: data,
             dataType: 'json',
             success: function (data) {
+                $('#form_checkout')[0].reset(); // Reset the form
+                $('#orderForm')[0].reset(); // Reset the form
                 $('#checkoutModal').modal('hide');
             },
             error: function (xhr, status, error) {

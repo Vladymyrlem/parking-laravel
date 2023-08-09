@@ -2,7 +2,10 @@
 
     namespace App\Mail;
 
+    use App\Models\Contacts;
+    use App\Models\Kontakts;
     use App\Models\Parking;
+    use Carbon\Carbon;
     use Illuminate\Bus\Queueable;
     use Illuminate\Contracts\Queue\ShouldQueue;
     use Illuminate\Mail\Mailable;
@@ -26,9 +29,12 @@
 
         public function toMail($notifiable)
         {
+            $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y H:i');
+            $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->departure)->format('d/m/Y H:i');
+            $contacts = Contacts::all();
             return (new MailMessage)
                 ->subject('Order Confirmation')
-                ->markdown('email.order_confirmation', ['order' => $this->formData])
+                ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate])
                 ->attach($this->pdfFile, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf'])
                 ->to($this->formData->email)
                 ->cc(config('mail.admin_address')); // Use the admin email address from your .env
@@ -37,8 +43,10 @@
         public function build()
         {
             $pdfFilePath = public_path('order/order_' . $this->formData->id . '.pdf');
+            $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y H:i');
+            $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->departure)->format('d/m/Y H:i');
 
-            return $this->view('email.order_confirmation')->with(['order' => $this->formData])
+            return $this->view('email.order_confirmation')->with(['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate])
                 ->attach($pdfFilePath, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf']);
         }
 

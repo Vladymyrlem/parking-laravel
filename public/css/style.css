@@ -1543,7 +1543,7 @@ h2.prices {
 #prices h2 {
   color: var(--black, #151616);
   text-align: center;
-  font-family: Lato, sna-serif;
+  font-family: Lato, sans-serif;
   font-size: 50px;
   font-style: normal;
   font-weight: 700;
@@ -1602,7 +1602,7 @@ h2.prices {
 #prices .box .box_content h3 {
   color: var(--prime, #0074B7);
   font-family: Lato, sans-serif;
-  font-size: 30px;
+  font-size: 25px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
@@ -1936,7 +1936,7 @@ h2.prices {
 --------------------------------------------*/
 #reviews {
   margin-top: 150px;
-  padding-bottom: 25px;
+  padding-bottom: 100px;
   position: relative;
   z-index: 2;
 }
@@ -1971,6 +1971,11 @@ h2.prices {
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+}
+
+#reviews-carousel {
+  width: 100%;
+  max-width: 1170px;
 }
 
 #reviews .carousel-indicators {
@@ -2042,8 +2047,13 @@ h2.prices {
 }
 
 #information .title {
+  color: var(--black, #151616);
+  /* H3 bold */
+  font-family: Lato, sans-serif;
   font-size: 30px;
+  font-style: normal;
   font-weight: 900;
+  line-height: 33px; /* 110% */
   margin: 0 0 20px 0;
   padding: 0;
   text-align: left;
@@ -2052,9 +2062,12 @@ h2.prices {
 }
 
 #information .subtitle {
+  color: #131313;
+  font-family: Lato, sans-serif;
   font-size: 26px;
   font-style: normal;
   font-weight: 300;
+  line-height: 110%; /* 28.6px */
   margin: 0 0 20px 0;
   padding: 0;
   text-align: left;
@@ -2071,6 +2084,7 @@ h2.prices {
   font-style: normal;
   font-weight: 400;
   line-height: 140%;
+  color: var(--black, #151616);
   text-align: left;
   margin: 0 auto 0 0;
 }
@@ -2114,16 +2128,6 @@ h2.prices {
   padding-top: 30px;
   height: 0;
   overflow: hidden;
-}
-
-#information .video iframe,
-#information .video object,
-#information.video embed {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
 }
 
 /* Teaser
@@ -2491,9 +2495,14 @@ h2.prices {
   margin-bottom: 38px;
 }
 #partners h2 {
-  font-size: 46px;
-  font-weight: 900;
+  color: #131313;
+  /* H2 */
+  font-family: Lato, sans-serif;
   text-align: center;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
   margin: 0 0 25px 0;
   padding: 0;
 }
@@ -2626,7 +2635,7 @@ h2.prices {
   padding: 30px 20px;
   display: grid;
   grid-template-columns: auto 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 58px auto;
   gap: 16px;
   height: 100%;
 }
@@ -2650,6 +2659,9 @@ h2.prices {
   grid-column: 2;
   grid-row: 1;
   margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 }
 
 #services .service-box .service-content {
@@ -2679,7 +2691,7 @@ h2.prices {
 #locations .location-select-container {
   z-index: 1;
   position: absolute;
-  top: -20px;
+  top: -60px;
   left: 50%;
   transform: translateX(-50%);
   width: 100%;
@@ -2764,24 +2776,42 @@ h2.prices {
 
 .navi {
   background-color: #0074b7;
-  padding: 5px;
+  padding: 20px 75px;
   margin: 5px auto;
-  display: block;
   position: relative;
-  top: -70px;
+  top: -63px;
+  color: var(--white, #FFF);
+  /* H3 bold */
+  font-family: Lato, sans-serif;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 900;
+  line-height: 33px; /* 110% */
+  width: 100%;
+  max-width: 975px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.navi a {
+  border-radius: 5px;
+  background: var(--white, #FFF);
+  padding: 18px 40px;
+  width: 100%;
+  max-width: 248px;
+  color: var(--prime, #0074B7);
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  text-transform: capitalize;
   text-align: center;
-  font-size: 24px;
+}
+.navi a:hover {
+  text-decoration: none;
   color: #fff;
-  font-weight: bold;
-}
-
-.navi a,
-.navi a:hover {
-  color: #fff !important;
-}
-
-.navi a:hover {
-  text-decoration: underline;
+  background: var(--prime, #0074B7);
 }
 
 /* Footer Bar
@@ -3788,6 +3818,26 @@ p span.price {
   margin-bottom: 90px;
   position: relative;
   z-index: 2;
+}
+#gallery h2 {
+  color: var(--black, #151616);
+  /* H2 */
+  font-family: Lato, sans-serif;
+  font-size: 50px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 30px;
+}
+#gallery .gallery {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  grid-gap: 30px;
+}
+#gallery .gallery img {
+  border-radius: 5px;
+  border: 2px solid var(--grey, #AFADAD);
 }
 
 #gallery .box {
