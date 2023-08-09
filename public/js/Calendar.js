@@ -113,28 +113,24 @@ class CalendarIk {
 }
 
 class DatesList {
-    class = {};
-    dates = [];
 
     constructor( { ...args } ) {
         this.calendar = args.calendar;
         this.dates = args.dates;
-        this.class.dateList = args.dateListClass;
+        this.dateListClass = args.dateListClass;
 
-        this.init();
-    }
-
-    init() {
         this.listDatesRender();
-        this.addRemoveDateAction();
+        this.addActionForRemoveDate();
     }
 
     // Render Dates List
     listDatesRender() {
-        const listDates = document.querySelector( '.' + this.class.dateList );
+        const listDates = document.querySelector( '.' + this.dateListClass );
         if ( ! listDates ) {
             return -1;
         }
+
+        listDates.innerHTML = '';
 
         this.dates.forEach( date => {
             if ( this.compareDate( date ) ) {
@@ -153,7 +149,7 @@ class DatesList {
 
     // DELETE Date from list dates
     // TODO: this add ajax method for delete date
-    addRemoveDateAction() {
+    addActionForRemoveDate() {
         const listDates = document.querySelectorAll( '[data-blocked-date]' );
 
         listDates.forEach( item => {
@@ -166,8 +162,15 @@ class DatesList {
                 while ( i < this.dates.length ) {
                     if ( this.dates[i].new_date === date ) {
 
+
+
+
                         // TODO: this insert code for ajax method for delete date
-                        this.dates.splice(i, 1);
+                        const deletedDate = this.dates.splice(i, 1);
+                        console.log( 'deleted date: ', deletedDate )
+
+
+
 
                     } else {
                         ++i;
@@ -180,6 +183,12 @@ class DatesList {
         });
     }
 
+
+    refresh() {
+        this.listDatesRender();
+        this.addActionForRemoveDate();
+    }
+
     // HELPERS
     compareDate = function ( date ) {
         const d = date.new_date.split('/');
@@ -187,9 +196,4 @@ class DatesList {
         const date2 = new Date( new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1, 23, 59, 59, 999 );
         return date1 > date2;
     }
-}
-
-
-class AddDate {
-
 }

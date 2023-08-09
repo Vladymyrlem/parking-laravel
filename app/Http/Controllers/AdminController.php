@@ -74,7 +74,8 @@
 
         public function storeHeaderBlock(Request $request)
         {
-
+echo '<pre>'; print_r( $request ); echo '</pre>';
+die('-1');
             $product = HeadBlock::create($request->input());
             return response()->json($product);
         }
@@ -198,4 +199,16 @@
             // Get the public URL for the file
             return response()->json(['location' => "/images/$imageName"]);
         }
+
+        // TODO: olbor calendar
+        public function calendarDate(Request $request)
+        {
+            echo 'calendar test';
+            echo 'test request: <pre>';
+            print_r($request);
+            echo '</pre>';
+            die; // TODO olbor
+        }
+
+
     }

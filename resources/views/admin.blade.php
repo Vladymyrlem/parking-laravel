@@ -159,7 +159,7 @@
                 <h2 class="calendar__title">Dni w których wyłączona jest możliwość złożenia zamówienia</h2>
                 <div class="calendar__container">
                     <div class="calendar__visual_wrapper">
-                        <div class="calendar__visual js_calendar"></div>
+                        <div class="calendar__main_calendar"></div>
                     </div>
                     <div class="calendar__date_list_wrapper">
                         <ul class="calendar__date_list js_list_blocked_dates">

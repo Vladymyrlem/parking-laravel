@@ -138,4 +138,8 @@
         Route::post('/admin/newsletter', [NewsletterController::class, 'storeNewsletter']);
 // update Contacts
         Route::put('/admin/newsletter/{newsletter_id}', [NewsletterController::class, 'updateNewsletter']);
+
+        // TODO: olbor
+        Route::post('/admin/blocked-dates', [AdminController::class, 'calendarDate']);
+
     });
