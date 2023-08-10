@@ -32,7 +32,7 @@
         |            "postmark", "log", "array", "failover"
         |
         */
-
+        'debug' => true,
         'mailers' => [
             'smtp' => [
                 'transport' => 'smtp',

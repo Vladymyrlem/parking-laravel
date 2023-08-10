@@ -18,6 +18,7 @@
     use App\Http\Controllers\NewsletterController;
     use App\Http\Controllers\ContentController;
     use App\Http\Controllers\ParkingController;
+    use App\Http\Controllers\HomeController;
 
     /*
     |--------------------------------------------------------------------------
@@ -32,7 +33,7 @@
 
     Auth::routes();
 
-    Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/', [HomeController::class, 'index'])->name('home');
 
     Route::middleware('auth')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -49,6 +50,7 @@
         Route::delete('/admin/prices/{price_id}', [PricesController::class, 'destroyPrices']);
         Route::post('/admin/reservations', [AdminController::class, 'reservations']);
         Route::post('/save-reservations', [ReservationController::class, 'saveReservations'])->name('save-reservations');
+        Route::post('/send-contact', [HomeController::class, 'sendContactUs'])->name('send-contact');
 
         Route::post('/submit-order', [ParkingController::class, 'storeParking']);
         Route::post('/submit-order/{order_id}', [ParkingController::class, 'showParking']);

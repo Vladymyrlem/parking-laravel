@@ -195,7 +195,61 @@ jQuery(function () {
             }
         });
     });
+    $(document).ready(function () {
+        $('#orderForm input').keyup(function () {
+            var emptyFields = false;
+            $('#orderForm input').each(function () {
+                if ($(this).val() === '') {
+                    emptyFields = true;
+                    $(this).addClass('error-border');
+                } else {
+                    $(this).removeClass('error-border');
+                }
+            });
 
+            if (emptyFields) {
+                $('#order_submit_btn').prop('disabled', true);
+            } else {
+                $('#order_submit_btn').prop('disabled', false);
+            }
+        });
+    });
+
+    $('#form_contact').on('submit', function (e) {
+        e.preventDefault();
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        // Create the data object to send in the AJAX request
+        // const data = {
+        //     // '_token': token,
+        //     // Include other form data as needed
+        //     contact_first_name: $('input#contact_firstname').val(),
+        //     contact_last_name: $('input#contact_lastname').val(),
+        //     contact_phone: $('input#contact_phone').val(),
+        //     contact_email: $('#contact_email').val(),
+        //     contact_message: $('textarea#contact_message').val(),
+        // };
+        // console.log(data);
+        $.ajax({
+            type: 'POST',
+            url: '/send-contact',
+            data: $(this).serialize(),
+            success: function (response) {
+                console.log(response.message);
+                console.log($(this).serialize());
+
+                // Display success message or perform other actions
+            },
+            error: function (error) {
+                console.error(error);
+                // Display error message or perform other actions
+            }
+        });
+    });
 });
 
 
@@ -257,3 +311,47 @@ jQuery(window).on('load', function () {
 
 
 });
+$(document).ready(function () {
+    $('.show-button').click(function () {
+        var container = $('#regulamin');
+        var content = $('#regulamin .row');
+        var button = $(this);
+
+        var isExpanded = container.hasClass('expanded');
+        $('#terms').toggleClass('open');
+        content.toggleClass('expanded');
+        $(this).find('span').text(function (i, text) {
+            return text === 'rozwijać się' ? 'zwijać się' : 'rozwijać się';
+        });
+    });
+});
+$(document).ready(function () {
+    $('#myCheckbox').change(function () {
+        if ($(this).is(':checked')) {
+            $('#submitButton').prop('disabled', false); // Enable the submit button
+        } else {
+            $('#submitButton').prop('disabled', true); // Disable the submit button
+        }
+    });
+});
+$(document).ready(function () {
+    $('.contacts-us-checkbox').change(function () {
+        var allChecked = $('.contacts-us-checkbox').filter(':checked').length === 2;
+        $('#contact_submit_btn').prop('disabled', !allChecked);
+    });
+
+    $('.approval_rodo_link_more').on('click', function (e) {
+        e.preventDefault();
+        $('#newsletter_approval_rodo_more').toggleClass('isHide');
+        $(this).text(function (i, text) {
+            return text === 'rozwiń' ? 'zwiń' : 'rozwiń';
+        });
+    });
+});
+
+
+
+
+
+
+

@@ -9,7 +9,13 @@
 }
 
 #newsletter h3 {
-    color: #fff;
+    color: var(--white, #FFF);
+    font-family: Lato, sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-align: left;
 }
 
 #newsletter .checkbox label {
@@ -20,24 +26,134 @@
 
 
 #newsletter .title {
+    color: var(--white, #FFF);
+
+    /* H3 bold */
+    font-family: Lato, sans-serif;
     font-size: 30px;
-    color: #fff;
-    text-transform: uppercase;
+    font-style: normal;
     font-weight: 900;
-    margin: 0;
+    line-height: 33px; /* 110% */
+    text-align: left;
+    margin: 0 auto 30px 0;
     padding: 0;
 }
 
 #newsletter .newsletter-form {
     /*width: 62%;*/
-    background-color: #fff;
-    height: 55px;
-    padding: 9px;
+
+
+    .input-group {
+        background-color: #fff;
+        height: auto;
+        padding: 10px;
+        margin: 0;
+    }
+
+    .custom-checkbox {
+        width: 100%;
+        color: var(--white, #FFF);
+        font-family: Lato, sans-serif;
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 800;
+        line-height: 20.594px; /* 205.937% */
+        text-transform: capitalize;
+        padding-left: 26px;
+
+        display: flex;
+        align-items: flex-start;
+        justify-content: flex-start;
+
+        text-align: left;
+
+        input {
+            flex: 0;
+        }
+    }
 }
 
 #newsletter .newsletter-form input {
     box-shadow: none;
     border: none;
+    position: relative;
+    z-index: 2;
+    float: left;
+    width: 100%;
+    margin-bottom: 0;
+
+    &[type="email"] {
+        height: 100%;
+
+        ::placeholder {
+            color: var(--black, #151616);
+            /* Add med */
+            font-family: Lato, sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 20.594px; /* 128.711% */
+            text-transform: capitalize;
+        }
+    }
+
+
+}
+
+#newsletter .newsletter-form button {
+    border-radius: 5px;
+    background: var(--prime, #0074B7);
+    padding: 10px 16px;
+    width: 100%;
+    color: var(--white, #FFF);
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 125% */
+    text-transform: capitalize;
+}
+
+.approval {
+    display: block;
+}
+
+.approval .g-recaptcha {
+    margin-top: 10px;
+}
+
+.approval .row {
+    margin: 0;
+}
+
+.approval_rodo {
+    display: block;
+    margin: 0;
+    padding: 10px;
+    background-color: #f8f8f8;
+}
+
+.approval_rodo p {
+    margin: 0;
+    font-size: 12px;
+    text-align: justify;
+}
+
+.approval_rodo_more {
+    margin-top: 10px;
+}
+
+#newsletter .approval_rodo {
+    background: none;
+    padding: 30px 0 10px 0;
+}
+
+#newsletter .approval_rodo p {
+    color: #fff;
+}
+
+#newsletter .approval_rodo p a {
+    color: #fff;
 }
 
 #newsletter .newsletter-form .button {

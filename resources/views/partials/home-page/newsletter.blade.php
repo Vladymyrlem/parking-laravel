@@ -1,19 +1,16 @@
 <section id="newsletter" class="wow slideInLeft animated" data-wow-offset="300" style="visibility: visible; animation-name: slideInLeft;">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <div class="alert hidden" id="newsletter_form_msg"></div>
-            </div>
+
             <div class="col-md-7 col-xs-12">
                 <h2 class="title">Zostaw swój adres e-mail</h2>
                 <h3>Prześlemy informację o aktualnych i przyszłych promocjach.</h3>
                 <div class="approval_rodo">
-                    <p>Zgodnie z art. 13 ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informujemy, iż: » <strong><a href="#"
-                                                                                                                                                                                       id="newsletter_approval_rodo_link_more"
-                                                                                                                                                                                       class="approval_rodo_link_more"
-                                                                                                                                                                                       data-target="newsletter_approval_rodo_more">rozwiń</a></strong>
+                    <p>
+                        Zgodnie z art. 13 ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informujemy, iż: »
+                        <strong><a href="#" id="newsletter_approval_rodo_link_more" class="approval_rodo_link_more" data-target="newsletter_approval_rodo_more">rozwiń</a></strong>
                     </p>
-                    <div id="newsletter_approval_rodo_more" class="approval_rodo_more isHide" style="display: none;">
+                    <div id="newsletter_approval_rodo_more" class="approval_rodo_more isHide">
 
                         <p>1. Administratorem Pana/Pani danych osobowych jest Ekko-Pol z siedzibą w 54-530 Wrocław, ul. Skarżyńskiego 2.</p>
                         <p>2. Kontakt z Inspektorem Ochrony Danych jest możliwy poprzez wiadomość na email: <a href="mailto:gdpr@parkingrondo.pl">gdpr@parkingrondo.pl</a>.</p>
@@ -33,17 +30,19 @@
                 </div>
             </div>
             <div class="col-md-5 col-xs-12">
-                <form id="subscribe-form" method="post" action="/subscribe">
+                <form id="subscribe-form" class="newsletter-form" method="post">
                     {{--                    @csrf--}}
-                    <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label class="col-md-4 control-label">E-Mail Address</label>
-                        <div class="col-md-6">
-                            <input type="email" class="form-control" name="email" value="{{ old('email') }}">
+                    <div class="input-group row{{ $errors->has('email') ? ' has-error' : '' }}">
+                        <div class="col-md-6 col-12 p-0">
+                            <input type="email" id="newsletter_email" class="form-control form_element" placeholder="Wpisz swój adres e-mail" name="email" value="{{ old('email') }}">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                             @endif
+                        </div>
+                        <div class="col-md-6 col-12 pr-0">
+                            <button type="submit" id="newsletter_submit_btn" disabled>Wyślij</button>
                         </div>
                     </div>
                     <br>
@@ -60,13 +59,13 @@
                     </div>
                     <!-- "I agree" checkbox -->
                     <div class="form-group">
-                        <label>
-                            <input type="checkbox" name="agree" id="agree" class="checkbox" required>
-                            I agree to the terms and conditions.
+                        <label class="custom-checkbox" for="agree">
+                            <input type="checkbox" id="agree" name="agree" class="hidden-checkbox newsletter-checkbox">
+                            <span class="custom-checkmark"></span>
+                            Zgodnie z art. 13 ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informujemy, iż: » rozwiń
                         </label>
                     </div>
                     <br>
-                    <button type="submit">Subscribe</button>
                     <div id="successMessage" style="display: none;">You have been subscribed successfully!</div>
                 </form>
             </div>
