@@ -197,4 +197,39 @@
             // Get the public URL for the file
             return response()->json(['location' => "/images/$imageName"]);
         }
+
+        public function calendarDate(Request $request)
+        {
+            $dates = [];
+
+            // Loop through the request input to extract date values
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'field_date_') === 0) {
+                    $dates[substr($key, 11)] = $value;
+                }
+            }
+
+            // Loop through the dates and store them in the database
+            foreach ($dates as $key => $date) {
+                Reservation::create([
+                    'new_date' => $date, // Adjust column names accordingly
+                ]);
+            }
+
+            return response()->json(['message' => 'Reservation dates stored successfully']);
+        }
+
+        public function storeAllDates(Request $request)
+        {
+            $selectedDates = $request->input('dates');
+
+            foreach ($selectedDates as $key => $date) {
+                // Assuming you have a Reservation model and 'start_date' is the column name
+                Reservation::create([
+                    'new_date' => $date,
+                ]);
+            }
+
+            return response()->json(['message' => 'All dates stored successfully']);
+        }
     }

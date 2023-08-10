@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Models\Contacts;
     use App\Models\Parking;
     use App\Models\Price;
     use Barryvdh\DomPDF\Facade\Pdf;
@@ -57,7 +58,8 @@
             $order["body"] = "Laravel 8 send email with attachment";
             $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->arrival)->format('d/m/Y H:i');
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->departure)->format('d/m/Y H:i');
-            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate'));
+            $contacts = Contacts::all();
+            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'contacts'));
             $pdf->setOption('encoding', 'utf-8');
 
             $filename = 'order_' . $order->id . '.pdf';

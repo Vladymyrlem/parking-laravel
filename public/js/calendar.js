@@ -1,605 +1,225 @@
-let disabledDates = [
-    {"new_date": "02/08/2023"},
-    {"new_date": "03/08/2023"},
-    {"new_date": "04/08/2023"},
-    {"new_date": "04/08/2023"},
-    {"new_date": "05/08/2023"},
-    {"new_date": "06/08/2023"},
-    {"new_date": "09/08/2023"},
-    {"new_date": "09/08/2023"},
-    {"new_date": "11/08/2023"},
-    {"new_date": "21/08/2023"},
-];
-// fetch('/get-dates')
-//     .then(response => response.json())
-//     .then(data => {
-//         // Use the data array from the database in your JavaScript code
-//         console.log(data);
-//
-//         // Example: You can assign the data to a global variable for use in other parts of the script
-//         window.dataArray = data;
-//     })
-//     .catch(error => {
-//         console.error('Error fetching dates:', error);
-//     });
+class CalendarIk {
+    calendar = null;
+    dates = [];
 
-/**
- * Import Date
- *
- * @param dates { {new_date: String }[] }
- * @returns { Set<String> }
- */
-function importDate(dates) {
-    return new Set(dates.map(element => element.new_date));
-}
-
-/**
- * Export Date
- *
- * @param dates { Set<String> }
- * @returns { {new_date: String }[] }
- */
-function exportDate(dates) {
-    return Array.from(dates).map(value => ({"new_date": value}));
-}
-
-// preparation of data for internal use
-let disabledDatesWork = importDate(disabledDates);
-
-// preparing data for sending to the database
-disabledDates = exportDate(disabledDatesWork);
-
-
-// an array of inputs for selecting new dates that need to be blocked
-// an array of inputs for selecting new dates that need to be blocked
-selectDateInputs = [];
-CONST = {
-    CLASS: {
-        selectDateCalendar: 'js_select_date_calendar',
-        addDateLabel: 'js_add_date_label',
+    class = {
         hide: 'hide',
         disabled: 'disabled',
-    },
-
-    SEL: {
-        selectDateCalendar: '.js_select_date_calendar',
-        addDateLabel: '.js_add_date_label',
-        calendarMain: '.calendar__visual',
-        calendarTitleName: '.js_calendar table .jsCalendar-title .jsCalendar-title-name',
-        calendarAddDateList: '.calendar__add_date_list',
-        buttonSubmit: '.js_btn_submit',
-        buttonSelectRepeater: '.js_select_repeater',
-        renderListBlockedDate: '.js_list_blocked_dates',
-    },
-}
-
-/*
- * SELECT NEW DATE
- */
-function selectNewDates($input) {
-
-    $input.addEventListener('focus', e => {
-        e.preventDefault();
-        const $input = e.target;
-        const $parent = $input.parentElement;
-        const $targetCalendar = $parent.querySelector(CONST.SEL.selectDateCalendar);
-        const value = $input.value;
-
-        $targetCalendar.classList.remove(CONST.CLASS.hide);
-
-
-        let selectDateCalendar = null;
-        if (typeof $input.data !== 'object') {
-
-            // Calendar Instance
-            selectDateCalendar = jsCalendar.new($targetCalendar, Date.now(), {
-                language: 'pl',
-                monthFormat: 'YYYY/#',
-                dayFormat: 'DDD',
-                firstDayOfTheWeek: 2,
-                navigator: true,
-                navigatorPosition: 'right',
-                onDayRender: function (index, element, info) {
-                    if (index == 0 || index == 6) {
-                        element.style.color = '#c32525';
-                    }
-                },
-                onMonthRender: function (index, element, info) {
-
-                    // add a month wrapper <span> for the header
-                    const $title = document.querySelector(CONST.SEL.calendarTitleName)
-                    let parts = element.innerText.split('/');
-                    $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
-                },
-                onDateRender: function (date, element, info) {
-                    // Disabled Date
-                    const currDate = customFormatDate(date);
-                    if (disabledDatesWork.has(currDate) || getPreviousDay() >= date) {
-                        element.classList.add(CONST.CLASS.disabled);
-                    }
-
-                    // weekend colors
-                    if (!info.isCurrent && (date.getDay() == 0 || date.getDay() == 6)) {
-                        element.style.fontWeight = 'bold';
-                        element.style.color = (info.isCurrentMonth) ? '#c32525' : '#ffb4b4';
-                    }
-                },
-            });
-
-            // Select Date
-            selectDateCalendar.onDateClick(function (event, date) {
-                const $target = event.target;
-                const isDisabled = $target.classList.contains(CONST.CLASS.disabled);
-                if (!isDisabled) {
-                    selectDateCalendar.refresh();
-                    $target.classList.add('select');
-                    $input.value = customFormatDate(date);
-                    // close calendar wrapper
-                    $target.closest(CONST.SEL.selectDateCalendar).classList.add(CONST.CLASS.hide);
-                }
-            });
-
-            $input.data = selectDateCalendar;
-        }
-    });
-}
-
-function renderListBlockedDates() {
-    const $wrapper = document.querySelector(CONST.SEL.renderListBlockedDate);
-    const template = '' +
-        '<li class="calendar__date_item">' +
-        '<span>%%% [ </span>' +
-        '<a onclick="removeDisabledDate(this, \'%%%\')" data-blocked_date="%%%" href="#">usuń</a>' +
-        '<span> ]</span>' +
-        '</li>';
-
-    const items = [];
-    disabledDatesWork.forEach(date => {
-        items.push(template.replaceAll('%%%', date));
-    });
-
-    $wrapper.innerHTML = items.join('');
-}
-
-function removeDisabledDate(self, date) {
-    const parent = self.parentElement;
-
-    disabledDatesWork.forEach(setDate => {
-        if (setDate === date) {
-            disabledDatesWork.delete(date);
-        }
-    });
-
-    calendar.refresh();
-    parent.remove();
-
-    console.log(disabledDates);
-    disabledDates = exportDate(disabledDatesWork);
-    console.log(disabledDates);
-}
-
-function getPreviousDay(date = new Date()) {
-    const previous = new Date(date.getTime());
-    previous.setDate(date.getDate() - 1);
-    previous.setHours(23, 59, 59, 999);
-    return previous;
-}
-
-pad = d => (d < 10) ? '0' + d.toString() : d.toString();
-
-customFormatDate = date => {
-    return this.pad(date.getDate()) + '/' + this.pad(date.getMonth() + 1) + '/' + date.getFullYear();
-}
-
-class CalendarClass {
-
-    constructor(disabledDatesWork, selectDateInputs) {
-        this.disabledDatesWork = disabledDatesWork;
-        this.selectDateInputs = selectDateInputs;
-
-        this.initializeCalendar();
-        this.initializeEventListeners();
+        select: 'select',
     }
 
-    getCalendar(array) {
-        return exportDate(array);
+    constructor({...args}) {
+        this.class.wrapper = args.calendarWrapperClass;
+        this.dates = args.dates;
+        this.class.calendarTitleName = this.class.wrapper + ' ' + 'table .jsCalendar-title .jsCalendar-title-name';
+
+        this.init();
     }
 
+    init() {
+        if (!this.dates) {
+            return false;
+        }
 
-    initializeCalendar() {
-        // instance view Calendar
-        this.calendar = jsCalendar.new(CONST.SEL.calendarMain, Date.now(), {
+        this.calendar = jsCalendar.new(this.class.wrapper, Date.now(), {
             language: 'pl',
             monthFormat: 'YYYY/#',
             dayFormat: 'DDD',
             firstDayOfTheWeek: 2,
             navigator: true,
             navigatorPosition: 'right',
-            onDayRender: function (index, element, info) {
-                // console.log(index, element, info)
-                if (index == 0 || index == 6) {
-                    element.style.color = '#c32525';
-                }
-            },
-            onMonthRender: function (index, element, info) {
-
-                // add a month wrapper <span> for the header
-                const $title = document.querySelector(CONST.SEL.calendarTitleName)
-                let parts = element.innerText.split('/');
-                $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
-            },
-            onDateRender: function (date, element, info) {
-
-                // Disabled Date
-                const currDate = customFormatDate(date);
-                if (disabledDatesWork.has(currDate) || getPreviousDay() >= date) {
-                    element.classList.add(CONST.CLASS.disabled);
-                }
-
-                // weekend colors
-                if (!info.isCurrent && (date.getDay() == 0 || date.getDay() == 6)) {
-                    element.style.fontWeight = 'bold';
-                    element.style.color = (info.isCurrentMonth) ? '#c32525' : '#ffb4b4';
-                }
-            },
-
-        });
-
-    }
-
-    initializeEventListeners() {
-        document.addEventListener('click', e => {
-            e.preventDefault();
-            const $target = e.target;
-
-            if (!$target.closest(CONST.SEL.addDateLabel)) {
-                const selectCalendarWrapper = document.querySelectorAll(CONST.SEL.selectDateCalendar);
-                selectCalendarWrapper.forEach(selectCalendar => {
-                    selectCalendar.classList.add(CONST.CLASS.hide);
-                })
-            }
-        })
-        const buttonRepeat = document.querySelector(CONST.SEL.buttonSelectRepeater);
-        buttonRepeat.addEventListener('click', e => {
-            const id = selectDateInputs.length;
-            const template = `
-    <label class="calendar__add_date_label ${CONST.CLASS.addDateLabel}" data-add_date_id="${id}">
-        <input class="calendar__select_date_input" name="add_date_${id}" type="text" placeholder="wybierz datę...">
-        <div class="date_selection_calendar ${CONST.CLASS.selectDateCalendar}"></div>
-    </label>
-    `;
-            const listItem = document.createElement('LI');
-            listItem.classList.add('calendar__add_date_item');
-            listItem.innerHTML = template;
-
-            const selectDateInputWrapper = document.querySelector(CONST.SEL.calendarAddDateList);
-            selectDateInputWrapper.append(listItem);
-            selectDateInputs.push(listItem);
-            selectNewDates(listItem.querySelector('input'));
-        });
-        /*
- * BUTTON SUBMIT
- */
-        const buttonSubmit = document.querySelector(CONST.SEL.buttonSubmit);
-        buttonSubmit.addEventListener('click', e => {
-            if (selectDateInputs.length === 0) {
-                return;
-            }
-
-            const arrValues = selectDateInputs.map(itemElement => {
-                return itemElement.querySelector('input').value;
-            });
-
-            new Set(arrValues).forEach(value => {
-                if (value) {
-                    disabledDatesWork.add(value);
-                }
-            });
-
-            renderListBlockedDates();
-            this.calendar.refresh();
-            selectDateInputs.length = 0;
-            document.querySelector(CONST.SEL.calendarAddDateList).innerHTML = '';
-
-
-            console.log(disabledDates);
-            disabledDates = exportDate(disabledDatesWork);
-            console.log(disabledDates);
+            onDayRender: this.dayRender.bind(this),
+            onMonthRender: this.monthRender.bind(this),
+            onDateRender: this.dateRender.bind(this),
         });
     }
 
+    dayRender(index, element, info) {
+        if (index === 0 || index === 6) {
+            this.setClassNames(index, element);
+        }
+    }
 
-// instance view Calendar
+    dateRender(date, element, info) {
+        const fDate = this.formatDate(date);
+
+        element.classList.add('calendar_date');
+        element.setAttribute("data-calendar-date", fDate);
+
+        // Disabled Date
+        if (this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date) {
+            element.classList.add(this.class.disabled);
+        }
+
+        // weekend
+        if (!info.isCurrent && (date.getDay() === 0 || date.getDay() === 6)) {
+            this.setClassNames(date.getDay(), element)
+        }
+    }
+
+    monthRender(index, element, info) {
+        // add a month wrapper <span> for the header
+        const $title = document.querySelector(this.class.calendarTitleName)
+        let parts = element.innerText.split('/');
+
+        if ($title) {
+            $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
+        }
+    }
 
 
+    // Helpers
+    setClassNames = function (index, element) {
+        if (index === 0 || index === 6) {
+            element.classList.add('weekend');
+
+            if (index === 0) {
+                element.classList.add('sunday');
+            } else {
+                element.classList.add('saturday');
+            }
+
+        }
+    }
+
+    containsValueInArray = function (arr, value) {
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i].new_date === value) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    getPreviousDay = function (date = new Date()) {
+        const previous = new Date(date.getTime());
+        previous.setDate(date.getDate() - 1);
+        previous.setHours(23, 59, 59, 999);
+        return previous;
+    }
+
+    pad = function (d) {
+        return (d < 10) ? '0' + d.toString() : d.toString()
+    };
+
+    formatDate = function (date) {
+        return this.pad(date.getDate()) + '/' + this.pad(date.getMonth() + 1) + '/' + date.getFullYear();
+    }
 }
 
-//
-// /**
-//  * Import Date
-//  *
-//  * @param dates { {new_date: String }[] }
-//  * @returns { Set<String> }
-//  */
-// function importDate(dates) {
-//     return new Set(dates.map(element => element.new_date));
-// }
-//
-// /**
-//  * Export Date
-//  *
-//  * @param dates { Set<String> }
-//  * @returns { {new_date: String }[] }
-//  */
-// function exportDate(dates) {
-//     return Array.from(dates).map(value => ({"new_date": value}));
-// }
-//
-// // preparation of data for internal use
-// let disabledDatesWork = importDate(dataArray);
-//
-// // preparing data for sending to the database
-// disabledDates = exportDate(disabledDatesWork);
-//
-//
-// // an array of inputs for selecting new dates that need to be blocked
-// const selectDateInputs = [];
-//
-// /*
-//  * CONSTANTS
-//  */
-// const CONST = {
-//     CLASS: {
-//         selectDateCalendar: 'js_select_date_calendar',
-//         addDateLabel: 'js_add_date_label',
-//         hide: 'hide',
-//         disabled: 'disabled',
-//     },
-//
-//     SEL: {
-//         selectDateCalendar: '.js_select_date_calendar',
-//         addDateLabel: '.js_add_date_label',
-//         calendarMain: '.calendar__visual',
-//         calendarTitleName: '.js_calendar table .jsCalendar-title .jsCalendar-title-name',
-//         calendarAddDateList: '.calendar__add_date_list',
-//         buttonSubmit: '.js_btn_submit',
-//         buttonSelectRepeater: '.js_select_repeater',
-//         renderListBlockedDate: '.js_list_blocked_dates',
-//     },
-// }
-//
-//
-// /*
-//  * HELPERS
-//  */
-//
-// // return 1 to 01, 2 to 02 etc.
-// const pad = d => (d < 10) ? '0' + d.toString() : d.toString();
-//
-// const formatDate = date => {
-//     return pad(date.getDate()) + '/' + pad(date.getMonth() + 1) + '/' + date.getFullYear();
-// }
-//
-// /*
-//  * Close Selector Calendars
-//  */
-// document.addEventListener('click', e => {
-//     e.preventDefault();
-//     const $target = e.target;
-//
-//     if (!$target.closest(CONST.SEL.addDateLabel)) {
-//         const selectCalendarWrapper = document.querySelectorAll(CONST.SEL.selectDateCalendar);
-//         selectCalendarWrapper.forEach(selectCalendar => {
-//             selectCalendar.classList.add(CONST.CLASS.hide);
-//         })
-//     }
-// })
-//
-// function getPreviousDay(date = new Date()) {
-//     const previous = new Date(date.getTime());
-//     previous.setDate(date.getDate() - 1);
-//     previous.setHours(23, 59, 59, 999);
-//     return previous;
-// }
-//
-// // instance view Calendar
-// const calendar = jsCalendar.new(CONST.SEL.calendarMain, Date.now(), {
-//     language: 'pl',
-//     monthFormat: 'YYYY/#',
-//     dayFormat: 'DDD',
-//     firstDayOfTheWeek: 2,
-//     navigator: true,
-//     navigatorPosition: 'right',
-//     onDayRender: function (index, element, info) {
-//         // console.log(index, element, info)
-//         if (index == 0 || index == 6) {
-//             element.style.color = '#c32525';
-//         }
-//     },
-//     onMonthRender: function (index, element, info) {
-//
-//         // add a month wrapper <span> for the header
-//         const $title = document.querySelector(CONST.SEL.calendarTitleName)
-//         let parts = element.innerText.split('/');
-//         $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
-//     },
-//     onDateRender: function (date, element, info) {
-//
-//         // Disabled Date
-//         const currDate = formatDate(date);
-//         if (disabledDatesWork.has(currDate) || getPreviousDay() >= date) {
-//             element.classList.add(CONST.CLASS.disabled);
-//         }
-//
-//         // weekend colors
-//         if (!info.isCurrent && (date.getDay() == 0 || date.getDay() == 6)) {
-//             element.style.fontWeight = 'bold';
-//             element.style.color = (info.isCurrentMonth) ? '#c32525' : '#ffb4b4';
-//         }
-//     },
-//
-// });
-//
-// function renderListBlockedDates() {
-//     const $wrapper = document.querySelector(CONST.SEL.renderListBlockedDate);
-//     const template = '' +
-//         '<li class="calendar__date_item">' +
-//         '<span>%%% [ </span>' +
-//         '<a onclick="removeDisabledDate(this, \'%%%\')" data-blocked_date="%%%" href="#">usuń</a>' +
-//         '<span> ]</span>' +
-//         '</li>';
-//
-//     const items = [];
-//     disabledDatesWork.forEach(date => {
-//         items.push(template.replaceAll('%%%', date));
-//     });
-//
-//     $wrapper.innerHTML = items.join('');
-// }
-//
-// function removeDisabledDate(self, date) {
-//     const parent = self.parentElement;
-//
-//     disabledDatesWork.forEach(setDate => {
-//         if (setDate === date) {
-//             disabledDatesWork.delete(date);
-//         }
-//     });
-//
-//     calendar.refresh();
-//     parent.remove();
-//
-//     console.log(disabledDates);
-//     disabledDates = exportDate(disabledDatesWork);
-//     console.log(disabledDates);
-// }
-//
-// renderListBlockedDates();
-//
-//
-// /*
-//  * SELECT NEW DATE
-//  */
-// function selectNewDates($input) {
-//
-//     $input.addEventListener('focus', e => {
-//         e.preventDefault();
-//         const $input = e.target;
-//         const $parent = $input.parentElement;
-//         const $targetCalendar = $parent.querySelector(CONST.SEL.selectDateCalendar);
-//         const value = $input.value;
-//
-//         $targetCalendar.classList.remove(CONST.CLASS.hide);
-//
-//
-//         let selectDateCalendar = null;
-//         if (typeof $input.data !== 'object') {
-//
-//             // Calendar Instance
-//             selectDateCalendar = jsCalendar.new($targetCalendar, Date.now(), {
-//                 language: 'pl',
-//                 monthFormat: 'YYYY/#',
-//                 dayFormat: 'DDD',
-//                 firstDayOfTheWeek: 2,
-//                 navigator: true,
-//                 navigatorPosition: 'right',
-//                 onDayRender: function (index, element, info) {
-//                     if (index == 0 || index == 6) {
-//                         element.style.color = '#c32525';
-//                     }
-//                 },
-//                 onMonthRender: function (index, element, info) {
-//
-//                     // add a month wrapper <span> for the header
-//                     const $title = document.querySelector(CONST.SEL.calendarTitleName)
-//                     let parts = element.innerText.split('/');
-//                     $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
-//                 },
-//                 onDateRender: function (date, element, info) {
-//                     // Disabled Date
-//                     const currDate = formatDate(date);
-//                     if (disabledDatesWork.has(currDate) || getPreviousDay() >= date) {
-//                         element.classList.add(CONST.CLASS.disabled);
-//                     }
-//
-//                     // weekend colors
-//                     if (!info.isCurrent && (date.getDay() == 0 || date.getDay() == 6)) {
-//                         element.style.fontWeight = 'bold';
-//                         element.style.color = (info.isCurrentMonth) ? '#c32525' : '#ffb4b4';
-//                     }
-//                 },
-//             });
-//
-//             // Select Date
-//             selectDateCalendar.onDateClick(function (event, date) {
-//                 const $target = event.target;
-//                 const isDisabled = $target.classList.contains(CONST.CLASS.disabled);
-//                 if (!isDisabled) {
-//                     selectDateCalendar.refresh();
-//                     $target.classList.add('select');
-//                     $input.value = formatDate(date);
-//                     // close calendar wrapper
-//                     $target.closest(CONST.SEL.selectDateCalendar).classList.add(CONST.CLASS.hide);
-//                 }
-//             });
-//
-//             $input.data = selectDateCalendar;
-//         }
-//     });
-// }
-//
-//
-// /*
-//  * REPEAT INPUT
-//  */
-// const buttonRepeat = document.querySelector(CONST.SEL.buttonSelectRepeater);
-// buttonRepeat.addEventListener('click', e => {
-//     const id = selectDateInputs.length;
-//     const template = `
-//     <label class="calendar__add_date_label ${CONST.CLASS.addDateLabel}" data-add_date_id="${id}">
-//         <input class="calendar__select_date_input" name="add_date_${id}" type="text" placeholder="wybierz datę...">
-//         <div class="date_selection_calendar ${CONST.CLASS.selectDateCalendar}"></div>
-//     </label>
-//     `;
-//     const listItem = document.createElement('LI');
-//     listItem.classList.add('calendar__add_date_item');
-//     listItem.innerHTML = template;
-//
-//     const selectDateInputWrapper = document.querySelector(CONST.SEL.calendarAddDateList);
-//     selectDateInputWrapper.append(listItem);
-//     selectDateInputs.push(listItem);
-//     selectNewDates(listItem.querySelector('input'));
-// });
-//
-//
-// /*
-//  * BUTTON SUBMIT
-//  */
-// const buttonSubmit = document.querySelector(CONST.SEL.buttonSubmit);
-// buttonSubmit.addEventListener('click', e => {
-//     if (selectDateInputs.length === 0) {
-//         return;
-//     }
-//
-//     const arrValues = selectDateInputs.map(itemElement => {
-//         return itemElement.querySelector('input').value;
-//     });
-//
-//     new Set(arrValues).forEach(value => {
-//         if (value) {
-//             disabledDatesWork.add(value);
-//         }
-//     });
-//
-//     renderListBlockedDates();
-//     calendar.refresh();
-//     selectDateInputs.length = 0;
-//     document.querySelector(CONST.SEL.calendarAddDateList).innerHTML = '';
-//
-//
-//     console.log(disabledDates);
-//     disabledDates = exportDate(disabledDatesWork);
-//     console.log(disabledDates);
-// });
+class DatesList {
+    class = {};
+    dates = [];
+
+    constructor({...args}) {
+        this.calendar = args.calendar;
+        this.dates = args.dates;
+        this.class.dateList = args.dateListClass;
+
+        this.init();
+    }
+
+    addActionForRemoveDate() {
+        const listDates = document.querySelectorAll('[data-blocked-date]');
+
+        listDates.forEach(item => {
+            // For each Button Delete link
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                const date = e.currentTarget.dataset.blockedDate;
+
+                let i = 0;
+                while (i < this.dates.length) {
+                    if (this.dates[i].new_date === date) {
 
 
+                        // TODO: this insert code for ajax method for delete date
+                        const deletedDate = this.dates.splice(i, 1);
+                        console.log('deleted date: ', deletedDate)
+
+
+                    } else {
+                        ++i;
+                    }
+                }
+
+                this.calendar.refresh();
+                item.parentElement.remove();
+            });
+        });
+    }
+
+    refresh() {
+        this.listDatesRender();
+        this.addActionForRemoveDate();
+    }
+
+    init() {
+        this.listDatesRender();
+        this.addRemoveDateAction();
+    }
+
+    // Render Dates List
+    listDatesRender() {
+        const listDates = document.querySelector('.' + this.class.dateList);
+        if (!listDates) {
+            return -1;
+        }
+
+        this.dates.forEach(date => {
+            if (this.compareDate(date)) {
+
+                const item = document.createElement('LI');
+                item.innerHTML = `
+                <span>${date.new_date} [ </span>
+                <a data-blocked-date="${date.new_date}" href="#">usuń</a>
+                <span> ]</span>
+                `;
+
+                listDates.append(item);
+            }
+        });
+    }
+
+    // DELETE Date from list dates
+    // TODO: this add ajax method for delete date
+    addRemoveDateAction() {
+        const listDates = document.querySelectorAll('[data-blocked-date]');
+
+        listDates.forEach(item => {
+            // For each Button Delete link
+            item.addEventListener('click', e => {
+                e.preventDefault();
+                const date = e.currentTarget.dataset.blockedDate;
+
+                let i = 0;
+                while (i < this.dates.length) {
+                    if (this.dates[i].new_date === date) {
+
+                        // TODO: this insert code for ajax method for delete date
+                        this.dates.splice(i, 1);
+
+                    } else {
+                        ++i;
+                    }
+                }
+
+                this.calendar.refresh();
+                item.parentElement.remove();
+            });
+        });
+    }
+
+    // HELPERS
+    compareDate = function (date) {
+        const d = date.new_date.split('/');
+        const date1 = new Date(d[2], d[1] - 1, d[0]);
+        const date2 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1, 23, 59, 59, 999);
+        return date1 > date2;
+    }
+}
+
+
+class AddDate {
+
+}

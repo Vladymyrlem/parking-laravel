@@ -34,7 +34,7 @@
             $contacts = Contacts::all();
             return (new MailMessage)
                 ->subject('Order Confirmation')
-                ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate])
+                ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate, 'contacts' => $contacts])
                 ->attach($this->pdfFile, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf'])
                 ->to($this->formData->email)
                 ->cc(config('mail.admin_address')); // Use the admin email address from your .env
@@ -45,8 +45,10 @@
             $pdfFilePath = public_path('order/order_' . $this->formData->id . '.pdf');
             $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y H:i');
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->departure)->format('d/m/Y H:i');
+            $contacts = Contacts::all();
 
-            return $this->view('email.order_confirmation')->with(['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate])
+            return $this->view('email.order_confirmation')->with(['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate,
+                'contacts' => $contacts])
                 ->attach($pdfFilePath, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf']);
         }
 
