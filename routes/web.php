@@ -143,5 +143,6 @@
         Route::put('/admin/newsletter/{newsletter_id}', [NewsletterController::class, 'updateNewsletter']);
         Route::post('/admin/blocked-dates', [AdminController::class, 'calendarDate']);
         Route::post('/admin/store-all-dates', [AdminController::class, 'storeAllDates']);
+        Route::delete('/admin/delete-by-date', [AdminController::class, 'deleteByDate']);
 
     });

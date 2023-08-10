@@ -168,14 +168,15 @@ class DatesList {
 
         this.dates.forEach(date => {
             if (this.compareDate(date)) {
-
+                var token = $('meta[name="csrf-token"]').attr('content');
                 const item = document.createElement('LI');
                 item.innerHTML = `
-                <span>${date.new_date} [ </span>
-                <a data-blocked-date="${date.new_date}" href="#">usuń</a>
-                <span> ]</span>
-                `;
-
+                <span class="d-flex">${date.new_date} [
+                  <form class="delete-form" method="POST">
+       <input type="hidden" name="_token" value="${token}">
+        <input type="hidden" name="blockedDate" value="${date.new_date}">
+        <button type="submit" class="delete-button btn btn-link">usuń</button>
+    </form>]</span>`;
                 listDates.append(item);
             }
         });

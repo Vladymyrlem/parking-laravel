@@ -87,6 +87,7 @@
                     </div>
                     <!-- Information Block-->
                     <div class="info-block" id="info" name="#info">
+                        @csrf
                         <h2 class="fs-2">Information block</h2>
                         @include('partials.information.table')
                         @include('partials.information.create')

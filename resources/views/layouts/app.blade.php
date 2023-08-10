@@ -238,9 +238,9 @@ position: relative;" aria-hidden="true">
             var url = $('#url').val();
 
             let data = <?php echo json_encode($arrayData); ?>;
-            data.push({new_date: '09/08/2023'});
-            data.push({new_date: '18/08/2023'});
-            data.push({new_date: '03/09/2023'});
+            // data.push({new_date: '09/08/2023'});
+            // data.push({new_date: '18/08/2023'});
+            // data.push({new_date: '03/09/2023'});
 
             // $('.js_calendar').data( 'calendar_dates', { data, url } );
 
@@ -387,6 +387,7 @@ position: relative;" aria-hidden="true">
                         data: new_date,
                         success: function (response) {
                             console.log(response);
+                            location.reload();
                             // Your success handling here
                         },
                         error: function (info) {
@@ -409,6 +410,7 @@ position: relative;" aria-hidden="true">
                     data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
                     success: function (response) {
                         console.log('All dates stored successfully:', response);
+                        location.reload();
                         // Any additional handling after storing all dates
                     },
                     error: function (info) {
@@ -417,6 +419,24 @@ position: relative;" aria-hidden="true">
                     },
                 });
             });
+// Get the ul element containing the list items
+            var ulElement = document.querySelector('.js_list_blocked_dates');
+
+// Convert list items to an array for sorting
+            var listItems = Array.from(ulElement.querySelectorAll('li'));
+
+// Sort list items based on the date value (assumes date format is "DD/MM/YYYY")
+            listItems.sort(function (a, b) {
+                var dateA = new Date(a.querySelector('[name="blockedDate"]').value.split('/').reverse().join('/'));
+                var dateB = new Date(b.querySelector('[name="blockedDate"]').value.split('/').reverse().join('/'));
+                return dateA - dateB; // Sort in descending order
+            });
+
+// Reorder the list items in the ul element
+            listItems.forEach(function (li) {
+                ulElement.appendChild(li);
+            });
+
 
             const deleteHtmlItems = (item) => {
                 item?.remove();
@@ -426,6 +446,34 @@ position: relative;" aria-hidden="true">
                 //     listSelectedDates.innerHTML = '';
                 // }
             }
+        });
+        var url = $('#url').val();
+
+        $(document).on('submit', '.delete-form', function (event) {
+
+            event.preventDefault(); // Prevent default form submission behavior
+
+            var form = this;
+            var blockedDate = $(form).find('input[name="blockedDate"]').val(); // Get the blocked date from the form
+
+            $.ajax({
+                type: 'DELETE', // Use POST method since you are deleting
+                url: url + '/delete-by-date', // Adjust the route URL
+                data: {
+                    blockedDate: blockedDate, // Send the blocked date to the server
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    console.log(response.message);
+                    // Perform any updates to the UI as needed
+                    // For example, remove the deleted <li> element
+                    $(form).closest('li').remove();
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
         });
     </script>
 @endif

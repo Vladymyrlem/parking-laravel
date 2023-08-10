@@ -16,6 +16,7 @@
     use GuzzleHttp\Client;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Log;
     use Illuminate\Support\Facades\Mail;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Validation\Validator;
@@ -232,4 +233,35 @@
 
             return response()->json(['message' => 'All dates stored successfully']);
         }
+
+        public function destroy($id)
+        {
+            $reservation = Reservation::find($id);
+
+            if (!$reservation) {
+                return response()->json(['message' => 'Reservation not found'], 404);
+            }
+
+            $reservation->delete();
+
+            return response()->json(['message' => 'Reservation deleted successfully']);
+        }
+
+        public function deleteByDate(Request $request)
+        {
+            $blockedDate = $request->input('blockedDate');
+            Log::info('Blocked Date: ' . $blockedDate);
+
+            $reservation = Reservation::where('new_date', $blockedDate)->first();
+            Log::info('Found Reservation: ' . json_encode($reservation));
+
+            if (!$reservation) {
+                return response()->json(['message' => 'Reservation not found'], 404);
+            }
+
+            $reservation->delete();
+
+            return response()->json(['message' => 'Reservation deleted successfully']);
+        }
+
     }
