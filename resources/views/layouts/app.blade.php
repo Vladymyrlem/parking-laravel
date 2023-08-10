@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="_token" content="{!! csrf_token() !!}"/>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -153,8 +154,7 @@ position: relative;" aria-hidden="true">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/Calendar.js') }}"></script>
-{{--<script src="{{asset('js/calendar.js')}}"></script>--}}
+<script src="{{asset('js/calendar.js')}}"></script>
 <script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{mix('js/ajaxscript.js')}}"></script>
@@ -170,6 +170,8 @@ position: relative;" aria-hidden="true">
 <!-- MODAL SECTION -->
 <!-- Head Block Modal-->
 @include('partials.modal.head-modal')
+@include('partials.modal.services-modal')
+
 @include('partials.modal.about-us-modal')
 <!-- Reviews Modal-->
 @include('partials.modal.review-modal')
@@ -179,8 +181,7 @@ position: relative;" aria-hidden="true">
 @include('partials.modal.section-title-modal')
 @include('partials.modal.newsletter-modal')
 <script src="{{ asset('js/app.js') }}"></script>
-{{-- TODO: olbor --}}
-{{--<script src="{{ asset('js/calendar.js') }}"></script>--}}
+<script src="{{ asset('js/calendar.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
@@ -231,203 +232,251 @@ position: relative;" aria-hidden="true">
         });
     });
 </script>
-<script>
-    @if(isset($arrayData))
-    jQuery(function ($) {
-        var url = $('#url').val();
+@if(isset($arrayData))
+    <script>
+        jQuery(function ($) {
+            var url = $('#url').val();
 
-        let data = <?php echo json_encode($arrayData); ?>;
-        data.push( { new_date: '09/08/2023' } );
-        data.push( { new_date: '18/08/2023' } );
-        data.push( { new_date: '03/09/2023' } );
+            let data = <?php echo json_encode($arrayData); ?>;
+            // data.push({new_date: '09/08/2023'});
+            // data.push({new_date: '18/08/2023'});
+            // data.push({new_date: '03/09/2023'});
 
-        // $('.js_calendar').data( 'calendar_dates', { data, url } );
+            // $('.js_calendar').data( 'calendar_dates', { data, url } );
 
-        const calendar1 = new CalendarIk({
-            dates: data,
-            calendarWrapperClass: '.calendar__main_calendar',
-        });
-
-        const datesList = new DatesList({
-            dates: data,
-            calendar: calendar1.calendar,
-            dateListClass: 'calendar__date_list',
-        });
-
-        // Function ONClick Date Calendar
-        function onDateClick( calendarBox, inputSelector, calendSelector ) {
-
-            const dates = document.querySelectorAll( calendSelector + ' .calendar_date');
-
-            dates.forEach( date => {
-                if ( ! date.classList.contains( 'disabled' ) ) {
-
-                    date.addEventListener( 'click', event => {
-                        dates.forEach( d => d.classList.remove('select'));
-                        date.classList.add('select');
-
-                        const $input = document.querySelector( inputSelector );
-                        if ( $input ) {
-                            $input.value = date.dataset.calendarDate;
-                        }
-
-                        toggleClassList( calendarBox );
-                    })
-                }
+            const calendar1 = new CalendarIk({
+                dates: data,
+                calendarWrapperClass: '.calendar__main_calendar',
             });
 
-        }
+            const datesList = new DatesList({
+                dates: data,
+                calendar: calendar1.calendar,
+                dateListClass: 'calendar__date_list',
+            });
 
-        /*
-         * REPEAT INPUT
-         */
-        // an array of inputs for selecting new dates that need to be blocked
-        const calendarsBox = [];
-        let itemCount = 0;
+            // Function ONClick Date Calendar
+            function onDateClick(calendarBox, inputSelector, calendSelector) {
 
-        const toggleClassList = ( elem, collapse = true ) => {
-            if ( collapse ) {
-                elem.classList.add( 'collapse_calendar' );
-                elem.classList.remove( 'expand_calendar' );
-            } else {
-                elem.classList.add( 'expand_calendar' );
-                elem.classList.remove( 'collapse_calendar' );
+                const dates = document.querySelectorAll(calendSelector + ' .calendar_date');
+
+                dates.forEach(date => {
+                    if (!date.classList.contains('disabled')) {
+
+                        date.addEventListener('click', event => {
+                            dates.forEach(d => d.classList.remove('select'));
+                            date.classList.add('select');
+
+                            const $input = document.querySelector(inputSelector);
+                            if ($input) {
+                                $input.value = date.dataset.calendarDate;
+                            }
+
+                            toggleClassList(calendarBox);
+                        })
+                    }
+                });
+
             }
-        }
 
-        /*
-         * CREATE ITEMS INPUTS
-         */
-        const buttonAddNewDate = document.querySelector( '.calendar__add_date_btn' );
-        buttonAddNewDate.addEventListener( 'click', e => {
-            e.preventDefault();
-            itemCount++;
+            /*
+             * REPEAT INPUT
+             */
+            // an array of inputs for selecting new dates that need to be blocked
+            const calendarsBox = [];
+            let itemCount = 0;
 
-            const template = `<label class="calendar__add_date_label" data-add_date_id="${ itemCount }">
-                <input class="calendar__add_date_input inpt_trgt_ind_${ itemCount }" name="field_date_${ itemCount }" type="text" placeholder="wybierz datę...">
+            const toggleClassList = (elem, collapse = true) => {
+                if (collapse) {
+                    elem.classList.add('collapse_calendar');
+                    elem.classList.remove('expand_calendar');
+                } else {
+                    elem.classList.add('expand_calendar');
+                    elem.classList.remove('collapse_calendar');
+                }
+            }
+
+            /*
+             * CREATE ITEMS INPUTS
+             */
+            const buttonAddNewDate = document.querySelector('.calendar__add_date_btn');
+            buttonAddNewDate.addEventListener('click', e => {
+                e.preventDefault();
+                itemCount++;
+
+                const template = `<label class="calendar__add_date_label" data-add_date_id="${itemCount}">
+                <input class="calendar__add_date_input inpt_trgt_ind_${itemCount}" name="field_date_${itemCount}" type="text" placeholder="wybierz datę...">
                 <div class="calendar__add_date_preloader hidden"><div></div><div></div><div></div><div></div></div>
             </label>
-            <div class="calendar__add_date_select calendar_box_${ itemCount }"></div>`;
+            <div class="calendar__add_date_select calendar_box_${itemCount}"></div>`;
 
-            const item = document.createElement('LI');
-            item.classList.add('calendar__add_date_item');
-            item.innerHTML = template;
+                const item = document.createElement('LI');
+                item.classList.add('calendar__add_date_item');
+                item.innerHTML = template;
 
-            const inputsList = document.querySelector( '.calendar__add_date_list' );
-            inputsList.append( item );
+                const inputsList = document.querySelector('.calendar__add_date_list');
+                inputsList.append(item);
 
-            item.querySelector( 'input' ).addEventListener( 'focus', createCalendar.bind( this, data ), { once: true } );
-            item.querySelector( 'input' ).addEventListener( 'focus', showCalendar );
-        })
-
-        const createCalendar = ( data, event ) => {
-            event.preventDefault();
-            const calendarBox = event.target.parentElement.nextElementSibling;
-            calendarsBox.push( calendarBox );
-            const value = event.target.value;
-
-            toggleClassList( calendarBox, false );
-
-            const calend = new CalendarIk({
-                dates: data,
-                calendarWrapperClass: '.' + calendarBox.classList[1],
-            });
-            onDateClick( calendarBox, '.' + event.target.classList[1], '.' + calendarBox.classList[1] );
-        }
-
-        // hide Calendars
-        (() => {
-            document.addEventListener( 'click', event => {
-                if ( ! ( event.target.closest( '.calendar__add_date_item' ) )) {
-                    while ( calendarsBox.length ) {
-                        toggleClassList( calendarsBox.pop() );
-                    }
-                }
+                item.querySelector('input').addEventListener('focus', createCalendar.bind(this, data), {once: true});
+                item.querySelector('input').addEventListener('focus', showCalendar);
             })
-        })()
 
-        const showCalendar = event => {
-            const calendarBox = event.target.parentElement.nextElementSibling;
-            calendarsBox.push( calendarBox );
-            toggleClassList( calendarBox, false );
-        }
+            const createCalendar = (data, event) => {
+                event.preventDefault();
+                const calendarBox = event.target.parentElement.nextElementSibling;
+                calendarsBox.push(calendarBox);
+                const value = event.target.value;
 
+                toggleClassList(calendarBox, false);
 
-        /*
-         * SAVE DATES
-         */
-        const submitButton = document.querySelector( '.js_btn_submit' );
-        submitButton.addEventListener( 'click', event => {
-            event.preventDefault();
+                const calend = new CalendarIk({
+                    dates: data,
+                    calendarWrapperClass: '.' + calendarBox.classList[1],
+                });
+                onDateClick(calendarBox, '.' + event.target.classList[1], '.' + calendarBox.classList[1]);
+            }
 
-            const items = document.querySelectorAll( '.calendar__add_date_item' );
-            items.forEach( item => {
-                const input = item.querySelector( 'input' );
-
-                const value = input?.value;
-                if ( ! value ) return;
-
-                const new_date = { new_date: value };
-
-
-
-                // TODO : ajax save dates
-
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $( 'meta[name="_token"]' ).attr( 'content' )
+            // hide Calendars
+            (() => {
+                document.addEventListener('click', event => {
+                    if (!(event.target.closest('.calendar__add_date_item'))) {
+                        while (calendarsBox.length) {
+                            toggleClassList(calendarsBox.pop());
+                        }
                     }
                 })
+            })()
 
+            const showCalendar = event => {
+                const calendarBox = event.target.parentElement.nextElementSibling;
+                calendarsBox.push(calendarBox);
+                toggleClassList(calendarBox, false);
+            }
+
+
+            /*
+             * SAVE DATES
+             */
+            const submitButton = document.querySelector('.js_btn_submit');
+            submitButton.addEventListener('click', event => {
+                event.preventDefault();
+
+                const items = document.querySelectorAll('.calendar__add_date_item');
+                const selectedDates = {}; // Initialize the selectedDates object
+
+                items.forEach(item => {
+                    const input = item.querySelector('input');
+                    const value = input?.value;
+
+                    if (!value) return;
+
+                    const key = input.getAttribute('name').substr(11); // Extract the key
+                    selectedDates[key] = value; // Add key-value pair to selectedDates object
+
+                    const new_date = {new_date: value};
+
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                        }
+                    });
+
+                    $.ajax({
+                        type: 'POST',
+                        url: url + '/blocked-dates',
+                        data: new_date,
+                        success: function (response) {
+                            console.log(response);
+                            location.reload();
+                            // Your success handling here
+                        },
+                        error: function (info) {
+                            console.log('Error:', info);
+                            // Your error handling here
+                        },
+                        beforeSend: function (a, b, c) {
+                            input.nextElementSibling.classList.remove('hidden');
+                        },
+                        complete: function () {
+                            input.nextElementSibling.classList.add('hidden');
+                        },
+                    });
+                });
+
+                // Perform a final AJAX request to send the entire selectedDates object
                 $.ajax({
                     type: 'POST',
-                    url: url + '/blocked-dates',
-                    data: new_date,
-                    success: function ( response ) {
-                        console.log( response );
-
-                        data.push( new_date );
-
-                        // After success - Rerender Calendar & List Dates & Clear Inputs List
-                        calendar1.calendar.refresh();
-                        datesList.refresh();
-                        item.remove();
-                        // deleteHtmlItems();
+                    url: url + '/store-all-dates', // Replace with the appropriate URL
+                    data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
+                    success: function (response) {
+                        console.log('All dates stored successfully:', response);
+                        location.reload();
+                        // Any additional handling after storing all dates
                     },
-                    error: function ( info ) {
-                        console.log('Error:', info );
-
-
-                        data.push( new_date );
-
-                        // After success - Rerender Calendar & List Dates & Clear Inputs List
-                        calendar1.calendar.refresh();
-                        datesList.refresh();
-                        item.remove();
-
-                        // deleteHtmlItems();
-                    },
-                    beforeSend: function ( a, b, c ) {
-                        input.nextElementSibling.classList.remove( 'hidden' )
-                    },
-                    complete: function() {
-                        input.nextElementSibling.classList.add( 'hidden' )
+                    error: function (info) {
+                        console.log('Error storing all dates:', info);
+                        // Error handling for storing all dates
                     },
                 });
-            })
+            });
+// Get the ul element containing the list items
+            var ulElement = document.querySelector('.js_list_blocked_dates');
+
+// Convert list items to an array for sorting
+            var listItems = Array.from(ulElement.querySelectorAll('li'));
+
+// Sort list items based on the date value (assumes date format is "DD/MM/YYYY")
+            listItems.sort(function (a, b) {
+                var dateA = new Date(a.querySelector('[name="blockedDate"]').value.split('/').reverse().join('/'));
+                var dateB = new Date(b.querySelector('[name="blockedDate"]').value.split('/').reverse().join('/'));
+                return dateA - dateB; // Sort in descending order
+            });
+
+// Reorder the list items in the ul element
+            listItems.forEach(function (li) {
+                ulElement.appendChild(li);
+            });
+
+
+            const deleteHtmlItems = (item) => {
+                item?.remove();
+
+                // const listSelectedDates = document.querySelector( '.calendar__add_date_list' );
+                // if ( listSelectedDates ) {
+                //     listSelectedDates.innerHTML = '';
+                // }
+            }
         });
+        var url = $('#url').val();
 
-        const deleteHtmlItems = ( item ) => {
-            item?.remove();
+        $(document).on('submit', '.delete-form', function (event) {
 
-            // const listSelectedDates = document.querySelector( '.calendar__add_date_list' );
-            // if ( listSelectedDates ) {
-            //     listSelectedDates.innerHTML = '';
-            // }
-        }
-    });
-</script>
+            event.preventDefault(); // Prevent default form submission behavior
+
+            var form = this;
+            var blockedDate = $(form).find('input[name="blockedDate"]').val(); // Get the blocked date from the form
+
+            $.ajax({
+                type: 'DELETE', // Use POST method since you are deleting
+                url: url + '/delete-by-date', // Adjust the route URL
+                data: {
+                    blockedDate: blockedDate, // Send the blocked date to the server
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    console.log(response.message);
+                    // Perform any updates to the UI as needed
+                    // For example, remove the deleted <li> element
+                    $(form).closest('li').remove();
+                    location.reload();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+    </script>
 @endif
+
 </body>
 </html>

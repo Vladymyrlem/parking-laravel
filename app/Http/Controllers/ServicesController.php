@@ -36,40 +36,12 @@
          *
          * @param Request $request
          *
-         * @return \Illuminate\Http\Response
+         * @return \Illuminate\Http\JsonResponse
          */
         public function store(Request $request)
         {
-            try {
-                $serviceId = $request->id;
-                $service_title = $request->input('service-title');
-                $description = $request->input('service-content');
-                if ($request->hasFile('image')) {
-                    // Image was uploaded, proceed with saving
-                    $imagePath = $request->file('image')->storePublicly('images', 'custom');
-
-                    // Extract the filename from the stored path
-                    $imageName = basename($imagePath);
-                } else {
-                    // Image was not uploaded, handle the situation (e.g., display an error message)
-                    // For example:
-                    return response()->json(['error' => 'No image uploaded'], 400);
-                }
-
-                // Save the file path to the database
-                $service = new Services();
-                $service->service_title = $service_title;
-                $service->service_content = $description;
-                $service->image = 'images/' . $imageName;
-                $service->save();
-                return response()->json(['message' => 'Post saved successfully', 'file_name' => $imageName]);
-            } catch (\Exception $e) {
-                // Log the error or display a detailed error message for debugging
-                Log::error($e->getMessage());
-                return response()->json(['error' => 'Internal Server Error'], 500);
-            }
-
-
+            $service = Services::create($request->input());
+            return response()->json($service);
         }
 
 
@@ -78,7 +50,7 @@
          *
          * @param int $service_id
          *
-         * @return \Illuminate\Http\Response
+         * @return \Illuminate\Http\JsonResponse
          */
         public function show($service_id)
         {
@@ -96,36 +68,16 @@
          */
         public function update($service_id, Request $request)
         {
-            $service = Services::findOrFail($service_id);
+            $service = Services::find($service_id);
 
             $service->service_title = $request->service_title;
             $service->service_content = $request->service_content;
-
-            if ($request->hasFile('image')) {
-                // Image was uploaded, proceed with saving
-                $imagePath = $request->file('image')->storePublicly('images', 'custom');
-
-                // Extract the filename from the stored path
-                $imageName = basename($imagePath);
-            } else {
-                // Image was not uploaded, handle the situation (e.g., display an error message)
-                // For example:
-                return response()->json(['error' => 'No image uploaded'], 400);
-            }
-            // Assuming you have a model and database table to save the data
-            $service->image = 'images/' . $imageName;
+            $service->image = $request->image;
 
             $service->save();
-            Log::info('Request data:', $request->all());
             return response()->json($service);
         }
 
-        public function edit($id)
-        {
-            $service = Services::findOrFail($id);
-
-            return response()->json($service);
-        }
 
         /**
          * Remove the specified infos from storage.
@@ -142,9 +94,9 @@
             return response()->json($info);
         }
 
-        public function uploadIcon(Request $request)
-        {
-            $imgpath = request()->file('image')->store('uploads', 'public');
-            return response()->json(['location' => "/storage/$imgpath"]);
-        }
+//        public function uploadIcon(Request $request)
+//        {
+//            $imgpath = request()->file('image')->store('uploads', 'public');
+//            return response()->json(['location' => "/storage/$imgpath"]);
+//        }
     }

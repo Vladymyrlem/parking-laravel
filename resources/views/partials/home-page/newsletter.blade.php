@@ -50,8 +50,7 @@
                     <!-- ReCAPTCHA v3 checkbox -->
                     <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
                         <div class="col-md-6">
-{{--                            TODO: olbor temp --}}
-{{--                            {!! RecaptchaV3::field('subscribe') !!}--}}
+                            {!! RecaptchaV3::field('subscribe') !!}
                             @if ($errors->has('g-recaptcha-response'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('g-recaptcha-response') }}</strong>

@@ -2,7 +2,7 @@
 --------------------------------------------*/
 #reviews {
     margin-top: 150px;
-    padding-bottom: 25px;
+    padding-bottom: 100px;
     position: relative;
     z-index: 2;
 }
@@ -39,6 +39,11 @@
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+}
+
+#reviews-carousel {
+    width: 100%;
+    max-width: 1170px;
 }
 
 #reviews .carousel-indicators {

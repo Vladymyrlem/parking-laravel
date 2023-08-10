@@ -22,8 +22,13 @@
 }
 
 #information .title {
+    color: var(--black, #151616);
+    /* H3 bold */
+    font-family: Lato, sans-serif;
     font-size: 30px;
+    font-style: normal;
     font-weight: 900;
+    line-height: 33px; /* 110% */
     margin: 0 0 20px 0;
     padding: 0;
     text-align: left;
@@ -32,9 +37,12 @@
 }
 
 #information .subtitle {
+    color: #131313;
+    font-family: Lato, sans-serif;
     font-size: 26px;
     font-style: normal;
     font-weight: 300;
+    line-height: 110%; /* 28.6px */
     margin: 0 0 20px 0;
     padding: 0;
     text-align: left;
@@ -51,6 +59,8 @@
     font-style: normal;
     font-weight: 400;
     line-height: 140%;
+    color: var(--black, #151616);
+
     text-align: left;
     margin: 0 auto 0 0;
 }
@@ -96,12 +106,12 @@
     overflow: hidden;
 }
 
-#information .video iframe,
-#information .video object,
-#information.video embed {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
+//#information .video iframe,
+//#information .video object,
+//#information.video embed {
+//    position: absolute;
+//    top: 0;
+//    left: 0;
+//    width: 100%;
+//    height: 100%;
+//}

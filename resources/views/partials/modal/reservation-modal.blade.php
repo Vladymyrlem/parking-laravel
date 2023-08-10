@@ -7,8 +7,9 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="row m-0">
-                <form action="#" method="post" id="form_checkout" name="form_checkout">
-
+                <form method="post" id="form_checkout" name="form_checkout">
+                    @csrf
+                    @method('POST')
                     <!-- Modal header end -->
                     <!-- Modal body start -->
                     <div class="modal-body">
@@ -83,7 +84,8 @@
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                     <h4 class="info-box-title">Rodzaj auta:</h4>
                                     <p class="info-box-description" id="checkout_car_desc">...</p>
-                                    <input type="hidden" name="checkout_car" id="checkout_car" value="" class="form_element" data-rule="required" data-msg="rodzaj pojazdu jest polem wymaganym">
+                                    <input type="hidden" id="checkout_car" name="checkout_car" value="Car Type Value" class="form_element" data-rule="required" data-msg="rodzaj pojazdu jest polem
+                                    wymaganym">
                                     <div id="validation_checkout_car" class="validation"></div>
                                 </div>
                                 <div class="info-box">

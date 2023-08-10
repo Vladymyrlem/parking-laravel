@@ -14,8 +14,7 @@
     {{--    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">--}}
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
-{{--    TODO: olbor temp --}}
-{{--    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])--}}
+    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -23,8 +22,7 @@
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
-{{--    TODO: olbor temp --}}
-{{--    {!! RecaptchaV3::initJs() !!}--}}
+    {!! RecaptchaV3::initJs() !!}
 
     @yield('styles')
 
@@ -39,26 +37,50 @@
 @include('partials.footer')
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script src="{{ asset('js/slick.js') }}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
-<script src="{{ asset('js/slick.min.js') }}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        // Get all ol elements with class 'days'
+        jQuery("#headblockCarousel").slick({
+            dots: true,
+            infinite: false,
+            variableWidth: false,
+            centerMode: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false
+        });
+        jQuery("#reviews-carousel").slick({
+            dots: true,
+            infinite: false,
+            variableWidth: false,
+            variableHeight: true,
+            centerMode: false,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
+    });
+
+</script>
 <script src="{{ asset('js/wow.min.js') }}"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script src="{{ asset('js/app.js') }}"></script>
-{{--TODO: olbor --}}
-{{--<script src="{{ asset('js/calendar.js') }}"></script>--}}
+<script src="{{ asset('js/calendar.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
 
 <script>
-    jQuery(function () {
+    $(document).ready(function () {
+
         $('.navbar-toggler').click(function (e) {
             e.preventDefault();
             if (!$(this).hasClass('collapsed')) {
@@ -68,6 +90,7 @@
             }
             $('.navbar-collapse').toggleClass('show');
         })
+
         var companyName = "PARKING RONDO";
 
         function loadMap(addressData) {

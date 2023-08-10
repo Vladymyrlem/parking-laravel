@@ -17,6 +17,7 @@
     use App\Http\Controllers\ServicesController;
     use App\Http\Controllers\NewsletterController;
     use App\Http\Controllers\ContentController;
+    use App\Http\Controllers\ParkingController;
 
     /*
     |--------------------------------------------------------------------------
@@ -49,6 +50,9 @@
         Route::post('/admin/reservations', [AdminController::class, 'reservations']);
         Route::post('/save-reservations', [ReservationController::class, 'saveReservations'])->name('save-reservations');
 
+        Route::post('/submit-order', [ParkingController::class, 'storeParking']);
+        Route::post('/submit-order/{order_id}', [ParkingController::class, 'showParking']);
+        Route::delete('/submit-order/{order_id}', [ParkingController::class, 'destroy']);
         /*Header block*/
         Route::get('/headblock', 'AdminController@index');
 
@@ -82,9 +86,8 @@
         Route::get('admin/services', [AdminController::class, 'index']);
         Route::get('/admin/services/{service_id}', [ServicesController::class, 'show']);
         Route::post('/admin/services', [ServicesController::class, 'store'])->name('admin.create.service');
-        Route::get('/admin/services/edit/{service_id}', [ServicesController::class, 'edit'])->name('admin.edit.services');
-        Route::put('/admin/services/update/{service_id}', [ServicesController::class, 'update'])->name('admin.update.services');
-        Route::delete('/admin/services/delete/{service_id}', [ServicesController::class, 'destroy']);
+        Route::put('/admin/services/{service_id}', [ServicesController::class, 'update'])->name('admin.update.services');
+        Route::delete('/admin/services/{service_id}', [ServicesController::class, 'destroy']);
         /*Reviews*/
         Route::get('admin/reviews', [AdminController::class, 'index']);
 // Populate Data in Edit Modal Form
@@ -138,8 +141,8 @@
         Route::post('/admin/newsletter', [NewsletterController::class, 'storeNewsletter']);
 // update Contacts
         Route::put('/admin/newsletter/{newsletter_id}', [NewsletterController::class, 'updateNewsletter']);
-
-        // TODO: olbor
         Route::post('/admin/blocked-dates', [AdminController::class, 'calendarDate']);
+        Route::post('/admin/store-all-dates', [AdminController::class, 'storeAllDates']);
+        Route::delete('/admin/delete-by-date', [AdminController::class, 'deleteByDate']);
 
     });

@@ -34,27 +34,15 @@ section.calendar {
 
 
   // TABLE //
-  .calendar__add_date_select,
-  .calendar__main_calendar {
+  .date_selection_calendar,
+  .calendar__visual_wrapper {
 
     table {
-        margin: 0 auto;
-
-        -webkit-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-
-     .jsCalendar-title-name span {
-         font-weight: bold;
-     }
+      margin: 0 auto;
 
       thead {
         .jsCalendar-week-days {
           text-transform: uppercase;
-
-            .weekend {
-                color: #c32525;
-            }
         }
       }
 
@@ -63,125 +51,23 @@ section.calendar {
       }
 
       tbody {
-
-          td {
-              &.disabled {
-                  color: #fff !important;
-                  background: #FF4C4C;
-                  cursor: auto;
-              }
-              &.weekend {
-                  font-weight: bold;
-                  color: #c32525;
-              }
-
-              &.jsCalendar-next,
-              &.jsCalendar-previous {
-                  &.disabled {
-                      color: #fff !important;
-                      background: #EEB1B1;
-                  }
-                  &.weekend {
-                      color: #ffc3c3;
-                  }
-              }
-
-              &.select {
-                  background: #9CDFFF;
-              }
-          }
+        .disabled {
+          cursor: auto;
+          //color: black;
+          background: rgba(255, 76, 76, 0.89);
+        }
+        .select {
+          background: rgba(3, 169, 244, 0.4);
+        }
       }
     }
   }
 
-  .calendar__add_date_select {
-      padding: 10px;
-      overflow: hidden;
-      transition: height 10s ease-in-out;
-
-      &.collapse_calendar {
-          animation: collapseCalendar .3s ease-in-out;
-          animation-fill-mode: forwards;
-      }
-      &.expand_calendar {
-          animation: expandCalendar .3s ease-in-out;
-          animation-fill-mode: forwards;
-      }
+  .date_selection_calendar {
+    &.hide {
+      display: none;
+    }
   }
-
-    @keyframes collapseCalendar {
-        0% {
-            height: 334px;
-            padding: 10px;
-        }
-
-        100% {
-            height: 0;
-            padding: 0;
-        }
-    }
-
-    @keyframes expandCalendar {
-        0% {
-            height: 0;
-            padding: 0;
-        }
-
-        100% {
-            height: 334px;
-            padding: 10px;
-        }
-    }
-
-    .calendar__add_date_preloader {
-        &.hidden {
-            display: none;
-        }
-
-        display: inline-block;
-        position: absolute;
-        top: -6px;
-        left: -6px;
-        width: 40px;
-        height: 40px;
-
-        div {
-            --curren-color: #FF4C4C;
-
-            box-sizing: border-box;
-            display: block;
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 5px solid var(--curren-color);
-            border-radius: 50%;
-            animation: anim_preloader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: var(--curren-color) transparent transparent transparent;
-
-            &:nth-child(1) {
-                animation-delay: -0.45s;
-            }
-            &:nth-child(2) {
-                animation-delay: -0.3s;
-            }
-            &:nth-child(3) {
-                animation-delay: -0.15s;
-            }
-            &:nth-child(4) {
-                animation-delay: -0.45s;
-            }
-        }
-    }
-
-    @keyframes anim_preloader {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
 
   .calendar__date_list_wrapper {
     display: flex;
@@ -191,33 +77,23 @@ section.calendar {
     .calendar__date_list {
       list-style: none;
       padding: 0;
-
     }
 
     .calendar__add_date_w {
       width: 100%;
     }
 
-    .calendar__add_date_list {
-        margin-bottom: 30px;
-    }
+    .calendar__add_date_label {
+      display: block;
+      width: 100%;
+      margin-bottom: 20px;
 
-    .calendar__add_date_item {
-      list-style: none;
-
-      &:not(:last-child) {
-          margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 50px;
       }
     }
 
-    .calendar__add_date_label {
-        position: relative;
-      display: block;
-      width: 100%;
-        margin-bottom: 0;
-    }
-
-    .calendar__add_date_input {
+    .calendar__select_date_input {
       display: block;
       width: 100%;
     }

@@ -16,6 +16,7 @@
     use GuzzleHttp\Client;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Log;
     use Illuminate\Support\Facades\Mail;
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Validation\Validator;
@@ -74,8 +75,6 @@
 
         public function storeHeaderBlock(Request $request)
         {
-echo '<pre>'; print_r( $request ); echo '</pre>';
-die('-1');
             $product = HeadBlock::create($request->input());
             return response()->json($product);
         }
@@ -200,15 +199,69 @@ die('-1');
             return response()->json(['location' => "/images/$imageName"]);
         }
 
-        // TODO: olbor calendar
         public function calendarDate(Request $request)
         {
-            echo 'calendar test';
-            echo 'test request: <pre>';
-            print_r($request);
-            echo '</pre>';
-            die; // TODO olbor
+            $dates = [];
+
+            // Loop through the request input to extract date values
+            foreach ($request->all() as $key => $value) {
+                if (strpos($key, 'field_date_') === 0) {
+                    $dates[substr($key, 11)] = $value;
+                }
+            }
+
+            // Loop through the dates and store them in the database
+            foreach ($dates as $key => $date) {
+                Reservation::create([
+                    'new_date' => $date, // Adjust column names accordingly
+                ]);
+            }
+
+            return response()->json(['message' => 'Reservation dates stored successfully']);
         }
 
+        public function storeAllDates(Request $request)
+        {
+            $selectedDates = $request->input('dates');
+
+            foreach ($selectedDates as $key => $date) {
+                // Assuming you have a Reservation model and 'start_date' is the column name
+                Reservation::create([
+                    'new_date' => $date,
+                ]);
+            }
+
+            return response()->json(['message' => 'All dates stored successfully']);
+        }
+
+        public function destroy($id)
+        {
+            $reservation = Reservation::find($id);
+
+            if (!$reservation) {
+                return response()->json(['message' => 'Reservation not found'], 404);
+            }
+
+            $reservation->delete();
+
+            return response()->json(['message' => 'Reservation deleted successfully']);
+        }
+
+        public function deleteByDate(Request $request)
+        {
+            $blockedDate = $request->input('blockedDate');
+            Log::info('Blocked Date: ' . $blockedDate);
+
+            $reservation = Reservation::where('new_date', $blockedDate)->first();
+            Log::info('Found Reservation: ' . json_encode($reservation));
+
+            if (!$reservation) {
+                return response()->json(['message' => 'Reservation not found'], 404);
+            }
+
+            $reservation->delete();
+
+            return response()->json(['message' => 'Reservation deleted successfully']);
+        }
 
     }

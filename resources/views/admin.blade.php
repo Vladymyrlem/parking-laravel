@@ -87,6 +87,7 @@
                     </div>
                     <!-- Information Block-->
                     <div class="info-block" id="info" name="#info">
+                        @csrf
                         <h2 class="fs-2">Information block</h2>
                         @include('partials.information.table')
                         @include('partials.information.create')
@@ -143,7 +144,6 @@
                     <div class="services-block" id="services" name="#services">
                         <h2 class="fs-2">Services block</h2>
                         @include('partials.services.table')
-                        @include('partials.services.create')
                     </div>
                     @include('partials.newsletter.create')
 
@@ -154,7 +154,6 @@
                     </div>
                 </div>
             </div>
-
             <section class="calendar">
                 <h2 class="calendar__title">Dni w których wyłączona jest możliwość złożenia zamówienia</h2>
                 <div class="calendar__container">
@@ -163,7 +162,7 @@
                     </div>
                     <div class="calendar__date_list_wrapper">
                         <ul class="calendar__date_list js_list_blocked_dates">
-{{--                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>--}}
+                            {{--                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>--}}
                         </ul>
                         <div class="calendar__add_date_w">
                             <ul class="calendar__add_date_list"></ul>
