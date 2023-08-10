@@ -161,9 +161,7 @@
                         <div class="calendar__main_calendar"></div>
                     </div>
                     <div class="calendar__date_list_wrapper">
-                        <ul class="calendar__date_list js_list_blocked_dates">
-                            {{--                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>--}}
-                        </ul>
+                        <ul class="calendar__date_list js_list_blocked_dates"></ul>
                         <div class="calendar__add_date_w">
                             <ul class="calendar__add_date_list"></ul>
 

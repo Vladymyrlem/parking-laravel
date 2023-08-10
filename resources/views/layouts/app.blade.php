@@ -381,6 +381,7 @@ position: relative;" aria-hidden="true">
                         }
                     });
 
+                    // SAVE
                     $.ajax({
                         type: 'POST',
                         url: url + '/blocked-dates',
@@ -436,16 +437,6 @@ position: relative;" aria-hidden="true">
             listItems.forEach(function (li) {
                 ulElement.appendChild(li);
             });
-
-
-            const deleteHtmlItems = (item) => {
-                item?.remove();
-
-                // const listSelectedDates = document.querySelector( '.calendar__add_date_list' );
-                // if ( listSelectedDates ) {
-                //     listSelectedDates.innerHTML = '';
-                // }
-            }
         });
         var url = $('#url').val();
 

@@ -14,7 +14,7 @@
     {{--    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">--}}
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
-    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
+{{--    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])--}}
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -22,7 +22,7 @@
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">--}}
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
-    {!! RecaptchaV3::initJs() !!}
+{{--    {!! RecaptchaV3::initJs() !!}--}}
 
     @yield('styles')
 
