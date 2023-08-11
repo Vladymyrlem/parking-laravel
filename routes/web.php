@@ -37,6 +37,8 @@
     Route::post('/send-contact', [HomeController::class, 'sendContactUs'])->name('send-contact');
 
     Route::middleware('auth')->group(function () {
+        Route::delete('/admin/delete-order/{id}', [AdminController::class, 'deleteOrder']);
+
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
         Route::post('admin', [AdminController::class, 'index'])->name('admin.store');
         Route::view('about', 'about')->name('about');

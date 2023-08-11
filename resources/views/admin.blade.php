@@ -12,9 +12,11 @@
         </div><!-- /.container-fluid -->
     </div>
     <div class="toolbar">
-        <button class="btn btn-secondary" id="sortByToday">Sort by Today's Arrival</button>
-        <button class="btn btn-secondary" id="resetFilters">Reset Filters</button>
-
+        <button id="b1" class="btn btn-secondary">przyjazd dzisiaj</button>
+        <button id="b2" class="btn btn-secondary">wyjazd dzisiaj</button>
+        <button id="b3" class="btn btn-secondary">z dzisiaj</button>
+        <button id="b5" class="btn btn-secondary">pokaż starsze</button>
+        <button id="b4" class="btn btn-secondary">wyczyść filtr</button>
     </div>
     <!-- /.content-header -->
     <table id="parkingTable" data-toggle="table"
@@ -32,6 +34,7 @@
            data-show-pagination-switch="true"
            data-pagination="true"
            data-id-field="id"
+           data-page-size="25"
            data-toolbar=".toolbar"
            data-page-list="[10, 25, 50, 100, all]"
            data-show-footer="true">
@@ -40,7 +43,7 @@
 
             <th data-field="id" data-sortable="true">numer</th>
             <th data-field="created_at" data-sortable="true">z dnia</th>
-            <th data-field="arrival" data-sorter="dateSort">przyjazd</th>
+            <th data-field="arrival" data-sortable="true" data-sorter="dateSort">przyjazd</th>
             <th data-field="departure" data-sortable="true">wyjazd</th>
             <th data-field="count_days" data-sortable="true">ilość dni</th>
             <th data-field="price" data-sortable="true">cena</th>
@@ -55,7 +58,10 @@
         @foreach($parkings as $parking)
             <tr>
                 <td class="id">{{ $parking->id }}</td>
-                <td class="created-date">{{ $parking->created_at }}</td>
+                <td class="created-date">{{ $parking->created_at }}
+                    <button class="btn btn-danger delete-btn" data-order-id="{{ $parking->id }}">Delete</button>
+
+                </td>
                 <td class="arrival-date">{{ $parking->arrival }}</td>
                 <td class="departure-date">{{ $parking->departure }}</td>
                 <td>{{ $parking->number_days }}</td>
@@ -69,7 +75,7 @@
                         </div>
                         <div class="d-flex">telefon:&nbsp;{{ $parking->phone_number }}</div>
                         email:
-                        {{ $parking->email }}
+                        <a href="mailto:{{ $parking->email }}">{{ $parking->email }}</a>
                     </div>
                 </td>
                 <td>
@@ -109,12 +115,14 @@
                                 <div class="pull-right">
                                     <button id="btn_add" name="btn_add" class="btn btn-default pull-right">Add New Head Row</button>
                                 </div>
+                                <button id="toggleRowsButton" class="btn btn-primary">Show All Rows</button>
+
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="col-12 col-md-offset-2">
-                                <table class="table table-striped table-hover">
+                                <table class="table table-striped table-hover" id="headerTable">
                                     <thead>
                                     <tr class="info">
                                         <th>ID</th>

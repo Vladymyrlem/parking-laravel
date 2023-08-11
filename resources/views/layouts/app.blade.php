@@ -193,20 +193,90 @@ position: relative;" aria-hidden="true">
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
+    const headerTable = $('#headerTable');
+    const toggleButton = $('#toggleRowsButton');
+
+    // Initial state: Show only one row
+    headerTable.find('tbody tr').not(':first').hide();
+
+    toggleButton.on('click', function () {
+        const hiddenRows = headerTable.find('tbody tr').not(':visible');
+
+        if (hiddenRows.length > 0) {
+            // Show all rows
+            hiddenRows.show();
+            toggleButton.text('Show Only One Row');
+        } else {
+            // Show only one row
+            headerTable.find('tbody tr').not(':first').hide();
+            toggleButton.text('Show All Rows');
+        }
+    });
+    var b1 = $('#b1');
+    var b2 = $('#b2');
+    var b3 = $('#b3');
+    var b4 = $('#b4');
+    var b5 = $('#b5');
+    var table = $('#parkingTable');
+
     function dateSort(a, b) {
         var aDate = new Date(a);
         var bDate = new Date(b);
         return aDate - bDate;
     }
 
-    $('#parkingTable').bootstrapTable({
-        height: 550,
+    table.bootstrapTable({
         locale: 'pl',
         toolbar: '.toolbar'
     });
+    $('.delete-btn').on('click', function () {
+        var orderId = $(this).data('order-id');
+
+        $.ajax({
+            url: '/admin/delete-order/' + orderId, // Replace with your delete route URL
+            type: 'DELETE',
+            dataType: 'json',
+            success: function (response) {
+                // Remove the deleted row from the table
+                $('#parkingTable').bootstrapTable('remove', {field: 'id', values: [orderId]});
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    });
+    var todayDate = new Date().toISOString().slice(0, 10);
+
+    $(function () {
+        $(b1).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                arrival: [todayDate]
+            });
+        });
+        $(b2).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                departure: ['2023-08-11']
+            });
+        });
+        $(b3).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                datah: ['2023-08-11']
+            });
+        });
+        $(b4).click(function () {
+            $(table).bootstrapTable('filterBy', {});
+        });
+        $(b5).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                oldh: ['tak', 'nie']
+            });
+        });
+    });
+
     $('#sortByToday').on('click', function () {
         $('#parkingTable').bootstrapTable('filterBy', {
-            arrival: new Date().toISOString().split('T')[0]
+            arrival: [todayDate]
         });
     });
     $('#resetFilters').on('click', function () {
@@ -215,141 +285,8 @@ position: relative;" aria-hidden="true">
             toolbar: '#customToolbar'
         });
     });
-    var $table = $('#table')
-    var $remove = $('#remove')
-    var selections = []
 
-    function getIdSelections() {
-        return $.map($table.bootstrapTable('getSelections'), function (row) {
-            return row.id
-        })
-    }
 
-    function responseHandler(res) {
-        $.each(res.rows, function (i, row) {
-            row.state = $.inArray(row.id, selections) !== -1
-        })
-        return res
-    }
-
-    function detailFormatter(index, row) {
-        var html = []
-        $.each(row, function (key, value) {
-            html.push('<p><b>' + key + ':</b> ' + value + '</p>')
-        })
-        return html.join('')
-    }
-
-    function operateFormatter(value, row, index) {
-        return [
-            '<a class="remove" href="javascript:void(0)" title="Remove">',
-            '<i class="fa fa-trash"></i>',
-            '</a>'
-        ].join('')
-    }
-
-    window.operateEvents = {
-        'click .like': function (e, value, row, index) {
-            alert('You click like action, row: ' + JSON.stringify(row))
-        },
-        'click .remove': function (e, value, row, index) {
-            $table.bootstrapTable('remove', {
-                field: 'id',
-                values: [row.id]
-            })
-        }
-    }
-
-    function totalTextFormatter(data) {
-        return 'Total'
-    }
-
-    function totalNameFormatter(data) {
-        return data.length
-    }
-
-    function totalPriceFormatter(data) {
-        var field = this.field
-        return '$' + data.map(function (row) {
-            return +row[field].substring(1)
-        }).reduce(function (sum, i) {
-            return sum + i
-        }, 0)
-    }
-
-    function initTable() {
-        $table.bootstrapTable('destroy').bootstrapTable({
-            height: 550,
-            locale: $('#locale').val(),
-            columns: [
-                [{
-                    field: 'arrival',
-                    checkbox: true,
-                    rowspan: 2,
-                    align: 'center',
-                    valign: 'middle'
-                }, {
-                    title: 'Item ID',
-                    field: 'id',
-                    rowspan: 2,
-                    align: 'center',
-                    valign: 'middle',
-                    sortable: true,
-                    footerFormatter: totalTextFormatter
-                }, {
-                    title: 'Item Detail',
-                    colspan: 3,
-                    align: 'center'
-                }],
-                [{
-                    field: 'name',
-                    title: 'Item Name',
-                    sortable: true,
-                    footerFormatter: totalNameFormatter,
-                    align: 'center'
-                }, {
-                    field: 'price',
-                    title: 'Item Price',
-                    sortable: true,
-                    align: 'center',
-                    footerFormatter: totalPriceFormatter
-                }, {
-                    field: 'client_name',
-                    title: 'Item Operate',
-                    align: 'center',
-                    clickToSelect: false,
-                    events: window.operateEvents,
-                    formatter: operateFormatter
-                }]
-            ]
-        })
-        $table.on('check.bs.table uncheck.bs.table ' +
-            'check-all.bs.table uncheck-all.bs.table',
-            function () {
-                $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
-
-                // save your data, here just save the current page
-                selections = getIdSelections()
-                // push or splice the selections if you want to save all data selections
-            })
-        $table.on('all.bs.table', function (e, name, args) {
-            console.log(name, args)
-        })
-        $remove.click(function () {
-            var ids = getIdSelections()
-            $table.bootstrapTable('remove', {
-                field: 'id',
-                values: ids
-            })
-            $remove.prop('disabled', true)
-        })
-    }
-
-    $(function () {
-        initTable()
-
-        $('#locale').change(initTable)
-    })
 </script>
 <script>
     // Check if both checkbox and CAPTCHA are validated
