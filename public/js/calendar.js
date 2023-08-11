@@ -119,44 +119,8 @@ class DatesList {
         this.init();
     }
 
-    addActionForRemoveDate() {
-        const listDates = document.querySelectorAll('[data-blocked-date]');
-
-        listDates.forEach(item => {
-            // For each Button Delete link
-            item.addEventListener('click', e => {
-                e.preventDefault();
-                const date = e.currentTarget.dataset.blockedDate;
-
-                let i = 0;
-                while (i < this.dates.length) {
-                    if (this.dates[i].new_date === date) {
-
-
-                        // TODO: this insert code for ajax method for delete date
-                        const deletedDate = this.dates.splice(i, 1);
-                        console.log('deleted date: ', deletedDate)
-
-
-                    } else {
-                        ++i;
-                    }
-                }
-
-                this.calendar.refresh();
-                item.parentElement.remove();
-            });
-        });
-    }
-
-    refresh() {
-        this.listDatesRender();
-        this.addActionForRemoveDate();
-    }
-
     init() {
         this.listDatesRender();
-        this.addRemoveDateAction();
     }
 
     // Render Dates List
@@ -182,34 +146,35 @@ class DatesList {
         });
     }
 
-    // DELETE Date from list dates
-    // TODO: this add ajax method for delete date
-    addRemoveDateAction() {
-        const listDates = document.querySelectorAll('[data-blocked-date]');
-
-        listDates.forEach(item => {
-            // For each Button Delete link
-            item.addEventListener('click', e => {
-                e.preventDefault();
-                const date = e.currentTarget.dataset.blockedDate;
-
-                let i = 0;
-                while (i < this.dates.length) {
-                    if (this.dates[i].new_date === date) {
-
-                        // TODO: this insert code for ajax method for delete date
-                        this.dates.splice(i, 1);
-
-                    } else {
-                        ++i;
-                    }
-                }
-
-                this.calendar.refresh();
-                item.parentElement.remove();
-            });
-        });
-    }
+    // addActionForRemoveDate() {
+    //     const listDates = document.querySelectorAll('[data-blocked-date]');
+    //
+    //     listDates.forEach(item => {
+    //         // For each Button Delete link
+    //         item.addEventListener('click', e => {
+    //             e.preventDefault();
+    //             const date = e.currentTarget.dataset.blockedDate;
+    //
+    //             let i = 0;
+    //             while (i < this.dates.length) {
+    //                 if (this.dates[i].new_date === date) {
+    //
+    //
+    //                     // TODO: this insert code for ajax method for delete date
+    //                     const deletedDate = this.dates.splice(i, 1);
+    //                     console.log('deleted date: ', deletedDate)
+    //
+    //
+    //                 } else {
+    //                     ++i;
+    //                 }
+    //             }
+    //
+    //             this.calendar.refresh();
+    //             item.parentElement.remove();
+    //         });
+    //     });
+    // }
 
     // HELPERS
     compareDate = function (date) {
@@ -218,9 +183,4 @@ class DatesList {
         const date2 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1, 23, 59, 59, 999);
         return date1 > date2;
     }
-}
-
-
-class AddDate {
-
 }

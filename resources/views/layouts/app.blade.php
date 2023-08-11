@@ -181,7 +181,6 @@ position: relative;" aria-hidden="true">
 @include('partials.modal.section-title-modal')
 @include('partials.modal.newsletter-modal')
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/calendar.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
@@ -238,11 +237,6 @@ position: relative;" aria-hidden="true">
             var url = $('#url').val();
 
             let data = <?php echo json_encode($arrayData); ?>;
-            // data.push({new_date: '09/08/2023'});
-            // data.push({new_date: '18/08/2023'});
-            // data.push({new_date: '03/09/2023'});
-
-            // $('.js_calendar').data( 'calendar_dates', { data, url } );
 
             const calendar1 = new CalendarIk({
                 dates: data,
@@ -437,7 +431,15 @@ position: relative;" aria-hidden="true">
             listItems.forEach(function (li) {
                 ulElement.appendChild(li);
             });
-        });
+
+
+
+
+
+        }); // -- END JQUERY
+
+
+
         var url = $('#url').val();
 
         $(document).on('submit', '.delete-form', function (event) {

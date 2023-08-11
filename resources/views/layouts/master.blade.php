@@ -23,7 +23,8 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
 {{--    {!! RecaptchaV3::initJs() !!}--}}
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     @yield('styles')
 
 </head>
@@ -44,6 +45,11 @@
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
+
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
+<script src="{{asset('js/calendar.js')}}"></script>
+
 <script type="text/javascript">
     $(document).ready(function () {
         // Get all ol elements with class 'days'
@@ -218,6 +224,18 @@
         //     fetchReservedDates(); // Fetch the reserved dates from the backend and add the calendar
         // });
     });
+</script>
+<script>
+    {{--  Calendar  --}}
+    {{--    @if( null !== blockedDates )--}}
+    {{--    let data = <?php echo json_encode( blockedDates ); ?>;--}}
+    {{--    console.log( 'Data: ', data )--}}
+    {{--    @endif--}}
+
+
+
+
+
 </script>
 </body>
 </html>
