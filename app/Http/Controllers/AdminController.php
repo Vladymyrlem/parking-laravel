@@ -264,4 +264,10 @@
             return response()->json(['message' => 'Reservation deleted successfully']);
         }
 
+        public function getUpdatedDatesList()
+        {
+            // Fetch the updated dates list content, generate HTML and return as response
+
+            return view('partials.dates-list'); // Assuming you have a partial view for the dates list
+        }
     }

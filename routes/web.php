@@ -147,4 +147,6 @@
         Route::post('/admin/store-all-dates', [AdminController::class, 'storeAllDates']);
         Route::delete('/admin/delete-by-date', [AdminController::class, 'deleteByDate']);
 
+        Route::get('/admin/get-updated-dates-list', [AdminController::class, 'getUpdatedDatesList']);
+
     });

@@ -387,7 +387,8 @@ position: relative;" aria-hidden="true">
                         data: new_date,
                         success: function (response) {
                             console.log(response);
-                            location.reload();
+                            reloadDatesList();
+                            // location.reload();
                             // Your success handling here
                         },
                         error: function (info) {
@@ -410,7 +411,8 @@ position: relative;" aria-hidden="true">
                     data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
                     success: function (response) {
                         console.log('All dates stored successfully:', response);
-                        location.reload();
+                        reloadDatesList();
+                        // location.reload();
                         // Any additional handling after storing all dates
                     },
                     error: function (info) {
@@ -449,6 +451,20 @@ position: relative;" aria-hidden="true">
         });
         var url = $('#url').val();
 
+        function reloadDatesList() {
+            $.ajax({
+                type: 'GET',
+                url: url + '/get-updated-dates-list', // Adjust the URL to your route
+                success: function (response) {
+                    // Replace the content of #datesListDiv with updated content
+                    $('.calendar__date_list_wrapper').html(response);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
         $(document).on('submit', '.delete-form', function (event) {
 
             event.preventDefault(); // Prevent default form submission behavior
@@ -467,8 +483,10 @@ position: relative;" aria-hidden="true">
                     console.log(response.message);
                     // Perform any updates to the UI as needed
                     // For example, remove the deleted <li> element
+                    console.log(response);
                     $(form).closest('li').remove();
-                    location.reload();
+                    reloadDatesList();
+                    // location.reload();
                 },
                 error: function (error) {
                     console.error(error);
