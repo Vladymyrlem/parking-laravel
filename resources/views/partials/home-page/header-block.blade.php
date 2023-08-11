@@ -106,6 +106,7 @@ margin-top: 94px">
                                     <input type="text" name="order_drop_off_date" autocomplete="off" id="order_drop_off_date" data-rule="required"
                                            data-msg="podaj datę zakończenia rezerwacji"
                                            class="form-control form_element" placeholder="yyyy-mm-dd">
+                                   
                                 </div>
                                 <div id="validation_order_drop_off_date" class="validation"></div>
                             </div>

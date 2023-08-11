@@ -457,7 +457,7 @@ position: relative;" aria-hidden="true">
                 url: url + '/get-updated-dates-list', // Adjust the URL to your route
                 success: function (response) {
                     // Replace the content of #datesListDiv with updated content
-                    $('.calendar__date_list_wrapper').html(response);
+                    $('.calendar__container').html(response);
                 },
                 error: function (error) {
                     console.error(error);

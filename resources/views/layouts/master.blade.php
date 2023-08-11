@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">--}}
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">--}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
     {!! RecaptchaV3::initJs() !!}
@@ -46,7 +48,6 @@
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
 <script type="text/javascript">
     $(document).ready(function () {
-        // Get all ol elements with class 'days'
         jQuery("#headblockCarousel").slick({
             dots: true,
             infinite: false,
@@ -68,6 +69,16 @@
     });
 
 </script>
+@if(isset($blockedDates))
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let data = <?php echo json_encode($blockedDates); ?>;
+            console.log(data);
+        });
+
+    </script>
+@endif
 <script src="{{ asset('js/wow.min.js') }}"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
