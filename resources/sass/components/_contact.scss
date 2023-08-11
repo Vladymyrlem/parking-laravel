@@ -28,7 +28,7 @@
             font-style: normal;
             font-weight: 700;
             line-height: normal;
-            padding-right: 40px;
+            padding-right: 0;
             text-align: left;
         }
 
@@ -73,5 +73,128 @@
         width: 100%;
         max-width: 405px;
         margin: 0 auto;
+    }
+}
+
+#contacts-us-section {
+    margin-top: 100px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+
+    .contact-us-container {
+        width: 100%;
+        max-width: 770px;
+        margin: 0 auto;
+    }
+
+    h2 {
+        color: var(--black, #151616);
+        /* H2 */
+        font-family: Lato, sans-serif;
+        font-size: 50px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        text-align: center;
+        margin-bottom: 20px;
+
+        span {
+            color: var(--prime, #0074B7);
+
+            /* H2 */
+            font-family: Lato, sans-serif;
+            font-size: 50px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+    }
+
+    h3 {
+        color: var(--black, #151616);
+
+        /* H3 */
+        font-family: Lato, sans-serif;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: normal;
+        margin-bottom: 30px;
+        text-align: center;
+    }
+
+    form {
+        .approval {
+            .row {
+                margin-bottom: 30px;
+
+                &:last-child {
+                    margin-bottom: 15px;
+                }
+            }
+        }
+
+        .custom-checkbox {
+            text-align: left;
+            color: #757575;
+            font-family: Lato, sans-serif;
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 140%; /* 16.8px */
+            text-transform: capitalize;
+            padding-left: 60px;
+            margin-bottom: 30px;
+
+
+        }
+
+        input {
+            border-radius: 5px;
+            border: 1px solid #E0DDDD;
+            padding: 10px;
+            margin-bottom: 20px;
+
+            &::placeholder {
+                color: var(--grey, #AFADAD);
+
+                /* Body */
+                font-family: Lato, sans-serif;
+                font-size: 18px;
+                font-style: normal;
+                font-weight: 400;
+                line-height: 140%; /* 25.2px */
+            }
+
+
+            &[type="checkbox"] {
+                margin-bottom: 30px;
+            }
+        }
+    }
+
+    textarea {
+        margin-bottom: 20px;
+        height: 220px
+    }
+
+    button {
+        border-radius: 5px;
+        background: var(--prime, #0074B7);
+        width: 100%;
+        max-width: 370px;
+        padding: 18px;
+        color: var(--white, #FFF);
+
+        /* H4 */
+        font-family: Lato, sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
     }
 }

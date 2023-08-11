@@ -45,7 +45,7 @@
         public function content()
         {
             return new Content(
-                view: 'view.name',
+                view: 'email.contact',
             );
         }
 
@@ -66,8 +66,8 @@
          */
         public function build()
         {
-            return $this->from($this->contactFormData['email'])
+            return $this->from($this->contactFormData['contact_email'])
                 ->subject('Contact Form Submission')
-                ->view('emails.contact');
+                ->view('email.contact');
         }
     }

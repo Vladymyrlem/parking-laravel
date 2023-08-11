@@ -1,12 +1,66 @@
 <a href="#top" class="scrollup fadeInRight animated" style="display: inline;">na górę strony</a>
 <footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 top-foot row justify-content-between">
+                <div class="foot-left col-auto">
+                    <a href="/" class="logo foot-logo">
+                        <img src="{{ asset('images/parking-logo.png') }}" alt="">
+                    </a>
+                    <div class="foot-reservation-block">
+                        <h2 class="foot-reservation-block__title">Rezerwacja online</h2>
+                        <h3 class="foot-reservation-block__subtitle">Zarezerwowanie miejsca jest bardzo proste.</h3>
+                        <a href="#header-block" class="foot-reservation-block__link">rezerwację</a>
+                    </div>
+                </div>
+                <nav class="col-auto footer-nav">
+                    <div class="foot-label">Nawigacja</div>
+                    <ul>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#aboutus" data-scroll>O Nas</a></li>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#gallery" data-scroll>Galeria</a></li>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#locations" data-scroll>Dojazrd</a></li>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#contacts-section" data-scroll>Kontakt</a></li>
+                        <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>
+                    </ul>
+                </nav>
+                <div class="foot-contacts col-md-5 pr-md-0 pl-md-0">
+                    <div class="foot-label">Kontakt</div>
+                    <div class="contacts-grid">
+        <span class="contact-name">        {!!  getTitleBySlug('contact-mail') !!}
+</span>
+                        @php
+                            use Illuminate\Support\Str;
+                            $email = Str::ucfirst(getContact('email'));
+                        @endphp
+                        <div class="contact-value"><a class="" href="mailto:{!! getContact('email') !!}">{{$email}}</a></div>
+                        <span class="contact-name">        {!!  getTitleBySlug('contact-address') !!}
+</span>
+                        <div class="contact-value"><a href="{!! getContact('map_link') !!}">{!! getContact('address') !!}</a></div>
+                        <span class="contact-name">        {!!  getTitleBySlug('contact-phone') !!}
+</span>
+                        <div class="contact-value">
+                            <a href="tel:{!! getContact('phone_number_1') !!}">{!! getContact('phone_number_1') !!}</a>
+                            <a href="tel:{!! getContact('phone_number_2') !!}">{!! getContact('phone_number_2') !!}</a>
 
-    <div class="bottom-footer">
+                        </div>
+                        <span class="contact-name">        {!!  getTitleBySlug('contact-gps') !!}
+</span>
+                        <div class="contact-value">
+                            {!! getContact('latitude') !!},{!! getContact('longitude') !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="bottom-footer col-12">
         <span class="rights-reserved">
             Wszelkie prawa zastrzeżone
         </span>
-        <div class="created-by">
-            Created by <a href="https://entsolve.pl">Entsolve.pl</a>
+                <div class="created-by">
+                    Created by <a href="https://entsolve.pl">Entsolve.pl</a>
+                </div>
+            </div>
         </div>
     </div>
 </footer>

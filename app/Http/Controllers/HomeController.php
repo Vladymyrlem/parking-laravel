@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Mail\ContactMail;
     use App\Models\Contacts;
     use App\Models\HeadBlock;
     use App\Models\Information;
@@ -14,6 +15,7 @@
     use DateTime;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Mail;
 
     class HomeController extends Controller
     {
@@ -55,5 +57,19 @@
             // Pass the $blockedDates variable to the view
             return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
                 'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services'));
+        }
+
+        public function sendContactUs(Request $request)
+        {
+            $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
+//            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
+            Mail::raw('Test email', function ($message) {
+                $message->to('vovangud@gmail.com');
+                $message->subject('Test Subject');
+            });
+
+            // Return the total price as a JSON response (optional)
+            return response()->json(['message' => 'Message sent successfully']);
+
         }
     }

@@ -173,7 +173,7 @@ margin-top: 94px">
                         <div class="form-group styled-input-car">
                             <input type="email" id="client_email" name="client_email" placeholder="Wpisz swój adres email">
                         </div>
-                        <button type="submit" id="order_submit_btn" class="submit">dokończ rezerwację</button>
+                        <button type="submit" id="order_submit_btn" class="submit" disabled>dokończ rezerwację</button>
                     </form>
                 </div>
                 @include('partials.modal.reservation-modal')

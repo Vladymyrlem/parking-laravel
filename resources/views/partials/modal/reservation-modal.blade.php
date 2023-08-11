@@ -115,8 +115,6 @@
                             <div class="clearfix"></div>
                         </div>
 
-                        <hr>
-
                         <!-- Checkout Personal Info start -->
                         <div class="checkout-personal-info">
 
@@ -171,25 +169,13 @@
                                 <div class="form-group left">
                                     <label for="checkout_car_brand">Marka samochodu:</label>
                                     <input type="text" name="checkout_car_brand" id="checkout_car_brand" value="" class="form-control form_element" data-rule="" data-msg="to pole jest wymagane">
-                                    <!--
-                                    <div class="styled-select-age">
-                                        <select name="checkout_car_brand" id="checkout_car_brand" class="form_element" data-rule="" data-msg="to pole jest wymagane">
-                                            <option value="0" disabled="disabled" selected="selected">wybierz...</option>
-                                            <option value="Abarth">Abarth</option><option value="Acura">Acura</option><option value="Aixam">Aixam</option><option value="Alfa Romeo">Alfa Romeo</option><option value="Aro">Aro</option><option value="Aston Martin">Aston Martin</option><option value="Audi">Audi</option><option value="Austin">Austin</option><option value="Autobianchi">Autobianchi</option><option value="Bentley">Bentley</option><option value="BMW">BMW</option><option value="Brilliance">Brilliance</option><option value="Buick">Buick</option><option value="Cadillac">Cadillac</option><option value="Chatenet">Chatenet</option><option value="Chevrolet">Chevrolet</option><option value="Chrysler">Chrysler</option><option value="Citroën">Citroën</option><option value="Cupra">Cupra</option><option value="Dacia">Dacia</option><option value="Daewoo">Daewoo</option><option value="Daihatsu">Daihatsu</option><option value="De Lorean">De Lorean</option><option value="DKW">DKW</option><option value="Dodge">Dodge</option><option value="DS Automobiles">DS Automobiles</option><option value="Ferrari">Ferrari</option><option value="Fiat">Fiat</option><option value="Ford">Ford</option><option value="Gaz">Gaz</option><option value="GMC">GMC</option><option value="Gonow">Gonow</option><option value="Grecav">Grecav</option><option value="GWM">GWM</option><option value="Hammer">Hammer</option><option value="Honda">Honda</option><option value="Hummer">Hummer</option><option value="Hyundai">Hyundai</option><option value="Infiniti">Infiniti</option><option value="Isuzu">Isuzu</option><option value="Iveco">Iveco</option><option value="Jaguar">Jaguar</option><option value="Jeep">Jeep</option><option value="Kia">Kia</option><option value="Lada">Lada</option><option value="Lamborghini">Lamborghini</option><option value="Lancia">Lancia</option><option value="Land Rover">Land Rover</option><option value="Lexus">Lexus</option><option value="Ligier">Ligier</option><option value="Lincoln">Lincoln</option><option value="Lotus">Lotus</option><option value="LuAZ">LuAZ</option><option value="Maserati">Maserati</option><option value="Maybach">Maybach</option><option value="Mazda">Mazda</option><option value="McLaren">McLaren</option><option value="Mercedes-Benz">Mercedes-Benz</option><option value="Mercury">Mercury</option><option value="MG">MG</option><option value="Microcar">Microcar</option><option value="Mini">Mini</option><option value="Mitsubishi">Mitsubishi</option><option value="Moskwicz">Moskwicz</option><option value="Nissan">Nissan</option><option value="NSU">NSU</option><option value="Nysa">Nysa</option><option value="Oldsmobile">Oldsmobile</option><option value="Opel">Opel</option><option value="Peugeot">Peugeot</option><option value="Piaggio">Piaggio</option><option value="Plymouth">Plymouth</option><option value="Polonez">Polonez</option><option value="Pontiac">Pontiac</option><option value="Porsche">Porsche</option><option value="RAM">RAM</option><option value="Renault">Renault</option><option value="Rolls-Royce">Rolls-Royce</option><option value="Rover">Rover</option><option value="Saab">Saab</option><option value="Saturn">Saturn</option><option value="Scion">Scion</option><option value="Seat">Seat</option><option value="Škoda">Škoda</option><option value="Smart">Smart</option><option value="SsangYong">SsangYong</option><option value="Subaru">Subaru</option><option value="Suzuki">Suzuki</option><option value="Syrena">Syrena</option><option value="Talbot">Talbot</option><option value="Tarpan">Tarpan</option><option value="Tata">Tata</option><option value="Tesla">Tesla</option><option value="Toyota">Toyota</option><option value="Trabant">Trabant</option><option value="Triumph">Triumph</option><option value="TVR">TVR</option><option value="Uaz">Uaz</option><option value="Vauxhall">Vauxhall</option><option value="Volkswagen">Volkswagen</option><option value="Volvo">Volvo</option><option value="VTN">VTN</option><option value="Warszawa">Warszawa</option><option value="Wartburg">Wartburg</option><option value="Wołga">Wołga</option><option value="Yugo">Yugo</option><option value="Zaporożec">Zaporożec</option><option value="Zastava">Zastava</option><option value="Żuk">Żuk</option><option value="Inny">Inny</option>                                </select>
-                                    </div>
-                                    //-->
+
                                     <div id="validation_checkout_car_brand" class="validation"></div>
                                 </div>
                                 <div class="form-group right">
                                     <label for="checkout_car_model">Model auta:</label>
                                     <input type="text" name="checkout_car_model" id="checkout_car_model" value="" class="form-control form_element" data-rule="" data-msg="to pole jest wymagane">
-                                    <!--
-                                    <div class="styled-select-age">
-                                        <select name="checkout_car_model" id="checkout_car_model" class="form_element" data-rule="required" data-msg="to pole jest wymagane">
-                                            <option value="0" disabled="disabled" selected="selected">wybierz markę pojazdu</option>
-                                        </select>
-                                    </div>
-                                    //-->
+
                                     <div id="validation_checkout_car_model" class="validation"></div>
                                 </div>
                             </div>
