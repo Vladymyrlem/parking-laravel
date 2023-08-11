@@ -34,7 +34,7 @@
                     {{--                    @csrf--}}
                     <div class="input-group row{{ $errors->has('email') ? ' has-error' : '' }}">
                         <div class="col-md-6 col-12 p-0">
-                            <input type="email" id="newsletter_email" class="form-control form_element" placeholder="Wpisz swój adres e-mail" name="email" value="{{ old('email') }}">
+                            <input type="email" id="newsletter_email" class="form-control form_element" placeholder="Wpisz swój adres e-mail" name="email" value="">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -72,41 +72,4 @@
         </div>
     </div>
 </section>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script>
-    $(document).ready(function () {
-        // Submit the form using Ajax
-        $('#subscribe-form').submit(function (event) {
-            event.preventDefault();
-            const form = this; // Store a reference to the form element
 
-            // Get the reCAPTCHA response
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {
-                    // Add the CSRF token and reCAPTCHA response to form data
-                    const formData = new FormData(form); // Use the stored reference to the form element
-                    formData.append('_token', '{{ csrf_token() }}');
-                    formData.append('g-recaptcha-response', token);
-
-                    // Submit the form
-                    $.ajax({
-                        type: 'POST',
-                        url: '/subscribe',
-                        data: formData,
-                        dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            $('#successMessage').show();
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            // Handle error response if needed
-                        }
-                    });
-                }.bind(this)); // Explicitly bind the context to the promise callback
-            });
-        });
-    });
-</script>

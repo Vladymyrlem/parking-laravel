@@ -10,20 +10,41 @@
     use Illuminate\Notifications\Messages\MailMessage;
     use Illuminate\Queue\SerializesModels;
 
-    class ContactMail extends Mailable
+    class NewSubscriberNotification extends Mailable
     {
         use Queueable, SerializesModels;
-
-        public $contactFormData;
 
         /**
          * Create a new message instance.
          *
          * @return void
          */
-        public function __construct($contactFormData)
+        public $subscriptionFormData;
+
+        /**
+         * Create a new message instance.
+         *
+         * @return void
+         */
+        public function __construct($subscriptionFormData)
         {
-            $this->contactFormData = $contactFormData;
+            $this->subscriptionFormData = $subscriptionFormData;
+        }
+
+//        public function build()
+//        {
+//            return $this->from($this->subscriptionFormData['email'])
+//                ->subject('Contact Form Submission')
+//                ->view('email.subscription');
+//        }
+
+        public function toMail($notifiable)
+        {
+            return (new MailMessage)
+                ->subject('New Subscriber')
+                ->line('A new subscriber has signed up:')
+                ->line('Email: ' . $this->subscriptionFormData->email)
+                ->action('View Subscribers', url('/subscribers'));
         }
 
         /**
@@ -34,7 +55,7 @@
         public function envelope()
         {
             return new Envelope(
-                subject: 'Contact Mail',
+                subject: 'New Subscriber Notification',
             );
         }
 
@@ -46,7 +67,7 @@
         public function content()
         {
             return new Content(
-                view: 'email.contact',
+                view: 'email.subscription',
             );
         }
 
@@ -58,14 +79,5 @@
         public function attachments()
         {
             return [];
-        }
-
-        public function toMail($notifiable)
-        {
-            return (new MailMessage)
-                ->subject('New Subscriber')
-                ->line('A new subscriber has signed up:')
-                ->line('Email: ' . $this->contactFormData->contact_email)
-                ->action('View Subscribers', url('/send-contact'));
         }
     }

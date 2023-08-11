@@ -28,7 +28,6 @@
 
         public $fillable = [
             'id',
-            'start_date',
             'arrival',
             'departure',
             'number_days',

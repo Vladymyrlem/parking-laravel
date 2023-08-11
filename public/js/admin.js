@@ -193,22 +193,6 @@ jQuery(function () {
 
 $(document).ready(function () {
     // Get the blocked dates from PHP variable (passed from the controller)
-    var blockedDates = ['26-07-2023', '27-07-2023', '28-07-2023', '29-07-2023', '30-07-2023', '31-07-2023', '01-08-2023', '02-08-2023', '03-08-2023', '04-08-2023', '05-08-2023', '06-08-2023',];
-
-    // // Create the FullCalendar instance
-    // $('#calendar').Calendar({
-    //     // Configure your calendar options here
-    //     // ...
-    //     // Add a custom function to disable blocked dates
-    //     dayRender: function (date, cell) {
-    //         var formattedDate = date.format('DD-MM-YYYY');
-    //         if ($.inArray(formattedDate, blockedDates) !== -1) {
-    //             cell.css('background-color', 'gray'); // Customize the style for blocked dates
-    //             cell.css('pointer-events', 'none'); // Disable click events on blocked dates
-    //         }
-    //     },
-    //
-    // });
 
     // Function to initialize TinyMCE for the new editor
     function initializeTinyMCE(editorId) {

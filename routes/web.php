@@ -34,6 +34,7 @@
     Auth::routes();
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::post('/send-contact', [HomeController::class, 'sendContactUs'])->name('send-contact');
 
     Route::middleware('auth')->group(function () {
         Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
@@ -50,7 +51,6 @@
         Route::delete('/admin/prices/{price_id}', [PricesController::class, 'destroyPrices']);
         Route::post('/admin/reservations', [AdminController::class, 'reservations']);
         Route::post('/save-reservations', [ReservationController::class, 'saveReservations'])->name('save-reservations');
-        Route::post('/send-contact', [HomeController::class, 'sendContactUs'])->name('send-contact');
 
         Route::post('/submit-order', [ParkingController::class, 'storeParking']);
         Route::post('/submit-order/{order_id}', [ParkingController::class, 'showParking']);
@@ -146,5 +146,7 @@
         Route::post('/admin/blocked-dates', [AdminController::class, 'calendarDate']);
         Route::post('/admin/store-all-dates', [AdminController::class, 'storeAllDates']);
         Route::delete('/admin/delete-by-date', [AdminController::class, 'deleteByDate']);
+
+        Route::get('/admin/get-updated-dates-list', [AdminController::class, 'getUpdatedDatesList']);
 
     });

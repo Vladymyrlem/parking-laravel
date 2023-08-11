@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">--}}
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">--}}
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
 {{--    {!! RecaptchaV3::initJs() !!}--}}
@@ -52,7 +54,6 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        // Get all ol elements with class 'days'
         jQuery("#headblockCarousel").slick({
             dots: true,
             infinite: false,
@@ -74,6 +75,16 @@
     });
 
 </script>
+@if(isset($blockedDates))
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            let data = <?php echo json_encode($blockedDates); ?>;
+            console.log(data);
+        });
+
+    </script>
+@endif
 <script src="{{ asset('js/wow.min.js') }}"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
 {{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
@@ -83,7 +94,65 @@
 <script src="{{ asset('js/calendar.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    $(document).ready(function () {
+        // Submit the form using Ajax
+        $('#newsletter_submit_btn').click(function (event) {
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            const formData = {
+                email: $('input#newsletter_email').val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/subscribe',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log(formData);
+                    $('#successMessage').show();
+                },
+                error: function (error) {
+                    console.log(error);
+                    // Handle error response if needed
+                }
+            });
+            // Get the reCAPTCHA response
+            {{--grecaptcha.ready(function () {--}}
+            {{--    grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {--}}
+            {{--        // Add the CSRF token and reCAPTCHA response to form data--}}
+            {{--        const formData = new FormData(form); // Use the stored reference to the form element--}}
+            {{--        formData.append('_token', '{{ csrf_token() }}');--}}
+            {{--        formData.append('g-recaptcha-response', token);--}}
 
+            {{--        // Submit the form--}}
+            {{--        $.ajax({--}}
+            {{--            type: 'POST',--}}
+            {{--            url: '/subscribe',--}}
+            {{--            data: formData,--}}
+            {{--            dataType: 'json',--}}
+            {{--            contentType: false,--}}
+            {{--            processData: false,--}}
+            {{--            success: function (response) {--}}
+            {{--                $('#successMessage').show();--}}
+            {{--            },--}}
+            {{--            error: function (error) {--}}
+            {{--                console.log(error);--}}
+            {{--                // Handle error response if needed--}}
+            {{--            }--}}
+            {{--        });--}}
+            {{--    }.bind(this)); // Explicitly bind the context to the promise callback--}}
+            {{--});--}}
+        });
+    });
+</script>
 <script>
     $(document).ready(function () {
 

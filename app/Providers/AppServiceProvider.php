@@ -32,6 +32,10 @@
                 $arrayData = Reservation::all('new_date');
                 $view->with('arrayData', $arrayData);
             });
+            View::composer('layouts.master', function ($view) {
+                $blockedDates = Reservation::all('new_date');
+                $view->with('blockedDates', $blockedDates);
+            });
             Blade::directive('getIconSVG', function ($expression) {
                 return "<?php echo App\Helpers\getIconSVG$expression; ?>";
             });
