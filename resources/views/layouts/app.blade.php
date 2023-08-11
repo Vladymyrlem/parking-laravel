@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
 
     @yield('styles')
     <style>
@@ -186,7 +187,170 @@ position: relative;" aria-hidden="true">
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function dateSort(a, b) {
+        var aDate = new Date(a);
+        var bDate = new Date(b);
+        return aDate - bDate;
+    }
+
+    $('#parkingTable').bootstrapTable({
+        height: 550,
+        locale: 'pl',
+        toolbar: '.toolbar'
+    });
+    $('#sortByToday').on('click', function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            arrival: new Date().toISOString().split('T')[0]
+        });
+    });
+    $('#resetFilters').on('click', function () {
+        $('#parkingTable').bootstrapTable('destroy');
+        $('#parkingTable').bootstrapTable({
+            toolbar: '#customToolbar'
+        });
+    });
+    var $table = $('#table')
+    var $remove = $('#remove')
+    var selections = []
+
+    function getIdSelections() {
+        return $.map($table.bootstrapTable('getSelections'), function (row) {
+            return row.id
+        })
+    }
+
+    function responseHandler(res) {
+        $.each(res.rows, function (i, row) {
+            row.state = $.inArray(row.id, selections) !== -1
+        })
+        return res
+    }
+
+    function detailFormatter(index, row) {
+        var html = []
+        $.each(row, function (key, value) {
+            html.push('<p><b>' + key + ':</b> ' + value + '</p>')
+        })
+        return html.join('')
+    }
+
+    function operateFormatter(value, row, index) {
+        return [
+            '<a class="remove" href="javascript:void(0)" title="Remove">',
+            '<i class="fa fa-trash"></i>',
+            '</a>'
+        ].join('')
+    }
+
+    window.operateEvents = {
+        'click .like': function (e, value, row, index) {
+            alert('You click like action, row: ' + JSON.stringify(row))
+        },
+        'click .remove': function (e, value, row, index) {
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: [row.id]
+            })
+        }
+    }
+
+    function totalTextFormatter(data) {
+        return 'Total'
+    }
+
+    function totalNameFormatter(data) {
+        return data.length
+    }
+
+    function totalPriceFormatter(data) {
+        var field = this.field
+        return '$' + data.map(function (row) {
+            return +row[field].substring(1)
+        }).reduce(function (sum, i) {
+            return sum + i
+        }, 0)
+    }
+
+    function initTable() {
+        $table.bootstrapTable('destroy').bootstrapTable({
+            height: 550,
+            locale: $('#locale').val(),
+            columns: [
+                [{
+                    field: 'arrival',
+                    checkbox: true,
+                    rowspan: 2,
+                    align: 'center',
+                    valign: 'middle'
+                }, {
+                    title: 'Item ID',
+                    field: 'id',
+                    rowspan: 2,
+                    align: 'center',
+                    valign: 'middle',
+                    sortable: true,
+                    footerFormatter: totalTextFormatter
+                }, {
+                    title: 'Item Detail',
+                    colspan: 3,
+                    align: 'center'
+                }],
+                [{
+                    field: 'name',
+                    title: 'Item Name',
+                    sortable: true,
+                    footerFormatter: totalNameFormatter,
+                    align: 'center'
+                }, {
+                    field: 'price',
+                    title: 'Item Price',
+                    sortable: true,
+                    align: 'center',
+                    footerFormatter: totalPriceFormatter
+                }, {
+                    field: 'client_name',
+                    title: 'Item Operate',
+                    align: 'center',
+                    clickToSelect: false,
+                    events: window.operateEvents,
+                    formatter: operateFormatter
+                }]
+            ]
+        })
+        $table.on('check.bs.table uncheck.bs.table ' +
+            'check-all.bs.table uncheck-all.bs.table',
+            function () {
+                $remove.prop('disabled', !$table.bootstrapTable('getSelections').length)
+
+                // save your data, here just save the current page
+                selections = getIdSelections()
+                // push or splice the selections if you want to save all data selections
+            })
+        $table.on('all.bs.table', function (e, name, args) {
+            console.log(name, args)
+        })
+        $remove.click(function () {
+            var ids = getIdSelections()
+            $table.bootstrapTable('remove', {
+                field: 'id',
+                values: ids
+            })
+            $remove.prop('disabled', true)
+        })
+    }
+
+    $(function () {
+        initTable()
+
+        $('#locale').change(initTable)
+    })
+</script>
 <script>
     // Check if both checkbox and CAPTCHA are validated
     // function checkValidation() {

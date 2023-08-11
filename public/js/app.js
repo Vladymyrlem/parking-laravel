@@ -195,23 +195,21 @@ jQuery(function () {
       }
     });
   });
-  $(document).ready(function () {
-    $('#orderForm input').keyup(function () {
-      var emptyFields = false;
-      $('#orderForm input').each(function () {
-        if ($(this).val() === '') {
-          emptyFields = true;
-          $(this).addClass('error-border');
-        } else {
-          $(this).removeClass('error-border');
-        }
-      });
-      if (emptyFields) {
-        $('#order_submit_btn').prop('disabled', true);
+  $('#orderForm input').keyup(function () {
+    var emptyFields = false;
+    $('#orderForm input').each(function () {
+      if ($(this).val() === '') {
+        emptyFields = true;
+        $(this).addClass('error-border');
       } else {
-        $('#order_submit_btn').prop('disabled', false);
+        $(this).removeClass('error-border');
       }
     });
+    if (emptyFields) {
+      $('#order_submit_btn').prop('disabled', true);
+    } else {
+      $('#order_submit_btn').prop('disabled', false);
+    }
   });
   $('#form_contact').on('submit', function (e) {
     e.preventDefault();
@@ -222,24 +220,23 @@ jQuery(function () {
     });
 
     // Create the data object to send in the AJAX request
-    // const data = {
-    //     // '_token': token,
-    //     // Include other form data as needed
-    //     contact_first_name: $('input#contact_firstname').val(),
-    //     contact_last_name: $('input#contact_lastname').val(),
-    //     contact_phone: $('input#contact_phone').val(),
-    //     contact_email: $('#contact_email').val(),
-    //     contact_message: $('textarea#contact_message').val(),
-    // };
+    var formData = {
+      // '_token': token,
+      // Include other form data as needed
+      contact_first_name: $('input#contact_firstname').val(),
+      contact_last_name: $('input#contact_lastname').val(),
+      contact_phone: $('input#contact_phone').val(),
+      contact_email: $('#contact_email').val(),
+      contact_message: $('textarea#contact_message').val()
+    };
     // console.log(data);
     $.ajax({
       type: 'POST',
       url: '/send-contact',
-      data: $(this).serialize(),
+      data: formData,
       success: function success(response) {
         console.log(response.message);
-        console.log($(this).serialize());
-
+        console.log(formData);
         // Display success message or perform other actions
       },
 
@@ -327,6 +324,14 @@ $(document).ready(function () {
       $('#submitButton').prop('disabled', false); // Enable the submit button
     } else {
       $('#submitButton').prop('disabled', true); // Disable the submit button
+    }
+  });
+
+  $('#agree').change(function () {
+    if ($(this).is(':checked')) {
+      $('#newsletter_submit_btn').prop('disabled', false); // Enable the submit button
+    } else {
+      $('#newsletter_submit_btn').prop('disabled', true); // Disable the submit button
     }
   });
 });

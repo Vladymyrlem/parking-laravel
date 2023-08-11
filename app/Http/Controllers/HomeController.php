@@ -62,11 +62,11 @@
         public function sendContactUs(Request $request)
         {
             $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
-//            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
-            Mail::raw('Test email', function ($message) {
-                $message->to('vovangud@gmail.com');
-                $message->subject('Test Subject');
-            });
+            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
+//            Mail::raw('Test email', function ($message) {
+//                $message->to('vovangud@gmail.com');
+//                $message->subject('Test Subject');
+//            });
 
             // Return the total price as a JSON response (optional)
             return response()->json(['message' => 'Message sent successfully']);
