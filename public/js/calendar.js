@@ -237,21 +237,6 @@ class DatesList {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     // HELPERS
     compareDate = function (date) {
         const d = date.new_date.split('/');

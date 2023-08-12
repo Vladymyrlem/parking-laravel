@@ -345,18 +345,17 @@ position: relative;" aria-hidden="true">
         window.filterDatesFromToday = function( dates ) {
             const today = new Date().setHours(0,0,0,0);
 
-            const filteredDates = dates
-                .filter( dateStr => {
+            return dates
+                .filter(dateStr => {
                     const [day, month, year] = dateStr.new_date.split('/');
                     const date = new Date(`${year}-${month}-${day}`);
                     return date >= today - 1;
                 })
-                .sort( ( a, b ) => {
-                    var dateA = new Date( a.new_date.split('/').reverse().join('/') );
-                    var dateB = new Date( b.new_date.split('/').reverse().join('/') );
+                .sort((a, b) => {
+                    var dateA = new Date(a.new_date.split('/').reverse().join('/'));
+                    var dateB = new Date(b.new_date.split('/').reverse().join('/'));
                     return dateA - dateB;
                 });
-            return filteredDates;
         }
 
         window.fData = filterDatesFromToday( <?php echo json_encode($arrayData); ?> );

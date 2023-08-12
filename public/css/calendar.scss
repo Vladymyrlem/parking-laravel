@@ -32,205 +32,222 @@ section.calendar {
         flex-direction: column;
     }
 
+}
 
-    // TABLE //
-    .calendar__add_date_select,
-    .calendar__main_calendar {
+// Calendars //
+.wrapper_start_calendar,
+.wrapper_end_calendar,
+.calendar__add_date_select,
+.calendar__main_calendar {
 
-        table {
-            margin: 0 auto;
+    table {
+        margin: 0 auto;
 
-            -webkit-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
 
-            .jsCalendar-title-name span {
-                font-weight: bold;
-            }
+        .jsCalendar-title-name span {
+            font-weight: bold;
+        }
 
-            thead {
-                .jsCalendar-week-days {
-                    text-transform: uppercase;
+        thead {
+            .jsCalendar-week-days {
+                text-transform: uppercase;
 
-                    .weekend {
-                        color: #c32525;
-                    }
+                .weekend {
+                    color: #c32525;
                 }
             }
+        }
+
+        td {
+            cursor: pointer;
+        }
+
+        tbody {
 
             td {
-                cursor: pointer;
-            }
+                &.disabled {
+                    color: #fff !important;
+                    background: #FF4C4C;
+                    cursor: auto;
+                }
+                &.weekend {
+                    font-weight: bold;
+                    color: #c32525;
+                }
 
-            tbody {
-
-                td {
+                &.jsCalendar-next,
+                &.jsCalendar-previous {
                     &.disabled {
                         color: #fff !important;
-                        background: #FF4C4C;
-                        cursor: auto;
+                        background: #EEB1B1;
                     }
                     &.weekend {
-                        font-weight: bold;
-                        color: #c32525;
+                        color: #ffc3c3;
                     }
+                }
 
-                    &.jsCalendar-next,
-                    &.jsCalendar-previous {
-                        &.disabled {
-                            color: #fff !important;
-                            background: #EEB1B1;
-                        }
-                        &.weekend {
-                            color: #ffc3c3;
-                        }
-                    }
-
-                    &.select {
-                        background: #9CDFFF;
-                    }
+                &.select {
+                    background: #9CDFFF;
                 }
             }
         }
     }
+}
 
-    .calendar__add_date_select {
+// Front Calendars
+.wrapper_front_calendar {
+    display: block;
+    position: absolute;
+    top: -4px;
+    left: 220px;
+    width: 300px;
+    height: 300px;
+    z-index: 100;
+
+    &.hide {
+        display: none;
+    }
+}
+
+.calendar__add_date_select {
+    padding: 10px;
+    overflow: hidden;
+    transition: height 10s ease-in-out;
+
+    &.collapse_calendar {
+        animation: collapseCalendar .3s ease-in-out;
+        animation-fill-mode: forwards;
+    }
+    &.expand_calendar {
+        animation: expandCalendar .3s ease-in-out;
+        animation-fill-mode: forwards;
+    }
+}
+
+@keyframes collapseCalendar {
+    0% {
+        height: 334px;
         padding: 10px;
-        overflow: hidden;
-        transition: height 10s ease-in-out;
-
-        &.collapse_calendar {
-            animation: collapseCalendar .3s ease-in-out;
-            animation-fill-mode: forwards;
-        }
-        &.expand_calendar {
-            animation: expandCalendar .3s ease-in-out;
-            animation-fill-mode: forwards;
-        }
     }
 
-    @keyframes collapseCalendar {
-        0% {
-            height: 334px;
-            padding: 10px;
-        }
+    100% {
+        height: 0;
+        padding: 0;
+    }
+}
 
-        100% {
-            height: 0;
-            padding: 0;
-        }
+@keyframes expandCalendar {
+    0% {
+        height: 0;
+        padding: 0;
     }
 
-    @keyframes expandCalendar {
-        0% {
-            height: 0;
-            padding: 0;
-        }
+    100% {
+        height: 334px;
+        padding: 10px;
+    }
+}
 
-        100% {
-            height: 334px;
-            padding: 10px;
-        }
+.calendar__add_date_preloader {
+    &.hidden {
+        display: none;
     }
 
-    .calendar__add_date_preloader {
-        &.hidden {
-            display: none;
-        }
+    display: inline-block;
+    position: absolute;
+    top: -6px;
+    left: -6px;
+    width: 40px;
+    height: 40px;
 
-        display: inline-block;
+    div {
+        --curren-color: #FF4C4C;
+
+        box-sizing: border-box;
+        display: block;
         position: absolute;
-        top: -6px;
-        left: -6px;
         width: 40px;
         height: 40px;
+        border: 5px solid var(--curren-color);
+        border-radius: 50%;
+        animation: anim_preloader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+        border-color: var(--curren-color) transparent transparent transparent;
 
-        div {
-            --curren-color: #FF4C4C;
+        &:nth-child(1) {
+            animation-delay: -0.45s;
+        }
+        &:nth-child(2) {
+            animation-delay: -0.3s;
+        }
+        &:nth-child(3) {
+            animation-delay: -0.15s;
+        }
+        &:nth-child(4) {
+            animation-delay: -0.45s;
+        }
+    }
+}
 
-            box-sizing: border-box;
-            display: block;
-            position: absolute;
-            width: 40px;
-            height: 40px;
-            border: 5px solid var(--curren-color);
-            border-radius: 50%;
-            animation: anim_preloader 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-            border-color: var(--curren-color) transparent transparent transparent;
+@keyframes anim_preloader {
+    0% {
+        transform: rotate(0deg);
+    }
 
-            &:nth-child(1) {
-                animation-delay: -0.45s;
-            }
-            &:nth-child(2) {
-                animation-delay: -0.3s;
-            }
-            &:nth-child(3) {
-                animation-delay: -0.15s;
-            }
-            &:nth-child(4) {
-                animation-delay: -0.45s;
-            }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.calendar__date_list_wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .calendar__date_list {
+        list-style: none;
+        padding: 0;
+
+    }
+
+    .calendar__add_date_w {
+        width: 100%;
+    }
+
+    .calendar__add_date_list {
+        margin-bottom: 30px;
+    }
+
+    .calendar__add_date_item {
+        list-style: none;
+
+        &:not(:last-child) {
+            margin-bottom: 20px;
         }
     }
 
-    @keyframes anim_preloader {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
+    .calendar__add_date_label {
+        position: relative;
+        display: block;
+        width: 100%;
+        margin-bottom: 0;
     }
 
-    .calendar__date_list_wrapper {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
+    .calendar__add_date_input {
+        display: block;
+        width: 100%;
+    }
 
-        .calendar__date_list {
-            list-style: none;
-            padding: 0;
+    .calendar__add_date_btn_w {
+        width: 100%;
 
-        }
-
-        .calendar__add_date_w {
-            width: 100%;
-        }
-
-        .calendar__add_date_list {
-            margin-bottom: 30px;
-        }
-
-        .calendar__add_date_item {
-            list-style: none;
-
-            &:not(:last-child) {
-                margin-bottom: 20px;
-            }
-        }
-
-        .calendar__add_date_label {
-            position: relative;
-            display: block;
-            width: 100%;
-            margin-bottom: 0;
-        }
-
-        .calendar__add_date_input {
-            display: block;
-            width: 100%;
-        }
-
-        .calendar__add_date_btn_w {
-            width: 100%;
-
-            .calendar__add_date_btn {
-                display: flex;
-                margin: 0 auto;
-                padding: 5px 10px;
-                cursor: pointer;
-            }
+        .calendar__add_date_btn {
+            display: flex;
+            margin: 0 auto;
+            padding: 5px 10px;
+            cursor: pointer;
         }
     }
 }

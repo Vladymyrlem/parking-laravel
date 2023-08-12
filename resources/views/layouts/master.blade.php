@@ -76,11 +76,70 @@
 
 </script>
 @if(isset($blockedDates))
-
+    {{-- Calendar --}}
     <script type="text/javascript">
         $(document).ready(function () {
-            let data = <?php echo json_encode($blockedDates); ?>;
-            console.log(data);
+            window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
+
+            [
+                '#order_pick_up_date',
+                '#order_drop_off_date'
+            ]
+            .forEach( ( input, i ) => {
+                const $input = document.querySelector( input );
+                if ( $input ) {
+                    const wrapperCalendar = document.createElement( 'div' );
+                    const classLst = [ 'wrapper_front_calendar', `wrapper_calendar_${i}`, 'hide' ];
+                    classLst.forEach( clss => wrapperCalendar.classList.add( clss ) );
+                    $input.after( wrapperCalendar );
+
+                    window[`calendarSelectDate_${i}`] = new CalendarIk({
+                        dates: window.$blockedDates,
+                        calendarWrapperClass: `.${classLst[1]}`,
+                    });
+
+                    $input.addEventListener( 'click', e => {
+                        e.preventDefault();
+                        const calendarWrapper = e.target.nextElementSibling;
+                        document.querySelectorAll( '.wrapper_front_calendar' )
+                            .forEach( elem => elem.classList.add( 'hide' ) )
+
+                        calendarWrapper.classList.remove( 'hide' );
+                    })
+                }
+            })
+
+            // hide Calendars
+            ;(() => {
+                document.addEventListener('click', event => {
+                    if ( ! event.target.closest( '.wrapper_front_calendar' )
+                        &&
+                        ! event.target.closest( '#order_pick_up_date' )
+                        &&
+                        ! event.target.closest( '#order_drop_off_date' )
+                    ) {
+                        document.querySelectorAll( '.wrapper_front_calendar' )
+                            .forEach( elem => elem.classList.add( 'hide' ) )
+                    }
+                })
+            })();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         });
 
     </script>
@@ -91,7 +150,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/calendar.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/calendar.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -116,7 +177,7 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log(formData);
+                    // console.log(formData);
                     $('#successMessage').show();
                 },
                 error: function (error) {
@@ -293,18 +354,6 @@
         //     fetchReservedDates(); // Fetch the reserved dates from the backend and add the calendar
         // });
     });
-</script>
-<script>
-    {{--  Calendar  --}}
-    {{--    @if( null !== blockedDates )--}}
-    {{--    let data = <?php echo json_encode( blockedDates ); ?>;--}}
-    {{--    console.log( 'Data: ', data )--}}
-    {{--    @endif--}}
-
-
-
-
-
 </script>
 </body>
 </html>
