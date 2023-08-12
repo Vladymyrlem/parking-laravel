@@ -6,6 +6,7 @@
     use App\Models\Contacts;
     use App\Models\HeadBlock;
     use App\Models\Information;
+    use App\Models\Parking;
     use App\Models\Price;
     use App\Models\Reservation;
     use App\Models\Reviews;
@@ -72,4 +73,6 @@
             return response()->json(['message' => 'Message sent successfully']);
 
         }
+
+
     }

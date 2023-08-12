@@ -42,7 +42,7 @@
         /**
          * Show the application dashboard.
          *
-         * @return \Illuminate\Http\JsonResponse
+         * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Foundation\Application|\Illuminate\Http\Response|\Illuminate\View\View
          * @throws Exception
          */
         public function index()
@@ -61,17 +61,6 @@
             $about_us_title = DB::table('about_us')->value('title');;
             $about_us_content = DB::table('about_us')->value('content');
             $parkings = Parking::all();
-//            if (request()->ajax()) {
-//                return datatables()->of(Services::latest()->get())
-//                    ->addColumn('action', function ($data) {
-//                        $button = '<button type="button" name="edit" id="' . $data->id . '" class="edit btn btn-primary btn-sm">Edit</button>';
-//                        $button .= '&nbsp;&nbsp;';
-//                        $button .= '<button type="button" name="delete" id="' . $data->id . '" class="delete btn btn-danger btn-sm">Delete</button>';
-//                        return $button;
-//                    })
-//                    ->rawColumns(['action'])
-//                    ->make(true);
-//            }
             return view('admin', compact('prices', 'headBlocks', 'information', 'reviews', 'contacts',
                 'section_title', 'reservations', 'services', 'newsletter', 'text_content', 'about_us', 'about_us_title', 'about_us_content', 'parkings'));
         }
@@ -99,7 +88,7 @@
          *
          * @param \Illuminate\Http\Request $request
          * @param int $id
-         * @return \Illuminate\Http\Response
+         * @return \Illuminate\Http\JsonResponse
          */
         public function updateHeaderBlock(Request $request, $headblock_id)
         {
@@ -146,15 +135,7 @@
             // For simplicity, I'll use the `mail()` function.
             Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new NewSubscriberNotification($request->email));
             // Save the email to a text file
-//            $this->saveToTextFile($email);
-
             return response()->json(['message' => 'You have been subscribed successfully!']);
-        }
-
-        private function saveToTextFile($email)
-        {
-            $filename = public_path('subscribers.txt');
-            file_put_contents($filename, $email . PHP_EOL, FILE_APPEND);
         }
 
         public function reservations()
@@ -169,24 +150,6 @@
             $blockedDatesJson = json_encode($blockedDates);
             return view('admin', compact('blockedDatesJson'));
         }
-
-        /*Reviews collection methods*/
-        public function getReservationDates()
-        {
-            try {
-                // Fetch data from the database or perform other operations
-
-                // Example of returning data as JSON
-                $reviews = Reservation::all('new_date');
-//                $reviews = Reservation::all('new_date')->map(function ($reservation) {
-//                    return date('Y/m/d', strtotime($reservation->new_date));
-//                });
-                return response()->json($reviews);
-            } catch (\Exception $e) {
-                return response()->json(['error' => 'Failed to retrieve reviews'], 500);
-            }
-        }
-
 
         public function uploadImage(Request $request)
         {

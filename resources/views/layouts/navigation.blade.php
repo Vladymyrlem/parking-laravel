@@ -9,13 +9,17 @@
     <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
 position: relative;" aria-hidden="true">
         <ul>
-            <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>
-            <li class="menu-item"><a class="nav-link scroll-to" href="#aboutus" data-scroll>O Nas</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
             <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
-            <li class="menu-item"><a class="nav-link scroll-to" href="#gallery" data-scroll>Galeria</a></li>
-            <li class="menu-item"><a class="nav-link scroll-to" href="#locations" data-scroll>Dojazrd</a></li>
-            <li class="menu-item"><a class="nav-link scroll-to" href="#contacts-section" data-scroll>Kontakt</a></li>
-            <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Services</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Text Content</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Calendar</a></li>
         </ul>
     </nav>
     <!-- Sidebar Menu -->
