@@ -396,225 +396,129 @@ position: relative;" aria-hidden="true">
     });
 </script>
 @if(isset($arrayData))
-    <script>
-        jQuery(function ($) {
-            var url = $('#url').val();
+@endif
+<script>
+    jQuery(function ($) {
+        const url = $('#url').val();
 
-            let data = <?php echo json_encode($arrayData); ?>;
+        window.filterDatesFromToday = function( dates ) {
+            const today = new Date().setHours(0,0,0,0);
 
-            const calendar1 = new CalendarIk({
-                dates: data,
-                calendarWrapperClass: '.calendar__main_calendar',
-            });
-
-            const datesList = new DatesList({
-                dates: data,
-                calendar: calendar1.calendar,
-                dateListClass: 'calendar__date_list',
-            });
-
-            // Function ONClick Date Calendar
-            function onDateClick(calendarBox, inputSelector, calendSelector) {
-
-                const dates = document.querySelectorAll(calendSelector + ' .calendar_date');
-
-                dates.forEach(date => {
-                    if (!date.classList.contains('disabled')) {
-
-                        date.addEventListener('click', event => {
-                            dates.forEach(d => d.classList.remove('select'));
-                            date.classList.add('select');
-
-                            const $input = document.querySelector(inputSelector);
-                            if ($input) {
-                                $input.value = date.dataset.calendarDate;
-                            }
-
-                            toggleClassList(calendarBox);
-                        })
-                    }
-                });
-
-            }
-
-            /*
-             * REPEAT INPUT
-             */
-            // an array of inputs for selecting new dates that need to be blocked
-            const calendarsBox = [];
-            let itemCount = 0;
-
-            const toggleClassList = (elem, collapse = true) => {
-                if (collapse) {
-                    elem.classList.add('collapse_calendar');
-                    elem.classList.remove('expand_calendar');
-                } else {
-                    elem.classList.add('expand_calendar');
-                    elem.classList.remove('collapse_calendar');
-                }
-            }
-
-            /*
-             * CREATE ITEMS INPUTS
-             */
-            const buttonAddNewDate = document.querySelector('.calendar__add_date_btn');
-            buttonAddNewDate.addEventListener('click', e => {
-                e.preventDefault();
-                itemCount++;
-
-                const template = `<label class="calendar__add_date_label" data-add_date_id="${itemCount}">
-                <input class="calendar__add_date_input inpt_trgt_ind_${itemCount}" name="field_date_${itemCount}" type="text" placeholder="wybierz datę...">
-                <div class="calendar__add_date_preloader hidden"><div></div><div></div><div></div><div></div></div>
-            </label>
-            <div class="calendar__add_date_select calendar_box_${itemCount}"></div>`;
-
-                const item = document.createElement('LI');
-                item.classList.add('calendar__add_date_item');
-                item.innerHTML = template;
-
-                const inputsList = document.querySelector('.calendar__add_date_list');
-                inputsList.append(item);
-
-                item.querySelector('input').addEventListener('focus', createCalendar.bind(this, data), {once: true});
-                item.querySelector('input').addEventListener('focus', showCalendar);
-            })
-
-            const createCalendar = (data, event) => {
-                event.preventDefault();
-                const calendarBox = event.target.parentElement.nextElementSibling;
-                calendarsBox.push(calendarBox);
-                const value = event.target.value;
-
-                toggleClassList(calendarBox, false);
-
-                const calend = new CalendarIk({
-                    dates: data,
-                    calendarWrapperClass: '.' + calendarBox.classList[1],
-                });
-                onDateClick(calendarBox, '.' + event.target.classList[1], '.' + calendarBox.classList[1]);
-            }
-
-            // hide Calendars
-            (() => {
-                document.addEventListener('click', event => {
-                    if (!(event.target.closest('.calendar__add_date_item'))) {
-                        while (calendarsBox.length) {
-                            toggleClassList(calendarsBox.pop());
-                        }
-                    }
+            const filteredDates = dates
+                .filter( dateStr => {
+                    const [day, month, year] = dateStr.new_date.split('/');
+                    const date = new Date(`${year}-${month}-${day}`);
+                    return date >= today - 1;
                 })
-            })()
+                .sort( ( a, b ) => {
+                    var dateA = new Date( a.new_date.split('/').reverse().join('/') );
+                    var dateB = new Date( b.new_date.split('/').reverse().join('/') );
+                    return dateA - dateB;
+                });
+            return filteredDates;
+        }
 
-            const showCalendar = event => {
-                const calendarBox = event.target.parentElement.nextElementSibling;
-                calendarsBox.push(calendarBox);
-                toggleClassList(calendarBox, false);
-            }
+        window.fData = filterDatesFromToday( <?php echo json_encode($arrayData); ?> );
+
+        window.calendarMain = new CalendarIk({
+            dates: window.fData,
+            calendarWrapperClass: '.calendar__main_calendar',
+        });
+
+        window.datesList = new DatesList({
+            dates: window.fData,
+            calendar: window.calendarMain.calendar,
+            dateListClass: 'calendar__date_list',
+        });
 
 
-            /*
-             * SAVE DATES
-             */
-            const submitButton = document.querySelector('.js_btn_submit');
-            submitButton.addEventListener('click', event => {
-                event.preventDefault();
+        /*
+         * SAVE DATES
+         */
+        const submitButton = document.querySelector('.js_btn_submit');
+        submitButton.addEventListener('click', event => {
+            event.preventDefault();
 
-                const items = document.querySelectorAll('.calendar__add_date_item');
-                const selectedDates = {}; // Initialize the selectedDates object
+            const items = document.querySelectorAll('.calendar__add_date_item');
+            const selectedDates = {}; // Initialize the selectedDates object
 
-                items.forEach(item => {
-                    const input = item.querySelector('input');
-                    const value = input?.value;
+            items.forEach(item => {
+                const input = item.querySelector('input');
+                const value = input?.value;
 
-                    if (!value) return;
+                if (!value) return;
 
-                    const key = input.getAttribute('name').substr(11); // Extract the key
-                    selectedDates[key] = value; // Add key-value pair to selectedDates object
+                const key = input.getAttribute('name').substr(11); // Extract the key
+                selectedDates[key] = value; // Add key-value pair to selectedDates object
 
-                    const new_date = {new_date: value};
+                const new_date = {new_date: value};
 
-                    $.ajaxSetup({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                        }
-                    });
-
-                    // SAVE
-                    $.ajax({
-                        type: 'POST',
-                        url: url + '/blocked-dates',
-                        data: new_date,
-                        success: function (response) {
-                            console.log(response);
-                            reloadDatesList();
-                            // location.reload();
-                            // Your success handling here
-                        },
-                        error: function (info) {
-                            console.log('Error:', info);
-                            // Your error handling here
-                        },
-                        beforeSend: function (a, b, c) {
-                            input.nextElementSibling.classList.remove('hidden');
-                        },
-                        complete: function () {
-                            input.nextElementSibling.classList.add('hidden');
-                        },
-                    });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
                 });
 
-                // Perform a final AJAX request to send the entire selectedDates object
+                // SAVE
                 $.ajax({
                     type: 'POST',
-                    url: url + '/store-all-dates', // Replace with the appropriate URL
-                    data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
+                    url: url + '/blocked-dates',
+                    data: new_date,
                     success: function (response) {
-                        console.log('All dates stored successfully:', response);
                         reloadDatesList();
-                        // location.reload();
-                        // Any additional handling after storing all dates
                     },
                     error: function (info) {
-                        console.log('Error storing all dates:', info);
-                        // Error handling for storing all dates
+                        console.log('Error:', info);
+                    },
+                    beforeSend: function (a, b, c) {
+                        input.nextElementSibling.classList.remove('hidden');
+                    },
+                    complete: function () {
+                        input.nextElementSibling.classList.add('hidden');
                     },
                 });
             });
-// Get the ul element containing the list items
-            var ulElement = document.querySelector('.js_list_blocked_dates');
 
-// Convert list items to an array for sorting
-            var listItems = Array.from(ulElement.querySelectorAll('li'));
-
-// Sort list items based on the date value (assumes date format is "DD/MM/YYYY")
-            listItems.sort(function (a, b) {
-                var dateA = new Date(a.querySelector('[name="blockedDate"]').value.split('/').reverse().join('/'));
-                var dateB = new Date(b.querySelector('[name="blockedDate"]').value.split('/').reverse().join('/'));
-                return dateA - dateB; // Sort in descending order
+            // Perform a final AJAX request to send the entire selectedDates object
+            $.ajax({
+                type: 'POST',
+                url: url + '/store-all-dates', // Replace with the appropriate URL
+                data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
+                success: function (response) {
+                    reloadDatesList();
+                },
+                error: function (info) {
+                    console.log('Error storing all dates:', info);
+                },
             });
-
-// Reorder the list items in the ul element
-            listItems.forEach(function (li) {
-                ulElement.appendChild(li);
-            });
+        });
 
 
-
-
-
-        }); // -- END JQUERY
-
-
-
-        var url = $('#url').val();
-
+        /*
+         * RELOAD DATES
+         */
         function reloadDatesList() {
+
             $.ajax({
                 type: 'GET',
-                url: url + '/get-updated-dates-list', // Adjust the URL to your route
+                url: url + '/get-updated-dates-list',
                 success: function (response) {
-                    // Replace the content of #datesListDiv with updated content
-                    $('.calendar__container').html(response);
+                    if ( response.success ) {
+
+                        window.fData = window.filterDatesFromToday( response.data.map( d => ({ new_date: d })) );
+
+                        window.calendarMain.dates = window.fData;
+                        window.calendarMain.calendar.refresh();
+
+                        Array.from( document.querySelectorAll( '.js_list_blocked_dates li' ) )
+                            .forEach( elem => elem.remove() );
+
+                        Array.from( document.querySelectorAll( '.calendar__add_date_list li' ) )
+                            .forEach( elem => elem.remove() );
+
+                        window.datesList.dates = window.fData;
+                        window.datesList.listDatesRender();
+                    }
                 },
                 error: function (error) {
                     console.error(error);
@@ -622,6 +526,10 @@ position: relative;" aria-hidden="true">
             });
         }
 
+
+        /*
+         * DELETE DATE
+         */
         $(document).on('submit', '.delete-form', function (event) {
 
             event.preventDefault(); // Prevent default form submission behavior
@@ -637,21 +545,16 @@ position: relative;" aria-hidden="true">
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
-                    console.log(response.message);
-                    // Perform any updates to the UI as needed
-                    // For example, remove the deleted <li> element
-                    console.log(response);
-                    $(form).closest('li').remove();
                     reloadDatesList();
-                    // location.reload();
                 },
                 error: function (error) {
                     console.error(error);
                 }
             });
         });
-    </script>
-@endif
+
+    });
+</script>
 
 </body>
 </html>
