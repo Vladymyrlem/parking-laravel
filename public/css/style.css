@@ -543,6 +543,16 @@ ul#countries.active {
     float: right;
     width: auto;
   }
+  header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .top-header {
+    display: none !important;
+  }
+  .header-block {
+    margin-top: 75px !important;
+  }
 }
 .nav-collapse li {
   float: left;
@@ -675,8 +685,34 @@ header.large .brand {
   max-width: 370px;
 }
 
-#header-block form {
+#header-block form#orderForm {
   padding: 20px;
+}
+#header-block form#form_checkout .checkout-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#header-block form#form_checkout .checkout-title h4 {
+  color: #3D405C;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
+}
+#header-block form#form_checkout .checkout-title svg {
+  margin-right: 7px;
+}
+#header-block form#form_checkout #checkout_price_desc {
+  color: var(--prime, #0074B7);
+  /* Body */
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 25.2px */
 }
 
 #header-block form .alert {
@@ -1015,6 +1051,17 @@ header.large .brand {
   color: #fff;
 }
 
+@media screen and (max-width: 900px) {
+  #checkoutModal .modal-dialog {
+    width: 100%;
+    max-width: 770px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #checkoutModal .modal-dialog {
+    max-width: calc(100vw - 40px);
+  }
+}
 /* Blog Section
 -------------------------------------*/
 .blog-posts {
@@ -1551,6 +1598,12 @@ header.large .brand {
   color: var(--black, #151616);
 }
 
+@media screen and (max-width: 1200px) {
+  .about-us {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
 /* Vehicles
 --------------------------------------------*/
 #prices {
@@ -1596,6 +1649,7 @@ h2.prices {
   font-style: normal;
   font-weight: 400;
   line-height: 110%;
+  margin-bottom: 0;
 }
 
 #prices .box {
@@ -1646,7 +1700,7 @@ h2.prices {
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  margin-bottom: 20px;
+  margin-bottom: 0;
 }
 
 #prices .box .box_content h4 {
@@ -2275,6 +2329,18 @@ h2.prices {
   overflow: hidden;
 }
 
+@media screen and (max-width: 1200px) {
+  #information .row {
+    flex-flow: row wrap !important;
+    margin-bottom: 60px;
+  }
+  #information .row .media-column p {
+    margin: 0 auto;
+  }
+  #information .row:last-child {
+    margin-bottom: 0;
+  }
+}
 /* Teaser
 -------------------------------------*/
 #header-block .reservation {
@@ -2285,8 +2351,34 @@ h2.prices {
   max-width: 370px;
 }
 
-#header-block form {
+#header-block form#orderForm {
   padding: 20px;
+}
+#header-block form#form_checkout .checkout-title {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+#header-block form#form_checkout .checkout-title h4 {
+  color: #3D405C;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
+}
+#header-block form#form_checkout .checkout-title svg {
+  margin-right: 7px;
+}
+#header-block form#form_checkout #checkout_price_desc {
+  color: var(--prime, #0074B7);
+  /* Body */
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 25.2px */
 }
 
 #header-block form .alert {
@@ -2625,6 +2717,17 @@ h2.prices {
   color: #fff;
 }
 
+@media screen and (max-width: 900px) {
+  #checkoutModal .modal-dialog {
+    width: 100%;
+    max-width: 770px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #checkoutModal .modal-dialog {
+    max-width: calc(100vw - 40px);
+  }
+}
 /* Partners
 --------------------------------------------*/
 #partners {
@@ -3251,7 +3354,8 @@ footer .footer-nav li a:hover {
 /* Checkout Modal
 --------------------------------------------*/
 #checkoutModal .modal-dialog {
-  width: 748px;
+  width: 770px;
+  max-width: 770px;
 }
 
 #checkoutModal .modal-content {
@@ -3270,6 +3374,16 @@ footer .footer-nav li a:hover {
   font-size: 24px;
   font-weight: 900;
   text-transform: uppercase;
+}
+
+#form_checkout label {
+  color: #3D405C;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
 }
 
 #checkoutModal .close {
@@ -3298,6 +3412,7 @@ footer .footer-nav li a:hover {
   font-weight: bold;
   margin-bottom: 25px;
   text-transform: uppercase;
+  padding-left: 20px;
 }
 
 #checkoutModal .checkout-info-box {
@@ -3308,6 +3423,11 @@ footer .footer-nav li a:hover {
 #checkoutModal .checkout-info-box h3 {
   margin: 0;
   margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+}
+#checkoutModal .checkout-info-box h3 svg {
+  margin-right: 10px;
 }
 
 #checkoutModal .checkout-info-box p {
@@ -3321,6 +3441,7 @@ footer .footer-nav li a:hover {
 #checkoutModal .checkout-info {
   margin-top: 30px;
   padding: 0 30px;
+  border-bottom: 2px solid var(--grey, #AFADAD);
 }
 
 #checkoutModal .checkout-info-left,
@@ -3348,11 +3469,6 @@ footer .footer-nav li a:hover {
   margin-bottom: 25px;
 }
 
-#checkoutModal .info-box .glyphicon {
-  float: left;
-  font-size: 17px;
-}
-
 #checkoutModal .info-box .info-box-title {
   color: #3D405C;
   font-family: Lato, sans-serif;
@@ -3364,17 +3480,23 @@ footer .footer-nav li a:hover {
 }
 
 #checkoutModal .info-box .info-box-description {
-  margin-left: 25px;
-  font-size: 14px;
+  margin-left: 31px;
+  color: #000;
+  /* Body */
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 25.2px */
 }
 
 #checkoutModal .checkout-personal-info {
-  padding: 0 30px;
+  padding: 30px 0 0 0;
 }
 
 #checkoutModal .checkout-personal-info .form-group {
   float: left;
-  width: 335px;
+  width: 48%;
   min-height: 70px;
 }
 
@@ -3434,6 +3556,7 @@ footer .footer-nav li a:hover {
   box-shadow: none;
   line-height: 45px;
   font-size: 18px;
+  padding: 10px;
 }
 
 #checkoutModal form input:focus {
@@ -3493,6 +3616,24 @@ form input[type=checkbox]:checked + label:before {
 #checkoutModal form .row {
   margin-left: 0;
   margin-right: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#checkoutModal form .row.approval_rodo_row {
+  padding-left: 0;
+  padding-right: 0;
+}
+#checkoutModal form .row.approval_rodo_row .approval_rodo {
+  background: #F3F3F8;
+}
+#checkoutModal form .row.approval_rodo_row .approval_rodo p {
+  color: #3D405C;
+  font-family: Lato, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 16.8px */
+  text-transform: capitalize;
 }
 
 .validation.error {
@@ -3649,6 +3790,9 @@ form .subtitle {
     font-size: 42px;
     margin: 0 0 20px 0;
   }
+  #services .service-box {
+    grid-template-rows: 40px auto;
+  }
   #services .service-box .service-icon {
     height: 38px;
     width: 38px;
@@ -3659,7 +3803,6 @@ form .subtitle {
   }
   #services .service-box .service-title {
     font-size: 24px;
-    padding-top: 6px;
   }
   #services .service-box .service-content {
     margin-top: 20px;
@@ -3950,7 +4093,6 @@ form .subtitle {
   /* CheckOut Modal
     --------------------------------------------*/
   #checkoutModal .checkout-info {
-    padding: 0 0 0 45px;
     float: none;
     width: 100%;
     max-width: 100%;
@@ -4098,6 +4240,9 @@ a:hover {
   border-radius: 0;
   margin-bottom: 40px;
   border: 5px solid #fff;
+}
+.alert.hidden {
+  display: none;
 }
 
 #contact .form-group_left {
@@ -4363,19 +4508,36 @@ p span.price {
 
 @media screen and (max-width: 1240px) {
   #gallery .gallery {
-    grid-template-columns: repeat(3, 1fr);
+    width: 100%;
+  }
+  #gallery .gallery img {
+    width: 100%;
+    height: 100%;
   }
   .container {
-    max-width: 1200px;
+    width: 100% !important;
+    max-width: 1200px !important;
   }
 }
 @media screen and (max-width: 1024px) {
   .container {
-    max-width: 990px;
+    max-width: 990px !important;
+  }
+  #gallery .gallery {
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 @media screen and (max-width: 768px) {
   .container {
-    max-width: 740px;
+    max-width: 740px !important;
+  }
+  #gallery .gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 20px;
+  }
+}
+@media screen and (max-width: 560px) {
+  #gallery .gallery {
+    grid-template-columns: 1fr;
   }
 }

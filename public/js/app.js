@@ -31,6 +31,27 @@ jQuery(function () {
       }
     });
   });
+  $('.wrapper_front_calendar.wrapper_calendar_0 .calendar_date').click(function () {
+    var selectedDate = $(this).data('calendar-date');
+    var formattedDate = formatDate(selectedDate); // Convert the date format
+    $('#order_pick_up_date').val(formattedDate);
+    $('.wrapper_front_calendar.wrapper_calendar_0').toggleClass('hide'); // Close the table (you might need a better selector)
+  });
+
+  $('.wrapper_front_calendar.wrapper_calendar_1 .calendar_date').click(function () {
+    var selectedDate = $(this).data('calendar-date');
+    var formattedDate = formatDate(selectedDate); // Convert the date format
+    $('#order_drop_off_date').val(formattedDate);
+    $('.wrapper_front_calendar.wrapper_calendar_1').toggleClass('hide'); // Close the table (you might need a better selector)
+  });
+
+  function formatDate(inputDate) {
+    var parts = inputDate.split('/');
+    var year = parts[2];
+    var month = parts[1];
+    var day = parts[0];
+    return year + '-' + month + '-' + day;
+  }
   jQuery('#orderForm').submit(function (e) {
     e.preventDefault(); // Prevent form submission
 
@@ -135,7 +156,7 @@ jQuery(function () {
       totalPrice = priceFor15Days + additionalPrice;
     }
     $('#checkout_price').val(totalPrice);
-    $('#checkout_price_desc').html(totalPrice);
+    $('#checkout_price_desc').html(totalPrice + 'PLN');
     // Show the modal
     $('#checkoutModal').modal('show');
   });
@@ -247,24 +268,27 @@ jQuery(function () {
     });
   });
 
-  var lastScrollTop = 0;
-  var headerHeight = $('.top-header').outerHeight();
-  $(window).scroll(function () {
-    var scrollTop = $(this).scrollTop();
+  var windowWidth = jQuery(window).width();
+  if (windowWidth > 1240) {
+    var lastScrollTop = 0;
+    var headerHeight = $('.top-header').outerHeight();
+    $(window).scroll(function () {
+      var scrollTop = $(this).scrollTop();
 
-    // Check if the user is scrolling down
-    if (scrollTop > lastScrollTop) {
-      $('.top-header').hide();
-      $('.logo img').css('width', '80%');
-    } else {
-      // Check if the user is back at the top
-      if (scrollTop <= headerHeight) {
-        $('.top-header').show();
-        $('.logo img').css('width', '100%');
+      // Check if the user is scrolling down
+      if (scrollTop > lastScrollTop) {
+        $('.top-header').hide();
+        $('.logo img').css('width', '80%');
+      } else {
+        // Check if the user is back at the top
+        if (scrollTop <= headerHeight) {
+          $('.top-header').show();
+          $('.logo img').css('width', '100%');
+        }
       }
-    }
-    lastScrollTop = scrollTop;
-  });
+      lastScrollTop = scrollTop;
+    });
+  }
   $(document).ready(function () {
     // Toggle the active class when clicking on a trigger element (e.g., a button or link)
     $('#language-switch-dropdown').click(function () {

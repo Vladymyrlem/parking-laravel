@@ -7,7 +7,7 @@
 
         <div class="row text-center">
             @foreach($prices as $price)
-                <div class="col-md-3 text-center box">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center box">
                     <div class="box_content">
                         <div class="top-price-box">
                             <h2>{{$price->count_days}}</h2>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             @endforeach
-            <div class="col-md-3 text-center box">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 m-md-auto text-center box">
                 <div class="box_content">
                     <div class="top-price-box">
                         <h2>&gt; 15 dni</h2>

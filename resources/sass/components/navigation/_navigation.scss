@@ -233,6 +233,16 @@ ul#countries {
         float: right;
         width: auto;
     }
+    header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .top-header {
+        display: none !important;
+    }
+    .header-block {
+        margin-top: 75px !important;
+    }
 }
 
 .nav-collapse li {

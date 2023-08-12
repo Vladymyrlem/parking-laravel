@@ -260,12 +260,12 @@ position: relative;" aria-hidden="true">
         });
         $(b2).click(function () {
             $(table).bootstrapTable('filterBy', {
-                departure: ['2023-08-11']
+                departure: [todayDate]
             });
         });
         $(b3).click(function () {
             $(table).bootstrapTable('filterBy', {
-                datah: ['2023-08-11']
+                datah: [todayDate]
             });
         });
         $(b4).click(function () {

@@ -7,7 +7,7 @@
 
         <div class="row text-center">
             <?php $__currentLoopData = $prices; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $price): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <div class="col-md-3 text-center box">
+                <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center box">
                     <div class="box_content">
                         <div class="top-price-box">
                             <h2><?php echo e($price->count_days); ?></h2>
@@ -25,7 +25,7 @@
                     </div>
                 </div>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-            <div class="col-md-3 text-center box">
+            <div class="col-12 col-md-6 col-lg-4 col-xl-3 m-md-auto text-center box">
                 <div class="box_content">
                     <div class="top-price-box">
                         <h2>&gt; 15 dni</h2>

@@ -115,3 +115,39 @@
 //    width: 100%;
 //    height: 100%;
 //}
+@media screen and (max-width: 1200px) {
+    #information .row {
+        flex-flow: row wrap !important;
+        margin-bottom: 60px;
+
+        .media-column {
+            p {
+                margin: 0 auto;
+            }
+        }
+    }
+    #information .row:last-child {
+        margin-bottom: 0;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+
+}
+
+@media screen and (max-width: 768px) {
+
+}
+
+@media screen and (max-width: 560px) {
+
+
+}
+
+@media screen and (max-width: 445px) {
+
+}
+
+@media screen and (max-width: 375px) {
+
+}
