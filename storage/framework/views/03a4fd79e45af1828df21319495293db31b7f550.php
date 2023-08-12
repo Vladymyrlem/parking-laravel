@@ -4,7 +4,7 @@
         <div class="form-group">
             <label for="inputName" class="col-sm-3 control-label">Count Days</label>
             <div class="col-sm-9">
-                <input type="number" name="count_days" id="count_days" class="form-controle" placeholder="Count Days">
+                <input type="number" name="count_days" id="count_days" class="form-control" placeholder="Count Days">
             </div>
         </div>
         <div class="form-group">

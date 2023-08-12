@@ -1040,8 +1040,11 @@ form .subtitle {
     #services .service-box .service-icon {
         height: 38px;
         width: 38px;
-        line-height: 37px;
-        font-size: 36px;
+
+        img {
+            width: 38px;
+            height: 38px;
+        }
     }
 
     #services .service-box .service-title {
@@ -1855,4 +1858,25 @@ p span.price {
     border-radius: 0;
     margin-bottom: 40px;
     border: 5px solid #fff;
+}
+
+@media screen and (max-width: 1240px) {
+    #gallery .gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    .container {
+        max-width: 1200px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .container {
+        max-width: 990px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        max-width: 740px;
+    }
 }

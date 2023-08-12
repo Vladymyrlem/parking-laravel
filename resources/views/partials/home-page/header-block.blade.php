@@ -39,6 +39,7 @@ margin-top: 94px">
                             <div class="time pull-right">
                                 <div class="styled-select-time">
                                     <select name="order_pick_up_time" id="order_pick_up_time" class="form_element" data-rule="required" data-msg="podaj godzinę rozpoczęcia rezerwacji">
+
                                         <option value="00:00">00:00</option>
                                         <option value="00:30">00:30</option>
                                         <option value="01:00">01:00</option>
@@ -106,7 +107,7 @@ margin-top: 94px">
                                     <input type="text" name="order_drop_off_date" autocomplete="off" id="order_drop_off_date" data-rule="required"
                                            data-msg="podaj datę zakończenia rezerwacji"
                                            class="form-control form_element" placeholder="yyyy-mm-dd">
-                                   
+
                                 </div>
                                 <div id="validation_order_drop_off_date" class="validation"></div>
                             </div>

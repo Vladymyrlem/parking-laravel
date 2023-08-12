@@ -1,3 +1,5 @@
+
+
 <?php $__env->startSection('content'); ?>
     <div class="card-body login-card-body">
         <p class="login-box-msg"><?php echo e(__('Login')); ?></p>

@@ -36,77 +36,115 @@ section.calendar .calendar__title {
     }
 }
 
-.calendar__container .calendar__add_date_select table,
-.calendar__container .calendar__main_calendar table {
+.wrapper_start_calendar table,
+.wrapper_end_calendar table,
+.calendar__add_date_select table,
+.calendar__main_calendar table {
     margin: 0 auto;
     -webkit-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
 
-.calendar__container .calendar__add_date_select table .jsCalendar-title-name span,
-.calendar__container .calendar__main_calendar table .jsCalendar-title-name span {
+.wrapper_start_calendar table .jsCalendar-title-name span,
+.wrapper_end_calendar table .jsCalendar-title-name span,
+.calendar__add_date_select table .jsCalendar-title-name span,
+.calendar__main_calendar table .jsCalendar-title-name span {
     font-weight: bold;
 }
 
-.calendar__container .calendar__add_date_select table thead .jsCalendar-week-days,
-.calendar__container .calendar__main_calendar table thead .jsCalendar-week-days {
+.wrapper_start_calendar table thead .jsCalendar-week-days,
+.wrapper_end_calendar table thead .jsCalendar-week-days,
+.calendar__add_date_select table thead .jsCalendar-week-days,
+.calendar__main_calendar table thead .jsCalendar-week-days {
     text-transform: uppercase;
 }
 
-.calendar__container .calendar__add_date_select table thead .jsCalendar-week-days .weekend,
-.calendar__container .calendar__main_calendar table thead .jsCalendar-week-days .weekend {
+.wrapper_start_calendar table thead .jsCalendar-week-days .weekend,
+.wrapper_end_calendar table thead .jsCalendar-week-days .weekend,
+.calendar__add_date_select table thead .jsCalendar-week-days .weekend,
+.calendar__main_calendar table thead .jsCalendar-week-days .weekend {
     color: #c32525;
 }
 
-.calendar__container .calendar__add_date_select table td,
-.calendar__container .calendar__main_calendar table td {
+.wrapper_start_calendar table td,
+.wrapper_end_calendar table td,
+.calendar__add_date_select table td,
+.calendar__main_calendar table td {
     cursor: pointer;
 }
 
-.calendar__container .calendar__add_date_select table tbody td.disabled,
-.calendar__container .calendar__main_calendar table tbody td.disabled {
+.wrapper_start_calendar table tbody td.disabled,
+.wrapper_end_calendar table tbody td.disabled,
+.calendar__add_date_select table tbody td.disabled,
+.calendar__main_calendar table tbody td.disabled {
     color: #fff !important;
     background: #FF4C4C;
     cursor: auto;
 }
 
-.calendar__container .calendar__add_date_select table tbody td.weekend,
-.calendar__container .calendar__main_calendar table tbody td.weekend {
+.wrapper_start_calendar table tbody td.weekend,
+.wrapper_end_calendar table tbody td.weekend,
+.calendar__add_date_select table tbody td.weekend,
+.calendar__main_calendar table tbody td.weekend {
     font-weight: bold;
     color: #c32525;
 }
 
-.calendar__container .calendar__add_date_select table tbody td.jsCalendar-next.disabled, .calendar__container .calendar__add_date_select table tbody td.jsCalendar-previous.disabled,
-.calendar__container .calendar__main_calendar table tbody td.jsCalendar-next.disabled,
-.calendar__container .calendar__main_calendar table tbody td.jsCalendar-previous.disabled {
+.wrapper_start_calendar table tbody td.jsCalendar-next.disabled, .wrapper_start_calendar table tbody td.jsCalendar-previous.disabled,
+.wrapper_end_calendar table tbody td.jsCalendar-next.disabled,
+.wrapper_end_calendar table tbody td.jsCalendar-previous.disabled,
+.calendar__add_date_select table tbody td.jsCalendar-next.disabled,
+.calendar__add_date_select table tbody td.jsCalendar-previous.disabled,
+.calendar__main_calendar table tbody td.jsCalendar-next.disabled,
+.calendar__main_calendar table tbody td.jsCalendar-previous.disabled {
     color: #fff !important;
     background: #EEB1B1;
 }
 
-.calendar__container .calendar__add_date_select table tbody td.jsCalendar-next.weekend, .calendar__container .calendar__add_date_select table tbody td.jsCalendar-previous.weekend,
-.calendar__container .calendar__main_calendar table tbody td.jsCalendar-next.weekend,
-.calendar__container .calendar__main_calendar table tbody td.jsCalendar-previous.weekend {
+.wrapper_start_calendar table tbody td.jsCalendar-next.weekend, .wrapper_start_calendar table tbody td.jsCalendar-previous.weekend,
+.wrapper_end_calendar table tbody td.jsCalendar-next.weekend,
+.wrapper_end_calendar table tbody td.jsCalendar-previous.weekend,
+.calendar__add_date_select table tbody td.jsCalendar-next.weekend,
+.calendar__add_date_select table tbody td.jsCalendar-previous.weekend,
+.calendar__main_calendar table tbody td.jsCalendar-next.weekend,
+.calendar__main_calendar table tbody td.jsCalendar-previous.weekend {
     color: #ffc3c3;
 }
 
-.calendar__container .calendar__add_date_select table tbody td.select,
-.calendar__container .calendar__main_calendar table tbody td.select {
+.wrapper_start_calendar table tbody td.select,
+.wrapper_end_calendar table tbody td.select,
+.calendar__add_date_select table tbody td.select,
+.calendar__main_calendar table tbody td.select {
     background: #9CDFFF;
 }
 
-.calendar__container .calendar__add_date_select {
+.wrapper_front_calendar {
+    display: block;
+    position: absolute;
+    top: -4px;
+    left: 220px;
+    width: 300px;
+    height: 300px;
+    z-index: 100;
+}
+
+.wrapper_front_calendar.hide {
+    display: none;
+}
+
+.calendar__add_date_select {
     padding: 10px;
     overflow: hidden;
     transition: height 10s ease-in-out;
 }
 
-.calendar__container .calendar__add_date_select.collapse_calendar {
+.calendar__add_date_select.collapse_calendar {
     animation: collapseCalendar 0.3s ease-in-out;
     animation-fill-mode: forwards;
 }
 
-.calendar__container .calendar__add_date_select.expand_calendar {
+.calendar__add_date_select.expand_calendar {
     animation: expandCalendar 0.3s ease-in-out;
     animation-fill-mode: forwards;
 }
@@ -133,7 +171,7 @@ section.calendar .calendar__title {
     }
 }
 
-.calendar__container .calendar__add_date_preloader {
+.calendar__add_date_preloader {
     display: inline-block;
     position: absolute;
     top: -6px;
@@ -142,11 +180,11 @@ section.calendar .calendar__title {
     height: 40px;
 }
 
-.calendar__container .calendar__add_date_preloader.hidden {
+.calendar__add_date_preloader.hidden {
     display: none;
 }
 
-.calendar__container .calendar__add_date_preloader div {
+.calendar__add_date_preloader div {
     --curren-color: #FF4C4C;
     box-sizing: border-box;
     display: block;
@@ -159,19 +197,19 @@ section.calendar .calendar__title {
     border-color: var(--curren-color) transparent transparent transparent;
 }
 
-.calendar__container .calendar__add_date_preloader div:nth-child(1) {
+.calendar__add_date_preloader div:nth-child(1) {
     animation-delay: -0.45s;
 }
 
-.calendar__container .calendar__add_date_preloader div:nth-child(2) {
+.calendar__add_date_preloader div:nth-child(2) {
     animation-delay: -0.3s;
 }
 
-.calendar__container .calendar__add_date_preloader div:nth-child(3) {
+.calendar__add_date_preloader div:nth-child(3) {
     animation-delay: -0.15s;
 }
 
-.calendar__container .calendar__add_date_preloader div:nth-child(4) {
+.calendar__add_date_preloader div:nth-child(4) {
     animation-delay: -0.45s;
 }
 
@@ -184,50 +222,50 @@ section.calendar .calendar__title {
     }
 }
 
-.calendar__container .calendar__date_list_wrapper {
+.calendar__date_list_wrapper {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__date_list {
+.calendar__date_list_wrapper .calendar__date_list {
     list-style: none;
     padding: 0;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_w {
+.calendar__date_list_wrapper .calendar__add_date_w {
     width: 100%;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_list {
+.calendar__date_list_wrapper .calendar__add_date_list {
     margin-bottom: 30px;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_item {
+.calendar__date_list_wrapper .calendar__add_date_item {
     list-style: none;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_item:not(:last-child) {
+.calendar__date_list_wrapper .calendar__add_date_item:not(:last-child) {
     margin-bottom: 20px;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_label {
+.calendar__date_list_wrapper .calendar__add_date_label {
     position: relative;
     display: block;
     width: 100%;
     margin-bottom: 0;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_input {
+.calendar__date_list_wrapper .calendar__add_date_input {
     display: block;
     width: 100%;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_btn_w {
+.calendar__date_list_wrapper .calendar__add_date_btn_w {
     width: 100%;
 }
 
-.calendar__container .calendar__date_list_wrapper .calendar__add_date_btn_w .calendar__add_date_btn {
+.calendar__date_list_wrapper .calendar__add_date_btn_w .calendar__add_date_btn {
     display: flex;
     margin: 0 auto;
     padding: 5px 10px;

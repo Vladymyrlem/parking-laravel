@@ -13,16 +13,18 @@
             <tr class="info">
                 <th>ID</th>
                 <th>Title</th>
+                <th>SubTitle</th>
                 <th>Slug</th>
             </tr>
             </thead>
-            <tbody id="headblock-list" name="headblock-list">
+            <tbody id="sectiontitle-list" name="sectiontitle-list">
             <?php $__currentLoopData = $section_title; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $title): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                <tr id="headblock-<?php echo e($title->id); ?>" class="active">
+                <tr id="sectiontitle-<?php echo e($title->id); ?>" class="active">
                     <td> <?php echo e($title->id); ?> </td>
                     <td> <?php echo e($title->title); ?> </td>
-                    <td><?php echo e($title->slug); ?></td>
-                    <td width="35%">
+                    <td> <?php echo e($title->subtitle); ?> </td>
+                    <td> <?php echo e($title->slug); ?> </td>
+                    <td width="350px">
                         <button class="btn btn-warning btn-detail open_section_title_modal" value="<?php echo e($title->id); ?>">Edit Title</button>
                         <button class="btn btn-danger btn-delete delete-section-title" value="<?php echo e($title->id); ?>">Delete Title</button>
                     </td>

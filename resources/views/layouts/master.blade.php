@@ -14,7 +14,9 @@
     {{--    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">--}}
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
-    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])
+    {{--    @vite(['resources/css/slick.css','resources/css/slick-theme.css'])--}}
+    <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
@@ -46,6 +48,10 @@
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
+
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
+<script src="{{asset('js/calendar.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         jQuery("#headblockCarousel").slick({
@@ -70,22 +76,61 @@
 
 </script>
 @if(isset($blockedDates))
-
+    {{-- Calendar --}}
     <script type="text/javascript">
         $(document).ready(function () {
-            let data = <?php echo json_encode($blockedDates); ?>;
-            console.log(data);
+            window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
+
+            [
+                '#order_pick_up_date',
+                '#order_drop_off_date'
+            ]
+                .forEach((input, i) => {
+                    const $input = document.querySelector(input);
+                    if ($input) {
+                        const wrapperCalendar = document.createElement('div');
+                        const classLst = ['wrapper_front_calendar', `wrapper_calendar_${i}`, 'hide'];
+                        classLst.forEach(clss => wrapperCalendar.classList.add(clss));
+                        $input.after(wrapperCalendar);
+
+                        window[`calendarSelectDate_${i}`] = new CalendarIk({
+                            dates: window.$blockedDates,
+                            calendarWrapperClass: `.${classLst[1]}`,
+                        });
+
+                        $input.addEventListener('click', e => {
+                            e.preventDefault();
+                            const calendarWrapper = e.target.nextElementSibling;
+                            document.querySelectorAll('.wrapper_front_calendar')
+                                .forEach(elem => elem.classList.add('hide'))
+
+                            calendarWrapper.classList.remove('hide');
+                        })
+                    }
+                })
+
+            // hide Calendars
+            ;(() => {
+                document.addEventListener('click', event => {
+                    if (!event.target.closest('.wrapper_front_calendar')
+                        &&
+                        !event.target.closest('#order_pick_up_date')
+                        &&
+                        !event.target.closest('#order_drop_off_date')
+                    ) {
+                        document.querySelectorAll('.wrapper_front_calendar')
+                            .forEach(elem => elem.classList.add('hide'))
+                    }
+                })
+            })();
         });
 
     </script>
 @endif
 <script src="{{ asset('js/wow.min.js') }}"></script>
-{{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
-{{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/calendar.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>

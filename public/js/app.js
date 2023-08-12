@@ -246,8 +246,32 @@ jQuery(function () {
       }
     });
   });
-});
 
+  var lastScrollTop = 0;
+  var headerHeight = $('.top-header').outerHeight();
+  $(window).scroll(function () {
+    var scrollTop = $(this).scrollTop();
+
+    // Check if the user is scrolling down
+    if (scrollTop > lastScrollTop) {
+      $('.top-header').hide();
+      $('.logo img').css('width', '80%');
+    } else {
+      // Check if the user is back at the top
+      if (scrollTop <= headerHeight) {
+        $('.top-header').show();
+        $('.logo img').css('width', '100%');
+      }
+    }
+    lastScrollTop = scrollTop;
+  });
+  $(document).ready(function () {
+    // Toggle the active class when clicking on a trigger element (e.g., a button or link)
+    $('#language-switch-dropdown').click(function () {
+      $('ul#countries').toggleClass('active');
+    });
+  });
+});
 jQuery(window).on('load', function () {
   $('.scrollup, .navbar-brand').click(function () {
     var new_hash = $(this).attr('href');

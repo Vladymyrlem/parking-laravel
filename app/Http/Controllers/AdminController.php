@@ -229,12 +229,16 @@
             return response()->json(['message' => 'Reservation deleted successfully']);
         }
 
+
         public function getUpdatedDatesList()
         {
-            // Fetch the updated dates list content, generate HTML and return as response
-
-            $reservation = Reservation::all('new_date');
-            return view('partials.dates-list', compact('reservation')); // Assuming you have a partial view for the dates list
+//            return view('partials.dates-list', ['name' => 'John Doe', 'email' => 'john@example.com'] );
+            $reservations = Reservation::pluck('new_date');
+            return response()->json([
+                'success' => true,
+                'message' => 'Reservation deleted successfully',
+                'data' => $reservations,
+            ]);
         }
 
         public function deleteOrder($id)

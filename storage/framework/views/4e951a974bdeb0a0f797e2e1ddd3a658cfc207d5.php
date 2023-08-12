@@ -8,61 +8,305 @@
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <title><?php echo $__env->yieldContent('title', 'Parking Rondo'); ?></title>
+    <!-- Fav and touch icons -->
+    
+    
+    
+    
+    <link rel="shortcut icon" href="<?php echo e(asset('images/favicon.png')); ?>">
+    
+    <link rel="stylesheet" href="<?php echo e(asset('css/slick.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/slick-theme.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
+    
+    
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/jsCalendar.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/calendar.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/animate.css')); ?>">
+    <script src="<?php echo e(asset('js/navbar/responsive-nav.js')); ?>"></script>
+    <?php echo RecaptchaV3::initJs(); ?>
 
-    <?php echo app('Illuminate\Foundation\Vite')(['resources/sass/app.css','resources/sass/style.scss','resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css']); ?>
+
     <?php echo $__env->yieldContent('styles'); ?>
 
-
 </head>
-<body>
-<div id="app">
-    <!-- Top Navbar -->
-    <nav class="navbar navbar-expand-md navbar-light bg-light">
-        <div class="container-fluid">
-            <!-- Brand Logo -->
-            <a href="<?php echo e(url('/')); ?>" class="navbar-brand"><?php echo e(config('app.name', 'Laravel')); ?></a>
+<body name="#start" id="top" class="js">
+<!-- Top Navbar -->
+<?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-            <!-- Search Form -->
-            <form class="form-inline my-2 my-lg-0" id="searchForm" action="#" method="GET">
-                <input class="form-control mr-sm-2" type="search" name="query" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
+<main class="">
+    <?php echo $__env->yieldContent('content'); ?>
+</main>
+<?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
-            <!-- Other Navbar items -->
-            <!-- ... -->
-
-        </div>
-    </nav>
-
-    <main class="py-4">
-        <?php echo $__env->yieldContent('content'); ?>
-    </main>
-</div>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script src="<?php echo e(asset('js/slick.min.js')); ?>"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="<?php echo e(asset('js/slick.js')); ?>"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
+<script src="<?php echo e(asset('js/navbar/fastclick.js')); ?>" async></script>
+<script src="<?php echo e(asset('js/navbar/scroll.js')); ?>" async></script>
+<script src="<?php echo e(asset('js/navbar/fixed-responsive-nav.js')); ?>" async></script>
+
+<script type="text/javascript" src="<?php echo e(asset('js/jsCalendar/jsCalendar.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jsCalendar/jsCalendar.lang.pl.js')); ?>"></script>
+<script src="<?php echo e(asset('js/calendar.js')); ?>"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        jQuery("#headblockCarousel").slick({
+            dots: true,
+            infinite: false,
+            variableWidth: false,
+            centerMode: false,
+            slidesToShow: 1,
+            slidesToScroll: 1,
+            arrows: false
+        });
+        jQuery("#reviews-carousel").slick({
+            dots: true,
+            infinite: false,
+            variableWidth: false,
+            variableHeight: true,
+            centerMode: false,
+            slidesToShow: 1,
+            slidesToScroll: 1
+        });
+    });
+
+</script>
+<?php if(isset($blockedDates)): ?>
+    
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
+
+            [
+                '#order_pick_up_date',
+                '#order_drop_off_date'
+            ]
+                .forEach((input, i) => {
+                    const $input = document.querySelector(input);
+                    if ($input) {
+                        const wrapperCalendar = document.createElement('div');
+                        const classLst = ['wrapper_front_calendar', `wrapper_calendar_${i}`, 'hide'];
+                        classLst.forEach(clss => wrapperCalendar.classList.add(clss));
+                        $input.after(wrapperCalendar);
+
+                        window[`calendarSelectDate_${i}`] = new CalendarIk({
+                            dates: window.$blockedDates,
+                            calendarWrapperClass: `.${classLst[1]}`,
+                        });
+
+                        $input.addEventListener('click', e => {
+                            e.preventDefault();
+                            const calendarWrapper = e.target.nextElementSibling;
+                            document.querySelectorAll('.wrapper_front_calendar')
+                                .forEach(elem => elem.classList.add('hide'))
+
+                            calendarWrapper.classList.remove('hide');
+                        })
+                    }
+                })
+
+            // hide Calendars
+            ;(() => {
+                document.addEventListener('click', event => {
+                    if (!event.target.closest('.wrapper_front_calendar')
+                        &&
+                        !event.target.closest('#order_pick_up_date')
+                        &&
+                        !event.target.closest('#order_drop_off_date')
+                    ) {
+                        document.querySelectorAll('.wrapper_front_calendar')
+                            .forEach(elem => elem.classList.add('hide'))
+                    }
+                })
+            })();
+        });
+
+    </script>
+<?php endif; ?>
+<script src="<?php echo e(asset('js/wow.min.js')); ?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
-<script src="<?php echo e(asset('js/calendar.js')); ?>"></script>
-
+<script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
+<script src="<?php echo e(asset('js/gmap3.min.js')); ?>"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
-    jQuery(function () {
+    $(document).ready(function () {
+        // Submit the form using Ajax
+        $('#newsletter_submit_btn').click(function (event) {
+            event.preventDefault();
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+            const formData = {
+                email: $('input#newsletter_email').val()
+            }
+            $.ajax({
+                type: 'POST',
+                url: '/subscribe',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function (response) {
+                    console.log(formData);
+                    $('#successMessage').show();
+                },
+                error: function (error) {
+                    console.log(error);
+                    // Handle error response if needed
+                }
+            });
+            // Get the reCAPTCHA response
+            
+            
+            
+            
+            
+            
 
-        var data = [];
-        // var disableddates = ['26/07/2023', '27/07/2023', '28/07/2023', '29/07/2023', '30/07/2023', '31/07/2023', '01/08/2023', '02/08/2023', '03/08/2023', '04/08/2023', '05/08/2023', '06/08/2023',];
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
 
-        $('#tdd').calendar({
-            zIndex: 999,
-            date: new Date(),
-            selectedRang: [new Date()]
-        }).show();
+        $('.navbar-toggler').click(function (e) {
+            e.preventDefault();
+            if (!$(this).hasClass('collapsed')) {
+                $(this).addClass('collapsed');
+            } else {
+                $(this).removeClass('collapse');
+            }
+            $('.navbar-collapse').toggleClass('show');
+        })
 
-        var $doff = $('#doff');
-        var UID = 1;
+        var companyName = "PARKING RONDO";
+
+        function loadMap(addressData) {
+
+            var path = document.URL;
+            path = path.substring(0, path.lastIndexOf("/") + 1)
+
+            var locationContent = "<h2>" + companyName + "</h2><p>" + addressData.value + "</p>";
+
+            var locationData = {
+                map: {
+                    options: {
+                        center: [51.109251, 16.902584],
+                        zoom: 14,
+                        maxZoom: 18,
+                        scrollwheel: false,
+                        mapTypeId: google.maps.MapTypeId.ROADMAP,
+                        mapTypeControl: true,
+                        mapTypeControlOptions: {
+                            style: google.maps.MapTypeControlStyle.DROPDOWN_MENU
+                        },
+                        navigationControl: true,
+                        scrollwheel: true,
+                        streetViewControl: true
+                    }
+                },
+                infowindow: {
+                    options: {
+                        content: locationContent
+                    },
+                    events: {
+                        closeclick: function (infowindow) {
+                            //alert("closing : " + infowindow.getContent());
+                        }
+                    }
+                },
+                marker: {
+                    options: {
+                        icon: new google.maps.MarkerImage(
+                            path + "images/mapmarker.png",
+                            new google.maps.Size(59, 58, "px", "px"),
+                            new google.maps.Point(0, 0),    //sets the origin point of the icon
+                            new google.maps.Point(29, 34)   //sets the anchor point for the icon
+                        ),
+                        draggable: false
+                    },
+                    events: {
+                        click: function (marker) {
+
+                        },
+                        mouseover: function (marker, event, context) {
+                            $(this).gmap3(
+                                {clear: "overlay"},
+                                {
+                                    overlay: {
+                                        latLng: marker.getPosition(),
+                                        options: {
+                                            content: ".",
+                                            offset: {
+                                                x: -50,
+                                                y: -50
+                                            }
+                                        }
+                                    }
+                                });
+                        },
+                        mouseout: function () {
+                            $(this).gmap3({clear: "overlay"});
+                        }
+                    }
+                }
+            };
+
+            if ($.isEmptyObject(addressData.latLng)) {
+                locationData.infowindow.address = addressData.value;
+                locationData.marker.address = addressData.value;
+            } else {
+                locationData.infowindow.latLng = addressData.latLng;
+                locationData.marker.latLng = addressData.latLng;
+            }
+
+            $('#locations .map').gmap3(locationData, "autofit");
+
+        }
+
+        var locations = [
+            {value: "ul. Skarżyńskiego 2, 54-530 Wrocław", latLng: [51.109251, 16.902584]},
+        ];
+        loadMap(locations[0]);
+
+        $("#location-map-select").append('<option value="' + locations[0].value + '">Please select a location</option>');
+        $.each(locations, function (index, value) {
+            //console.log(index);
+            var option = '<option value="' + index + '">' + value.value + '</option>';
+            $("#location-map-select").append(option);
+        });
+
+        $('#location-map-select').on('change', function () {
+            $('#locations .map').gmap3('destroy');
+            loadMap(locations[this.value]);
+        });
         var url = $('#url').val();
 
         // var modifiedUrl = url + '/reservations'
@@ -83,18 +327,6 @@
         //     });
         // }
         //
-        // // Function to add the calendar with reserved dates
-        // function addCalendarWithReservedDates(reservedDates) {
-        //     $doff.append('<input class="calendar form-control form_element" placeholder="wybierz datę..." autocomplete="off" id="input-' + UID + '" name="daysoff[]"><div id="ca-' + UID + '"></div>');
-        //     $('#ca-' + UID).calendar({
-        //         zIndex: 999,
-        //         date: new Date(),
-        //         disableddates: reservedDates, // Set the reserved dates as disabled dates on the calendar
-        //         selectedRang: [new Date()],
-        //         data: data,
-        //         trigger: '#input-' + UID++
-        //     });
-        // }
         //
         // // Add calendar input on button click
         // $('#add').click(function () {

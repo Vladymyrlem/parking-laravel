@@ -22,6 +22,17 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
   ),
+  'josiasmontag/laravel-recaptchav3' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Lunaweb\\RecaptchaV3\\Providers\\RecaptchaV3ServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'RecaptchaV3' => 'Lunaweb\\RecaptchaV3\\Facades\\RecaptchaV3',
+    ),
+  ),
   'laravel/sail' => 
   array (
     'providers' => 

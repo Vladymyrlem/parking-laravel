@@ -27,7 +27,7 @@
 </div>
 <!-- /.login-box -->
 
-<?php echo app('Illuminate\Foundation\Vite')('resources/js/app.js'); ?>
+<script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <!-- Bootstrap 4 -->
 <script src="<?php echo e(asset('js/bootstrap.bundle.min.js')); ?>"></script>
 <!-- AdminLTE App -->

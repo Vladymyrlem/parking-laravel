@@ -57,6 +57,8 @@ position: relative;" aria-hidden="true">
                                 </div>
                             </div>
                         </li>
+                        <li class="reservation-item-mob"><a href="#header-block" class="reservation-link">REZERWUJ</a>
+                        </li>
                     </ul>
                 </nav>
             </div>

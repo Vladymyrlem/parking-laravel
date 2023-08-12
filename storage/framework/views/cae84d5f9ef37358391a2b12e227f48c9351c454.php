@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?php echo e(config('app.name', 'Laravel')); ?></title>
     <meta name="_token" content="<?php echo csrf_token(); ?>"/>
+    <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -12,12 +13,26 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?php echo e(asset('css/fontawesome.min.css')); ?>">
     <!-- Theme style -->
+    <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/adminlte.min.css')); ?>">
+    <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/jsCalendar.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/calendar.css')); ?>">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="<?php echo e(asset('js/navbar/responsive-nav.js')); ?>"></script>
+    <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
 
     <?php echo $__env->yieldContent('styles'); ?>
     <style>
+        header {
+            background: #fff;
+            position: fixed;
+            z-index: 3;
+            width: 100%;
+            left: 0;
+            top: 0;
+
+        }
+
         .hidden-textarea {
             position: absolute;
             top: -9999px;
@@ -26,6 +41,10 @@
             height: 1px;
             opacity: 0;
         }
+
+        nav ul > li a {
+            height: auto;
+        }
     </style>
 
 </head>
@@ -33,31 +52,28 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-        <a href="/" class="brand-link">
+    <header class="main-header navbar navbar-expand navbar-white navbar-light">
+        <a href="/admin" class="brand-link">
             <img src="<?php echo e(asset('images/parking-logo.png')); ?>" alt="Parking Rondo Logo"
-                 class="brand-image img-circle elevation-3"
+                 class="brand-image logo"
                  style="opacity: 1">
         </a>
-        <a data-widget="navbar-search" href="#" role="button">
-            <i class="fas fa-search"></i>
-        </a>
-        <div class="navbar-search-block">
-            <form class="form-inline">
-                <div class="input-group input-group-sm">
-                    <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
-                    <div class="input-group-append">
-                        <button class="btn btn-navbar" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                        <button class="btn btn-navbar" type="button" data-widget="navbar-search">
-                            <i class="fas fa-times"></i>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
+        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
+position: relative;" aria-hidden="true">
+            <ul>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Services</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Text Content</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Calendar</a></li>
+            </ul>
+        </nav>
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
@@ -84,7 +100,7 @@
                 </div>
             </li>
         </ul>
-    </nav>
+    </header>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
@@ -96,7 +112,18 @@
                  style="opacity: .8">
             <span class="brand-text font-weight-light">AdminLTE 3</span>
         </a>
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
         <?php echo $__env->make('layouts.navigation', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
     </aside>
 
@@ -133,6 +160,8 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jsCalendar/jsCalendar.min.js')); ?>"></script>
+<script type="text/javascript" src="<?php echo e(asset('js/jsCalendar/jsCalendar.lang.pl.js')); ?>"></script>
 <script src="<?php echo e(asset('js/calendar.js')); ?>"></script>
 <script src="<?php echo e(asset('js/tinymce/tinymce.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/admin.js')); ?>"></script>
@@ -149,115 +178,331 @@
 <!-- MODAL SECTION -->
 <!-- Head Block Modal-->
 <?php echo $__env->make('partials.modal.head-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+<?php echo $__env->make('partials.modal.services-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
+
+<?php echo $__env->make('partials.modal.about-us-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- Reviews Modal-->
 <?php echo $__env->make('partials.modal.review-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- Contacts Modal-->
 <?php echo $__env->make('partials.modal.contacts-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <!-- Section title Modal-->
 <?php echo $__env->make('partials.modal.section-title-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
-
-
+<?php echo $__env->make('partials.modal.newsletter-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
-<script src="<?php echo e(asset('js/calendar.js')); ?>"></script>
 <script src="<?php echo e(asset('js/datatables/jquery.datatables.min.js')); ?>"></script>
-
+<script src="<?php echo e(asset('js/navbar/fastclick.js')); ?>" async></script>
+<script src="<?php echo e(asset('js/navbar/scroll.js')); ?>" async></script>
+<script src="<?php echo e(asset('js/navbar/fixed-responsive-nav.js')); ?>" async></script>
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
 <script>
-    <?php if(isset($arrayData)): ?>
-    jQuery(function () {
-            var url = $('#url').val();
+    const headerTable = $('#headerTable');
+    const toggleButton = $('#toggleRowsButton');
 
-            var dataArray = <?php echo json_encode($arrayData); ?>;
-            // Now 'dataArray' contains the array values in JavaScript format
-            //console.log(dataArray);
-            var data = [];
-            var disabledDates = ['26/7/2023', '27/7/2023', '28/7/2023', '29/7/2023', '30/7/2023', '31/7/2023', '01/9/2023', '02/9/2023', '03/9/2023', '04/9/2023', '05/9/2023', '06/9/2023',];
+    // Initial state: Show only one row
+    headerTable.find('tbody tr').not(':first').hide();
 
-            $('#tdd').calendar({
-                zIndex: 999,
-                date: new Date(),
-                disabledDates: dataArray,
-                separator: '.'
+    toggleButton.on('click', function () {
+        const hiddenRows = headerTable.find('tbody tr').not(':visible');
 
-            }).show();
-            var myList = document.querySelector('.calendar-views .days');
-            var listItems = myList.getElementsByTagName('li');
-
-            for (var i = 0; i < listItems.length; i++) {
-                var listItem = listItems[i];
-                var value = parseInt(listItem.getAttribute('value'));
-                if (dataArray.includes(value)) {
-                    listItem.classList.add('disabled');
-                }
-            }
-            var $doff = $('#doff');
-            var UID = 1;
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            // var modifiedUrl = url + '/reservations'
-            //
-            // // Fetch reserved dates from the backend using AJAX
-            // function fetchReservedDates() {
-            //     // Replace 'your_endpoint_url' with the actual endpoint URL to fetch the reserved dates
-            //     $.ajax({
-            //         type: "GET",
-            //         url: modifiedUrl,
-            //         success: function (data) {
-            //             // Call the function to add the calendar with reserved dates
-            //             addCalendarWithReservedDates(data.reservedDates);
-            //         },
-            //         error: function (error) {
-            //             console.log('Error:', error);
-            //         }
-            //     });
-            // }
-            //
-            // // Function to add the calendar with reserved dates
-            // function addCalendarWithReservedDates(reservedDates) {
-            //     $doff.append('<input class="calendar form-control form_element" placeholder="wybierz datę..." autocomplete="off" id="input-' + UID + '" name="daysoff[]"><div id="ca-' + UID + '"></div>');
-            //     $('#ca-' + UID).calendar({
-            //         zIndex: 999,
-            //         date: new Date(),
-            //         disableddates: reservedDates, // Set the reserved dates as disabled dates on the calendar
-            //         selectedRang: [new Date()],
-            //         data: data,
-            //         trigger: '#input-' + UID++
-            //     });
-            // }
-            //
-            // // Add calendar input on button click
-            // $('#add').click(function () {
-            //     fetchReservedDates(); // Fetch the reserved dates from the backend and add the calendar
-            // });
+        if (hiddenRows.length > 0) {
+            // Show all rows
+            hiddenRows.show();
+            toggleButton.text('Show Only One Row');
+        } else {
+            // Show only one row
+            headerTable.find('tbody tr').not(':first').hide();
+            toggleButton.text('Show All Rows');
         }
-    )
-    ;
+    });
+    var b1 = $('#b1');
+    var b2 = $('#b2');
+    var b3 = $('#b3');
+    var b4 = $('#b4');
+    var b5 = $('#b5');
+    var table = $('#parkingTable');
+
+    function dateSort(a, b) {
+        var aDate = new Date(a);
+        var bDate = new Date(b);
+        return aDate - bDate;
+    }
+
+    table.bootstrapTable({
+        locale: 'pl',
+        toolbar: '.toolbar'
+    });
+    $('.delete-btn').on('click', function () {
+        var orderId = $(this).data('order-id');
+
+        $.ajax({
+            url: '/admin/delete-order/' + orderId, // Replace with your delete route URL
+            type: 'DELETE',
+            dataType: 'json',
+            success: function (response) {
+                // Remove the deleted row from the table
+                $('#parkingTable').bootstrapTable('remove', {field: 'id', values: [orderId]});
+                location.reload();
+            },
+            error: function (xhr, status, error) {
+                console.log(error);
+            }
+        });
+    });
+    var todayDate = new Date().toISOString().slice(0, 10);
+
+    $(function () {
+        $(b1).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                arrival: [todayDate]
+            });
+        });
+        $(b2).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                departure: ['2023-08-11']
+            });
+        });
+        $(b3).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                datah: ['2023-08-11']
+            });
+        });
+        $(b4).click(function () {
+            $(table).bootstrapTable('filterBy', {});
+        });
+        $(b5).click(function () {
+            $(table).bootstrapTable('filterBy', {
+                oldh: ['tak', 'nie']
+            });
+        });
+    });
+
+    $('#sortByToday').on('click', function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            arrival: [todayDate]
+        });
+    });
+    $('#resetFilters').on('click', function () {
+        $('#parkingTable').bootstrapTable('destroy');
+        $('#parkingTable').bootstrapTable({
+            toolbar: '#customToolbar'
+        });
+    });
+
+
 </script>
+<script>
+    // Check if both checkbox and CAPTCHA are validated
+    // function checkValidation() {
+    //     var isCaptchaVerified = grecaptcha.getResponse().length !== 0;
+    //     var isAgreeChecked = document.getElementById('agree').checked;
+    //
+    //     if (isCaptchaVerified && isAgreeChecked) {
+    //         document.getElementById('subscribeButton').disabled = false;
+    //     } else {
+    //         document.getElementById('subscribeButton').disabled = true;
+    //     }
+    // }
+    //
+    // // Enable form submission on checkbox change
+    // document.getElementById('agree').addEventListener('change', checkValidation);
+    //
+    // // Enable form submission on CAPTCHA verification
+    // function captchaCallback() {
+    //     checkValidation();
+    // }
+
+    // AJAX form submission
+    $('#subscribeForm').submit(function (e) {
+        e.preventDefault(); // Prevent default form submission
+
+        var formData = $(this).serialize(); // Serialize form data
+        var url = $(this).attr('action'); // Form action URL
+
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: formData,
+            dataType: 'json', // Change to 'html' if the response is not JSON
+            success: function (response) {
+                // Handle the success response, e.g., show success message or close modal
+                $('#subscribeModal').modal('hide');
+                alert('You have subscribed successfully!');
+            },
+            error: function (error) {
+                // Handle the error response, e.g., show error message
+                alert('Failed to subscribe. Please try again later.');
+            }
+        });
+    });
+</script>
+<?php if(isset($arrayData)): ?>
 <?php endif; ?>
+<script>
+    jQuery(function ($) {
+        const url = $('#url').val();
+
+        window.filterDatesFromToday = function (dates) {
+            const today = new Date().setHours(0, 0, 0, 0);
+
+            return dates
+                .filter(dateStr => {
+                    const [day, month, year] = dateStr.new_date.split('/');
+                    const date = new Date(`${year}-${month}-${day}`);
+                    return date >= today - 1;
+                })
+                .sort((a, b) => {
+                    var dateA = new Date(a.new_date.split('/').reverse().join('/'));
+                    var dateB = new Date(b.new_date.split('/').reverse().join('/'));
+                    return dateA - dateB;
+                });
+        }
+
+        window.fData = filterDatesFromToday( <?php echo json_encode($arrayData); ?> );
+
+        window.calendarMain = new CalendarIk({
+            dates: window.fData,
+            calendarWrapperClass: '.calendar__main_calendar',
+        });
+
+        window.datesList = new DatesList({
+            dates: window.fData,
+            calendar: window.calendarMain.calendar,
+            dateListClass: 'calendar__date_list',
+        });
+
+
+        /*
+         * SAVE DATES
+         */
+        const submitButton = document.querySelector('.js_btn_submit');
+        submitButton.addEventListener('click', event => {
+            event.preventDefault();
+
+            const items = document.querySelectorAll('.calendar__add_date_item');
+            const selectedDates = {}; // Initialize the selectedDates object
+
+            items.forEach(item => {
+                const input = item.querySelector('input');
+                const value = input?.value;
+
+                if (!value) return;
+
+                const key = input.getAttribute('name').substr(11); // Extract the key
+                selectedDates[key] = value; // Add key-value pair to selectedDates object
+
+                const new_date = {new_date: value};
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                    }
+                });
+
+                // SAVE
+                $.ajax({
+                    type: 'POST',
+                    url: url + '/blocked-dates',
+                    data: new_date,
+                    success: function (response) {
+                        console.log(response);
+                        reloadDatesList();
+                    },
+                    error: function (info) {
+                        console.log('Error:', info);
+                    },
+                    beforeSend: function (a, b, c) {
+                        input.nextElementSibling.classList.remove('hidden');
+                    },
+                    complete: function () {
+                        input.nextElementSibling.classList.add('hidden');
+                    },
+                });
+            });
+
+            // Perform a final AJAX request to send the entire selectedDates object
+            $.ajax({
+                type: 'POST',
+                url: url + '/store-all-dates', // Replace with the appropriate URL
+                data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
+                success: function (response) {
+                    console.log(response);
+                    reloadDatesList();
+                },
+                error: function (info) {
+                    console.log('Error storing all dates:', info);
+                },
+            });
+        });
+
+
+        /*
+         * RELOAD DATES
+         */
+        function reloadDatesList() {
+
+            $.ajax({
+                type: 'GET',
+                url: url + '/get-updated-dates-list',
+                success: function (response) {
+                    if (response.success) {
+
+                        window.fData = window.filterDatesFromToday(response.data.map(d => ({new_date: d})));
+
+                        window.calendarMain.dates = window.fData;
+                        window.calendarMain.calendar.refresh();
+
+                        Array.from(document.querySelectorAll('.js_list_blocked_dates li'))
+                            .forEach(elem => elem.remove());
+
+                        Array.from(document.querySelectorAll('.calendar__add_date_list li'))
+                            .forEach(elem => elem.remove());
+
+                        window.datesList.dates = window.fData;
+                        window.datesList.listDatesRender();
+                    }
+                    console.log(response);
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        }
+
+
+        /*
+         * DELETE DATE
+         */
+        $(document).on('submit', '.delete-form', function (event) {
+
+            event.preventDefault(); // Prevent default form submission behavior
+
+            var form = this;
+            var blockedDate = $(form).find('input[name="blockedDate"]').val(); // Get the blocked date from the form
+
+            $.ajax({
+                type: 'DELETE', // Use POST method since you are deleting
+                url: url + '/delete-by-date', // Adjust the route URL
+                data: {
+                    blockedDate: blockedDate, // Send the blocked date to the server
+                    _token: $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    reloadDatesList();
+                },
+                error: function (error) {
+                    console.error(error);
+                }
+            });
+        });
+
+    });
+</script>
+
+
 </body>
 </html>
 <?php /**PATH /home/vagrant/code/admin-lte/resources/views/layouts/app.blade.php ENDPATH**/ ?>

@@ -6,60 +6,73 @@
             <a href="<?php echo e(route('profile.show')); ?>" class="d-block"><?php echo e(Auth::user()->name); ?></a>
         </div>
     </div>
-
-    <!-- Sidebar Menu -->
-    <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
-            data-accordion="false">
-            <li class="nav-item">
-                <a href="<?php echo e(route('home')); ?>" class="nav-link">
-                    <i class="nav-icon fas fa-th"></i>
-                    <p>
-                        <?php echo e(__('Dashboard')); ?>
-
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="<?php echo e(route('users.index')); ?>" class="nav-link">
-                    <i class="nav-icon fas fa-users"></i>
-                    <p>
-                        <?php echo e(__('Users')); ?>
-
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="<?php echo e(route('about')); ?>" class="nav-link">
-                    <i class="nav-icon far fa-address-card"></i>
-                    <p>
-                        <?php echo e(__('About us')); ?>
-
-                    </p>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                    <i class="nav-icon fas fa-circle nav-icon"></i>
-                    <p>
-                        Two-level menu
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
-                <ul class="nav nav-treeview" style="display: none;">
-                    <li class="nav-item">
-                        <a href="#" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Child menu</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+    <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
+position: relative;" aria-hidden="true">
+        <ul>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Services</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Text Content</a></li>
+            <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Calendar</a></li>
         </ul>
     </nav>
+    <!-- Sidebar Menu -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <!-- /.sidebar-menu -->
 </div>
-<!-- /.sidebar --><?php /**PATH /home/vagrant/code/admin-lte/resources/views/layouts/navigation.blade.php ENDPATH**/ ?>
+<!-- /.sidebar -->
+<?php /**PATH /home/vagrant/code/admin-lte/resources/views/layouts/navigation.blade.php ENDPATH**/ ?>

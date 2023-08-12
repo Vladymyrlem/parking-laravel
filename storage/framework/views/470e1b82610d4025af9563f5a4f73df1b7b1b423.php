@@ -13,6 +13,12 @@
                             <input type="text" class="form-control has-error" id="section-title" name="title" placeholder="Title" value="">
                         </div>
                     </div>
+                    <div class="form-group error">
+                        <label for="inputName" class="col-sm-3 control-label">SubTitle</label>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control has-error" id="section-subtitle" name="subtitle" placeholder="Title" value="">
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="inputDetail" class="col-sm-3 control-label">Slug</label>
                         <div class="col-sm-9">
