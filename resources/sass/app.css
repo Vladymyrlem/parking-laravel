@@ -10351,7 +10351,7 @@ a:hover {
   user-select: none;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 1240px) {
   .js .nav-collapse {
     position: relative;
   }
@@ -10403,13 +10403,20 @@ header {
 }
 
 .logo {
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  text-decoration: none;
-  font-weight: bold;
-  line-height: 55px;
-  padding: 16px 0;
-  color: #fff;
   float: left;
+}
+
+ul#countries > li {
+  height: 40px;
+  width: 100%;
+  display: block;
+}
+ul#countries > li a {
+  display: block;
+}
+ul#countries.active {
+  display: block;
+  position: relative;
 }
 
 /* ------------------------------------------
@@ -10440,7 +10447,7 @@ header {
   opacity: 1;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 1240px) {
   .mask {
     display: none !important;
     opacity: 0 !important;
@@ -10476,12 +10483,23 @@ header {
 
 .js .nav-collapse-0.opened.dropdown-active {
   max-height: 9999px !important;
+  background: #ffffff;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 1240px) {
   .nav-collapse {
     float: right;
     width: auto;
+  }
+  header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  .top-header {
+    display: none !important;
+  }
+  .header-block {
+    margin-top: 75px !important;
   }
 }
 .nav-collapse li {
@@ -10489,9 +10507,12 @@ header {
   width: 100%;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 1240px) {
   .nav-collapse li {
     width: auto;
+  }
+  .nav-collapse li.reservation-item-mob {
+    display: none;
   }
 }
 .nav-collapse a {
@@ -10515,7 +10536,7 @@ header {
   background-color: transparent;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 1240px) {
   .nav-collapse a {
     text-align: center;
     border-top: 0;
@@ -10528,7 +10549,7 @@ header {
   padding-left: 2em;
 }
 
-@media screen and (min-width: 40em) {
+@media screen and (min-width: 1240px) {
   .nav-collapse ul ul a {
     display: none;
   }
@@ -10556,7 +10577,7 @@ header {
 }
 
 .nav-toggle:before {
-  color: #fff; /* Edit this to change the icon color */
+  color: #000b16; /* Edit this to change the icon color */
   font: normal 28px/55px "responsivenav"; /* Edit font-size (28px) to change the icon size */
   text-transform: none;
   text-align: center;
