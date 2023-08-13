@@ -43,3 +43,23 @@
         }
     }
 }
+
+@media screen and (max-width: 1240px) {
+    #partners {
+        padding: 50px 0;
+        margin-top: 40px;
+        margin-bottom: 50px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #partners {
+        .underline {
+            width: 100%;
+        }
+
+        figure {
+            justify-content: space-around;
+        }
+    }
+}

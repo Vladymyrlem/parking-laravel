@@ -278,6 +278,7 @@ $(document).ready(function () {
     }
 
     initializeTinyMCE('description-editor');
+    initializeTinyMCE('text-editor');
     initializeTinyMCE('gallery');
     initializeFullTinyMCE('media-editor');
     initializeFullTinyMCE('terms-content');

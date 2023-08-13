@@ -188,6 +188,8 @@ position: relative;" aria-hidden="true">
 @include('partials.modal.section-title-modal')
 @include('partials.modal.newsletter-modal')
 <script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/tinymce/admin.js') }}"></script>
+<script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>

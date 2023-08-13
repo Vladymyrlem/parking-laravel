@@ -191,6 +191,8 @@ position: relative;" aria-hidden="true">
 <?php echo $__env->make('partials.modal.section-title-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <?php echo $__env->make('partials.modal.newsletter-modal', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
+<script src="<?php echo e(asset('js/tinymce/admin.js')); ?>"></script>
+<script src="<?php echo e(asset('js/admin.js')); ?>"></script>
 <script src="<?php echo e(asset('js/datatables/jquery.datatables.min.js')); ?>"></script>
 <script src="<?php echo e(asset('js/navbar/fastclick.js')); ?>" async></script>
 <script src="<?php echo e(asset('js/navbar/scroll.js')); ?>" async></script>

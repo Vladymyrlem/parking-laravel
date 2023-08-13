@@ -5,7 +5,7 @@ lightgray
 margin-top: 94px">
     <div class="container">
         <div class="row">
-            <div class="col-md-7 col-12">
+            <div class="col-lg-7 col-12 header-left">
                 <div class="reservation" id="rezerwui">
                     <div class="reservation-block-message d-flex flex-column align-items-center text-center">
                         <p>Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
@@ -189,7 +189,7 @@ margin-top: 94px">
                 </div>
                 @include('partials.modal.reservation-modal')
             </div>
-            <div class="col-md-5 col-12">
+            <div class="col-lg-5 col-12 header-right">
                 <div id="headblockCarousel" class="slick">
                     @foreach($headBlocks as $headBlock)
                         <div class="">

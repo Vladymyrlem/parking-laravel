@@ -396,9 +396,23 @@ $(document).ready(function () {
         $('#contact_submit_btn').prop('disabled', !allChecked);
     });
 
-    $('.approval_rodo_link_more').on('click', function (e) {
+    $('#newsletter_approval_rodo_link_more').on('click', function (e) {
         e.preventDefault();
         $('#newsletter_approval_rodo_more').toggleClass('isHide');
+        $(this).text(function (i, text) {
+            return text === 'rozwiń' ? 'zwiń' : 'rozwiń';
+        });
+    });
+    $('#checkout_approval_rodo_link_more').on('click', function (e) {
+        e.preventDefault();
+        $('#checkout_approval_rodo_more').toggleClass('isHide');
+        $(this).text(function (i, text) {
+            return text === 'rozwiń' ? 'zwiń' : 'rozwiń';
+        });
+    });
+    $('#contact_approval_rodo_link_more').on('click', function (e) {
+        e.preventDefault();
+        $('#contact_approval_rodo_more').toggleClass('isHide');
         $(this).text(function (i, text) {
             return text === 'rozwiń' ? 'zwiń' : 'rozwiń';
         });

@@ -47,3 +47,14 @@
         padding-bottom: 50px;
     }
 }
+
+@media screen and (max-width: 768px) {
+    .left-about-us {
+        margin-bottom: 30px;
+    }
+    .about-us .about-us-content p {
+        margin-left: 0;
+        margin-right: auto;
+        width: 100%;
+    }
+}

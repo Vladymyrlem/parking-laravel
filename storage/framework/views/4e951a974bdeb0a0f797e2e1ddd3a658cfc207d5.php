@@ -71,7 +71,8 @@
             variableHeight: true,
             centerMode: false,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            arrows: false
         });
     });
 

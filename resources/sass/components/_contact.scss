@@ -213,3 +213,51 @@
         line-height: normal;
     }
 }
+
+@media screen and (max-width: 768px) {
+    #contacts-section {
+        padding-top: 50px;
+        padding-bottom: 100px;
+
+        .contacts-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    #contacts-us-section {
+        h2 {
+            font-size: 36px;
+            align-items: flex-start;
+            padding: 0 20px;
+            text-align: left;
+        }
+
+        h3 {
+            font-size: 20px;
+            text-align: left;
+            padding: 0 20px;
+        }
+
+        form .form-group:first-child {
+            border-right: none;
+            border-bottom: 1px solid rgb(0, 116, 183);
+            padding-bottom: 20px;
+        }
+    }
+
+}
+
+@media screen and (max-width: 560px) {
+    #contacts-section .contacts-grid {
+        grid-gap: 0;
+
+        .contact-name {
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .contact-value {
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+    }
+}

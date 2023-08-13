@@ -164,8 +164,19 @@ header.large .brand {
 @media screen and (max-width: 1240px) {
     header .row {
         align-items: flex-start;
-    }
 
+    }
+    header {
+        padding-top: 10px;
+        padding-bottom: 10px;
+
+        .logo {
+            padding-left: 20px;
+        }
+    }
+    .js .nav-collapse-0.opened {
+        max-height: 100% !important;
+    }
     header .top-header {
         display: none !important;
     }
@@ -174,6 +185,12 @@ header.large .brand {
 
         .nav-collapse ul {
             background: #ffffff;
+            padding: 20px;
+
+            > li a {
+                padding-left: 0;
+                padding-right: 0;
+            }
         }
     }
     .reservation-link {
@@ -187,5 +204,16 @@ header.large .brand {
             display: block;
             width: 100%;
         }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .logo {
+        img {
+            max-width: 240px;
+        }
+    }
+    .nav-toggle {
+        top: -5px;
     }
 }

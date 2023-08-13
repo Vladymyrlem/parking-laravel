@@ -48,3 +48,53 @@
         }
     }
 }
+
+@media screen and (max-width: 1240px) {
+    #header-block {
+        margin-top: 75px !important;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    #header-block {
+        .row {
+            flex-flow: column-reverse;
+            align-items: center;
+
+            .header-right, .header-left {
+                width: 100%;
+                align-items: center;
+                text-align: center;
+            }
+
+            .header-right {
+                margin-bottom: 75px;
+            }
+        }
+
+        #headblockCarousel {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 100%;
+
+            .headblock-title,
+            .headblock-subtitle {
+                display: flex;
+                text-align: left;
+            }
+
+            &::before {
+                display: none;
+            }
+
+            .slick-dots {
+                text-align: center;
+            }
+        }
+
+        .reservation {
+            margin-left: auto;
+            margin-right: auto;
+        }
+    }
+}

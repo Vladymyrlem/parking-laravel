@@ -308,6 +308,16 @@ header.large .brand {
   header .row {
     align-items: flex-start;
   }
+  header {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+  header .logo {
+    padding-left: 20px;
+  }
+  .js .nav-collapse-0.opened {
+    max-height: 100% !important;
+  }
   header .top-header {
     display: none !important;
   }
@@ -316,6 +326,11 @@ header.large .brand {
   }
   .header-menu .nav-collapse ul {
     background: #ffffff;
+    padding: 20px;
+  }
+  .header-menu .nav-collapse ul > li a {
+    padding-left: 0;
+    padding-right: 0;
   }
   .reservation-link {
     display: none;
@@ -327,6 +342,14 @@ header.large .brand {
   .reservation-item-mob a.reservation-link {
     display: block;
     width: 100%;
+  }
+}
+@media screen and (max-width: 375px) {
+  .logo img {
+    max-width: 240px;
+  }
+  .nav-toggle {
+    top: -5px;
   }
 }
 /* =============================================
@@ -601,6 +624,17 @@ ul#countries.active {
 @media screen and (min-width: 1240px) {
   .nav-collapse ul ul a {
     display: none;
+  }
+  .js .nav-collapse-0.opened {
+    max-height: 100% !important;
+  }
+}
+@media screen and (max-width: 1240px) {
+  .nav-toggle {
+    position: absolute !important;
+    top: 0;
+    z-index: 999;
+    right: 0;
   }
 }
 /* ------------------------------------------
@@ -1582,6 +1616,45 @@ header.large .brand {
   position: relative;
 }
 
+@media screen and (max-width: 1240px) {
+  #header-block {
+    margin-top: 75px !important;
+  }
+}
+@media screen and (max-width: 1024px) {
+  #header-block .row {
+    flex-flow: column-reverse;
+    align-items: center;
+  }
+  #header-block .row .header-right, #header-block .row .header-left {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+  }
+  #header-block .row .header-right {
+    margin-bottom: 75px;
+  }
+  #header-block #headblockCarousel {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 100%;
+  }
+  #header-block #headblockCarousel .headblock-title,
+  #header-block #headblockCarousel .headblock-subtitle {
+    display: flex;
+    text-align: left;
+  }
+  #header-block #headblockCarousel::before {
+    display: none;
+  }
+  #header-block #headblockCarousel .slick-dots {
+    text-align: center;
+  }
+  #header-block .reservation {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
 .about-us {
   background: linear-gradient(180deg, #ECF2FF 0%, #FFF 100%);
   padding-top: 100px;
@@ -1624,6 +1697,16 @@ header.large .brand {
   .about-us {
     padding-top: 50px;
     padding-bottom: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  .left-about-us {
+    margin-bottom: 30px;
+  }
+  .about-us .about-us-content p {
+    margin-left: 0;
+    margin-right: auto;
+    width: 100%;
   }
 }
 /* Vehicles
@@ -1927,6 +2010,19 @@ h2.prices {
   margin-right: 7px;
 }
 
+@media screen and (max-width: 768px) {
+  #prices .title {
+    text-align: left;
+  }
+}
+@media screen and (max-width: 560px) {
+  #prices .title {
+    font-size: 28px;
+  }
+  #prices .subtitle {
+    font-size: 35px;
+  }
+}
 /* Newsletter
 --------------------------------------------*/
 #newsletter {
@@ -2153,6 +2249,55 @@ h2.prices {
   font-size: 16px;
 }
 
+@media screen and (max-width: 1200px) {
+  #newsletter {
+    max-width: calc(100vw - 40px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+@media screen and (max-width: 768px) {
+  #newsletter .title {
+    text-align: left !important;
+    font-size: 30px;
+    margin-bottom: 30px;
+  }
+  #newsletter h3 {
+    margin-bottom: 30px;
+    text-align: left;
+  }
+  #newsletter .approval_rodo {
+    padding-bottom: 30px;
+  }
+  #newsletter {
+    padding-bottom: 0;
+  }
+  #newsletter .newsletter-form {
+    height: 100% !important;
+  }
+  #newsletter .newsletter-form .input-group {
+    background: transparent;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  #newsletter .newsletter-form button {
+    border-radius: 5px;
+    border: 1px solid var(--black, #151616);
+    background: var(--white, #FFF);
+    padding: 10px;
+    color: var(--prime, #0074B7);
+    font-family: Lato, sans-serif;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 125% */
+    text-transform: capitalize;
+  }
+  .newsletter-button-col {
+    padding: 0 !important;
+    margin-top: 30px;
+  }
+}
 /* Reviews
 --------------------------------------------*/
 #reviews {
@@ -2244,6 +2389,12 @@ h2.prices {
   opacity: 1;
 }
 
+@media screen and (max-width: 768px) {
+  #reviews {
+    padding-bottom: 50px;
+    margin-top: 100px;
+  }
+}
 /* Information
 --------------------------------------------*/
 #information {
@@ -2345,9 +2496,10 @@ h2.prices {
 
 #information .video {
   position: relative;
-  padding-bottom: 56.25%;
-  padding-top: 30px;
-  height: 0;
+  padding-bottom: 0;
+  padding-top: 0;
+  height: auto;
+  max-height: 100%;
   overflow: hidden;
 }
 
@@ -2816,6 +2968,21 @@ h2.prices {
   margin: 0;
 }
 
+@media screen and (max-width: 1240px) {
+  #partners {
+    padding: 50px 0;
+    margin-top: 40px;
+    margin-bottom: 50px;
+  }
+}
+@media screen and (max-width: 768px) {
+  #partners .underline {
+    width: 100%;
+  }
+  #partners figure {
+    justify-content: space-around;
+  }
+}
 #contacts-section {
   background: linear-gradient(90deg, #ECF2FF 0%, #FFF 71.35%);
   padding: 100px 0 200px 0;
@@ -2997,6 +3164,44 @@ h2.prices {
   line-height: normal;
 }
 
+@media screen and (max-width: 768px) {
+  #contacts-section {
+    padding-top: 50px;
+    padding-bottom: 100px;
+  }
+  #contacts-section .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+  #contacts-us-section h2 {
+    font-size: 36px;
+    align-items: flex-start;
+    padding: 0 20px;
+    text-align: left;
+  }
+  #contacts-us-section h3 {
+    font-size: 20px;
+    text-align: left;
+    padding: 0 20px;
+  }
+  #contacts-us-section form .form-group:first-child {
+    border-right: none;
+    border-bottom: 1px solid rgb(0, 116, 183);
+    padding-bottom: 20px;
+  }
+}
+@media screen and (max-width: 560px) {
+  #contacts-section .contacts-grid {
+    grid-gap: 0;
+  }
+  #contacts-section .contacts-grid .contact-name {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  #contacts-section .contacts-grid .contact-value {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+}
 /* Services
 --------------------------------------------*/
 #services {
@@ -3231,6 +3436,24 @@ h2.prices {
   background: var(--prime, #0074B7);
 }
 
+@media screen and (max-width: 768px) {
+  #locations .location-select {
+    height: auto !important;
+    width: 100%;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+  .navi {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    font-size: 20px;
+    top: 0;
+  }
+  .navi a {
+    margin-top: 16px;
+  }
+}
 /* Footer
 --------------------------------------------*/
 footer {
@@ -3325,6 +3548,7 @@ footer .foot-left .foot-reservation-block__link {
   padding: 10px 15px;
   width: 100%;
   max-width: 100%;
+  text-align: center;
 }
 footer .foot-label {
   color: var(--black, #151616);
@@ -3407,6 +3631,97 @@ footer .footer-nav li a:hover {
   color: #000;
 }
 
+@media screen and (max-width: 1240px) {
+  footer .bottom-footer {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media screen and (max-width: 991px) {
+  .foot-contacts {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    padding-top: 40px;
+  }
+}
+@media screen and (max-width: 768px) {
+  footer {
+    padding: 30px 0;
+  }
+  footer .row {
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  footer .top-foot {
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-bottom: 0;
+  }
+  footer .foot-left {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 40px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  footer .foot-left .foot-logo {
+    text-align: center;
+  }
+  footer .footer-nav {
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  footer .footer-nav ul {
+    flex-flow: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    width: 100%;
+  }
+  footer .footer-nav ul > li {
+    margin-bottom: 30px;
+  }
+  footer .foot-label {
+    margin-bottom: 30px;
+  }
+  .foot-contacts {
+    border-top: 1px solid rgb(0, 116, 183);
+    border-bottom: 1px solid rgb(0, 116, 183);
+    padding-top: 40px;
+    margin-bottom: 40px;
+  }
+  .foot-contacts .foot-label {
+    text-align: center;
+  }
+  .foot-contacts .contacts-grid {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+    margin-bottom: 10px;
+    padding-left: 0;
+    padding-right: 0;
+  }
+  .foot-contacts .contacts-grid .contact-name {
+    text-align: center;
+    margin-bottom: 8px;
+    font-size: 20px;
+    padding-right: 0;
+  }
+  .foot-contacts .contacts-grid .contact-value {
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+}
+@media screen and (max-width: 475px) {
+  footer .bottom-footer {
+    flex-flow: column;
+    align-items: center;
+  }
+  footer .bottom-footer .rights-reserved {
+    margin-bottom: 30px;
+  }
+}
 /* Checkout Modal
 --------------------------------------------*/
 #checkoutModal .modal-dialog {
@@ -3924,7 +4239,6 @@ form .subtitle {
     --------------------------------------------*/
   #locations .location-select h2 {
     font-size: 28px;
-    margin: 30px 0 0 21px;
   }
   #locations .map {
     height: 500px;

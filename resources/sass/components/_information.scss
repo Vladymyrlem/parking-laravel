@@ -100,9 +100,10 @@
 
 #information .video {
     position: relative;
-    padding-bottom: 56.25%;
-    padding-top: 30px;
-    height: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    height: auto;
+    max-height: 100%;
     overflow: hidden;
 }
 

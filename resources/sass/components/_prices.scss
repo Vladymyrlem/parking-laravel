@@ -306,3 +306,18 @@ h2.prices {
 #prices .reserve-button span {
     margin-right: 7px;
 }
+
+@media screen and (max-width: 768px) {
+    #prices .title {
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #prices .title {
+        font-size: 28px;
+    }
+    #prices .subtitle {
+        font-size: 35px;
+    }
+}

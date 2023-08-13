@@ -25,7 +25,7 @@
                         <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>
                     </ul>
                 </nav>
-                <div class="foot-contacts col-12 col-lg-5 pr-md-0 pl-md-0">
+                <div class="foot-contacts col-12 col-lg-5 pr-lg-0 pl-lg-0">
                     <div class="foot-label">Kontakt</div>
                     <div class="contacts-grid">
         <span class="contact-name">        {!!  getTitleBySlug('contact-mail') !!}

@@ -25,7 +25,7 @@
                 $basePrice = ($numberDays <= 3) ? 99 : (119 + ($numberDays - 4) * 10);
                 $price = $basePrice * $numberDays;
                 $numberPeople = $faker->numberBetween(1, 10);
-                $typeCar = $faker->numberBetween(1, 3);
+                $typeCar = $faker->number();
 
                 Parking::create([
                     'arrival' => $arrival,

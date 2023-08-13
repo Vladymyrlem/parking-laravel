@@ -297,8 +297,19 @@ ul#countries {
     .nav-collapse ul ul a {
         display: none;
     }
+    .js .nav-collapse-0.opened {
+        max-height: 100% !important;
+    }
 }
 
+@media screen and (max-width: 1240px) {
+    .nav-toggle {
+        position: absolute !important;
+        top: 0;
+        z-index: 999;
+        right: 0;
+    }
+}
 
 /* ------------------------------------------
   NAV TOGGLE STYLES

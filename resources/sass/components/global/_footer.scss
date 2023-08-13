@@ -104,6 +104,7 @@ footer {
                 padding: 10px 15px;
                 width: 100%;
                 max-width: 100%;
+                text-align: center;
             }
         }
     }
@@ -196,4 +197,113 @@ footer .footer-nav li {
 footer .footer-nav li a:hover {
     text-decoration: underline;
     color: #000;
+}
+
+@media screen and (max-width: 1240px) {
+    footer .bottom-footer {
+        padding-left: 20px;
+        padding-right: 20px;
+
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .foot-contacts {
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        padding-top: 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    footer {
+        padding: 30px 0;
+
+        .row {
+            margin-left: 0;
+            margin-right: 0;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+
+        .top-foot {
+
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 0;
+        }
+    }
+    footer .foot-left {
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+        padding-left: 0;
+        padding-right: 0;
+
+        .foot-logo {
+            text-align: center;
+        }
+    }
+    footer .footer-nav {
+        align-items: center;
+        margin-bottom: 40px;
+
+        ul {
+            flex-flow: row;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            width: 100%;
+
+            > li {
+                margin-bottom: 30px;
+            }
+        }
+    }
+    footer .foot-label {
+        margin-bottom: 30px;
+    }
+    .foot-contacts {
+        border-top: 1px solid rgba(0, 116, 183, 1);
+        border-bottom: 1px solid rgba(0, 116, 183, 1);
+        padding-top: 40px;
+        margin-bottom: 40px;
+
+        .foot-label {
+            text-align: center;
+        }
+
+        .contacts-grid {
+            grid-template-columns: 1fr;
+            grid-gap: 0;
+            margin-bottom: 10px;
+            padding-left: 0;
+            padding-right: 0;
+
+            .contact-name {
+                text-align: center;
+                margin-bottom: 8px;
+                font-size: 20px;
+                padding-right: 0;
+            }
+
+            .contact-value {
+                font-size: 20px;
+                text-align: center;
+                margin-bottom: 30px;
+
+            }
+
+        }
+    }
+}
+
+@media screen and (max-width: 475px) {
+    footer .bottom-footer {
+        flex-flow: column;
+        align-items: center;
+
+        .rights-reserved {
+            margin-bottom: 30px;
+        }
+    }
 }
