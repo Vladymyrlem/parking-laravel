@@ -86,23 +86,23 @@
             const ofWrapperCalendarClassName = 'order_form_wrapper_calendar';
             const ofHideCalendarClassName = 'hide';
 
+
             /*
              * Create info text
              */
-            const textWrap = document.createElement('div');
-            textWrap.id = 'reservation-blocked-dates';
-            textWrap.classList.add('infoOff');
-            textWrap.innerText = `${
-                $blockedDates
-                    .filter(elem => {
-                        const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
-                        const date = new Date().setHours(0, 0, 0, 0);
-                        return currDate >= date;
-                    })
-                    .map(elem => elem.new_date)
-                    .join(', ')
-            }`;
-            orderForm.prepend(textWrap);
+            const textWrap = document.querySelector( '#reservation-blocked-dates' );
+            if ( textWrap ) {
+                textWrap.innerText = `${
+                    $blockedDates
+                        .filter(elem => {
+                            const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
+                            const date = new Date().setHours(0, 0, 0, 0);
+                            return currDate >= date;
+                        })
+                        .map(elem => elem.new_date)
+                        .join(', ')
+                }`;
+            }
 
 
             /*
