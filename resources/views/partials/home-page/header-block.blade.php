@@ -31,7 +31,7 @@ margin-top: 94px">
                                             fill="#151616"/>
                                     </svg>
                                         Od dnia</span>
-                                    <input type="text" name="order_pick_up_date" autocomplete="off" id="order_pick_up_date" data-rule="required" data-msg="podaj datę rozpoczęcia rezerwacji"
+                                    <input readonly="readonly" type="text" name="order_pick_up_date" autocomplete="off" id="order_pick_up_date" data-rule="required" data-msg="podaj datę rozpoczęcia rezerwacji"
                                            class="form-control form_element" placeholder="yyyy-mm-dd">
                                 </div>
                                 <div id="validation_order_pick_up_date" class="validation"></div>
@@ -103,10 +103,10 @@ margin-top: 94px">
                                             fill="#151616"/>
                                     </svg>   Do dnia
          </span>
-                                    <input type="text" name="order_drop_off_date" autocomplete="off" id="order_drop_off_date" data-rule="required"
+                                    <input readonly="readonly" type="text" name="order_drop_off_date" autocomplete="off" id="order_drop_off_date" data-rule="required"
                                            data-msg="podaj datę zakończenia rezerwacji"
                                            class="form-control form_element" placeholder="yyyy-mm-dd">
-                                   
+
                                 </div>
                                 <div id="validation_order_drop_off_date" class="validation"></div>
                             </div>

@@ -1,17 +1,24 @@
 class CalendarIk {
     calendar = null;
     dates = [];
+    ofDateFrom = null;
+    ofDateTo = null;
+    ofInputActive = null;
+    ofInputActiveId = -1;
 
     class = {
         hide: 'hide',
         disabled: 'disabled',
         select: 'select',
+        noSelect: 'no_select',
+        dateFrom: 'day_from',
+        dateTo: 'day_to',
     }
 
     constructor({...args}) {
         this.class.wrapper = args.calendarWrapperClass;
-        this.dates = args.dates;
         this.class.calendarTitleName = this.class.wrapper + ' ' + 'table .jsCalendar-title .jsCalendar-title-name';
+        this.dates = args.dates;
 
         this.init();
     }
@@ -51,6 +58,30 @@ class CalendarIk {
             element.classList.add(this.class.disabled);
         }
 
+        // No Selected Date
+        if ( ! (this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date)) {
+
+            if ( this.ofInputActiveId === '1' && this.ofDateFrom && date <= this.ofDateFrom ) {
+                element.classList.add(this.class.noSelect);
+            }
+
+            if ( this.ofInputActiveId === '0' && this.ofDateTo && date >= this.ofDateTo ) {
+                element.classList.add(this.class.noSelect);
+            }
+
+            const dCurr = date?.setHours(0,0,0,0);
+            const dFrom = this.ofDateFrom?.setHours(0,0,0,0);
+            const dTo = this.ofDateTo?.setHours(0,0,0,0);
+
+            if ( dCurr && dFrom && dCurr === dFrom ) {
+                element.classList.add(this.class.dateFrom);
+            }
+
+            if ( dCurr && dTo && dCurr === dTo ) {
+                element.classList.add(this.class.dateTo);
+            }
+        }
+
         // weekend
         if (!info.isCurrent && (date.getDay() === 0 || date.getDay() === 6)) {
             this.setClassNames(date.getDay(), element)
@@ -65,6 +96,38 @@ class CalendarIk {
         if ($title) {
             $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
         }
+    }
+
+    // Function ONClick Date Calendar
+    setActionOnDateClick = () => {
+
+        console.log( this )
+
+        const dates = this.calendar._target.querySelectorAll( ' .calendar_date');
+        dates?.forEach( date => {
+            if ( ! date.classList.contains('disabled')
+            || ! date.classList.contains('no_select') ) {
+
+                date.addEventListener( 'click', event => {
+
+                    if ( this.ofInputActive ) {
+                        this.ofInputActive.value = date.dataset.calendarDate.split('/').reverse().join('-');
+                        this.ofInputActive.setAttribute( 'data-selected-date', date.dataset.calendarDate );
+                    }
+
+                    if ( this.ofInputActiveId === '0' ) {
+                        this.ofDateFrom = new Date( date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
+                    }
+                    if ( this.ofInputActiveId === '1' ) {
+                        this.ofDateTo = new Date( date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
+                    }
+
+                    this.calendar.refresh();
+
+                })
+            }
+        });
+
     }
 
 
@@ -164,7 +227,7 @@ class DatesList {
             itemCount++;
 
             const template = `<label class="calendar__add_date_label" data-add_date_id="${itemCount}">
-                <input class="calendar__add_date_input inpt_trgt_ind_${itemCount}" name="field_date_${itemCount}" type="text" placeholder="wybierz datę...">
+                <input class="calendar__add_date_input inpt_trgt_ind_${itemCount}" name="field_date_${itemCount}" type="text" placeholder="wybierz datę..."  autocomplete="off" >
                 <div class="calendar__add_date_preloader hidden"><div></div><div></div><div></div><div></div></div>
             </label>
             <div class="calendar__add_date_select calendar_box_${itemCount}"></div>`;

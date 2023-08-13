@@ -32,8 +32,7 @@ section.calendar .calendar__title {
   }
 }
 
-.wrapper_start_calendar table,
-.wrapper_end_calendar table,
+.order_form_wrapper_calendar table,
 .calendar__add_date_select table,
 .calendar__main_calendar table {
   margin: 0 auto;
@@ -41,48 +40,40 @@ section.calendar .calendar__title {
   -ms-user-select: none;
   user-select: none;
 }
-.wrapper_start_calendar table .jsCalendar-title-name span,
-.wrapper_end_calendar table .jsCalendar-title-name span,
+.order_form_wrapper_calendar table .jsCalendar-title-name span,
 .calendar__add_date_select table .jsCalendar-title-name span,
 .calendar__main_calendar table .jsCalendar-title-name span {
   font-weight: bold;
 }
-.wrapper_start_calendar table thead .jsCalendar-week-days,
-.wrapper_end_calendar table thead .jsCalendar-week-days,
+.order_form_wrapper_calendar table thead .jsCalendar-week-days,
 .calendar__add_date_select table thead .jsCalendar-week-days,
 .calendar__main_calendar table thead .jsCalendar-week-days {
   text-transform: uppercase;
 }
-.wrapper_start_calendar table thead .jsCalendar-week-days .weekend,
-.wrapper_end_calendar table thead .jsCalendar-week-days .weekend,
+.order_form_wrapper_calendar table thead .jsCalendar-week-days .weekend,
 .calendar__add_date_select table thead .jsCalendar-week-days .weekend,
 .calendar__main_calendar table thead .jsCalendar-week-days .weekend {
   color: #c32525;
 }
-.wrapper_start_calendar table td,
-.wrapper_end_calendar table td,
+.order_form_wrapper_calendar table td,
 .calendar__add_date_select table td,
 .calendar__main_calendar table td {
   cursor: pointer;
 }
-.wrapper_start_calendar table tbody td.disabled,
-.wrapper_end_calendar table tbody td.disabled,
+.order_form_wrapper_calendar table tbody td.disabled,
 .calendar__add_date_select table tbody td.disabled,
 .calendar__main_calendar table tbody td.disabled {
   color: #fff !important;
   background: #FF4C4C;
   cursor: auto;
 }
-.wrapper_start_calendar table tbody td.weekend,
-.wrapper_end_calendar table tbody td.weekend,
+.order_form_wrapper_calendar table tbody td.weekend,
 .calendar__add_date_select table tbody td.weekend,
 .calendar__main_calendar table tbody td.weekend {
   font-weight: bold;
   color: #c32525;
 }
-.wrapper_start_calendar table tbody td.jsCalendar-next.disabled, .wrapper_start_calendar table tbody td.jsCalendar-previous.disabled,
-.wrapper_end_calendar table tbody td.jsCalendar-next.disabled,
-.wrapper_end_calendar table tbody td.jsCalendar-previous.disabled,
+.order_form_wrapper_calendar table tbody td.jsCalendar-next.disabled, .order_form_wrapper_calendar table tbody td.jsCalendar-previous.disabled,
 .calendar__add_date_select table tbody td.jsCalendar-next.disabled,
 .calendar__add_date_select table tbody td.jsCalendar-previous.disabled,
 .calendar__main_calendar table tbody td.jsCalendar-next.disabled,
@@ -90,33 +81,50 @@ section.calendar .calendar__title {
   color: #fff !important;
   background: #EEB1B1;
 }
-.wrapper_start_calendar table tbody td.jsCalendar-next.weekend, .wrapper_start_calendar table tbody td.jsCalendar-previous.weekend,
-.wrapper_end_calendar table tbody td.jsCalendar-next.weekend,
-.wrapper_end_calendar table tbody td.jsCalendar-previous.weekend,
+.order_form_wrapper_calendar table tbody td.jsCalendar-next.weekend, .order_form_wrapper_calendar table tbody td.jsCalendar-previous.weekend,
 .calendar__add_date_select table tbody td.jsCalendar-next.weekend,
 .calendar__add_date_select table tbody td.jsCalendar-previous.weekend,
 .calendar__main_calendar table tbody td.jsCalendar-next.weekend,
 .calendar__main_calendar table tbody td.jsCalendar-previous.weekend {
   color: #ffc3c3;
 }
-.wrapper_start_calendar table tbody td.select,
-.wrapper_end_calendar table tbody td.select,
+.order_form_wrapper_calendar table tbody td.select,
 .calendar__add_date_select table tbody td.select,
 .calendar__main_calendar table tbody td.select {
   background: #9CDFFF;
 }
 
-.wrapper_front_calendar {
-  display: block;
-  position: absolute;
-  top: -4px;
-  left: 220px;
-  width: 300px;
-  height: 300px;
-  z-index: 100;
+#orderForm {
+  position: relative;
 }
-.wrapper_front_calendar.hide {
+
+#order_pick_up_date,
+#order_drop_off_date {
+  width: 140px;
+}
+
+.order_form_wrapper_calendar {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 10;
+  display: block;
+  width: 298px;
+  height: auto;
+}
+.order_form_wrapper_calendar.hide {
   display: none;
+}
+.order_form_wrapper_calendar .day_from,
+.order_form_wrapper_calendar .day_to {
+  outline: 1px solid #0074B7;
+}
+.order_form_wrapper_calendar .no_select {
+  opacity: 0.3;
+  cursor: auto;
+}
+.order_form_wrapper_calendar .no_select:hover {
+  pointer-events: none;
 }
 
 .calendar__add_date_select {
@@ -246,6 +254,10 @@ section.calendar .calendar__title {
   display: flex;
   margin: 0 auto;
   padding: 10px 20px;
+  cursor: pointer;
+}
+
+#orderForm .date input, #orderForm .date select, #orderForm .time input, #orderForm .time select {
   cursor: pointer;
 }
 
