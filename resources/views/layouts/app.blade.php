@@ -53,8 +53,9 @@
 
     <!-- Navbar -->
     <header class="main-header navbar navbar-expand navbar-white navbar-light">
-        <a href="/admin" class="brand-link">
-            <img src="{{ asset('images/parking-logo.png') }}" alt="Parking Rondo Logo"
+        <a href="/admin" class="brand-link logo">
+            <img src="{{ asset('images/parking-logo.png') }}"
+                 alt="Parking Rondo Logo"
                  class="brand-image"
                  style="opacity: 1">
         </a>
@@ -259,12 +260,12 @@ position: relative;" aria-hidden="true">
         });
         $(b2).click(function () {
             $(table).bootstrapTable('filterBy', {
-                departure: ['2023-08-11']
+                departure: [todayDate]
             });
         });
         $(b3).click(function () {
             $(table).bootstrapTable('filterBy', {
-                datah: ['2023-08-11']
+                datah: [todayDate]
             });
         });
         $(b4).click(function () {
@@ -342,8 +343,8 @@ position: relative;" aria-hidden="true">
     jQuery(function ($) {
         const url = $('#url').val();
 
-        window.filterDatesFromToday = function( dates ) {
-            const today = new Date().setHours(0,0,0,0);
+        window.filterDatesFromToday = function (dates) {
+            const today = new Date().setHours(0, 0, 0, 0);
 
             return dates
                 .filter(dateStr => {
@@ -405,6 +406,7 @@ position: relative;" aria-hidden="true">
                     url: url + '/blocked-dates',
                     data: new_date,
                     success: function (response) {
+                        console.log(response);
                         reloadDatesList();
                     },
                     error: function (info) {
@@ -443,18 +445,18 @@ position: relative;" aria-hidden="true">
                 type: 'GET',
                 url: url + '/get-updated-dates-list',
                 success: function (response) {
-                    if ( response.success ) {
+                    if (response.success) {
 
-                        window.fData = window.filterDatesFromToday( response.data.map( d => ({ new_date: d })) );
+                        window.fData = window.filterDatesFromToday(response.data.map(d => ({new_date: d})));
 
                         window.calendarMain.dates = window.fData;
                         window.calendarMain.calendar.refresh();
 
-                        Array.from( document.querySelectorAll( '.js_list_blocked_dates li' ) )
-                            .forEach( elem => elem.remove() );
+                        Array.from(document.querySelectorAll('.js_list_blocked_dates li'))
+                            .forEach(elem => elem.remove());
 
-                        Array.from( document.querySelectorAll( '.calendar__add_date_list li' ) )
-                            .forEach( elem => elem.remove() );
+                        Array.from(document.querySelectorAll('.calendar__add_date_list li'))
+                            .forEach(elem => elem.remove());
 
                         window.datesList.dates = window.fData;
                         window.datesList.listDatesRender();
@@ -495,6 +497,7 @@ position: relative;" aria-hidden="true">
 
     });
 </script>
+
 
 </body>
 </html>

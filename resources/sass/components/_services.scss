@@ -88,3 +88,18 @@
         margin: 0;
     }
 }
+
+/* Services*/
+@media screen and (max-width: 1240px) {
+    #services .services-container {
+        max-width: 100%;
+    }
+    #information .media-column p {
+        text-align: center;
+
+        img {
+            width: 100%;
+            max-width: 100%;
+        }
+    }
+}

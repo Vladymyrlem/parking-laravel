@@ -39,6 +39,7 @@ margin-top: 94px">
                             <div class="time pull-right">
                                 <div class="styled-select-time">
                                     <select name="order_pick_up_time" id="order_pick_up_time" class="form_element" data-rule="required" data-msg="podaj godzinę rozpoczęcia rezerwacji">
+
                                         <option value="00:00">00:00</option>
                                         <option value="00:30">00:30</option>
                                         <option value="01:00">01:00</option>

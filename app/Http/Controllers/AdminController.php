@@ -229,6 +229,7 @@
             return response()->json(['message' => 'Reservation deleted successfully']);
         }
 
+
         public function getUpdatedDatesList()
         {
 //            return view('partials.dates-list', ['name' => 'John Doe', 'email' => 'john@example.com'] );
@@ -238,5 +239,15 @@
                 'message' => 'Reservation deleted successfully',
                 'data' => $reservations,
             ]);
+        }
+
+        public function deleteOrder($id)
+        {
+            $order = Parking::find($id);
+            if ($order) {
+                $order->delete();
+                return response()->json(['message' => 'Order deleted successfully']);
+            }
+            return response()->json(['message' => 'Order not found'], 404);
         }
     }

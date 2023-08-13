@@ -14,17 +14,20 @@
     {{--    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/ico/apple-touch-icon-72-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" href="img/ico/apple-touch-icon-57-precomposed.png">--}}
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}">
-{{--    @vite(['resources/css/calendar.css','resources/css/slick.css','resources/css/slick-theme.css'])--}}
+    {{--    @vite(['resources/css/slick.css','resources/css/slick-theme.css'])--}}
+    <link rel="stylesheet" href="{{ asset('css/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/slick-theme.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-grid.min.css') }}">--}}
     {{--    <link rel="stylesheet" href="{{ asset('css/bootstrap-reboot.min.css') }}">--}}
-    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
-{{--    {!! RecaptchaV3::initJs() !!}--}}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
+    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
+    {!! RecaptchaV3::initJs() !!}
+
     @yield('styles')
 
 </head>
@@ -45,6 +48,10 @@
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
+
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
+<script src="{{asset('js/calendar.js')}}"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         jQuery("#headblockCarousel").slick({
@@ -68,110 +75,62 @@
     });
 
 </script>
-<script src="{{ asset('js/wow.min.js') }}"></script>
-{{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/daygrid/main.js"></script>--}}
-{{--<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/interaction/main.js"></script>--}}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-
-<script src="{{ asset('js/app.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/calendar.js') }}"></script>
 @if(isset($blockedDates))
     {{-- Calendar --}}
     <script type="text/javascript">
         $(document).ready(function () {
             window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
 
-            const orderForm = document.querySelector( '#orderForm' );
-            const ofInputsIds = ['#order_pick_up_date', '#order_drop_off_date'];
-            const ofWrapperCalendarClassName = 'order_form_wrapper_calendar';
-            const ofHideCalendarClassName = 'hide';
+            [
+                '#order_pick_up_date',
+                '#order_drop_off_date'
+            ]
+                .forEach((input, i) => {
+                    const $input = document.querySelector(input);
+                    if ($input) {
+                        const wrapperCalendar = document.createElement('div');
+                        const classLst = ['wrapper_front_calendar', `wrapper_calendar_${i}`, 'hide'];
+                        classLst.forEach(clss => wrapperCalendar.classList.add(clss));
+                        $input.after(wrapperCalendar);
 
+                        window[`calendarSelectDate_${i}`] = new CalendarIk({
+                            dates: window.$blockedDates,
+                            calendarWrapperClass: `.${classLst[1]}`,
+                        });
 
-             /*
-              * Create Wrapper For Calendar
-              */
-            const ofWrapperCalendar = document.createElement( 'div' );
-            ofWrapperCalendar.classList.add( ofWrapperCalendarClassName );
-            ofWrapperCalendar.classList.add( ofHideCalendarClassName );
-            orderForm.append( ofWrapperCalendar );
+                        $input.addEventListener('click', e => {
+                            e.preventDefault();
+                            const calendarWrapper = e.target.nextElementSibling;
+                            document.querySelectorAll('.wrapper_front_calendar')
+                                .forEach(elem => elem.classList.add('hide'))
 
-            /*
-             * Create Calendar
-             */
-            window.ofCalendar = new CalendarIk({
-                dates: window.$blockedDates,
-                calendarWrapperClass: '.' + ofWrapperCalendarClassName,
-                ofInputDateFrom: document.querySelector( ofInputsIds[0] ),
-                ofInputDateTo: document.querySelector( ofInputsIds[1] ),
-            });
+                            calendarWrapper.classList.remove('hide');
+                        })
+                    }
+                })
 
-
-            ofInputsIds.forEach( ( input, i ) => {
-                const $input = document.querySelector( input );
-                if ( $input ) {
-
-                    $input.setAttribute( 'data-input-id', i );
-
-                    $input.addEventListener( 'click', e => {
-                        e.preventDefault();
-
-                        // Set Calendar position
-                        const posForm = orderForm.getBoundingClientRect();
-                        const posInput = e.target.getBoundingClientRect();
-                        const posLeft = posInput.left - posForm.left + posInput.width;
-                        const posTop = posInput.top - posForm.top;
-                        ofCalendar.calendar._target.style.top = posTop + 'px';
-                        ofCalendar.calendar._target.style.left = posLeft + 'px';
-
-                        ofCalendar.calendar._target.classList.remove( ofHideCalendarClassName );
-                        ofCalendar.ofInputActive = $input;
-                        ofCalendar.ofInputActiveId = $input.dataset.inputId;
-                        ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick();
-                    })
-                }
-            })
-
-            /**
-             * Close Calendars Click Out calendar
-             */
             // hide Calendars
             ;(() => {
                 document.addEventListener('click', event => {
-
-                    if ( ! event.target.closest( '.' + ofWrapperCalendarClassName )
+                    if (!event.target.closest('.wrapper_front_calendar')
                         &&
-                        ! event.target.closest( ofInputsIds[0] )
+                        !event.target.closest('#order_pick_up_date')
                         &&
-                        ! event.target.closest( ofInputsIds[1] )
+                        !event.target.closest('#order_drop_off_date')
                     ) {
-                        ofCalendar.calendar._target.classList.add( ofHideCalendarClassName );
+                        document.querySelectorAll('.wrapper_front_calendar')
+                            .forEach(elem => elem.classList.add('hide'))
                     }
                 })
             })();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         });
 
     </script>
 @endif
+<script src="{{ asset('js/wow.min.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+
+<script src="{{ asset('js/app.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
@@ -196,7 +155,7 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    // console.log(formData);
+                    console.log(formData);
                     $('#successMessage').show();
                 },
                 error: function (error) {

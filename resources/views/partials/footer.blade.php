@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-12 top-foot row justify-content-between">
-                <div class="foot-left col-auto">
+                <div class="foot-left col-md-6 col-lg-auto">
                     <a href="/" class="logo foot-logo">
                         <img src="{{ asset('images/parking-logo.png') }}" alt="">
                     </a>
@@ -13,7 +13,7 @@
                         <a href="#header-block" class="foot-reservation-block__link">rezerwację</a>
                     </div>
                 </div>
-                <nav class="col-auto footer-nav">
+                <nav class="col-md-6 col-lg-auto footer-nav">
                     <div class="foot-label">Nawigacja</div>
                     <ul>
                         <li class="menu-item"><a class="nav-link scroll-to" href="#header-block" data-scroll>Start</a></li>
@@ -25,7 +25,7 @@
                         <li class="menu-item"><a class="nav-link scroll-to" href="#terms" data-scroll>Regulamin</a></li>
                     </ul>
                 </nav>
-                <div class="foot-contacts col-md-5 pr-md-0 pl-md-0">
+                <div class="foot-contacts col-12 col-lg-5 pr-md-0 pl-md-0">
                     <div class="foot-label">Kontakt</div>
                     <div class="contacts-grid">
         <span class="contact-name">        {!!  getTitleBySlug('contact-mail') !!}

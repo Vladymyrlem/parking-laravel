@@ -47,7 +47,6 @@
         {
             $description = $request->input('description');
             $media = $request->input('media');
-
             // Assuming you have a model and database table to save the data
             $yourModel = new Information();
             $yourModel->description = $description;
