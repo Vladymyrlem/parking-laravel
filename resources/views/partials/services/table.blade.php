@@ -22,7 +22,7 @@
                     <td>{{ $post->service_title }}</td>
                     <td>{{ $post->service_content }}</td>
                     <td>
-{{--                        {!! getIconHtml("$post->image", 58, 58) !!} <!-- Width and height set to 58x58 -->--}}
+                        {!! getIconHtml("$post->image", 58, 58) !!} <!-- Width and height set to 58x58 -->
                     </td>
                     <td>
                         <!-- Edit button -->

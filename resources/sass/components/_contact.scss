@@ -153,6 +153,21 @@
 
         }
 
+        .form-group {
+            margin-bottom: 20px;
+
+            &:first-child {
+                border-right: 1px solid rgba(0, 116, 183, 1);
+            }
+
+            .form-group_left:last-child, .form-group_right:last-child {
+                input {
+                    margin-bottom: 0;
+
+                }
+            }
+        }
+
         input {
             border-radius: 5px;
             border: 1px solid #E0DDDD;

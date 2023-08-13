@@ -70,7 +70,7 @@ section.calendar {
                 &.disabled {
                     color: #fff !important;
                     background: #FF4C4C;
-                    cursor: auto;
+                    cursor: not-allowed;
                 }
                 &.weekend {
                     font-weight: bold;
@@ -125,7 +125,7 @@ section.calendar {
 
     .no_select {
         opacity: .3;
-        cursor: auto;
+        cursor: not-allowed;
         &:hover {
             pointer-events: none;
         }

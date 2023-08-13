@@ -53,8 +53,10 @@
 
                 <th data-field="id" data-sortable="true">numer</th>
                 <th data-field="created_at" data-sortable="true">z dnia</th>
-                <th data-field="arrival" data-sortable="true" data-sorter="dateSort">przyjazd</th>
+                <th data-field="arrival" data-sortable="true">przyjazd</th>
+                <th data-field="arrivalh" data-sortable="true" data-sorter="dateSort" class="d-none">przyjazdh</th>
                 <th data-field="departure" data-sortable="true">wyjazd</th>
+                <th data-field="departureh" data-sortable="true" class="d-none" data-sorter="dateSort">wyjazdh</th>
                 <th data-field="count_days" data-sortable="true">ilość dni</th>
                 <th data-field="price" data-sortable="true">cena</th>
                 <th data-field="number_peoples" data-sortable="true">osob</th>
@@ -70,10 +72,11 @@
                     <td class="id">{{ $parking->id }}</td>
                     <td class="created-date">{{ $parking->created_at }}
                         <button class="btn btn-danger delete-btn" data-order-id="{{ $parking->id }}">Delete</button>
-
                     </td>
                     <td class="arrival-date">{{ $parking->arrival }}</td>
+                    <td class="arrival-date-without-time d-none">{{ $parking->arrival }}</td>
                     <td class="departure-date">{{ $parking->departure }}</td>
+                    <td class="departure-date-without-time d-none">{{ $parking->departure }}</td>
                     <td>{{ $parking->number_days }}</td>
                     <td>{{ $parking->price }}</td>
                     <td>{{ $parking->number_peoples }}</td>
@@ -263,7 +266,9 @@
                         <div class="calendar__main_calendar"></div>
                     </div>
                     <div class="calendar__date_list_wrapper">
-                        <ul class="calendar__date_list js_list_blocked_dates"></ul>
+                        <ul class="calendar__date_list js_list_blocked_dates">
+                            {{--                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>--}}
+                        </ul>
                         <div class="calendar__add_date_w">
                             <ul class="calendar__add_date_list"></ul>
 

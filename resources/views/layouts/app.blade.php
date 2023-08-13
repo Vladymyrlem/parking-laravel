@@ -251,13 +251,17 @@ position: relative;" aria-hidden="true">
         });
     });
     var todayDate = new Date().toISOString().slice(0, 10);
-
-    $(function () {
-        $(b1).click(function () {
-            $(table).bootstrapTable('filterBy', {
-                arrival: [todayDate]
-            });
+    $('#b1').click(function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            arrival: ['2023-08-13']
         });
+    });
+    $(function () {
+        // $(b1).click(function () {
+        //     $('#parkingTable').bootstrapTable('filterBy', {
+        //         arrival: ['2023-08-13']
+        //     });
+        // });
         $(b2).click(function () {
             $(table).bootstrapTable('filterBy', {
                 departure: [todayDate]
@@ -427,6 +431,7 @@ position: relative;" aria-hidden="true">
                 url: url + '/store-all-dates', // Replace with the appropriate URL
                 data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
                 success: function (response) {
+                    console.log(response);
                     reloadDatesList();
                 },
                 error: function (info) {
@@ -461,6 +466,7 @@ position: relative;" aria-hidden="true">
                         window.datesList.dates = window.fData;
                         window.datesList.listDatesRender();
                     }
+                    console.log(response);
                 },
                 error: function (error) {
                     console.error(error);

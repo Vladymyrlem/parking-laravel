@@ -7,6 +7,15 @@ margin-top: 94px">
         <div class="row">
             <div class="col-md-7 col-12">
                 <div class="reservation" id="rezerwui">
+                    <div class="reservation-block-message d-flex flex-column align-items-center text-center">
+                        <p>Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
+                        <div class="reservation-blocked-dates" id="reservation-blocked-dates">
+                            {{--  19/07/2023, 20/07/2023, 20/07/2023, 20/07/2023, 20/07/2023,
+                                  21/07/2023, 22/07/2023, 23/07/2023, 24/07/2023, 25/07/2023,
+                                  26/07/2023, 27/07/2023, 28/07/2023, 29/07/2023, 30/07/2023.--}}
+                        </div>
+                        <p>W razie zapytań prosimy o telefon - 606 550 570</p>
+                    </div>
                     <form id="orderForm" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
@@ -31,7 +40,7 @@ margin-top: 94px">
                                             fill="#151616"/>
                                     </svg>
                                         Od dnia</span>
-                                    <input readonly="readonly" type="text" name="order_pick_up_date" autocomplete="off" id="order_pick_up_date" data-rule="required" data-msg="podaj datę rozpoczęcia rezerwacji"
+                                    <input type="text" name="order_pick_up_date" autocomplete="off" id="order_pick_up_date" data-rule="required" data-msg="podaj datę rozpoczęcia rezerwacji"
                                            class="form-control form_element" placeholder="yyyy-mm-dd">
                                 </div>
                                 <div id="validation_order_pick_up_date" class="validation"></div>
@@ -104,7 +113,7 @@ margin-top: 94px">
                                             fill="#151616"/>
                                     </svg>   Do dnia
          </span>
-                                    <input readonly="readonly" type="text" name="order_drop_off_date" autocomplete="off" id="order_drop_off_date" data-rule="required"
+                                    <input type="text" name="order_drop_off_date" autocomplete="off" id="order_drop_off_date" data-rule="required"
                                            data-msg="podaj datę zakończenia rezerwacji"
                                            class="form-control form_element" placeholder="yyyy-mm-dd">
 

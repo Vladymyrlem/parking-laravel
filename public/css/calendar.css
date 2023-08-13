@@ -65,7 +65,7 @@ section.calendar .calendar__title {
 .calendar__main_calendar table tbody td.disabled {
   color: #fff !important;
   background: #FF4C4C;
-  cursor: auto;
+  cursor: not-allowed;
 }
 .order_form_wrapper_calendar table tbody td.weekend,
 .calendar__add_date_select table tbody td.weekend,
@@ -121,7 +121,7 @@ section.calendar .calendar__title {
 }
 .order_form_wrapper_calendar .no_select {
   opacity: 0.3;
-  cursor: auto;
+  cursor: not-allowed;
 }
 .order_form_wrapper_calendar .no_select:hover {
   pointer-events: none;

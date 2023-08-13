@@ -309,7 +309,7 @@ header.large .brand {
     align-items: flex-start;
   }
   header .top-header {
-    display: none;
+    display: none !important;
   }
   .header-menu {
     align-items: flex-end;
@@ -547,9 +547,6 @@ ul#countries.active {
     padding-top: 10px;
     padding-bottom: 10px;
   }
-  .top-header {
-    display: none !important;
-  }
   .header-block {
     margin-top: 75px !important;
   }
@@ -683,6 +680,31 @@ header.large .brand {
   box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 370px;
+}
+#header-block .reservation .reservation-block-message {
+  margin-bottom: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#header-block .reservation .reservation-block-message p {
+  color: var(--black, #151616);
+  text-align: center;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+#header-block .reservation .reservation-block-message .reservation-blocked-dates {
+  color: var(--prime, #0074B7);
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px;
+  text-transform: capitalize;
 }
 
 #header-block form#orderForm {
@@ -2350,6 +2372,31 @@ h2.prices {
   width: 100%;
   max-width: 370px;
 }
+#header-block .reservation .reservation-block-message {
+  margin-bottom: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+#header-block .reservation .reservation-block-message p {
+  color: var(--black, #151616);
+  text-align: center;
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
+  margin-bottom: 0;
+}
+#header-block .reservation .reservation-block-message .reservation-blocked-dates {
+  color: var(--prime, #0074B7);
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20.594px;
+  text-transform: capitalize;
+}
 
 #header-block form#orderForm {
   padding: 20px;
@@ -2904,6 +2951,15 @@ h2.prices {
   padding-left: 60px;
   margin-bottom: 30px;
 }
+#contacts-us-section form .form-group {
+  margin-bottom: 20px;
+}
+#contacts-us-section form .form-group:first-child {
+  border-right: 1px solid rgb(0, 116, 183);
+}
+#contacts-us-section form .form-group .form-group_left:last-child input, #contacts-us-section form .form-group .form-group_right:last-child input {
+  margin-bottom: 0;
+}
 #contacts-us-section form input {
   border-radius: 5px;
   border: 1px solid #E0DDDD;
@@ -3044,7 +3100,7 @@ h2.prices {
 /* Locations
 --------------------------------------------*/
 #locations {
-  margin-top: 90px;
+  margin-top: 0;
   position: relative;
   z-index: 2;
 }

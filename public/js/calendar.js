@@ -59,25 +59,25 @@ class CalendarIk {
         }
 
         // No Selected Date
-        if ( ! (this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date)) {
+        if (!(this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date)) {
 
-            if ( this.ofInputActiveId === '1' && this.ofDateFrom && date <= this.ofDateFrom ) {
+            if (this.ofInputActiveId === '1' && this.ofDateFrom && date <= this.ofDateFrom) {
                 element.classList.add(this.class.noSelect);
             }
 
-            if ( this.ofInputActiveId === '0' && this.ofDateTo && date >= this.ofDateTo ) {
+            if (this.ofInputActiveId === '0' && this.ofDateTo && date >= this.ofDateTo) {
                 element.classList.add(this.class.noSelect);
             }
 
-            const dCurr = date?.setHours(0,0,0,0);
-            const dFrom = this.ofDateFrom?.setHours(0,0,0,0);
-            const dTo = this.ofDateTo?.setHours(0,0,0,0);
+            const dCurr = date?.setHours(0, 0, 0, 0);
+            const dFrom = this.ofDateFrom?.setHours(0, 0, 0, 0);
+            const dTo = this.ofDateTo?.setHours(0, 0, 0, 0);
 
-            if ( dCurr && dFrom && dCurr === dFrom ) {
+            if (dCurr && dFrom && dCurr === dFrom) {
                 element.classList.add(this.class.dateFrom);
             }
 
-            if ( dCurr && dTo && dCurr === dTo ) {
+            if (dCurr && dTo && dCurr === dTo) {
                 element.classList.add(this.class.dateTo);
             }
         }
@@ -101,25 +101,25 @@ class CalendarIk {
     // Function ONClick Date Calendar
     setActionOnDateClick = () => {
 
-        console.log( this )
+        console.log(this)
 
-        const dates = this.calendar._target.querySelectorAll( ' .calendar_date');
-        dates?.forEach( date => {
-            if ( ! date.classList.contains('disabled')
-            || ! date.classList.contains('no_select') ) {
+        const dates = this.calendar._target.querySelectorAll(' .calendar_date');
+        dates?.forEach(date => {
+            if (!date.classList.contains('disabled')
+                || !date.classList.contains('no_select')) {
 
-                date.addEventListener( 'click', event => {
+                date.addEventListener('click', event => {
 
-                    if ( this.ofInputActive ) {
+                    if (this.ofInputActive) {
                         this.ofInputActive.value = date.dataset.calendarDate.split('/').reverse().join('-');
-                        this.ofInputActive.setAttribute( 'data-selected-date', date.dataset.calendarDate );
+                        this.ofInputActive.setAttribute('data-selected-date', date.dataset.calendarDate);
                     }
 
-                    if ( this.ofInputActiveId === '0' ) {
-                        this.ofDateFrom = new Date( date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
+                    if (this.ofInputActiveId === '0') {
+                        this.ofDateFrom = new Date(date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
                     }
-                    if ( this.ofInputActiveId === '1' ) {
-                        this.ofDateTo = new Date( date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
+                    if (this.ofInputActiveId === '1') {
+                        this.ofDateTo = new Date(date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
                     }
 
                     this.calendar.refresh();
@@ -209,7 +209,6 @@ class DatesList {
             }
         });
     }
-
 
 
     /*
