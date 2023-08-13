@@ -267,12 +267,12 @@ position: relative;" aria-hidden="true">
         // });
         $(b2).click(function () {
             $(table).bootstrapTable('filterBy', {
-                departure: [todayDate]
+                departureh: [todayDate]
             });
         });
         $(b3).click(function () {
             $(table).bootstrapTable('filterBy', {
-                datah: [todayDate]
+                arrivalh: [todayDate]
             });
         });
         $(b4).click(function () {

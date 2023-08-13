@@ -86,12 +86,11 @@
             const ofWrapperCalendarClassName = 'order_form_wrapper_calendar';
             const ofHideCalendarClassName = 'hide';
 
-
             /*
-             * Create info text
-             */
-            const textWrap = document.querySelector( '#reservation-blocked-dates' );
-            if ( textWrap ) {
+                      * Create info text
+                      */
+            const textWrap = document.querySelector('#reservation-blocked-dates');
+            if (textWrap) {
                 textWrap.innerText = `${
                     $blockedDates
                         .filter(elem => {

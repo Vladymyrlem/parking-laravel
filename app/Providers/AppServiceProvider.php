@@ -39,5 +39,8 @@
             Blade::directive('getIconSVG', function ($expression) {
                 return "<?php echo App\Helpers\getIconSVG$expression; ?>";
             });
+            Blade::directive('convertDate', function ($expression) {
+                return "<?php echo App\Helpers\getConvertedDate$expression; ?>";
+            });
         }
     }

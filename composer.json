@@ -44,7 +44,8 @@
         },
         "files": [
             "app/Helpers/helpers.php",
-            "app/Helpers/SVGHelper.php"
+            "app/Helpers/SVGHelper.php",
+            "app/Helpers/DateHelper.php"
         ]
     },
     "autoload-dev": {
