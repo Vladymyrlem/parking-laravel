@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
 
     @yield('styles')
@@ -216,12 +217,7 @@ position: relative;" aria-hidden="true">
             toggleButton.text('Show All Rows');
         }
     });
-    var b1 = $('#b1');
-    var b2 = $('#b2');
-    var b3 = $('#b3');
-    var b4 = $('#b4');
-    var b5 = $('#b5');
-    var table = $('#parkingTable');
+
 
     function dateSort(a, b) {
         var aDate = new Date(a);
@@ -229,7 +225,7 @@ position: relative;" aria-hidden="true">
         return aDate - bDate;
     }
 
-    table.bootstrapTable({
+    $('#parkingTable').bootstrapTable({
         locale: 'pl',
         toolbar: '.toolbar'
     });
@@ -253,34 +249,54 @@ position: relative;" aria-hidden="true">
     var todayDate = new Date().toISOString().slice(0, 10);
     $('#b1').click(function () {
         $('#parkingTable').bootstrapTable('filterBy', {
-            arrival: ['2023-08-13']
+            arrivalh: [todayDate]
         });
     });
-    $(function () {
-        // $(b1).click(function () {
-        //     $('#parkingTable').bootstrapTable('filterBy', {
-        //         arrival: ['2023-08-13']
-        //     });
-        // });
-        $(b2).click(function () {
-            $(table).bootstrapTable('filterBy', {
-                departureh: [todayDate]
-            });
-        });
-        $(b3).click(function () {
-            $(table).bootstrapTable('filterBy', {
-                arrivalh: [todayDate]
-            });
-        });
-        $(b4).click(function () {
-            $(table).bootstrapTable('filterBy', {});
-        });
-        $(b5).click(function () {
-            $(table).bootstrapTable('filterBy', {
-                oldh: ['tak', 'nie']
-            });
+    $('#b2').click(function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            departureh: [todayDate]
         });
     });
+    $('#b3').click(function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            createdh: [todayDate]
+        });
+    });
+
+    function formatDate(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0');
+        var day = String(date.getDate()).padStart(2, '0');
+        return year + '-' + month + '-' + day;
+    }
+
+    $('#b4').click(function () {
+        var todayDate = new Date(); // Current date
+        var oneWeekAgo = new Date(todayDate);
+        oneWeekAgo.setDate(todayDate.getDate() - 7); // Subtract 7 days
+
+        var oneYearAgo = new Date(todayDate);
+        oneYearAgo.setFullYear(todayDate.getFullYear() - 1); // Subtract 1 year
+
+        var customStartDate = new Date(todayDate);
+        customStartDate.setDate(todayDate.getDate() - 7); // Subtract 7 days
+        customStartDate.setFullYear(todayDate.getFullYear() - 1); // Subtract 1 year
+
+        var dateArray = [];
+        var currentDate = new Date(customStartDate);
+        // console.log(customStartDate);
+
+        // Generate an array of dates starting from customStartDate up to oneWeekAgo
+        while (currentDate <= oneWeekAgo) {
+            dateArray.push(formatDate(currentDate));
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+        // console.log(dateArray);
+        $('#parkingTable').bootstrapTable('filterBy', {
+            createdh: dateArray
+        });
+    });
+
 
     $('#sortByToday').on('click', function () {
         $('#parkingTable').bootstrapTable('filterBy', {

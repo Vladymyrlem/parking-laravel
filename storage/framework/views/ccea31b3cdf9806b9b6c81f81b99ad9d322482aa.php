@@ -23,19 +23,19 @@
             <button id="b1" class="btn btn-secondary">przyjazd dzisiaj</button>
             <button id="b2" class="btn btn-secondary">wyjazd dzisiaj</button>
             <button id="b3" class="btn btn-secondary">z dzisiaj</button>
-            <button id="b5" class="btn btn-secondary">pokaż starsze</button>
-            <button id="b4" class="btn btn-secondary">wyczyść filtr</button>
+            <button id="b4" class="btn btn-secondary">pokaż starsze</button>
+            <button id="resetFilters" class="btn btn-secondary">wyczyść filtr</button>
         </div>
         <!-- /.content-header -->
         <table id="parkingTable" data-toggle="table"
                data-search="true"
-               data-show-refresh="true"
+               data-show-refresh="false"
                data-show-toggle="true"
                data-show-fullscreen="true"
-               data-show-columns="true"
-               data-show-columns-toggle-all="true"
-               data-detail-view="true"
-               data-show-export="true"
+               data-show-columns="false"
+               data-show-columns-toggle-all="false"
+               data-detail-view="false"
+               data-show-export="false"
                data-click-to-select="true"
                data-detail-formatter="detailFormatter"
                data-minimum-count-columns="2"
@@ -51,6 +51,7 @@
 
                 <th data-field="id" data-sortable="true">numer</th>
                 <th data-field="created_at" data-sortable="true">z dnia</th>
+                <th data-field="createdh" data-sortable="true" class="d-none">z dnia h</th>
                 <th data-field="arrival" data-sortable="true">przyjazd</th>
                 <th data-field="arrivalh" data-sortable="true" data-sorter="dateSort" class="d-none">przyjazdh</th>
                 <th data-field="departure" data-sortable="true">wyjazd</th>
@@ -71,6 +72,9 @@
                     <td class="created-date"><?php echo e($parking->created_at); ?>
 
                         <button class="btn btn-danger delete-btn" data-order-id="<?php echo e($parking->id); ?>">Delete</button>
+                    </td>
+                    <td class="created-date-without-time d-none"><?php echo e(getConvertedDate($parking->created_at)); ?>
+
                     </td>
                     <td class="arrival-date"><?php echo e($parking->arrival); ?></td>
                     <td class="arrival-date-without-time d-none">
