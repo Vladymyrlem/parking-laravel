@@ -7,6 +7,34 @@
     box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 370px;
+
+    .reservation-block-message {
+        margin-bottom: 0;
+        padding-left: 20px;
+        padding-right: 20px;
+
+        p {
+            color: var(--black, #151616);
+            text-align: center;
+            font-family: Lato, sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20.594px; /* 128.711% */
+            text-transform: capitalize;
+            margin-bottom: 0;
+        }
+
+        .reservation-blocked-dates {
+            color: var(--prime, #0074B7);
+            font-family: Lato, sans-serif;
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: 20.594px;
+            text-transform: capitalize;
+        }
+    }
 }
 
 #header-block form {

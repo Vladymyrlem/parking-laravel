@@ -7,6 +7,15 @@ margin-top: 94px">
         <div class="row">
             <div class="col-md-7 col-12">
                 <div class="reservation" id="rezerwui">
+                    <div class="reservation-block-message d-flex flex-column align-items-center text-center">
+                        <p>Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
+                        <div class="reservation-blocked-dates" id="reservation-blocked-dates">
+                            {{--  19/07/2023, 20/07/2023, 20/07/2023, 20/07/2023, 20/07/2023,
+                                  21/07/2023, 22/07/2023, 23/07/2023, 24/07/2023, 25/07/2023,
+                                  26/07/2023, 27/07/2023, 28/07/2023, 29/07/2023, 30/07/2023.--}}
+                        </div>
+                        <p>W razie zapytań prosimy o telefon - 606 550 570</p>
+                    </div>
                     <form id="orderForm" enctype="multipart/form-data">
                         @csrf
                         @method('POST')

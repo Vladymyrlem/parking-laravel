@@ -81,50 +81,96 @@
         $(document).ready(function () {
             window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
 
-            [
-                '#order_pick_up_date',
-                '#order_drop_off_date'
-            ]
-                .forEach((input, i) => {
-                    const $input = document.querySelector(input);
-                    if ($input) {
-                        const wrapperCalendar = document.createElement('div');
-                        const classLst = ['wrapper_front_calendar', `wrapper_calendar_${i}`, 'hide'];
-                        classLst.forEach(clss => wrapperCalendar.classList.add(clss));
-                        $input.after(wrapperCalendar);
+            const orderForm = document.querySelector('#orderForm');
+            const ofInputsIds = ['#order_pick_up_date', '#order_drop_off_date'];
+            const ofWrapperCalendarClassName = 'order_form_wrapper_calendar';
+            const ofHideCalendarClassName = 'hide';
 
-                        window[`calendarSelectDate_${i}`] = new CalendarIk({
-                            dates: window.$blockedDates,
-                            calendarWrapperClass: `.${classLst[1]}`,
-                        });
+            /*
+             * Create info text
+             */
+            const textWrap = document.createElement('div');
+            textWrap.id = 'reservation-blocked-dates';
+            textWrap.classList.add('infoOff');
+            textWrap.innerText = `${
+                $blockedDates
+                    .filter(elem => {
+                        const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
+                        const date = new Date().setHours(0, 0, 0, 0);
+                        return currDate >= date;
+                    })
+                    .map(elem => elem.new_date)
+                    .join(', ')
+            }`;
+            orderForm.prepend(textWrap);
 
-                        $input.addEventListener('click', e => {
-                            e.preventDefault();
-                            const calendarWrapper = e.target.nextElementSibling;
-                            document.querySelectorAll('.wrapper_front_calendar')
-                                .forEach(elem => elem.classList.add('hide'))
 
-                            calendarWrapper.classList.remove('hide');
-                        })
-                    }
-                })
+            /*
+             * Create Wrapper For Calendar
+             */
+            const ofWrapperCalendar = document.createElement('div');
+            ofWrapperCalendar.classList.add(ofWrapperCalendarClassName);
+            ofWrapperCalendar.classList.add(ofHideCalendarClassName);
+            orderForm.append(ofWrapperCalendar);
 
+            /*
+             * Create Calendar
+             */
+            window.ofCalendar = new CalendarIk({
+                dates: window.$blockedDates,
+                calendarWrapperClass: '.' + ofWrapperCalendarClassName,
+                ofInputDateFrom: document.querySelector(ofInputsIds[0]),
+                ofInputDateTo: document.querySelector(ofInputsIds[1]),
+            });
+
+            /*
+             * Create Events for Inputs
+             */
+            ofInputsIds.forEach((input, i) => {
+                const $input = document.querySelector(input);
+                if ($input) {
+
+                    $input.setAttribute('data-input-id', i);
+                    $input.setAttribute('readonly', 'readonly');
+
+                    $input.addEventListener('click', e => {
+                        e.preventDefault();
+
+                        // Set Calendar position
+                        const posForm = orderForm.getBoundingClientRect();
+                        const posInput = e.target.getBoundingClientRect();
+                        const posLeft = posInput.left - posForm.left + posInput.width;
+                        const posTop = posInput.top - posForm.top;
+                        ofCalendar.calendar._target.style.top = posTop + 'px';
+                        ofCalendar.calendar._target.style.left = posLeft + 'px';
+
+                        ofCalendar.calendar._target.classList.remove(ofHideCalendarClassName);
+                        ofCalendar.ofInputActive = $input;
+                        ofCalendar.ofInputActiveId = $input.dataset.inputId;
+                        ofCalendar.calendar.refresh();
+                        ofCalendar.setActionOnDateClick();
+                    })
+                }
+            })
+
+            /*
+             * Close Calendars Click Out calendar
+             */
             // hide Calendars
             ;(() => {
                 document.addEventListener('click', event => {
-                    if (!event.target.closest('.wrapper_front_calendar')
+
+                    if (!event.target.closest('.' + ofWrapperCalendarClassName)
                         &&
-                        !event.target.closest('#order_pick_up_date')
+                        !event.target.closest(ofInputsIds[0])
                         &&
-                        !event.target.closest('#order_drop_off_date')
+                        !event.target.closest(ofInputsIds[1])
                     ) {
-                        document.querySelectorAll('.wrapper_front_calendar')
-                            .forEach(elem => elem.classList.add('hide'))
+                        ofCalendar.calendar._target.classList.add(ofHideCalendarClassName);
                     }
                 })
             })();
         });
-
     </script>
 @endif
 <script src="{{ asset('js/wow.min.js') }}"></script>
@@ -308,30 +354,11 @@
         });
         var url = $('#url').val();
 
-        // var modifiedUrl = url + '/reservations'
-        //
-        // // Fetch reserved dates from the backend using AJAX
-        // function fetchReservedDates() {
-        //     // Replace 'your_endpoint_url' with the actual endpoint URL to fetch the reserved dates
-        //     $.ajax({
-        //         type: "GET",
-        //         url: modifiedUrl,
-        //         success: function (data) {
-        //             // Call the function to add the calendar with reserved dates
-        //             addCalendarWithReservedDates(data.reservedDates);
-        //         },
-        //         error: function (error) {
-        //             console.log('Error:', error);
-        //         }
-        //     });
-        // }
-        //
-        //
-        // // Add calendar input on button click
-        // $('#add').click(function () {
-        //     fetchReservedDates(); // Fetch the reserved dates from the backend and add the calendar
-        // });
+
     });
+
+    var datesArray = <?php echo json_encode($blockedDates); ?>;
+
 </script>
 </body>
 </html>

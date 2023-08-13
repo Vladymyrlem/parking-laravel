@@ -251,13 +251,17 @@ position: relative;" aria-hidden="true">
         });
     });
     var todayDate = new Date().toISOString().slice(0, 10);
-
-    $(function () {
-        $(b1).click(function () {
-            $(table).bootstrapTable('filterBy', {
-                arrival: [todayDate]
-            });
+    $('#b1').click(function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            arrival: ['2023-08-13']
         });
+    });
+    $(function () {
+        // $(b1).click(function () {
+        //     $('#parkingTable').bootstrapTable('filterBy', {
+        //         arrival: ['2023-08-13']
+        //     });
+        // });
         $(b2).click(function () {
             $(table).bootstrapTable('filterBy', {
                 departure: [todayDate]

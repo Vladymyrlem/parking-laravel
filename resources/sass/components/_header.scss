@@ -165,8 +165,9 @@ header.large .brand {
     header .row {
         align-items: flex-start;
     }
+
     header .top-header {
-        display: none;
+        display: none !important;
     }
     .header-menu {
         align-items: flex-end;

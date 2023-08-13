@@ -35,8 +35,7 @@ section.calendar {
 }
 
 // Calendars //
-.wrapper_start_calendar,
-.wrapper_end_calendar,
+.order_form_wrapper_calendar,
 .calendar__add_date_select,
 .calendar__main_calendar {
 
@@ -71,9 +70,8 @@ section.calendar {
                 &.disabled {
                     color: #fff !important;
                     background: #FF4C4C;
-                    cursor: auto;
+                    cursor: not-allowed;
                 }
-
                 &.weekend {
                     font-weight: bold;
                     color: #c32525;
@@ -85,7 +83,6 @@ section.calendar {
                         color: #fff !important;
                         background: #EEB1B1;
                     }
-
                     &.weekend {
                         color: #ffc3c3;
                     }
@@ -99,21 +96,43 @@ section.calendar {
     }
 }
 
-// Front Calendars
-.wrapper_front_calendar {
-    display: block;
+// Front Calendars Position
+#orderForm {
+    position: relative;
+}
+#order_pick_up_date,
+#order_drop_off_date {
+    width: 140px;
+}
+.order_form_wrapper_calendar {
     position: absolute;
-    top: -4px;
-    left: 220px;
-    width: 300px;
-    height: 300px;
-    z-index: 100;
+    top: 0;
+    left: 100%;
+    z-index: 10;
+    display: block;
+
+    width: 298px;
+    height: auto;
 
     &.hide {
         display: none;
     }
+
+    .day_from,
+    .day_to {
+        outline: 1px solid #0074B7;
+    }
+
+    .no_select {
+        opacity: .3;
+        cursor: not-allowed;
+        &:hover {
+            pointer-events: none;
+        }
+    }
 }
 
+// Dates List
 .calendar__add_date_select {
     padding: 10px;
     overflow: hidden;
@@ -123,7 +142,6 @@ section.calendar {
         animation: collapseCalendar .3s ease-in-out;
         animation-fill-mode: forwards;
     }
-
     &.expand_calendar {
         animation: expandCalendar .3s ease-in-out;
         animation-fill-mode: forwards;
@@ -182,15 +200,12 @@ section.calendar {
         &:nth-child(1) {
             animation-delay: -0.45s;
         }
-
         &:nth-child(2) {
             animation-delay: -0.3s;
         }
-
         &:nth-child(3) {
             animation-delay: -0.15s;
         }
-
         &:nth-child(4) {
             animation-delay: -0.45s;
         }
@@ -267,5 +282,13 @@ section.calendar {
         margin: 0 auto;
         padding: 10px 20px;
         cursor: pointer;
+    }
+}
+
+#orderForm {
+    .date, .time {
+        input, select {
+            cursor: pointer;
+        }
     }
 }

@@ -61,6 +61,8 @@
             $about_us_title = DB::table('about_us')->value('title');;
             $about_us_content = DB::table('about_us')->value('content');
             $parkings = Parking::all();
+            $parkings_arrival = Parking::all('arrival');
+            $parkings_departure = Parking::all('departure');
             return view('admin', compact('prices', 'headBlocks', 'information', 'reviews', 'contacts',
                 'section_title', 'reservations', 'services', 'newsletter', 'text_content', 'about_us', 'about_us_title', 'about_us_content', 'parkings'));
         }

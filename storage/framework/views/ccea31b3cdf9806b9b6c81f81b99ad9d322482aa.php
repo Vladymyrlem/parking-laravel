@@ -1,5 +1,3 @@
-
-
 <?php $__env->startSection('content'); ?>
     <style>
         .main-header {
@@ -53,8 +51,10 @@
 
                 <th data-field="id" data-sortable="true">numer</th>
                 <th data-field="created_at" data-sortable="true">z dnia</th>
-                <th data-field="arrival" data-sortable="true" data-sorter="dateSort">przyjazd</th>
+                <th data-field="arrival" data-sortable="true">przyjazd</th>
+                <th data-field="arrivalh" data-sortable="true" data-sorter="dateSort" class="d-none">przyjazdh</th>
                 <th data-field="departure" data-sortable="true">wyjazd</th>
+                <th data-field="departureh" data-sortable="true" class="d-none" data-sorter="dateSort">wyjazdh</th>
                 <th data-field="count_days" data-sortable="true">ilość dni</th>
                 <th data-field="price" data-sortable="true">cena</th>
                 <th data-field="number_peoples" data-sortable="true">osob</th>
@@ -71,10 +71,11 @@
                     <td class="created-date"><?php echo e($parking->created_at); ?>
 
                         <button class="btn btn-danger delete-btn" data-order-id="<?php echo e($parking->id); ?>">Delete</button>
-
                     </td>
                     <td class="arrival-date"><?php echo e($parking->arrival); ?></td>
+                    <td class="arrival-date-without-time d-none"><?php echo e($parking->arrival); ?></td>
                     <td class="departure-date"><?php echo e($parking->departure); ?></td>
+                    <td class="departure-date-without-time d-none"><?php echo e($parking->departure); ?></td>
                     <td><?php echo e($parking->number_days); ?></td>
                     <td><?php echo e($parking->price); ?></td>
                     <td><?php echo e($parking->number_peoples); ?></td>

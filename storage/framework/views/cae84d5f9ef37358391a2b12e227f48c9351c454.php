@@ -53,9 +53,10 @@
 
     <!-- Navbar -->
     <header class="main-header navbar navbar-expand navbar-white navbar-light">
-        <a href="/admin" class="brand-link">
-            <img src="<?php echo e(asset('images/parking-logo.png')); ?>" alt="Parking Rondo Logo"
-                 class="brand-image logo"
+        <a href="/admin" class="brand-link logo">
+            <img src="<?php echo e(asset('images/parking-logo.png')); ?>"
+                 alt="Parking Rondo Logo"
+                 class="brand-image"
                  style="opacity: 1">
         </a>
         <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
@@ -253,21 +254,25 @@ position: relative;" aria-hidden="true">
         });
     });
     var todayDate = new Date().toISOString().slice(0, 10);
-
-    $(function () {
-        $(b1).click(function () {
-            $(table).bootstrapTable('filterBy', {
-                arrival: [todayDate]
-            });
+    $('#b1').click(function () {
+        $('#parkingTable').bootstrapTable('filterBy', {
+            arrival: ['2023-08-13']
         });
+    });
+    $(function () {
+        // $(b1).click(function () {
+        //     $('#parkingTable').bootstrapTable('filterBy', {
+        //         arrival: ['2023-08-13']
+        //     });
+        // });
         $(b2).click(function () {
             $(table).bootstrapTable('filterBy', {
-                departure: ['2023-08-11']
+                departure: [todayDate]
             });
         });
         $(b3).click(function () {
             $(table).bootstrapTable('filterBy', {
-                datah: ['2023-08-11']
+                datah: [todayDate]
             });
         });
         $(b4).click(function () {
