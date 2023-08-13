@@ -73,9 +73,12 @@
                         <button class="btn btn-danger delete-btn" data-order-id="<?php echo e($parking->id); ?>">Delete</button>
                     </td>
                     <td class="arrival-date"><?php echo e($parking->arrival); ?></td>
-                    <td class="arrival-date-without-time d-none"><?php echo e($parking->arrival); ?></td>
+                    <td class="arrival-date-without-time d-none">
+                        <?php echo e(getConvertedDate($parking->arrival)); ?>
+
+                    </td>
                     <td class="departure-date"><?php echo e($parking->departure); ?></td>
-                    <td class="departure-date-without-time d-none"><?php echo e($parking->departure); ?></td>
+                    <td class="departure-date-without-time d-none"><?php echo e(getConvertedDate($parking->departure)); ?></td>
                     <td><?php echo e($parking->number_days); ?></td>
                     <td><?php echo e($parking->price); ?></td>
                     <td><?php echo e($parking->number_peoples); ?></td>

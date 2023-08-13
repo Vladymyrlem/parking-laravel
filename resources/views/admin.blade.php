@@ -74,9 +74,11 @@
                         <button class="btn btn-danger delete-btn" data-order-id="{{ $parking->id }}">Delete</button>
                     </td>
                     <td class="arrival-date">{{ $parking->arrival }}</td>
-                    <td class="arrival-date-without-time d-none">{{ $parking->arrival }}</td>
+                    <td class="arrival-date-without-time d-none">
+                        {{ getConvertedDate($parking->arrival) }}
+                    </td>
                     <td class="departure-date">{{ $parking->departure }}</td>
-                    <td class="departure-date-without-time d-none">{{ $parking->departure }}</td>
+                    <td class="departure-date-without-time d-none">{{ getConvertedDate($parking->departure) }}</td>
                     <td>{{ $parking->number_days }}</td>
                     <td>{{ $parking->price }}</td>
                     <td>{{ $parking->number_peoples }}</td>
