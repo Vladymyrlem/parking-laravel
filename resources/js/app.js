@@ -216,23 +216,55 @@ jQuery(function () {
             }
         });
     });
-    $('#orderForm input').keyup(function () {
-        var emptyFields = false;
+    /*
+            * Validate Order Form
+            */
+    var errorText = 'To pole jest obowiązkowe';
+
+    function checkFieldsNotEmpty(event) {
+        var allFieldsNotEmpty = true;
+
         $('#orderForm input').each(function () {
-            if ($(this).val() === '') {
-                emptyFields = true;
+            if ($(this).val().trim() === '') {
+                allFieldsNotEmpty = false;
                 $(this).addClass('error-border');
+                $('#validation_' + this.id).text(errorText)
             } else {
                 $(this).removeClass('error-border');
+                $('#validation_' + this.id).text('')
             }
         });
 
-        if (emptyFields) {
-            $('#order_submit_btn').prop('disabled', true);
-        } else {
+        return allFieldsNotEmpty;
+    }
+
+    $('#orderForm input').on('click', function () {
+        $(this).removeClass('error-border');
+        $('#validation_' + this.id).text('')
+        $('#order_submit_btn').prop('disabled', false);
+    });
+
+    $('#order_submit_btn').addClass('disabled').prop('disabled', false).on('click', function (e) {
+        if (checkFieldsNotEmpty()) {
             $('#order_submit_btn').prop('disabled', false);
+        } else {
+            $('#order_submit_btn').prop('disabled', true);
+        }
+    })
+    // - Validate Order Form
+
+    /*
+     * Validate Form Checkout
+     */
+    $('#checkout_submit_btn').prop('disabled', true)
+    $('#checkout_approval_1').on('change', function (e) {
+        if (e.target.checked) {
+            $('#checkout_submit_btn').prop('disabled', false).removeClass('disabled');
+        } else {
+            $('#checkout_submit_btn').prop('disabled', true).addClass('disabled');
         }
     });
+    // - Validate Form Checkout
 
     $('#form_contact').on('submit', function (e) {
         e.preventDefault();
