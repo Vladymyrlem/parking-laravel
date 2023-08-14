@@ -153,17 +153,30 @@
             return view('admin', compact('blockedDatesJson'));
         }
 
+//        public function uploadImage(Request $request)
+//        {
+//            $uploadedFile = $request->file('file');
+//
+//            // Save the file to the "public/c" directory
+//            $imagePath = $request->file('file')->storePublicly('images', 'custom');
+//
+//            // Extract the filename from the stored path
+//            $imageName = basename($imagePath);
+//            // Get the public URL for the file
+//            return response()->json(['location' => "/images/$imageName"]);
+//        }
         public function uploadImage(Request $request)
         {
             $uploadedFile = $request->file('file');
 
-            // Save the file to the "public/c" directory
-            $imagePath = $request->file('file')->storePublicly('images', 'custom');
+            // Get the original filename
+            $originalFilename = $uploadedFile->getClientOriginalName();
 
-            // Extract the filename from the stored path
-            $imageName = basename($imagePath);
+            // Save the file to the "public/images" directory with the original filename
+            $imagePath = $request->file('file')->storeAs('images', $originalFilename, 'custom');
+
             // Get the public URL for the file
-            return response()->json(['location' => "/images/$imageName"]);
+            return response()->json(['location' => "/images/$originalFilename"]);
         }
 
         public function calendarDate(Request $request)

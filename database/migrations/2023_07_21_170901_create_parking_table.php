@@ -14,7 +14,6 @@
         {
             Schema::create('parking', function (Blueprint $table) {
                 $table->id();
-                $table->dateTime('start_date');
                 $table->dateTime('arrival');
                 $table->dateTime('departure');
                 $table->integer('number_days');
@@ -24,8 +23,13 @@
                 $table->text('client_surname');
                 $table->integer('phone_number');
                 $table->text('email');
+                $table->string('type_car');
                 $table->string('car_mark');
+                $table->string('car_number');
+                $table->string('car_model');
                 $table->timestamps();
+                $table->softDeletes();
+
             });
         }
 

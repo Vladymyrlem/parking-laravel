@@ -14,12 +14,14 @@
         {
             Schema::create('prices', function (Blueprint $table) {
                 $table->id();
-                $table->integer('count_days');
+                $table->integer('count_days')->default(0)->change();
                 $table->decimal('standart_price', 8, 2);
                 $table->decimal('promotional_price', 8, 2);
                 $table->date('start_promotional_date');
                 $table->date('end_promotional_date');
                 $table->timestamps();
+                $table->softDeletes();
+
             });
         }
 

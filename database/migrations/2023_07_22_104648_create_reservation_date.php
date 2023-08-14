@@ -14,8 +14,7 @@
         {
             Schema::create('reservation_date', function (Blueprint $table) {
                 $table->id();
-                $table->integer('user_id');
-                $table->date('reservation_date');
+                $table->date('new_date');
                 $table->timestamps();
             });
         }

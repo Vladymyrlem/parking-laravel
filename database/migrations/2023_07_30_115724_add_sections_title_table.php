@@ -15,6 +15,7 @@
             Schema::create('sections_title', function (Blueprint $table) {
                 $table->id();
                 $table->text('title');
+                $table->string('subtitle');
                 $table->text('slug');
                 $table->timestamps();
                 $table->softDeletes();

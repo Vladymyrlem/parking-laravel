@@ -173,17 +173,21 @@ margin-top: 94px">
                                         <option value="23:30">23:30</option>
                                     </select>
                                 </div>
-                                <div id="validation_order_drop_off_time" class="validation"></div>
                             </div>
+                            <div id="validation_order_drop_off_time" class="validation"></div>
 
                         </div>
                         <div class="decor-order-line"></div>
                         <div class="form-group styled-input-car">
                             <input type="text" id="client_phone" name="client_phone" placeholder="Podaj swój telefon">
                         </div>
+                        <div id="validation_client_phone" class="validation"></div>
+
                         <div class="form-group styled-input-car">
                             <input type="email" id="client_email" name="client_email" placeholder="Wpisz swój adres email">
                         </div>
+                        <div id="validation_client_email" class="validation"></div>
+
                         <button type="submit" id="order_submit_btn" class="submit" disabled>dokończ rezerwację</button>
                     </form>
                 </div>

@@ -21,6 +21,7 @@
                 $table->string('phone_number_2');
                 $table->float('latitude');
                 $table->float('longitude');
+                $table->text('map_link');
             });
         }
 

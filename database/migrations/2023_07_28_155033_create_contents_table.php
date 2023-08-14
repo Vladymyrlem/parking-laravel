@@ -15,6 +15,7 @@
             Schema::create('contents', function (Blueprint $table) {
                 $table->id();
                 $table->longText('content');
+                $table->string('slug');
                 $table->timestamps();
                 $table->softDeletes();
             });
