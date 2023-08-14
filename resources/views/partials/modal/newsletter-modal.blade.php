@@ -40,6 +40,7 @@
                 </form>
             </div>
             <div class="modal-footer">
+
                 <button type="button" class="btn btn-primary" id="btn-save-newsletter" value="add">Save Changes</button>
                 <input type="hidden" id="newsletter_id" name="newsletter_id" value="0">
             </div>

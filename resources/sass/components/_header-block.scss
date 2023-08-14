@@ -2,6 +2,11 @@
     padding-top: 107px;
     padding-bottom: 107px;
 
+    .header-right {
+        display: flex;
+        align-items: center;
+    }
+
     #headblockCarousel {
         width: 100%;
         max-width: 470px;

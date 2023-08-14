@@ -1,3 +1,5 @@
+<script src="https://www.google.com/recaptcha/api.js?render=explicit"></script>
+
 <section id="newsletter" class="wow slideInLeft animated" data-wow-offset="300" style="visibility: visible; animation-name: slideInLeft;">
     <div class="container">
         <div class="row">
@@ -64,6 +66,19 @@
                             <span class="custom-checkmark"></span>
                             Zgodnie z art. 13 ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informujemy, iż: » rozwiń
                         </label>
+                        <div class="g-recaptcha" data-sitekey="6LdThHsnAAAAANxCKFV4g8K3jONKSG5DE9rWY9zs"></div>
+                        <script>
+                            grecaptcha.ready(function () {
+                                grecaptcha.execute('6LdThHsnAAAAANxCKFV4g8K3jONKSG5DE9rWY9zs', {
+                                    action: 'subscribe'
+                                }).then(function (token) {
+                                    var recaptchaInput = document.getElementById('g-recaptcha-response-64da1b744d6f3');
+                                    if (recaptchaInput) {
+                                        recaptchaInput.value = token;
+                                    }
+                                });
+                            });
+                        </script>
                     </div>
                     <br>
                     <div id="successMessage" style="display: none;">You have been subscribed successfully!</div>

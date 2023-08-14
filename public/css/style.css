@@ -1165,6 +1165,10 @@ header.large .brand {
   padding-top: 107px;
   padding-bottom: 107px;
 }
+#header-block .header-right {
+  display: flex;
+  align-items: center;
+}
 #header-block #headblockCarousel {
   width: 100%;
   max-width: 470px;
@@ -1534,7 +1538,7 @@ h2.prices {
 
 #prices .styled-select-vehicle-data:after {
   content: "";
-  background: #ffffff url("../img/dropdown-icon.png") no-repeat 5px 18px;
+  background: #ffffff url("../images/dropdown-icon.png") no-repeat 5px 18px;
   right: 0px;
   top: 0px;
   width: 30px;
@@ -2938,7 +2942,7 @@ h2.prices {
 
 #locations .styled-select-location:after {
   content: "";
-  background: #ffffff url("../img/dropdown-icon.png") no-repeat 5px 21px;
+  background: #ffffff url("../images/dropdown-icon.png") no-repeat 5px 21px;
   right: 0px;
   top: 0px;
   width: 30px;
@@ -3487,7 +3491,7 @@ footer .footer-nav li a:hover {
 
 #checkoutModal form .styled-select-age:after {
   content: "";
-  background: #ffffff url("../img/dropdown-icon.png") no-repeat 5px 18px;
+  background: #ffffff url("../images/dropdown-icon.png") no-repeat 5px 18px;
   right: 0px;
   top: 0px;
   width: 29px;
@@ -3507,15 +3511,44 @@ footer .footer-nav li a:hover {
   height: 39px;
 }
 
+#header-block .approval-rodo-checkbox {
+  padding-left: 40px;
+  color: #757575;
+  font-family: Lato, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 16.8px */
+  text-transform: capitalize;
+}
+#header-block .approval-rodo-checkbox span.subtitle {
+  color: #757575;
+  font-family: Lato, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 16.8px */
+  text-transform: capitalize;
+}
+
 #checkoutModal form input {
   background-color: #fff;
   height: 45px;
-  border-radius: 0;
-  border: 2px solid #dbdbdb;
+  border-radius: 5px;
+  border: 1px solid #E0DDDD;
   box-shadow: none;
   line-height: 45px;
   font-size: 18px;
   padding: 10px;
+}
+#checkoutModal form input::placeholder {
+  color: var(--grey, #AFADAD);
+  /* Body */
+  font-family: Lato, sans-serif;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 25.2px */
 }
 
 #checkoutModal form input:focus {
@@ -3584,6 +3617,7 @@ form input[type=checkbox]:checked + label:before {
 }
 #checkoutModal form .row.approval_rodo_row .approval_rodo {
   background: #F3F3F8;
+  padding: 10px 20px;
 }
 #checkoutModal form .row.approval_rodo_row .approval_rodo p {
   color: #3D405C;
@@ -3623,7 +3657,10 @@ form input[type=checkbox]:checked + label:before {
 }
 
 #checkoutModal .modal-footer {
-  background-color: #e3e2e2;
+  background-color: #fff;
+  display: flex;
+  justify-content: space-between;
+  border-top: 0;
 }
 
 #checkoutModal .modal-footer .btn {
@@ -3645,20 +3682,35 @@ form input[type=checkbox]:checked + label:before {
   background-color: #fff;
 }
 
-#checkoutModal .modal-footer .btn-yellow {
-  border-color: #000;
+#checkoutModal .modal-footer #checkout_cancel_btn {
+  border-radius: 5px;
+  border: 2px solid #3D405C;
+  background: #fff;
+  padding: 10px 16px;
+  color: #3D405C;
+  /* Add med */
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
 }
 
-#checkoutModal .modal-footer .btn-yellow button {
-  background-color: #0074b7;
-}
-
-#checkoutModal .modal-footer .btn-gray {
-  border-color: #b8b6b6;
-}
-
-#checkoutModal .modal-footer .btn-gray button {
-  background-color: #716d6e;
+#checkoutModal .modal-footer #checkout_submit_btn {
+  border-radius: 5px;
+  background: var(--prime, #0074B7);
+  width: 100%;
+  max-width: 350px;
+  padding: 10px 16px;
+  color: var(--white, #FFF);
+  /* Add med */
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
 }
 
 form .subtitle {

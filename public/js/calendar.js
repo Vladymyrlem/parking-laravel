@@ -101,7 +101,7 @@ class CalendarIk {
     // Function ONClick Date Calendar
     setActionOnDateClick = () => {
 
-        console.log(this)
+        // console.log(this)
 
         const dates = this.calendar._target.querySelectorAll(' .calendar_date');
         dates?.forEach(date => {

@@ -26,8 +26,7 @@
     <link rel="stylesheet" href="<?php echo e(asset('css/calendar.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/animate.css')); ?>">
     <script src="<?php echo e(asset('js/navbar/responsive-nav.js')); ?>"></script>
-    <?php echo RecaptchaV3::initJs(); ?>
-
+    
 
     <?php echo $__env->yieldContent('styles'); ?>
 
@@ -37,6 +36,7 @@
 <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <main class="">
+    <?php echo RecaptchaV3::initJs(); ?> <!-- Initialize reCAPTCHA script -->
     <?php echo $__env->yieldContent('content'); ?>
 </main>
 <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -211,31 +211,31 @@
                 }
             });
             // Get the reCAPTCHA response
-            
-            
-            
-            
-            
-            
+            grecaptcha.ready(function () {
+                grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {
+                    // Add the CSRF token and reCAPTCHA response to form data
+                    const formData = new FormData(form); // Use the stored reference to the form element
+                    formData.append('_token', '<?php echo e(csrf_token()); ?>');
+                    formData.append('g-recaptcha-response', token);
 
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
+                    // Submit the form
+                    $.ajax({
+                        type: 'POST',
+                        url: '/subscribe',
+                        data: formData,
+                        dataType: 'json',
+                        contentType: false,
+                        processData: false,
+                        success: function (response) {
+                            $('#successMessage').show();
+                        },
+                        error: function (error) {
+                            console.log(error);
+                            // Handle error response if needed
+                        }
+                    });
+                }.bind(this)); // Explicitly bind the context to the promise callback
+            });
         });
     });
 </script>
@@ -361,6 +361,8 @@
     var datesArray = <?php echo json_encode($blockedDates); ?>;
 
 </script>
+
+
 </body>
 </html>
 <?php /**PATH /home/vagrant/code/admin-lte/resources/views/layouts/master.blade.php ENDPATH**/ ?>

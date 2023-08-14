@@ -215,13 +215,15 @@
                             <div class="row">
                                 <div class="form-group left">
                                     <label for="checkout_car_brand">Marka samochodu:</label>
-                                    <input type="text" name="checkout_car_brand" id="checkout_car_brand" value="" class="form-control form_element" data-rule="" data-msg="to pole jest wymagane">
+                                    <input type="text" name="checkout_car_brand" id="checkout_car_brand" placeholder="Marka samochodu:" value="" class="form-control form_element" data-rule=""
+                                           data-msg="to pole jest wymagane">
 
                                     <div id="validation_checkout_car_brand" class="validation"></div>
                                 </div>
                                 <div class="form-group right">
                                     <label for="checkout_car_model">Model auta:</label>
-                                    <input type="text" name="checkout_car_model" id="checkout_car_model" value="" class="form-control form_element" data-rule="" data-msg="to pole jest wymagane">
+                                    <input type="text" name="checkout_car_model" id="checkout_car_model" placeholder="Model auta:" value="" class="form-control form_element" data-rule=""
+                                           data-msg="to pole jest wymagane">
 
                                     <div id="validation_checkout_car_model" class="validation"></div>
                                 </div>
@@ -272,8 +274,8 @@
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="form-group all">
-                                    <label class="custom-checkbox" for="checkout_approval_1">
+                                <div class="form-group all mb-0">
+                                    <label class="custom-checkbox approval-rodo-checkbox" for="checkout_approval_1">
                                         <input type="checkbox" id="checkout_approval_1" class="hidden-checkbox contacts-us-checkbox">
                                         <span class="custom-checkmark"></span>
                                         Wyrażam zgodę na przetwarzanie moich danych osobowych
@@ -295,17 +297,13 @@
                     <!-- Modal body end -->
                     <!-- Modal footer start -->
                     <div class="modal-footer">
-                    <span class="btn-border btn-gray">
-                        <button type="button" class="btn btn-default btn-gray" id="checkout_cancel_btn" data-dismiss="modal">Anuluj</button>
-                    </span>
-                        <span class="btn-border btn-yellow">
-                        <button type="submit" id="checkout_submit_btn" class="btn btn-primary btn-yellow">Zarezerwuj</button>
-                    </span>
+                        <button type="button" class="btn " id="checkout_cancel_btn" data-dismiss="modal">Anuluj</button>
+                        <button type="submit" id="checkout_submit_btn" class="btn btn-primary ">Zarezerwuj</button>
                     </div>
                     <!-- Modal footer end -->
-                    <input type="hidden" name="section" value="checkout">
-                    <input type="hidden" name="action" value="add">
-                    <input type="hidden" name="license" value="2E801E65DFC0ED17FF104628B6CDDBB8">
+                    {{--                    <input type="hidden" name="section" value="checkout">--}}
+                    {{--                    <input type="hidden" name="action" value="add">--}}
+                    {{--                    <input type="hidden" name="license" value="2E801E65DFC0ED17FF104628B6CDDBB8">--}}
                 </form>
             </div>
             <!-- Custom block to display form data -->

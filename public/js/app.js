@@ -111,9 +111,9 @@ jQuery(function () {
 
       // Calculate the difference in days
       var daysDifference = endDateTime.diff(startDateTime, 'days');
-
+      var days = (endDateTime - startDateTime) / (1000 * 60 * 60 * 24);
       // Round the difference to the nearest whole number
-      return Math.ceil(daysDifference);
+      return Math.ceil(days);
     }
 
     // Example usage
@@ -160,6 +160,10 @@ jQuery(function () {
     // Show the modal
     $('#checkoutModal').modal('show');
   });
+  $('#checkout_cancel_btn').on('click', function (e) {
+    e.preventDefault();
+    $('#form_checkout input[type="text"]').val('');
+  });
   $('#form_checkout').on('submit', function (e) {
     e.preventDefault();
     $.ajaxSetup({
@@ -198,7 +202,7 @@ jQuery(function () {
       car_model: $('input#checkout_car_model').val(),
       car_number: $('input#checkout_plate').val()
     };
-    console.log(data);
+    // console.log(data);
     $.ajax({
       url: '/submit-order',
       // Replace with your backend URL
