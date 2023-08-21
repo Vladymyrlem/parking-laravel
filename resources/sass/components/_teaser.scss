@@ -440,3 +440,28 @@
         max-width: calc(100vw - 40px);
     }
 }
+
+@media screen and (max-width: 475px) {
+
+    #header-block form {
+
+        .datetime {
+
+            flex-wrap: wrap;
+        }
+
+        .date {
+            width: 100%;
+            flex: 0 0 100%;
+            margin-bottom: 20px;
+        }
+
+        .time {
+            width: 100%;
+        }
+
+        .styled-select-time {
+            margin: 0 auto;
+        }
+    }
+}

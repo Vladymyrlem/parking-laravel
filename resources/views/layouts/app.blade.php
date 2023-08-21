@@ -60,77 +60,41 @@
                  class="brand-image"
                  style="opacity: 1">
         </a>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <div class="container-fluid">
-                <a class="navbar-brand" href="#">Navbar</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="#">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Link</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown
+        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
+position: relative;" aria-hidden="true">
+            <ul>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Sekcja nagłówków</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Zalety</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Bloki tekstowe</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Kalendarz</a></li>
+                <li class="nav-item dropdown ml-auto">
+                    <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right user-menu" style="left: inherit; right: 0px;">
+                        <a href="{{ route('profile.show') }}" class="dropdown-item">
+                            <i class="mr-2 fas fa-file"></i>
+                            {{ __('My profile') }}
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{ route('logout') }}" class="dropdown-item"
+                               onclick="event.preventDefault(); this.closest('form').submit();">
+                                <i class="mr-2 fas fa-sign-out-alt"></i>
+                                {{ __('Log Out') }}
                             </a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                                <li><a class="dropdown-item" href="#">Another action</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link disabled">Disabled</a>
-                        </li>
-                    </ul>
-                    <form class="d-flex">
-                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Search</button>
-                    </form>
-                </div>
-            </div>
+                        </form>
+                    </div>
+                </li>
+            </ul>
         </nav>
-{{--        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;--}}
-{{--position: relative;" aria-hidden="true">--}}
-{{--            <ul>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Sekcja nagłówków</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Zalety</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Bloki tekstowe</a></li>--}}
-{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Kalendarz</a></li>--}}
-{{--                <li class="nav-item dropdown ml-auto">--}}
-{{--                    <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">--}}
-{{--                        {{ Auth::user()->name }}--}}
-{{--                    </a>--}}
-{{--                    <div class="dropdown-menu dropdown-menu-right user-menu" style="left: inherit; right: 0px;">--}}
-{{--                        <a href="{{ route('profile.show') }}" class="dropdown-item">--}}
-{{--                            <i class="mr-2 fas fa-file"></i>--}}
-{{--                            {{ __('My profile') }}--}}
-{{--                        </a>--}}
-{{--                        <div class="dropdown-divider"></div>--}}
-{{--                        <form method="POST" action="{{ route('logout') }}">--}}
-{{--                            @csrf--}}
-{{--                            <a href="{{ route('logout') }}" class="dropdown-item"--}}
-{{--                               onclick="event.preventDefault(); this.closest('form').submit();">--}}
-{{--                                <i class="mr-2 fas fa-sign-out-alt"></i>--}}
-{{--                                {{ __('Log Out') }}--}}
-{{--                            </a>--}}
-{{--                        </form>--}}
-{{--                    </div>--}}
-{{--                </li>--}}
-{{--            </ul>--}}
-{{--        </nav>--}}
         <!-- Right navbar links -->
 
     </header>

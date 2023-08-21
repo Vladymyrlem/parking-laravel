@@ -18,6 +18,7 @@
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Mail;
     use Illuminate\Support\Facades\Validator;
+    use TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2;
 
     class HomeController extends Controller
     {

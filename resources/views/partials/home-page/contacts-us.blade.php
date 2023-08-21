@@ -111,7 +111,6 @@
                 </div>
 
                 <div id="contact_g_recaptcha" class="form-group d-flex justify-content-between flex-wrap align-items-center">
-                    <div id="contact_us"></div>
 {{--                    <div class="g-recaptcha" id="g-recaptcha-response-64da1b744d6f8" data-sitekey="6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ"></div>--}}
 {{--                    <script src="https://www.google.com/recaptcha/api.js?render=6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ" async defer></script>--}}
 
@@ -127,6 +126,10 @@
 {{--                            });--}}
 {{--                        });--}}
 {{--                    </script>--}}
+                    <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
+                    @if ($errors->has('g-recaptcha-response'))
+                        <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
+                    @endif
                     <button id="contact_submit_btn" type="submit" class="btn submit-message mt-lg-0 mt-3" value="Wyślij wiadomość">Wyślij wiadomość</button>
                     <div class="contact_us_sended alert-success"></div>
                 </div>

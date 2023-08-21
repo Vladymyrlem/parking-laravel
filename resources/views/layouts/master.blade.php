@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
 
-{{--    @yield('styles')--}}
+    {{--    @yield('styles')--}}
 
 </head>
 <body name="#start" id="top" class="js">
@@ -181,8 +181,8 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
-<script src="https://www.google.com/recaptcha/api.js?hl=pl&render=6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ" async defer></script>
-{!!  GoogleReCaptchaV2::render('newsletter','contact_us') !!}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{{--{!!  GoogleReCaptchaV2::render('newsletter','contact_us') !!}--}}
 
 <script>
     $(document).ready(function () {
@@ -227,7 +227,7 @@
             $.ajax({
                 type: 'POST',
                 url: '/subscribe',
-                data: formData.serialize(),
+                data: formData,
                 dataType: 'json',
                 contentType: false,
                 processData: false,

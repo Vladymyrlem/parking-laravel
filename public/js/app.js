@@ -442,7 +442,7 @@ jQuery(function () {
         setTimeout(function () {
           $('#contact_form_msg').html('').addClass('hidden').removeClass('validation_ok');
           //                            $('#contact_submit_btn').removeAttr('disabled').val('Wyślij wiadomość');
-          $('#contact_g_recaptcha').html('').hide();
+          $('#contact_g_recaptcha .g-recaptcha').html('').hide();
         }, 5000);
         $('.contact_us_sended').text('Your contacts sended successfully');
         // Display success message or perform other actions
