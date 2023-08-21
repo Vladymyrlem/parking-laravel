@@ -5,6 +5,7 @@
     use App\Http\Requests\CreatePricesRequest;
     use App\Http\Requests\UpdatePricesRequest;
     use App\Models\Price;
+    use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Response;
 
@@ -30,6 +31,9 @@
         public function index(Request $request)
         {
             $prices = Price::all();
+            $price_promotional = Price::all('promotional_price');
+            $start_promotional = Price::all('start_promotional_date');
+            $end_promotional = Price::all('end_promotional_date');
             return view('admin', compact('prices'));
         }
 
@@ -75,6 +79,16 @@
             $price->promotional_price = $request->promotional_price;
             $price->start_promotional_date = $request->start_promotional_date;
             $price->end_promotional_date = $request->end_promotional_date;
+            if ($price->end_promo_date && Carbon::now() > $price->end_promo_date) {
+                $price->promotional_price = null;
+                $price->start_promotional_date = null;
+                $price->end_promotional_date = null;
+            } else {
+                // Update promotional fields
+                $price->promotional_price = $request->promotional_price;
+                $price->start_promotional_date = $request->start_promotional_date;
+                $price->end_promotional_date = $request->end_promotional_date;
+            }
             $price->save();
             return response()->json($price);
         }

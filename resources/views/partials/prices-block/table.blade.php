@@ -6,7 +6,7 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table table-dark table-valign-middle" id="prices-table">
+    <table class="table table-dark table-valign-middle table-responsive-lg" id="prices-table">
         <thead>
         <tr>
             <th>Count Days</th>

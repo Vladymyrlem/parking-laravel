@@ -11,3 +11,29 @@ $fa-font-path: '../webfonts';
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/solid.scss';
 @import '../../node_modules/@fortawesome/fontawesome-free/scss/brands.scss';
 @import './components/navigation/navigation';
+.main-header {
+    position: fixed;
+}
+
+#info-table {
+    tbody > tr > td {
+        p {
+            margin-left: 0;
+            margin-right: auto;
+        }
+
+        img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+        }
+    }
+}
+
+#services-list > tr > td:last-child {
+    width: 150px;
+}
+
+.main-header {
+    max-height: 65px;
+}

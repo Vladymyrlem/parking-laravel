@@ -17,6 +17,7 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Mail;
+    use Illuminate\Support\Facades\Validator;
 
     class HomeController extends Controller
     {
@@ -62,17 +63,30 @@
 
         public function sendContactUs(Request $request)
         {
+            $validator = Validator::make($request->all(), [
+                'contact_firstname' => 'required|min:3',
+                'contact_phone' => 'required|min:3',
+                'contact_lastname' => 'required',
+                'contact_email' => 'required|email',
+                'contact_message' => 'required',
+                'checkbox1' => 'accepted',
+                'checkbox2' => 'accepted'
+            ]);
             $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
-            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
-//            Mail::raw('Test email', function ($message) {
-//                $message->to('vovangud@gmail.com');
-//                $message->subject('Test Subject');
-//            });
 
+//            if ($validator->passes()) {
             // Return the total price as a JSON response (optional)
-            return response()->json(['message' => 'Message sent successfully']);
+            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
 
+            return response()->json(['message' => 'Message sent successfully']);
+//            } else {
+//                return response()->json(['error' => $validator->errors()]);
+//            }
         }
 
+        public function verify(Request $request)
+        {
+            dd(GoogleReCaptchaV2::verifyResponse($request->input('g-recaptcha-response'))->getMessage());
+        }
 
     }

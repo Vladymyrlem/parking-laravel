@@ -22,7 +22,7 @@
                     <?php echo $info->media; ?>
 
                 </td>
-                <td width="120">
+                <td width="220">
                     <button class="btn btn-warning btn-detail open_info" value="<?php echo e($info->id); ?>">Edit Info</button>
                     <button class="btn btn-danger btn-delete delete-info" value="<?php echo e($info->id); ?>">Delete Info</button>
                 </td>

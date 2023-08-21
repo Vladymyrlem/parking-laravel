@@ -8,7 +8,7 @@
 
 <div class="row">
     <div class="col-12 col-md-offset-2">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-responsive-lg table-hover">
             <thead>
             <tr class="info">
                 <th>ID</th>
@@ -28,7 +28,7 @@
                     <td>{{$contact->phone_number_1}}<br>{{$contact->phone_number_2}}</td>
                     <td>{{$contact->latitude}}','&nbsp;{{$contact->longitude}}</td>
                     <td><a href="{{$contact->map_link}}" target="_blank">Link to google map</a></td>
-                    <td width="35%">
+                    <td width="100">
                         <button class="btn btn-warning btn-detail open_contacts_modal" value="{{$contact->id}}">Edit</button>
                     </td>
                 </tr>

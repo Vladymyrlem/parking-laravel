@@ -214,6 +214,16 @@
     }
 }
 
+#form_contact {
+    .validation {
+        display: none;
+
+        &.errror {
+            display: block;
+        }
+    }
+}
+
 @media screen and (max-width: 768px) {
     #contacts-section {
         padding-top: 50px;

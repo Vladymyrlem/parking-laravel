@@ -7,7 +7,9 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Parking Rondo')</title>
+    <title>Parking lotnisko Wroclaw Rondo - bezpieczny parking przy lotnisku.</title>
+    <meta name="description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany, Parking 24/7, 3 minuty przy lotnisku Wrocław"/>
+    <meta name="Author" content="Parking Rondo"/>
     <!-- Fav and touch icons -->
     {{--    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">--}}
@@ -26,9 +28,8 @@
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
-    {{--    {!! RecaptchaV3::initJs() !!}--}}
 
-    @yield('styles')
+{{--    @yield('styles')--}}
 
 </head>
 <body name="#start" id="top" class="js">
@@ -36,7 +37,6 @@
 @include('partials.header')
 
 <main class="">
-    {!! RecaptchaV3::initJs() !!} <!-- Initialize reCAPTCHA script -->
     @yield('content')
 </main>
 @include('partials.footer')
@@ -137,13 +137,14 @@
                     $input.addEventListener('click', e => {
                         e.preventDefault();
 
+                        const inputTop = $('#order_pick_up_date').height();
                         // Set Calendar position
                         const posForm = orderForm.getBoundingClientRect();
                         const posInput = e.target.getBoundingClientRect();
                         const posLeft = posInput.left - posForm.left + posInput.width;
-                        const posTop = posInput.top - posForm.top;
-                        ofCalendar.calendar._target.style.top = posTop + 'px';
-                        ofCalendar.calendar._target.style.left = posLeft + 'px';
+                        const posTop = posInput.top - posForm.top + inputTop;
+                        ofCalendar.calendar._target.style.top = posTop + 20 + 'px';
+                        ofCalendar.calendar._target.style.left = 16 + 'px';
 
                         ofCalendar.calendar._target.classList.remove(ofHideCalendarClassName);
                         ofCalendar.ofInputActive = $input;
@@ -180,7 +181,9 @@
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js?hl=pl&render=6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ" async defer></script>
+{!!  GoogleReCaptchaV2::render('newsletter','contact_us') !!}
+
 <script>
     $(document).ready(function () {
         // Submit the form using Ajax
@@ -194,15 +197,41 @@
             const formData = {
                 email: $('input#newsletter_email').val()
             }
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '/subscribe',
+            //     data: formData,
+            //     dataType: 'json',
+            //     contentType: false,
+            //     processData: false,
+            //     success: function (response) {
+            //         console.log(formData);
+            //         $('#successMessage').show();
+            //     },
+            //     error: function (error) {
+            //         console.log(error);
+            //         // Handle error response if needed
+            //     }
+            // });
+            // Get the reCAPTCHA response
+            // grecaptcha.ready(function () {
+            //     grecaptcha.execute('6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ', {action: 'newsletter-form'}).then(function (token) {
+            // Add the CSRF token and reCAPTCHA response to form data
+            // token = $('meta[name="_token"]').attr('content');
+            // formData.append('<input type="hidden" name="recaptcha_token" value="' + token + '">');
+
+            {{--formData.append('_token', '{{ csrf_token() }}');--}}
+            {{--formData.append('g-recaptcha-response', token);--}}
+
+            // Submit the form
             $.ajax({
                 type: 'POST',
                 url: '/subscribe',
-                data: formData,
+                data: formData.serialize(),
                 dataType: 'json',
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log(formData);
                     $('#successMessage').show();
                 },
                 error: function (error) {
@@ -210,32 +239,8 @@
                     // Handle error response if needed
                 }
             });
-            // Get the reCAPTCHA response
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {
-                    // Add the CSRF token and reCAPTCHA response to form data
-                    const formData = new FormData(form); // Use the stored reference to the form element
-                    formData.append('_token', '{{ csrf_token() }}');
-                    formData.append('g-recaptcha-response', token);
-
-                    // Submit the form
-                    $.ajax({
-                        type: 'POST',
-                        url: '/subscribe',
-                        data: formData,
-                        dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            $('#successMessage').show();
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            // Handle error response if needed
-                        }
-                    });
-                }.bind(this)); // Explicitly bind the context to the promise callback
-            });
+            //     }.bind(this)); // Explicitly bind the context to the promise callback
+            // });
         });
     });
 </script>
@@ -361,7 +366,6 @@
     var datesArray = <?php echo json_encode($blockedDates); ?>;
 
 </script>
-{{--@yield('recaptcha_init') <!-- Inject reCAPTCHA initialization script here -->--}}
 
 </body>
 </html>

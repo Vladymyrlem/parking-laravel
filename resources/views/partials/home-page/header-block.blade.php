@@ -10,9 +10,6 @@ margin-top: 94px">
                     <div class="reservation-block-message d-flex flex-column align-items-center text-center">
                         <p>Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
                         <div class="reservation-blocked-dates" id="reservation-blocked-dates">
-                            {{--  19/07/2023, 20/07/2023, 20/07/2023, 20/07/2023, 20/07/2023,
-                                  21/07/2023, 22/07/2023, 23/07/2023, 24/07/2023, 25/07/2023,
-                                  26/07/2023, 27/07/2023, 28/07/2023, 29/07/2023, 30/07/2023.--}}
                         </div>
                         <p>W razie zapytań prosimy o telefon - 606 550 570</p>
                     </div>
@@ -23,9 +20,9 @@ margin-top: 94px">
                         <div class="styled-select-car">
                             <select name="order_car_select" id="order_car_select" class="strtoupper form_element" data-rule="required" data-msg="to pole jest wymagane">
                                 <optgroup label="Wybierz typ pojazdu">
-                                    <option value="1">samochód osobowy</option>
-                                    <option value="2">samochód dostawczy</option>
-                                    <option value="3">SUV / VAN</option>
+                                    <option value="1" selected {{ old('order_car_select') == '1' ? 'selected' : '' }}>samochód osobowy</option>
+                                    <option value="2" {{ old('order_car_select') == '2' ? 'selected' : '' }}>samochód dostawczy</option>
+                                    <option value="3" {{ old('order_car_select') == '3' ? 'selected' : '' }}>SUV / VAN</option>
                                 </optgroup>
                             </select>
                         </div>

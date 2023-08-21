@@ -1,5 +1,5 @@
-<section id="reviews" class="container wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp;">
-    <div class="row text-center d-flex flex-column align-items-center">
+<section id="reviews" class="container wow fadeInUp animated" style="visibility: visible; animation-name: fadeInUp; margin-left: auto; margin-right :auto;">
+    <div class="row text-center ">
         <div class="col-md-12 stars">
             <svg width="252" height="60" viewBox="0 0 252 60" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path
@@ -20,7 +20,7 @@
             </svg>
         </div>
         <div class="col-12 col-md-offset-1">
-            <div id="reviews-carousel" class="slick">
+            <div id="reviews-carousel" class="slick m-auto">
                 @foreach($reviews as $review)
                     <div class="item">
                         <div class="review">

@@ -6,10 +6,10 @@
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table" id="content-table">
+    <table class="table table-responsive-lg" id="content-table">
         <thead>
         <tr>
-            <th>Text Content</th>
+            <th>Bloki tekstowe</th>
             <th>Content Slug</th>
             <th colspan="3">Action</th>
         </tr>

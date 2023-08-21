@@ -4,11 +4,14 @@
             <h2 class="title" style="visibility: visible; animation-name: fadeInDown;">Parking RONDO - <span class="subtitle">Obowiązujący cennik parkingu.</span>
             </h2>
         </div>
-
+        @php
+            $now = Carbon\Carbon::now('Europe/Warsaw');
+        @endphp
         <div class="row text-center">
             @foreach($prices as $price)
                 <div class="col-12 col-md-6 col-lg-4 col-xl-3 text-center box">
-                    <div class="box_content">
+
+                    <div class="box_content @if( !empty($price->promotional_price) && $price->end_promotional_date >= $now )  promo @endif">
                         <div class="top-price-box">
                             <h2>{{$price->count_days}}</h2>
                             <h3 class="subtitle">
@@ -19,8 +22,23 @@
                                 @endif
                             </h3>
                         </div>
-                        <div class="bottom-price-box">
-                            <h4>{{$price->standart_price}} <small>PLN</small></h4>
+                        <div class="bottom-price-box ">
+                            <h4>
+                                @if( $price->promotional_price && $price->end_promotional_date >= $now)
+                                    <span class="promotional-price"> {{ $price->promotional_price }}&nbsp;<small>PLN</small></span>
+                                    <span class="standart-price">
+                                    <s>{{$price->standart_price}} &nbsp;PLN</s>
+                                </span>
+                                    <div class="promo-range d-flex flex-column">
+                                        {{ strftime('%d %B %Y %H:%M', strtotime($price->start_promotional_date)) }}
+
+                                        <p class="start-promotional">od: {{formatDate($price->start_promotional_date)}}</p>
+                                        <p class="start-promotional">do: {{formatDate($price->end_promotional_date)}}</p>
+                                    </div>
+                                @else
+                                    {{$price->standart_price}} <small>PLN</small>
+                                @endif
+                            </h4>
                         </div>
                     </div>
                 </div>

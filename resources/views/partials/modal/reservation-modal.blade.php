@@ -3,8 +3,8 @@
         <div class="modal-content">
             <!-- Modal header start -->
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">Zakończ rejestrację</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">DOKOŃCZ SWOJĄ REZERWACJĘ</h4>
+                <button type="button" class="close closeCheckoutForm" data-dismiss="modal" aria-hidden="true">×</button>
             </div>
             <div class="row m-0">
                 <form method="post" id="form_checkout" name="form_checkout">
@@ -307,7 +307,7 @@
                 </form>
             </div>
             <!-- Custom block to display form data -->
-            <div id="displayData"></div>
+            <div id="displayData" class="alert-success" style="display: none">Dziękujemy, rezerwacja została przyjęta</div>
         </div>
     </div>
 </div>

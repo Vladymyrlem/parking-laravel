@@ -35,6 +35,9 @@
 
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::post('/send-contact', [HomeController::class, 'sendContactUs'])->name('send-contact');
+    Route::post('/subscribe', [AdminController::class, 'subscribe'])->name('subscribe');
+    Route::post('/save-reservations', [ReservationController::class, 'saveReservations'])->name('save-reservations');
+    Route::post('/submit-order', [ParkingController::class, 'storeParking']);
 
     Route::middleware(['auth'])->group(function () {
         Route::delete('/admin/delete-order/{id}', [AdminController::class, 'deleteOrder']);
@@ -52,9 +55,7 @@
         Route::put('/admin/prices/{price_id?}', [PricesController::class, 'updatePrices']);
         Route::delete('/admin/prices/{price_id}', [PricesController::class, 'destroyPrices']);
         Route::post('/admin/reservations', [AdminController::class, 'reservations']);
-        Route::post('/save-reservations', [ReservationController::class, 'saveReservations'])->name('save-reservations');
 
-        Route::post('/submit-order', [ParkingController::class, 'storeParking']);
         Route::post('/submit-order/{order_id}', [ParkingController::class, 'showParking']);
         Route::delete('/submit-order/{order_id}', [ParkingController::class, 'destroy']);
         /*Header block*/
@@ -136,7 +137,6 @@
         Route::get('/admin/reservation-dates', [AdminController::class, 'getReservationDates']);
         Route::post('/admin', [AdminController::class, 'storeContent'])->name('admin.content');
         Route::post('/admin/upload/images', [AdminController::class, 'uploadImage'])->name('upload.post.image');
-        Route::post('/subscribe', [AdminController::class, 'subscribe'])->name('subscribe');
         /*Newsletter*/
         Route::get('admin/newsletter', [AdminController::class, 'index']);
 // Populate Data in Edit Modal Form

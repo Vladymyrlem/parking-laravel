@@ -752,6 +752,9 @@ header.large .brand {
     font-style: normal;
     font-weight: 400;
     line-height: 140%; /* 25.2px */
+    span {
+        color: #000;
+    }
 }
 
 #checkoutModal .checkout-personal-info {
@@ -1630,6 +1633,23 @@ form .subtitle {
     margin-top: 90px;
     position: relative;
     z-index: 2;
+
+    ul > li {
+        text-align: left;
+    }
+
+    button {
+        &.open {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+
+        &:focus {
+
+            box-shadow: none;
+        }
+    }
 }
 
 #terms h2 {
@@ -1859,6 +1879,10 @@ p span.price {
     * {
         color: var(--black, #151616);
 
+    }
+
+    ul {
+        padding-left: 20px;
     }
 
     &.expanded {

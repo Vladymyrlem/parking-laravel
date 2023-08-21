@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,7 +49,7 @@
     </style>
 
 </head>
-<body class="hold-transition sidebar-collapse">
+<body class="hold-transition sidebar-collapse js">
 <div class="wrapper">
 
     <!-- Navbar -->
@@ -60,45 +60,79 @@
                  class="brand-image"
                  style="opacity: 1">
         </a>
-        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
-position: relative;" aria-hidden="true">
-            <ul>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Services</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Section Titles</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Text Content</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Calendar</a></li>
-            </ul>
-        </nav>
-        <!-- Right navbar links -->
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
-                    {{ Auth::user()->name }}
-                </a>
-                <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
-                    <a href="{{ route('profile.show') }}" class="dropdown-item">
-                        <i class="mr-2 fas fa-file"></i>
-                        {{ __('My profile') }}
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <form method="POST" action="{{ route('logout') }}">
-                        @csrf
-                        <a href="{{ route('logout') }}" class="dropdown-item"
-                           onclick="event.preventDefault(); this.closest('form').submit();">
-                            <i class="mr-2 fas fa-sign-out-alt"></i>
-                            {{ __('Log Out') }}
-                        </a>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#">Navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Link</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                                <li><a class="dropdown-item" href="#">Another action</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link disabled">Disabled</a>
+                        </li>
+                    </ul>
+                    <form class="d-flex">
+                        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-success" type="submit">Search</button>
                     </form>
                 </div>
-            </li>
-        </ul>
+            </div>
+        </nav>
+{{--        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;--}}
+{{--position: relative;" aria-hidden="true">--}}
+{{--            <ul>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Sekcja nagłówków</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Zalety</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Bloki tekstowe</a></li>--}}
+{{--                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Kalendarz</a></li>--}}
+{{--                <li class="nav-item dropdown ml-auto">--}}
+{{--                    <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">--}}
+{{--                        {{ Auth::user()->name }}--}}
+{{--                    </a>--}}
+{{--                    <div class="dropdown-menu dropdown-menu-right user-menu" style="left: inherit; right: 0px;">--}}
+{{--                        <a href="{{ route('profile.show') }}" class="dropdown-item">--}}
+{{--                            <i class="mr-2 fas fa-file"></i>--}}
+{{--                            {{ __('My profile') }}--}}
+{{--                        </a>--}}
+{{--                        <div class="dropdown-divider"></div>--}}
+{{--                        <form method="POST" action="{{ route('logout') }}">--}}
+{{--                            @csrf--}}
+{{--                            <a href="{{ route('logout') }}" class="dropdown-item"--}}
+{{--                               onclick="event.preventDefault(); this.closest('form').submit();">--}}
+{{--                                <i class="mr-2 fas fa-sign-out-alt"></i>--}}
+{{--                                {{ __('Log Out') }}--}}
+{{--                            </a>--}}
+{{--                        </form>--}}
+{{--                    </div>--}}
+{{--                </li>--}}
+{{--            </ul>--}}
+{{--        </nav>--}}
+        <!-- Right navbar links -->
+
     </header>
     <!-- /.navbar -->
 
@@ -127,7 +161,7 @@ position: relative;" aria-hidden="true">
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
+    <div class="content-wrapper pl-2 pr-2 pl-md-5 pr-md-5">
         @yield('content')
     </div>
     <!-- /.content-wrapper -->
@@ -161,11 +195,11 @@ position: relative;" aria-hidden="true">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
-<script src="{{asset('js/calendar.js')}}"></script>
-<script src="{{asset('js/tinymce/tinymce.min.js')}}"></script>
+<script src="{{ asset('js/calendar.js') }}"></script>
+<script src="{{ asset('js/tinymce/tinymce.min.js') }}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
-<script src="{{mix('js/ajaxscript.js')}}"></script>
-<script src="{{asset('js/slick.min.js')}}"></script>
+<script src="{{ mix('js/ajaxscript.js') }}"></script>
+<script src="{{ asset('js/slick.min.js') }}"></script>
 
 <!-- AdminLTE App -->
 <script src="{{ asset('js/adminlte.min.js') }}" defer></script>
@@ -188,17 +222,16 @@ position: relative;" aria-hidden="true">
 @include('partials.modal.section-title-modal')
 @include('partials.modal.newsletter-modal')
 <script src="{{ asset('js/app.js') }}"></script>
-<script src="{{ asset('js/tinymce/admin.js') }}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
-<script src="{{ asset('js/datatables/jquery.datatables.min.js') }}"></script>
+<script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
 <script src="{{ asset('js/navbar/scroll.js') }}" async></script>
 <script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
 <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
-<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table-locale-all.min.js"></script>
+<script src="{{ asset('js/bootstrap-table-pl-PL.js') }}"></script>
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{{--<script src="https://www.google.com/recaptcha/api.js" async defer></script>--}}
 <script>
     const headerTable = $('#headerTable');
     const toggleButton = $('#toggleRowsButton');
@@ -228,7 +261,7 @@ position: relative;" aria-hidden="true">
     }
 
     $('#parkingTable').bootstrapTable({
-        locale: 'pl',
+        locale: 'pl-PL',
         toolbar: '.toolbar'
     });
     $('.delete-btn').on('click', function () {

@@ -22,9 +22,9 @@ h2.prices {
 }
 
 #prices .title {
-    font-size: 36px;
-    font-weight: 900;
-    margin-bottom: 65px;
+    font-size: 50px;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 
 #prices {
@@ -126,21 +126,63 @@ h2.prices {
     width: 100%;
 }
 
-#prices .box.promo h1,
-#prices .box.promo .box_content .subtitle {
+#prices .box .box_content.promo h2,
+#prices .box_content.promo .subtitle {
     color: #00a82a;
 }
 
-#prices .box.promo h2 p {
-    color: #017f21;
-    font-size: 20px;
+#prices .box_content.promo h4 {
+    display: flex;
+    flex-flow: column;
+
+    p {
+        color: #017f21;
+        font-size: 20px;
+    }
+
 }
 
-#prices .box.promo .box_content h2 {
+#prices .box_content.promo {
+    .promo-range {
+
+        p {
+            font-size: 16px;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 0;
+        }
+    }
+
+    .standart-price {
+        line-height: 20px;
+        margin-bottom: 10px;
+
+        s {
+            color: #017f21;
+            font-size: 20px;
+        }
+
+    }
+}
+
+#prices .box_content.promo .bottom-price-box {
     background-color: #00a82a;
+
+    .promotional-price {
+        color: #fff;
+        font-size: 32px;
+        padding: 10px;
+        font-weight: bold;
+
+        small {
+            color: #fff;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    }
 }
 
-#prices .box.promo .box_content {
+#prices .box_content.promo .top-price-box {
     border-color: #00a82a;
 }
 

@@ -3,11 +3,11 @@
 </div>
 <div class="card">
     <div class="card-header text-center font-weight-bold">
-        <h2>Laravel 8 Ajax Book CRUD with DataTable Example Tutorial</h2>
+        <h2>Zalety</h2>
     </div>
 
     <div class="card-body">
-        <table class="table table-bordered" id="datatable-ajax-crud">
+        <table class="table table-bordered table-responsive-lg">
             <thead>
             <tr>
                 <th>Service Title</th>

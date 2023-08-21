@@ -9,7 +9,7 @@
 
 <div class="row">
     <div class="col-12 col-md-offset-2">
-        <table class="table table-striped table-hover">
+        <table class="table table-striped table-hover table-responsive-lg">
             <thead>
             <tr class="info">
                 <th>ID</th>

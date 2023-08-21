@@ -59,7 +59,7 @@
             $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->arrival)->format('d/m/Y H:i');
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->departure)->format('d/m/Y H:i');
             $contacts = Contacts::all();
-            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'contacts'));
+            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'departureDate','contacts'));
             $pdf->setOption('encoding', 'utf-8');
 
             $filename = 'order_' . $order->id . '.pdf';

@@ -273,18 +273,31 @@ ul#countries {
 }
 
 .nav-collapse a:active,
-.nav-collapse li a.active {
-    border: 2px solid #b8b6b6;
+.nav-collapse li a.active, .nav-collapse li.active a {
+    border: 2px solid var(--prime, #0074B7);
     color: #716d6e;
+    border-radius: 5px;
     background-color: transparent;
 }
 
 @media screen and (min-width: 1240px) {
+    .header-menu {
+        margin-left: auto;
+    }
     .nav-collapse a {
         text-align: center;
         border-top: 0;
         float: left;
         margin: 0;
+    }
+    .main-header {
+        max-height: 94px;
+
+        .js .nav-collapse-0.opened {
+            max-height: 100% !important;
+            height: 100%;
+            background: #fff;
+        }
     }
 }
 

@@ -1,5 +1,5 @@
 <section class="contacts-section" id="contacts-section" name="contacts-section">
-    <div class="container p-lg-0">
+    <div class="container p-xl-0">
         <h2 class="contacts-title">
             {!!  getTitleBySlug('contact') !!}
         </h2>
@@ -28,6 +28,6 @@
             </div>
         </div>
         <h4 class="address-title">Zobacz na Google Maps jak do nas trafić </h4>
-        <a class="contact-map-link" href="{{ $map_link }}">prowadź do</a>
+        <a class="contact-map-link" href="{{ $map_link }}">Prowadź do</a>
     </div>
 </section>

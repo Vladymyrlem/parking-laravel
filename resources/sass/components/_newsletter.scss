@@ -1,11 +1,15 @@
 /* Newsletter
 --------------------------------------------*/
 #newsletter {
-    background-color: #0074b7;
     margin-top: 90px;
-    padding: 90px 0;
     position: relative;
     z-index: 2;
+
+    .container {
+        background-color: #0074b7;
+        padding: 30px;
+        border-radius: 5px;
+    }
 }
 
 #newsletter h3 {
@@ -59,7 +63,7 @@
         font-weight: 800;
         line-height: 20.594px; /* 205.937% */
         text-transform: capitalize;
-        padding-left: 26px;
+        padding-left: 37px;
 
         display: flex;
         align-items: flex-start;
@@ -69,6 +73,7 @@
 
         input {
             flex: 0;
+            width: 0;
         }
     }
 }
@@ -112,6 +117,8 @@
     font-weight: 700;
     line-height: 20px; /* 125% */
     text-transform: capitalize;
+    border: none;
+    box-shadow: none;
 }
 
 .approval {

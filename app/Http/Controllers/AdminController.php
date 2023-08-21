@@ -23,6 +23,7 @@
     use Illuminate\Support\Facades\Storage;
     use Illuminate\Validation\Validator;
     use Laracasts\Flash\Flash;
+    use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
     use SubscriptionConfirmation;
     use Yajra\DataTables\DataTables;
     use Yajra\DataTables\Exceptions\Exception;
@@ -112,12 +113,12 @@
             $request->validate([
                 'email' => 'email',
 
-//                'g-recaptcha-response' => 'required|recaptchav3:subscribe,0.5'
+//                'g-recaptcha-response' => 'required|recaptchav3:newsletter-form,0.5'
             ]);
 
             // Implement Google reCAPTCHA v3 verification
 //            $recaptcha_token = $request->input('recaptcha');
-//            $recaptcha_secret_key = '6LcivXInAAAAAOSU4FzhvY87QghSlLPDMnuTOlt7';
+//            $recaptcha_secret_key = '6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ';
 //            $client = new Client();
 //            $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
 //                'form_params' => [
@@ -125,12 +126,14 @@
 //                    'response' => $recaptcha_token
 //                ]
 //            ]);
-//
+
 //            $body = json_decode((string)$response->getBody());
 //            if (!$body->success || $body->score < 0.5) {
 //                return redirect()->back()->withInput()->withErrors(['recaptcha' => 'Failed to verify reCAPTCHA.']);
 //            }
+            $response = RecaptchaV3::verify($request->input('g-recaptcha-response'));
 
+           // if ($response) {
             // Send the email
             $email = $request->input('email');
             // Implement your email sending logic here, using Laravel's Mail class or any other email package.
@@ -138,20 +141,26 @@
             Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new NewSubscriberNotification($request->email));
             // Save the email to a text file
             return response()->json(['message' => 'You have been subscribed successfully!']);
-        }
+      //  }else {
+        // reCAPTCHA verification failed
+   // return response()->json(['error' => 'reCAPTCHA verification failed'], 422);
+    //}
 
-        public function reservations()
-        {
-            $reservations = Reservation::all('new_date');
-            $blockedDates = [];
-            // Loop through each reservation and get the custom date value
-            foreach ($reservations as $reservation) {
-                // Access the 'custom_date' attribute (using the accessor) to get the custom date value
-                $blockedDates[] = $reservation->custom_date;
-            }
-            $blockedDatesJson = json_encode($blockedDates);
-            return view('admin', compact('blockedDatesJson'));
+    }
+
+    public
+    function reservations()
+    {
+        $reservations = Reservation::all('new_date');
+        $blockedDates = [];
+        // Loop through each reservation and get the custom date value
+        foreach ($reservations as $reservation) {
+            // Access the 'custom_date' attribute (using the accessor) to get the custom date value
+            $blockedDates[] = $reservation->custom_date;
         }
+        $blockedDatesJson = json_encode($blockedDates);
+        return view('admin', compact('blockedDatesJson'));
+    }
 
 //        public function uploadImage(Request $request)
 //        {
@@ -165,104 +174,111 @@
 //            // Get the public URL for the file
 //            return response()->json(['location' => "/images/$imageName"]);
 //        }
-        public function uploadImage(Request $request)
-        {
-            $uploadedFile = $request->file('file');
+    public
+    function uploadImage(Request $request)
+    {
+        $uploadedFile = $request->file('file');
 
-            // Get the original filename
-            $originalFilename = $uploadedFile->getClientOriginalName();
+        // Get the original filename
+        $originalFilename = $uploadedFile->getClientOriginalName();
 
-            // Save the file to the "public/images" directory with the original filename
-            $imagePath = $request->file('file')->storeAs('images', $originalFilename, 'custom');
+        // Save the file to the "public/images" directory with the original filename
+        $imagePath = $request->file('file')->storeAs('images', $originalFilename, 'custom');
 
-            // Get the public URL for the file
-            return response()->json(['location' => "/images/$originalFilename"]);
+        // Get the public URL for the file
+        return response()->json(['location' => "/images/$originalFilename"]);
+    }
+
+    public
+    function calendarDate(Request $request)
+    {
+        $dates = [];
+
+        // Loop through the request input to extract date values
+        foreach ($request->all() as $key => $value) {
+            if (strpos($key, 'field_date_') === 0) {
+                $dates[substr($key, 11)] = $value;
+            }
         }
 
-        public function calendarDate(Request $request)
-        {
-            $dates = [];
-
-            // Loop through the request input to extract date values
-            foreach ($request->all() as $key => $value) {
-                if (strpos($key, 'field_date_') === 0) {
-                    $dates[substr($key, 11)] = $value;
-                }
-            }
-
-            // Loop through the dates and store them in the database
-            foreach ($dates as $key => $date) {
-                Reservation::create([
-                    'new_date' => $date, // Adjust column names accordingly
-                ]);
-            }
-
-            return response()->json(['message' => 'Reservation dates stored successfully']);
-        }
-
-        public function storeAllDates(Request $request)
-        {
-            $selectedDates = $request->input('dates');
-
-            foreach ($selectedDates as $key => $date) {
-                // Assuming you have a Reservation model and 'start_date' is the column name
-                Reservation::create([
-                    'new_date' => $date,
-                ]);
-            }
-
-            return response()->json(['message' => 'All dates stored successfully']);
-        }
-
-        public function destroy($id)
-        {
-            $reservation = Reservation::find($id);
-
-            if (!$reservation) {
-                return response()->json(['message' => 'Reservation not found'], 404);
-            }
-
-            $reservation->delete();
-
-            return response()->json(['message' => 'Reservation deleted successfully']);
-        }
-
-        public function deleteByDate(Request $request)
-        {
-            $blockedDate = $request->input('blockedDate');
-            Log::info('Blocked Date: ' . $blockedDate);
-
-            $reservation = Reservation::where('new_date', $blockedDate)->first();
-            Log::info('Found Reservation: ' . json_encode($reservation));
-
-            if (!$reservation) {
-                return response()->json(['message' => 'Reservation not found'], 404);
-            }
-
-            $reservation->delete();
-
-            return response()->json(['message' => 'Reservation deleted successfully']);
-        }
-
-
-        public function getUpdatedDatesList()
-        {
-//            return view('partials.dates-list', ['name' => 'John Doe', 'email' => 'john@example.com'] );
-            $reservations = Reservation::pluck('new_date');
-            return response()->json([
-                'success' => true,
-                'message' => 'Reservation deleted successfully',
-                'data' => $reservations,
+        // Loop through the dates and store them in the database
+        foreach ($dates as $key => $date) {
+            Reservation::create([
+                'new_date' => $date, // Adjust column names accordingly
             ]);
         }
 
-        public function deleteOrder($id)
-        {
-            $order = Parking::find($id);
-            if ($order) {
-                $order->delete();
-                return response()->json(['message' => 'Order deleted successfully']);
-            }
-            return response()->json(['message' => 'Order not found'], 404);
+        return response()->json(['message' => 'Reservation dates stored successfully']);
+    }
+
+    public
+    function storeAllDates(Request $request)
+    {
+        $selectedDates = $request->input('dates');
+
+        foreach ($selectedDates as $key => $date) {
+            // Assuming you have a Reservation model and 'start_date' is the column name
+            Reservation::create([
+                'new_date' => $date,
+            ]);
         }
+
+        return response()->json(['message' => 'All dates stored successfully']);
+    }
+
+    public
+    function destroy($id)
+    {
+        $reservation = Reservation::find($id);
+
+        if (!$reservation) {
+            return response()->json(['message' => 'Reservation not found'], 404);
+        }
+
+        $reservation->delete();
+
+        return response()->json(['message' => 'Reservation deleted successfully']);
+    }
+
+    public
+    function deleteByDate(Request $request)
+    {
+        $blockedDate = $request->input('blockedDate');
+        Log::info('Blocked Date: ' . $blockedDate);
+
+        $reservation = Reservation::where('new_date', $blockedDate)->first();
+        Log::info('Found Reservation: ' . json_encode($reservation));
+
+        if (!$reservation) {
+            return response()->json(['message' => 'Reservation not found'], 404);
+        }
+
+        $reservation->delete();
+
+        return response()->json(['message' => 'Reservation deleted successfully']);
+    }
+
+
+    public
+    function getUpdatedDatesList()
+    {
+//            return view('partials.dates-list', ['name' => 'John Doe', 'email' => 'john@example.com'] );
+        $reservations = Reservation::pluck('new_date');
+        return response()->json([
+            'success' => true,
+            'message' => 'Reservation deleted successfully',
+            'data' => $reservations,
+        ]);
+    }
+
+    public
+    function deleteOrder($id)
+    {
+        $order = Parking::find($id);
+        if ($order) {
+            $order->delete();
+            return response()->json(['message' => 'Order deleted successfully']);
+        }
+        return response()->json(['message' => 'Order not found'], 404);
+    }
     }

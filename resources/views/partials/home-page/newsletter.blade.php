@@ -32,8 +32,8 @@
                 </div>
             </div>
             <div class="col-md-5 col-xs-12">
-                <form id="subscribe-form" class="newsletter-form" method="post">
-                    {{--                    @csrf--}}
+                <form id="newsletter-form" class="newsletter-form" method="post">
+                    @csrf
                     <div class="input-group row{{ $errors->has('email') ? ' has-error' : '' }}">
                         <div class="col-md-6 col-12 p-0 newsletter-email-col">
                             <input type="email" id="newsletter_email" class="form-control form_element" placeholder="Wpisz swój adres e-mail" name="email" value="">
@@ -48,40 +48,43 @@
                         </div>
                     </div>
                     <br>
-                    <!-- ReCAPTCHA v3 checkbox -->
-                    <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
-                        <div class="col-md-6">
-                            {!! RecaptchaV3::field('subscribe') !!}
-                            @if ($errors->has('g-recaptcha-response'))
-                                <span class="help-block">
-                                        <strong>{{ $errors->first('g-recaptcha-response') }}</strong>
-                                    </span>
-                            @endif
-                        </div>
-                    </div>
-                    <!-- "I agree" checkbox -->
+
                     <div class="form-group">
                         <label class="custom-checkbox" for="agree">
                             <input type="checkbox" id="agree" name="agree" class="hidden-checkbox newsletter-checkbox">
                             <span class="custom-checkmark"></span>
                             Zgodnie z art. 13 ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informujemy, iż: » rozwiń
                         </label>
-                        <div class="g-recaptcha" data-sitekey="6LdThHsnAAAAANxCKFV4g8K3jONKSG5DE9rWY9zs"></div>
-                        <script>
-                            grecaptcha.ready(function () {
-                                grecaptcha.execute('6LdThHsnAAAAANxCKFV4g8K3jONKSG5DE9rWY9zs', {
-                                    action: 'subscribe'
-                                }).then(function (token) {
-                                    var recaptchaInput = document.getElementById('g-recaptcha-response-64da1b744d6f3');
-                                    if (recaptchaInput) {
-                                        recaptchaInput.value = token;
-                                    }
-                                });
-                            });
-                        </script>
+
+{{--                        <div class="g-recaptcha" id="g-recaptcha-response-64dfbbc8b61ba" data-sitekey="6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ"></div>--}}
+                        <!-- ReCAPTCHA v3 checkbox -->
+                        <div id="newsletter"></div>
+                        {{--                                            <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">--}}
+                        {{--                                                <div class="col-md-6">--}}
+                        {{--                                                    {!! RecaptchaV3::field('newsletter-form') !!}--}}
+                        {{--                                                    @if ($errors->has('g-recaptcha-response'))--}}
+                        {{--                                                        <span class="help-block">--}}
+                        {{--                                                                                            <strong>{{ $errors->first('g-recaptcha-response') }}</strong>--}}
+                        {{--                                                                                        </span>--}}
+                        {{--                                                    @endif--}}
+                        {{--                                                </div>--}}
+                        {{--                                            </div>--}}
+                        <!-- "I agree" checkbox -->
+                        {{--                        <script>--}}
+                        {{--                            grecaptcha.ready(function () {--}}
+                        {{--                                grecaptcha.execute('6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ', {--}}
+                        {{--                                    action: 'subscribe'--}}
+                        {{--                                }).then(function (token) {--}}
+                        {{--                                    var recaptchaInput = document.getElementById('g-recaptcha-response-64dfbbc8b61ba');--}}
+                        {{--                                    if (recaptchaInput) {--}}
+                        {{--                                        recaptchaInput.value = token;--}}
+                        {{--                                    }--}}
+                        {{--                                });--}}
+                        {{--                            });--}}
+                        {{--                        </script>--}}
                     </div>
                     <br>
-                    <div id="successMessage" style="display: none;">You have been subscribed successfully!</div>
+                    <div id="successMessage" class="alert-success" style="display: none;">You have been subscribed successfully!</div>
                 </form>
             </div>
         </div>
