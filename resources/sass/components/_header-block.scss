@@ -35,7 +35,7 @@
             color: var(--white, #FFF);
 
             /* H1 */
-            font-family: Lato, sans-serif;
+            font-family: Lato Bold, sans-serif !important;
             font-size: 60px;
             font-style: normal;
             font-weight: 800;
@@ -121,8 +121,10 @@
 @media screen and (max-width: 560px) {
     #header-block #headblockCarousel .headblock-title {
         font-size: 40px;
+        font-weight: 400;
     }
     #header-block #headblockCarousel .headblock-subtitle {
-        font-size: 25px;
+        display: block;
+        word-break: break-all;
     }
 }

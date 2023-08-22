@@ -4,7 +4,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-7 col-xs-12">
+            <div class="col-lg-7 col-xs-12">
                 <h2 class="title">Zostaw swój adres e-mail</h2>
                 <h3>Prześlemy informację o aktualnych i przyszłych promocjach.</h3>
                 <div class="approval_rodo">
@@ -31,7 +31,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-5 col-xs-12">
+            <div class="col-lg-5 col-xs-12">
                 <form id="newsletter-form" class="newsletter-form" method="post">
                     @csrf
                     <div class="input-group row{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -56,10 +56,10 @@
                             Zgodnie z art. 13 ogólnego rozporządzenia o ochronie danych osobowych z dnia 27 kwietnia 2016 r. (Dz. Urz. UE L 119 z 04.05.2016) informujemy, iż: » rozwiń
                         </label>
 
-                        <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>
-                        @if ($errors->has('g-recaptcha-response'))
-                            <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>
-                        @endif
+{{--                        <div class="g-recaptcha" data-sitekey="{{ env('GOOGLE_RECAPTCHA_KEY') }}"></div>--}}
+{{--                        @if ($errors->has('g-recaptcha-response'))--}}
+{{--                            <span class="text-danger">{{ $errors->first('g-recaptcha-response') }}</span>--}}
+{{--                        @endif--}}
                         <!-- "I agree" checkbox -->
                     </div>
                     <br>

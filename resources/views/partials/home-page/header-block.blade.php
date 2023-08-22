@@ -90,8 +90,9 @@ margin-top: 94px">
                                         ?>
                                     </select>
                                 </div>
+                                <div id="validation_order_drop_off_time" class="validation"></div>
+
                             </div>
-                            <div id="validation_order_drop_off_time" class="validation"></div>
 
                         </div>
                         <div class="decor-order-line"></div>
@@ -115,7 +116,7 @@ margin-top: 94px">
                     @foreach($headBlocks as $headBlock)
                         <div class="">
                             <span class="headblock-title mb-2 fw-bold">{{ $headBlock->title }}</span>
-                            <span class="headblock-subtitle">{{ $headBlock->subtitle }}</span>
+                            <p class="headblock-subtitle ml-0 mr-0 w-100">{!!  $headBlock->subtitle !!}</p>
                         </div>
                     @endforeach
                 </div>

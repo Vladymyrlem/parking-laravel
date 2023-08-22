@@ -447,21 +447,47 @@
 
         .datetime {
 
-            flex-wrap: wrap;
+            //flex-wrap: wrap;
         }
 
         .date {
-            width: 100%;
-            flex: 0 0 100%;
-            margin-bottom: 20px;
+            //width: 100%;
+            //flex: 0 0 100%;
+            //margin-bottom: 20px;
         }
 
         .time {
             width: 100%;
+            max-width: 86px;
+        }
+
+        .input-group input {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+
+        .input-group-addon {
+            width: auto;
+            max-width: 96px;
+
+            svg {
+                display: none;
+            }
+        }
+
+        #order_pick_up_date, #order_drop_off_date {
+            width: 100%;
+            max-width: 115px;
         }
 
         .styled-select-time {
-            margin: 0 auto;
+            //margin: 0 auto;
         }
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .order_form_wrapper_calendar {
+        left: - 6px !important;
     }
 }

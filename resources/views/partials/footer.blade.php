@@ -34,7 +34,7 @@
                             use Illuminate\Support\Str;
                             $email = Str::ucfirst(getContact('email'));
                         @endphp
-                        <div class="contact-value"><a class="" href="mailto:{!! getContact('email') !!}">{{$email}}</a></div>
+                        <div class="contact-value"><a class="" href="mailto:{!! getContact('email') !!}">{{ getContact('email') }}</a></div>
                         <span class="contact-name">        {!!  getTitleBySlug('contact-address') !!}
 </span>
                         <div class="contact-value"><a href="{!! getContact('map_link') !!}">{!! getContact('address') !!}</a></div>
@@ -48,7 +48,9 @@
                         <span class="contact-name">        {!!  getTitleBySlug('contact-gps') !!}
 </span>
                         <div class="contact-value">
+                            <a href="https://goo.gl/maps/ZsiHYaYKb67FrXiS7">
                           51.109251,16.902584
+                            </a>
                         </div>
                     </div>
                 </div>

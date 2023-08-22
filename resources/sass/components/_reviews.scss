@@ -104,7 +104,7 @@
     #reviews-carousel {
 
         //width: auto;
-        max-width: 98vw;
+        max-width: 94vw;
     }
     //}
 }
@@ -116,6 +116,17 @@
     }
     #reviews-carousel {
         max-width: 90vw !important;
+
+    }
+}
+
+@media screen and (max-width: 560px) {
+    #reviews {
+        //padding-bottom: 30px;
+        margin-top: 50px;
+    }
+    #reviews-carousel {
+        max-width: 84vw !important;
 
     }
 }

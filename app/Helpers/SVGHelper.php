@@ -9,7 +9,7 @@
             $svgFileName = $iconName . '.svg';
 
             // Create the HTML <img> tag with the src attribute pointing to the SVG file
-            $imgTag = '<img src="' . asset($folderName . '/' . $svgFileName) . '" width="' . $width . '" height="' . $height . '">';
+            $imgTag = '<img src="' . asset($folderName . '/' . $svgFileName) . '" width="' . $width . '" height="' . $height . '" alt="' . $iconName . '">';
 
             return $imgTag;
         }

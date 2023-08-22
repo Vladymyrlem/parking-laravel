@@ -7,9 +7,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Parking lotnisko Wroclaw Rondo - bezpieczny parking przy lotnisku.</title>
-    <meta name="description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany, Parking 24/7, 3 minuty przy lotnisku Wrocław"/>
-    <meta name="Author" content="Parking Rondo"/>
+    <meta name="description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta name="keywords" content="parking, lotnisko, Wrocław, strzeżony, 24/7, RONDO, monitorowany, ubezpieczony">
+    <meta name="author" content="Parking Wrocław RONDO">
+    <meta name="robots" content="index, follow">
+    <title>Parking lotnisko Wrocław RONDO</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parking lotnisko Wrocław RONDO">
+    <meta property="og:description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta property="og:image" content="url logo">
+    <meta property="og:url" content="https://www.parkingwroclawrondo.com">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Parking lotnisko Wrocław RONDO">
+    <meta name="twitter:description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta name="twitter:image" content="{{ asset('images/parking-logo.png') }}">
     <!-- Fav and touch icons -->
     {{--    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">--}}
@@ -68,7 +83,8 @@
             dots: true,
             infinite: false,
             variableWidth: false,
-            variableHeight: true,
+            variableHeight: false,
+            adaptiveHeight: true,
             centerMode: false,
             slidesToShow: 1,
             slidesToScroll: 1,

@@ -1206,7 +1206,7 @@ header.large .brand {
 #header-block #headblockCarousel .headblock-title {
   color: var(--white, #FFF);
   /* H1 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 60px;
   font-style: normal;
   font-weight: 800;
@@ -1274,9 +1274,11 @@ header.large .brand {
 @media screen and (max-width: 560px) {
   #header-block #headblockCarousel .headblock-title {
     font-size: 40px;
+    font-weight: 400;
   }
   #header-block #headblockCarousel .headblock-subtitle {
-    font-size: 25px;
+    display: block;
+    word-break: break-all;
   }
 }
 .about-us {
@@ -1327,6 +1329,7 @@ header.large .brand {
 @media screen and (max-width: 768px) {
   .left-about-us {
     margin-bottom: 30px;
+    text-align: left;
   }
   .about-us .about-us-content p {
     margin-left: 0;
@@ -1366,7 +1369,7 @@ h2.prices {
 #prices h2 {
   color: var(--black, #151616);
   text-align: center;
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 700;
@@ -1374,7 +1377,7 @@ h2.prices {
 }
 #prices .subtitle {
   color: var(--black, #151616);
-  font-family: Lato, sans-serif;
+  font-family: Lato, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -1387,33 +1390,34 @@ h2.prices {
   color: #0074b7;
 }
 
-#prices .box .box_content {
+#prices .box_content {
   background-color: #fff;
+  margin-bottom: 30px;
 }
-#prices .box .box_content .top-price-box {
+#prices .box_content .top-price-box {
   border-radius: 5px 5px 0px 0px;
   border: 1.187px solid var(--grey, #AFADAD);
   padding: 20px;
 }
-#prices .box .box_content .bottom-price-box {
+#prices .box_content .bottom-price-box {
   padding: 20px;
   border-radius: 0px 0px 5px 5px;
   background: var(--prime, #0074B7);
 }
-#prices .box .box_content .bottom-price-box h4 {
+#prices .box_content .bottom-price-box h4 {
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
-#prices .box .box_content .bottom-price-box small {
+#prices .box_content .bottom-price-box small {
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-#prices .box .box_content h2 {
+#prices .box_content h2 {
   color: var(--prime, #0074B7);
   font-family: Lato, sans-serif;
   font-size: 40px;
@@ -1423,7 +1427,7 @@ h2.prices {
   margin-bottom: 16px;
 }
 
-#prices .box .box_content h3 {
+#prices .box_content h3 {
   color: var(--prime, #0074B7);
   font-family: Lato, sans-serif;
   font-size: 25px;
@@ -1433,7 +1437,7 @@ h2.prices {
   margin-bottom: 0;
 }
 
-#prices .box .box_content h4 {
+#prices .box_content h4 {
   color: var(--white, #FFF);
   font-family: Lato, sans-serif;
   font-size: 40px;
@@ -1442,7 +1446,7 @@ h2.prices {
   line-height: normal;
 }
 
-#prices .box .box_content small {
+#prices .box_content small {
   color: #fff;
   font-size: 12px;
   text-transform: uppercase;
@@ -1454,7 +1458,7 @@ h2.prices {
   width: 100%;
 }
 
-#prices .box .box_content.promo h2,
+#prices .box_content.promo h2,
 #prices .box_content.promo .subtitle {
   color: #00a82a;
 }
@@ -1669,13 +1673,59 @@ h2.prices {
   #prices .title {
     text-align: left;
   }
+  .prices-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  #prices .box_content {
+    margin-bottom: 16px;
+  }
 }
 @media screen and (max-width: 560px) {
   #prices .title {
     font-size: 28px;
   }
+  #prices h2 {
+    line-height: 30px !important;
+    font-size: 30px !important;
+  }
   #prices .subtitle {
     font-size: 35px;
+  }
+  #prices .box_content .bottom-price-box h4 {
+    font-size: 30px !important;
+  }
+  #prices {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  #prices .box_content:last-child h3 {
+    font-size: 14px !important;
+  }
+  #prices .box_content .bottom-price-box h4, #prices .box_content .bottom-price-box small {
+    font-size: 25px !important;
+  }
+}
+@media screen and (max-width: 475px) {
+  #prices .box_content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 108px auto;
+  }
+}
+@media screen and (max-width: 420px) {
+  #prices .box_content {
+    grid-template-rows: 110px auto;
+  }
+  #prices .box_content .top-price-box {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #prices .box_content:last-child, #prices .box_content:nth-last-child(2) {
+    grid-template-rows: 130px auto;
   }
 }
 /* Newsletter
@@ -1709,8 +1759,9 @@ h2.prices {
 
 #newsletter .title {
   color: var(--white, #FFF);
+  text-transform: uppercase;
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -1935,11 +1986,15 @@ h2.prices {
   }
   #newsletter .newsletter-form {
     height: 100% !important;
+    padding: 0 !important;
   }
   #newsletter .newsletter-form .input-group {
     background: transparent;
     padding-left: 0;
     padding-right: 0;
+  }
+  #newsletter .approval_rodo {
+    padding-top: 0;
   }
   #newsletter .newsletter-form button {
     border-radius: 5px;
@@ -2055,7 +2110,7 @@ h2.prices {
 
 @media screen and (max-width: 1240px) {
   #reviews-carousel {
-    max-width: 98vw;
+    max-width: 94vw;
   }
 }
 @media screen and (max-width: 768px) {
@@ -2065,6 +2120,14 @@ h2.prices {
   }
   #reviews-carousel {
     max-width: 90vw !important;
+  }
+}
+@media screen and (max-width: 560px) {
+  #reviews {
+    margin-top: 50px;
+  }
+  #reviews-carousel {
+    max-width: 84vw !important;
   }
 }
 /* Information
@@ -2605,25 +2668,35 @@ h2.prices {
   }
 }
 @media screen and (max-width: 475px) {
-  #header-block form .datetime {
-    flex-wrap: wrap;
-  }
-  #header-block form .date {
-    width: 100%;
-    flex: 0 0 100%;
-    margin-bottom: 20px;
-  }
   #header-block form .time {
     width: 100%;
+    max-width: 86px;
   }
-  #header-block form .styled-select-time {
-    margin: 0 auto;
+  #header-block form .input-group input {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #header-block form .input-group-addon {
+    width: auto;
+    max-width: 96px;
+  }
+  #header-block form .input-group-addon svg {
+    display: none;
+  }
+  #header-block form #order_pick_up_date, #header-block form #order_drop_off_date {
+    width: 100%;
+    max-width: 115px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .order_form_wrapper_calendar {
+    left: -6px !important;
   }
 }
 /* Partners
 --------------------------------------------*/
 #partners {
-  padding: 100px 0;
+  padding: 30px 0;
   background-color: #fff;
   position: relative;
   z-index: 2;
@@ -2901,6 +2974,14 @@ h2.prices {
     font-size: 20px;
     margin-bottom: 20px;
   }
+  #contacts-us-section form .custom-checkbox {
+    margin-bottom: 0;
+    padding-left: 45px;
+  }
+  #contacts-us-section form input[type=checkbox] {
+    left: 5px;
+    top: 5px;
+  }
 }
 /* Services
 --------------------------------------------*/
@@ -2925,7 +3006,7 @@ h2.prices {
 #services h2 {
   color: #131313;
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -2964,7 +3045,7 @@ h2.prices {
   color: #757575;
   text-align: left;
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -3004,6 +3085,22 @@ h2.prices {
   #information .media-column p img {
     width: 100%;
     max-width: 100%;
+  }
+}
+@media screen and (max-width: 768px) {
+  #services h2 {
+    text-align: left;
+    font-size: 36px;
+  }
+  #services .services-container .row {
+    gap: 0;
+  }
+  #services .services-container .row .service-item {
+    margin-bottom: 16px !important;
+  }
+  #services .service-box .service-content {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
   }
 }
 /* Locations
@@ -3142,6 +3239,11 @@ h2.prices {
   background: var(--prime, #0074B7);
 }
 
+@media screen and (max-width: 992px) {
+  .navi, #locations .location-select {
+    border-radius: 0;
+  }
+}
 @media screen and (max-width: 768px) {
   #locations .location-select {
     height: auto !important;
@@ -3155,9 +3257,16 @@ h2.prices {
     align-items: center;
     font-size: 20px;
     top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .navi a {
     margin-top: 16px;
+  }
+}
+@media screen and (max-width: 560px) {
+  #newsletter .g-recaptcha {
+    max-width: calc(100vw - 60px) !important;
   }
 }
 /* Footer
@@ -3256,6 +3365,13 @@ footer .foot-left .foot-reservation-block__link {
   width: 100%;
   max-width: 100%;
   text-align: center;
+  color: var(--prime, #0074B7);
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  text-transform: capitalize;
 }
 footer .foot-label {
   color: var(--black, #151616);
@@ -3294,6 +3410,12 @@ footer .contacts-grid .contact-value {
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+}
+footer .contacts-grid .contact-value a {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--prime, #0074B7) !important;
 }
 footer .contacts-grid .contact-value:nth-child(3) {
   display: flex;
@@ -3418,6 +3540,15 @@ footer .footer-nav li a:hover {
     font-size: 20px;
     text-align: center;
     margin-bottom: 30px;
+  }
+}
+@media screen and (max-width: 560px) {
+  footer .footer-nav ul > li {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  footer .footer-nav {
+    margin-bottom: 0;
   }
 }
 @media screen and (max-width: 475px) {
@@ -3923,12 +4054,12 @@ form .subtitle {
     grid-template-rows: 40px auto;
   }
   #services .service-box .service-icon {
-    height: 38px;
-    width: 38px;
+    height: 43.5px;
+    width: 43.5px;
   }
   #services .service-box .service-icon img {
-    width: 38px;
-    height: 38px;
+    width: 43.5px;
+    height: 43.5px;
   }
   #services .service-box .service-title {
     font-size: 24px;
@@ -4674,6 +4805,10 @@ p span.price {
   #gallery .gallery {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
+  }
+  #header-block {
+    background-size: auto 100% !important;
+    background-position: left center !important;
   }
 }
 @media screen and (max-width: 560px) {

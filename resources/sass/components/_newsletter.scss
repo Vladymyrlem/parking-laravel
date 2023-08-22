@@ -31,9 +31,9 @@
 
 #newsletter .title {
     color: var(--white, #FFF);
-
+    text-transform: uppercase;
     /* H3 bold */
-    font-family: Lato, sans-serif;
+    font-family: Lato Bold, sans-serif !important;
     font-size: 30px;
     font-style: normal;
     font-weight: 900;
@@ -267,8 +267,13 @@
     #newsletter {
         padding-bottom: 0;
 
+        .container {
+            //padding: 20px 10px;
+        }
+
         .newsletter-form {
             height: 100% !important;
+            padding: 0 !important;
 
             .input-group {
                 background: transparent;
@@ -276,6 +281,9 @@
                 padding-right: 0;
             }
         }
+    }
+    #newsletter .approval_rodo {
+        padding-top: 0;
     }
     #newsletter .newsletter-form button {
         border-radius: 5px;

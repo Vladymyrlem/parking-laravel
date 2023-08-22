@@ -437,14 +437,14 @@ jQuery(function () {
         console.log(formData);
         // var _d = $.parseJSON(data);
         // console.log(_d.data.status);
-        $('#contact_form_msg').html('Wiadomość została wysłana').removeClass('hidden').addClass('validation_ok');
+        $('#contact_form_msg').html('Wiadomość została wysłana').removeClass('hidden').addClass('validation_ok').css('background', '#00a82a');
         $('#contact_submit_btn').text('wysłano!');
         setTimeout(function () {
           $('#contact_form_msg').html('').addClass('hidden').removeClass('validation_ok');
           //                            $('#contact_submit_btn').removeAttr('disabled').val('Wyślij wiadomość');
           $('#contact_g_recaptcha .g-recaptcha').html('').hide();
         }, 5000);
-        $('.contact_us_sended').text('Your contacts sended successfully');
+        $('.contact_us_sended').text('Twoja wiadomość została wysłana poprawnie');
         // Display success message or perform other actions
       },
 
@@ -611,6 +611,14 @@ $(document).ready(function () {
       return text === 'rozwiń' ? 'zwiń' : 'rozwiń';
     });
   });
+  var width = $('.g-recaptcha').parent().width();
+  if (width < 425) {
+    var scale = width / 304;
+    $('.g-recaptcha').css('transform', 'scale(' + scale + ')');
+    $('.g-recaptcha').css('-webkit-transform', 'scale(' + scale + ')');
+    $('.g-recaptcha').css('transform-origin', '0 0');
+    $('.g-recaptcha').css('-webkit-transform-origin', '0 0');
+  }
 });
 /******/ })()
 ;

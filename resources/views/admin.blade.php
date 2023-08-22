@@ -121,11 +121,11 @@
         </table>
     </div>
     <!-- Main content -->
-    <div class="content pl-3 pr-3">
+    <div class="content calendar-content pl-sm-3 pr-sm-3">
         <section class="calendar" id="calendar" name="#calendar">
             <h2 class="calendar__title">Dni w których wyłączona jest możliwość złożenia zamówienia</h2>
             <div class="calendar__container">
-                <div class="calendar__visual_wrapper">
+                <div class="calendar__visual_wrapper mb-5 mb-md-0">
                     <div class="calendar__main_calendar"></div>
                 </div>
                 <div class="calendar__date_list_wrapper">

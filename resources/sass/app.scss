@@ -1,5 +1,41 @@
 // Fonts
-@import url('https://fonts.bunny.net/css?family=Lato');
+//@import url('https://fonts.bunny.net/css?family=Lato');
+
+@font-face {
+    font-family: 'Lato';
+    src: url('../fonts/Lato-Light.eot');
+    src: local('Lato Light'), local('Lato-Light'),
+    url('../fonts/Lato-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Lato-Light.woff2') format('woff2'),
+    url('../fonts/Lato-Light.woff') format('woff'),
+    url('../fonts/Lato-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato Medium';
+    src: url('../fonts/Lato-Medium.eot');
+    src: local('Lato Medium'), local('Lato-Medium'),
+    url('../fonts/Lato-Medium.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Lato-Medium.woff2') format('woff2'),
+    url('../fonts/Lato-Medium.woff') format('woff'),
+    url('../fonts/Lato-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Lato Bold';
+    src: url('../fonts/Lato-Black.eot');
+    src: local('Lato Black'), local('Lato-Black'),
+    url('../fonts/Lato-Black.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/Lato-Black.woff2') format('woff2'),
+    url('../fonts/Lato-Black.woff') format('woff'),
+    url('../fonts/Lato-Black.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
 
 // Variables
 @import 'variables';
@@ -36,4 +72,64 @@ $fa-font-path: '../webfonts';
 
 .main-header {
     max-height: 65px;
+
+    .nav-collapse {
+        width: 100%;
+
+        ul {
+            display: flex;
+            width: 100%;
+        }
+
+        &.opened {
+            top: 210px;
+            background: #fff;
+        }
+    }
+}
+
+
+.close-head-editor, #btn_add_about_us, .close-editor, .close-reviews-editor, .close-contacts-editor, .close-service-editor {
+    font-size: 30px;
+    background: transparent;
+    border: none;
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+}
+
+.hide-edit-info-media .close-editor {
+    background: transparent;
+    font-size: 23px;
+    padding: 10px;
+    border: none;
+    box-shadow: none;
+}
+
+@media screen and (max-width: 1240px) {
+    .main-header {
+
+        .nav-collapse {
+            ul {
+                flex-flow: column;
+            }
+
+            &.opened {
+                top: 210px;
+                background: #fff;
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 400px) {
+    section.calendar {
+        padding: 20px 0 !important;
+    }
+    .content-wrapper > .content.calendar-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
 }
