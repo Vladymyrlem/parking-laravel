@@ -1214,14 +1214,17 @@ header.large .brand {
   margin-bottom: 20px;
 }
 #header-block #headblockCarousel .headblock-subtitle {
-  color: var(--white, #FFF);
+  color: #FFF !important;
   /* H3 */
-  font-family: Lato, sans-serif;
+  font-family: Lato, sans-serif !important;
   font-size: 36px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
   position: relative;
+}
+#header-block #headblockCarousel .headblock-subtitle * {
+  color: #ffffff;
 }
 
 @media screen and (max-width: 1240px) {
@@ -1273,12 +1276,13 @@ header.large .brand {
 }
 @media screen and (max-width: 560px) {
   #header-block #headblockCarousel .headblock-title {
-    font-size: 40px;
+    font-size: 35px;
     font-weight: 400;
   }
   #header-block #headblockCarousel .headblock-subtitle {
     display: block;
     word-break: break-all;
+    font-size: 25px;
   }
 }
 .about-us {

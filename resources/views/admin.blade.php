@@ -176,7 +176,7 @@
                                     <tr id="headblock-{{$headBlock->id}}" class="active">
                                         <td> {{$headBlock->id}} </td>
                                         <td> {{$headBlock->title}} </td>
-                                        <td>{{$headBlock->subtitle}}</td>
+                                        <td>{!! $headBlock->subtitle !!}</td>
                                         <td width="150">
                                             <button class="btn btn-warning btn-detail open_header_modal" value="{{$headBlock->id}}">Edit</button>
                                             <button class="btn btn-danger btn-delete delete-product" value="{{$headBlock->id}}">Delete</button>
