@@ -3,14 +3,14 @@
     <div class="container">
         <div class="row">
             <div class="col-12 top-foot row justify-content-between">
-                <div class="foot-left col-md-6 col-lg-auto">
+                <div class="foot-left col-md-6 col-lg-auto pl-0">
                     <a href="/" class="logo foot-logo">
                         <img src="{{ asset('images/parking-logo.png') }}" alt="">
                     </a>
                     <div class="foot-reservation-block">
                         <h2 class="foot-reservation-block__title">Rezerwacja online</h2>
                         <h3 class="foot-reservation-block__subtitle">Zarezerwowanie miejsca jest bardzo proste.</h3>
-                        <a href="#header-block" class="foot-reservation-block__link">rezerwację</a>
+                        <a href="#header-block" class="foot-reservation-block__link">Zarezerwuj</a>
                     </div>
                 </div>
                 <nav class="col-md-6 col-lg-auto footer-nav">
@@ -34,13 +34,13 @@
                             use Illuminate\Support\Str;
                             $email = Str::ucfirst(getContact('email'));
                         @endphp
-                        <div class="contact-value"><a class="" href="mailto:{!! getContact('email') !!}">{{$email}}</a></div>
+                        <div class="contact-value"><a class="" href="mailto:{!! getContact('email') !!}">{{ getContact('email') }}</a></div>
                         <span class="contact-name">        {!!  getTitleBySlug('contact-address') !!}
 </span>
                         <div class="contact-value"><a href="{!! getContact('map_link') !!}">{!! getContact('address') !!}</a></div>
                         <span class="contact-name">        {!!  getTitleBySlug('contact-phone') !!}
 </span>
-                        <div class="contact-value">
+                        <div class="contact-value phones-list d-flex flex-column">
                             <a href="tel:{!! getContact('phone_number_1') !!}">{!! getContact('phone_number_1') !!}</a>
                             <a href="tel:{!! getContact('phone_number_2') !!}">{!! getContact('phone_number_2') !!}</a>
 
@@ -48,7 +48,9 @@
                         <span class="contact-name">        {!!  getTitleBySlug('contact-gps') !!}
 </span>
                         <div class="contact-value">
-                            {!! getContact('latitude') !!},{!! getContact('longitude') !!}
+                            <a href="https://goo.gl/maps/ZsiHYaYKb67FrXiS7">
+                          51.109251,16.902584
+                            </a>
                         </div>
                     </div>
                 </div>

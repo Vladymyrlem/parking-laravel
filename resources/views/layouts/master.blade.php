@@ -7,7 +7,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Parking Rondo')</title>
+    <meta name="description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta name="keywords" content="parking, lotnisko, Wrocław, strzeżony, 24/7, RONDO, monitorowany, ubezpieczony">
+    <meta name="author" content="Parking Wrocław RONDO">
+    <meta name="robots" content="index, follow">
+    <title>Parking lotnisko Wrocław RONDO</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parking lotnisko Wrocław RONDO">
+    <meta property="og:description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta property="og:image" content="url logo">
+    <meta property="og:url" content="https://www.parkingwroclawrondo.com">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Parking lotnisko Wrocław RONDO">
+    <meta name="twitter:description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta name="twitter:image" content="{{ asset('images/parking-logo.png') }}">
     <!-- Fav and touch icons -->
     {{--    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/ico/apple-touch-icon-144-precomposed.png">--}}
     {{--    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/ico/apple-touch-icon-114-precomposed.png">--}}
@@ -26,9 +43,8 @@
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
-    {{--    {!! RecaptchaV3::initJs() !!}--}}
 
-    @yield('styles')
+    {{--    @yield('styles')--}}
 
 </head>
 <body name="#start" id="top" class="js">
@@ -36,7 +52,6 @@
 @include('partials.header')
 
 <main class="">
-    {!! RecaptchaV3::initJs() !!} <!-- Initialize reCAPTCHA script -->
     @yield('content')
 </main>
 @include('partials.footer')
@@ -60,6 +75,7 @@
             infinite: false,
             variableWidth: false,
             centerMode: false,
+            adaptiveHeight: true,
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false
@@ -68,7 +84,8 @@
             dots: true,
             infinite: false,
             variableWidth: false,
-            variableHeight: true,
+            variableHeight: false,
+            adaptiveHeight: true,
             centerMode: false,
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -89,23 +106,42 @@
             const ofHideCalendarClassName = 'hide';
 
             /*
-             * Create info text
-             */
-            const textWrap = document.querySelector('#reservation-blocked-dates');
-            if (textWrap) {
-                textWrap.innerText = `${
-                    $blockedDates
-                        .filter(elem => {
-                            const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
-                            const date = new Date().setHours(0, 0, 0, 0);
-                            return currDate >= date;
-                        })
-                        .map(elem => elem.new_date)
-                        .join(', ')
-                }`;
-            }
+                      * Create info text
+                      */
+            // const textWrap = document.querySelector('.reservation-blocked-dates');
+            // if (textWrap) {
+            //     textWrap.innerText = `${
+            //         $blockedDates
+            //             .filter(elem => {
+            //                 const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
+            //                 const date = new Date().setHours(0, 0, 0, 0);
+            //                 return currDate >= date;
+            //             })
+            //             .map(elem => elem.new_date)
+            //             .join(', ')
+            //     }`;
+            // }
 
+            var datesArray = <?php echo json_encode($blockedDates); ?>;
 
+            var currentDate = new Date();
+
+            // Filter out old dates
+            var excludedDates = datesArray.filter(function(dateObj) {
+                var dateParts = dateObj['new_date'].split('/');
+                var rawDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Month is zero-based
+                return rawDate >= currentDate;
+            });
+
+            // Extract the new_date values from the excluded dates
+            var excludedDateStrings = excludedDates.map(function(dateObj) {
+                return dateObj['new_date'];
+            });
+            var joinedExcludedDates = excludedDateStrings.join(', ');
+
+            console.log(joinedExcludedDates);
+            {{--// Insert the joined dates into the div with class 'reservations-list'--}}
+            $('.reservation-blocked-dates').text(joinedExcludedDates);
             /*
              * Create Wrapper For Calendar
              */
@@ -137,19 +173,20 @@
                     $input.addEventListener('click', e => {
                         e.preventDefault();
 
+                        const inputTop = $('#order_pick_up_date').height();
                         // Set Calendar position
                         const posForm = orderForm.getBoundingClientRect();
                         const posInput = e.target.getBoundingClientRect();
                         const posLeft = posInput.left - posForm.left + posInput.width;
-                        const posTop = posInput.top - posForm.top;
-                        ofCalendar.calendar._target.style.top = posTop + 'px';
-                        ofCalendar.calendar._target.style.left = posLeft + 'px';
+                        const posTop = posInput.top - posForm.top + inputTop;
+                        ofCalendar.calendar._target.style.top = posTop + 20 + 'px';
+                        ofCalendar.calendar._target.style.left = 16 + 'px';
 
                         ofCalendar.calendar._target.classList.remove(ofHideCalendarClassName);
                         ofCalendar.ofInputActive = $input;
                         ofCalendar.ofInputActiveId = $input.dataset.inputId;
                         ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick( true, ofHideCalendarClassName );
+                        ofCalendar.setActionOnDateClick(true, ofHideCalendarClassName);
                     })
                 }
             })
@@ -181,6 +218,8 @@
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="{{ asset('js/gmap3.min.js') }}"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+{{--{!!  GoogleReCaptchaV2::render('newsletter','contact_us') !!}--}}
+
 <script>
     $(document).ready(function () {
         // Submit the form using Ajax
@@ -194,6 +233,33 @@
             const formData = {
                 email: $('input#newsletter_email').val()
             }
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '/subscribe',
+            //     data: formData,
+            //     dataType: 'json',
+            //     contentType: false,
+            //     processData: false,
+            //     success: function (response) {
+            //         console.log(formData);
+            //         $('#successMessage').show();
+            //     },
+            //     error: function (error) {
+            //         console.log(error);
+            //         // Handle error response if needed
+            //     }
+            // });
+            // Get the reCAPTCHA response
+            // grecaptcha.ready(function () {
+            //     grecaptcha.execute('6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ', {action: 'newsletter-form'}).then(function (token) {
+            // Add the CSRF token and reCAPTCHA response to form data
+            // token = $('meta[name="_token"]').attr('content');
+            // formData.append('<input type="hidden" name="recaptcha_token" value="' + token + '">');
+
+            {{--formData.append('_token', '{{ csrf_token() }}');--}}
+            {{--formData.append('g-recaptcha-response', token);--}}
+
+            // Submit the form
             $.ajax({
                 type: 'POST',
                 url: '/subscribe',
@@ -202,7 +268,6 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log(formData);
                     $('#successMessage').show();
                 },
                 error: function (error) {
@@ -210,32 +275,8 @@
                     // Handle error response if needed
                 }
             });
-            // Get the reCAPTCHA response
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {
-                    // Add the CSRF token and reCAPTCHA response to form data
-                    const formData = new FormData(form); // Use the stored reference to the form element
-                    formData.append('_token', '{{ csrf_token() }}');
-                    formData.append('g-recaptcha-response', token);
-
-                    // Submit the form
-                    $.ajax({
-                        type: 'POST',
-                        url: '/subscribe',
-                        data: formData,
-                        dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            $('#successMessage').show();
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            // Handle error response if needed
-                        }
-                    });
-                }.bind(this)); // Explicitly bind the context to the promise callback
-            });
+            //     }.bind(this)); // Explicitly bind the context to the promise callback
+            // });
         });
     });
 </script>
@@ -361,7 +402,6 @@
     var datesArray = <?php echo json_encode($blockedDates); ?>;
 
 </script>
-{{--@yield('recaptcha_init') <!-- Inject reCAPTCHA initialization script here -->--}}
 
 </body>
 </html>

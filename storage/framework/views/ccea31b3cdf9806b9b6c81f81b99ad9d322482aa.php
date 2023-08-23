@@ -127,7 +127,7 @@
     </div>
     <!-- Main content -->
     <div class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-lg-12">
                     <!--Header Block-->
@@ -159,7 +159,7 @@
                                             <td> <?php echo e($headBlock->id); ?> </td>
                                             <td> <?php echo e($headBlock->title); ?> </td>
                                             <td><?php echo e($headBlock->subtitle); ?></td>
-                                            <td width="35%">
+                                            <td width="150">
                                                 <button class="btn btn-warning btn-detail open_header_modal" value="<?php echo e($headBlock->id); ?>">Edit</button>
                                                 <button class="btn btn-danger btn-delete delete-product" value="<?php echo e($headBlock->id); ?>">Delete</button>
                                             </td>

@@ -33,7 +33,7 @@
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->departure)->format('d/m/Y H:i');
             $contacts = Contacts::all();
             return (new MailMessage)
-                ->subject('Order Confirmation')
+                ->subject('Potwierdzenie rezerwacji')
                 ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate, 'contacts' => $contacts])
                 ->attach($this->pdfFile, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf'])
                 ->to($this->formData->email)
@@ -61,7 +61,7 @@
         public function envelope()
         {
             return new Envelope(
-                subject: 'Order Confirmation',
+                subject: 'Potwierdzenie rezerwacji',
             );
         }
 

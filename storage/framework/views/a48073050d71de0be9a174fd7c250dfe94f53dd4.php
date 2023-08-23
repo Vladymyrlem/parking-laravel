@@ -28,7 +28,7 @@
                     <td><?php echo e($contact->phone_number_1); ?><br><?php echo e($contact->phone_number_2); ?></td>
                     <td><?php echo e($contact->latitude); ?>','&nbsp;<?php echo e($contact->longitude); ?></td>
                     <td><a href="<?php echo e($contact->map_link); ?>" target="_blank">Link to google map</a></td>
-                    <td width="35%">
+                    <td width="100">
                         <button class="btn btn-warning btn-detail open_contacts_modal" value="<?php echo e($contact->id); ?>">Edit</button>
                     </td>
                 </tr>

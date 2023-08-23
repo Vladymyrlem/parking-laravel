@@ -14,6 +14,9 @@
         .row {
             gap: 30px 0;
 
+            .service-item {
+                margin-bottom: 30px;
+            }
         }
     }
 }
@@ -21,7 +24,7 @@
 #services h2 {
     color: #131313;
     /* H2 */
-    font-family: Lato, sans-serif;
+    font-family: Lato Medium, sans-serif !important;
     font-size: 50px;
     font-style: normal;
     font-weight: 400;
@@ -42,10 +45,12 @@
     background-color: #ededed;
     padding: 30px 20px;
     display: grid;
+    border-radius: 5px;
     grid-template-columns: auto 1fr;
     grid-template-rows: 58px auto;
     gap: 16px;
     height: 100%;
+
 }
 
 #services .service-box .service-icon {
@@ -59,7 +64,7 @@
     color: #757575;
     text-align: left;
     /* H3 bold */
-    font-family: Lato, sans-serif;
+    font-family: Lato Bold, sans-serif !important;
     font-size: 30px;
     font-style: normal;
     font-weight: 900;
@@ -101,5 +106,26 @@
             width: 100%;
             max-width: 100%;
         }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #services {
+        h2 {
+            text-align: left;
+            font-size: 36px;
+        }
+    }
+    #services .services-container .row {
+        gap: 0;
+
+        .service-item {
+
+            margin-bottom: 16px !important;
+        }
+    }
+    #services .service-box .service-content {
+        margin-top: 0 !important;
+        margin-bottom: 0 !important;
     }
 }

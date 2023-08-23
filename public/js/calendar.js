@@ -98,12 +98,12 @@ class CalendarIk {
         }
     }
 
-    // Function ONClick Date Calendar
-    setActionOnDateClick = ( closeAfterSelection = false, classNameClosedCalendar = '' ) => {
+
+    setActionOnDateClick = (closeAfterSelection = false, classNameClosedCalendar = '') => {
         const dates = this.calendar._target.querySelectorAll(' .calendar_date');
         dates?.forEach(date => {
 
-            if ( ! ( date.classList.contains('disabled') || date.classList.contains('no_select') ) ) {
+            if (!(date.classList.contains('disabled') || date.classList.contains('no_select'))) {
 
                 date.addEventListener('click', event => {
                     if (this.ofInputActive) {
@@ -118,9 +118,9 @@ class CalendarIk {
                         this.ofDateTo = new Date(date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
                     }
 
-                    // Close Calendar After Click Date
-                    if ( closeAfterSelection ) {
-                        this.calendar._target.classList.add( classNameClosedCalendar || this.class.hide );
+// Close Calendar After Click Date
+                    if (closeAfterSelection) {
+                        this.calendar._target.classList.add(classNameClosedCalendar || this.class.hide);
                     }
 
                     this.calendar.refresh();
@@ -128,7 +128,6 @@ class CalendarIk {
             }
         });
     }
-
 
     // Helpers
     setClassNames = function (index, element) {

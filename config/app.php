@@ -15,7 +15,7 @@
         |
         */
 
-        'name' => env('APP_NAME', 'Laravel'),
+        'name' => env('APP_NAME', 'Parking Rondo'),
 
         /*
         |--------------------------------------------------------------------------
@@ -41,7 +41,7 @@
         |
         */
 
-        'debug' => (bool)env('APP_DEBUG', false),
+        'debug' => (bool)env('APP_DEBUG', true),
 
         /*
         |--------------------------------------------------------------------------
@@ -54,7 +54,7 @@
         |
         */
 
-        'url' => env('APP_URL', 'http://lara.adminlte'),
+        'url' => env('APP_URL', 'http://parking-rondo.pl'),
 
         'asset_url' => env('ASSET_URL'),
 
@@ -69,7 +69,7 @@
         |
         */
 
-        'timezone' => 'UTC',
+        'timezone' => 'Europe/Warsaw',
 
         /*
         |--------------------------------------------------------------------------
@@ -82,7 +82,7 @@
         |
         */
 
-        'locale' => 'en',
+        'locale' => 'pl',
 
         /*
         |--------------------------------------------------------------------------
@@ -195,7 +195,8 @@
             // App\Providers\BroadcastServiceProvider::class,
             App\Providers\EventServiceProvider::class,
             App\Providers\RouteServiceProvider::class,
-            Yajra\Datatables\DatatablesServiceProvider::class,
+            TimeHunter\LaravelGoogleReCaptchaV2\Providers\GoogleReCaptchaV2ServiceProvider::class
+
         ],
 
         /*
@@ -213,6 +214,7 @@
             'Form' => Collective\Html\FormFacade::class,
             'Html' => Collective\Html\HtmlFacade::class,
             'Datatables' => Yajra\Datatables\Facades\Datatables::class,
+            'GoogleReCaptchaV2' => TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2::class
             // 'ExampleClass' => App\Example\ExampleClass::class,
         ])->toArray(),
 

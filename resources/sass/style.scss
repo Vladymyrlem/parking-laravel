@@ -5,9 +5,10 @@
 body {
     font-family: 'Lato', sans-serif;
     color: #716d6e;
+    font-weight: 600;
 
     * {
-        font-family: 'Lato', sans-serif !important;
+        font-family: 'Lato', sans-serif;
         color: #716d6e;
     }
 }
@@ -752,6 +753,9 @@ header.large .brand {
     font-style: normal;
     font-weight: 400;
     line-height: 140%; /* 25.2px */
+    span {
+        color: #000;
+    }
 }
 
 #checkoutModal .checkout-personal-info {
@@ -1141,12 +1145,12 @@ form .subtitle {
 
         .service-icon {
 
-            height: 38px;
-            width: 38px;
+            height: 43.5px;
+            width: 43.5px;
 
             img {
-                width: 38px;
-                height: 38px;
+                width: 43.5px;
+                height: 43.5px;
             }
         }
     }
@@ -1624,20 +1628,71 @@ form .subtitle {
     text-transform: uppercase !important;
 }
 
+strong {
+    font-family: Lato Bold, sans-serif !important;
+}
+
+small {
+    font-family: Lato Medium, sans-serif !important;
+}
+
 /* Terms
 --------------------------------------------*/
 #terms {
     margin-top: 90px;
     position: relative;
     z-index: 2;
+
+    strong {
+        font-family: Lato Bold, sans-serif !important;
+    }
+
+    small {
+        font-family: Lato Medium, sans-serif !important;
+    }
+
+    ul > li {
+        text-align: left;
+    }
+
+    button {
+        &.open {
+            svg {
+                transform: rotate(180deg);
+            }
+        }
+
+        &:focus {
+
+            box-shadow: none;
+        }
+    }
+}
+
+h2 {
+    font-family: Lato Bold, sans-serif !important;
+
 }
 
 #terms h2 {
+    font-family: Lato Bold, sans-serif !important;
     font-size: 46px;
     font-weight: 900;
     margin: 0 0 25px 0;
     padding: 0;
     text-align: center;
+}
+
+h3 {
+    font-family: Lato Medium, sans-serif !important;
+}
+
+p {
+    font-weight: 600;
+}
+
+#terms h3 {
+    font-family: Lato Medium, sans-serif !important;
 }
 
 a:hover {
@@ -1861,6 +1916,10 @@ p span.price {
 
     }
 
+    ul {
+        padding-left: 20px;
+    }
+
     &.expanded {
         max-height: 307px;
         overflow: hidden;
@@ -1874,11 +1933,12 @@ p span.price {
     position: relative;
     z-index: 2;
 
+
     h2 {
         color: var(--black, #151616);
 
         /* H2 */
-        font-family: Lato, sans-serif;
+        font-family: Lato Medium, sans-serif !important;
         font-size: 50px;
         font-style: normal;
         font-weight: 400;
@@ -1891,11 +1951,15 @@ p span.price {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: auto;
         grid-gap: 30px;
-
+        width: 100%;
+        max-width: 100%;
 
         img {
             border-radius: 5px;
             border: 2px solid var(--grey, #AFADAD);
+            width: 100%;
+            max-width: 100%;
+            height: auto;
         }
     }
 }
@@ -1971,7 +2035,7 @@ p span.price {
 
         img {
             width: 100%;
-            height: 100%
+            height: auto;
         }
     }
     .container {
@@ -1997,6 +2061,10 @@ p span.price {
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 20px;
     }
+    #header-block {
+        background-size: auto 100% !important;
+        background-position: left center !important;
+    }
 }
 
 @media screen and (max-width: 560px) {
@@ -2010,6 +2078,4 @@ p span.price {
 
 }
 
-@media screen and (max-width: 375px) {
 
-}

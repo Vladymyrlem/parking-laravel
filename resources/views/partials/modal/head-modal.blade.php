@@ -9,14 +9,15 @@
                 <form id="frmHeadBlock" name="frmHeadBlock" class="form-horizontal" novalidate="">
                     <div class="form-group error">
                         <label for="inputName" class="col-sm-3 control-label">Title</label>
-                        <div class="col-sm-9">
+                        <div class="col-sm-12">
                             <input type="text" class="form-control has-error" id="title" name="title" placeholder="Title" value="">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputDetail" class="col-sm-3 control-label">Subtitle</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Subtitle" value="">
+                        <div class="col-sm-12">
+{{--                            <input type="text" class="form-control" id="subtitle" name="subtitle" placeholder="Subtitle" value="">--}}
+                            <textarea name="subtitle" class="w-100" id="subtitle" cols="30" rows="10" placeholder="Subtitle"></textarea>
                         </div>
                     </div>
                 </form>

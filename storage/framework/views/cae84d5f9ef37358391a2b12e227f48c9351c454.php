@@ -79,11 +79,11 @@ position: relative;" aria-hidden="true">
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#" aria-expanded="false">
+                <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">
                     <?php echo e(Auth::user()->name); ?>
 
                 </a>
-                <div class="dropdown-menu dropdown-menu-right" style="left: inherit; right: 0px;">
+                <div class="dropdown-menu dropdown-menu-right user-menu" style="left: inherit; right: 0px;">
                     <a href="<?php echo e(route('profile.show')); ?>" class="dropdown-item">
                         <i class="mr-2 fas fa-file"></i>
                         <?php echo e(__('My profile')); ?>

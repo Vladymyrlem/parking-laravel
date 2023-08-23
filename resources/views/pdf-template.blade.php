@@ -61,7 +61,7 @@ Ilość dni: <b>
 <p>
     Rezewacja do:
     <b>
-        {{ $order->id }}/{{ $arrivalDate }}
+        {{ $order->id }}/{{ $departureDate }}
     </b>
 </p>
 <p>Liczba osób do transferu: <b>{{ $order->number_peoples }}</b></p>
@@ -71,7 +71,7 @@ Ilość dni: <b>
 
 <b>Dane rezerwującego</b>
 
-<p>Imię i nazwisko: test test</p>
+<p>Imię i nazwisko: {{ $order->client_name }}&nbsp;{{ $order->client_surname }}</p>
 <p>Email: {{ $order->email }}</p>
 <p>Nr telefonu: {{ $order->phone_number }}</p>
 

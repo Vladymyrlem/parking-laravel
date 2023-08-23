@@ -15,6 +15,7 @@
     use App\Models\Reviews;
     use App\Models\SectionTitle;
     use App\Models\Services;
+    use App\Rules\ReCaptcha;
     use GuzzleHttp\Client;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
@@ -24,8 +25,6 @@
     use Illuminate\Validation\Validator;
     use Laracasts\Flash\Flash;
     use SubscriptionConfirmation;
-    use Yajra\DataTables\DataTables;
-    use Yajra\DataTables\Exceptions\Exception;
 
     class AdminController extends Controller
     {
@@ -111,13 +110,12 @@
         {
             $request->validate([
                 'email' => 'email',
-
-//                'g-recaptcha-response' => 'required|recaptchav3:subscribe,0.5'
+//                'g-recaptcha-response' => ['required', new ReCaptcha()]
             ]);
 
             // Implement Google reCAPTCHA v3 verification
 //            $recaptcha_token = $request->input('recaptcha');
-//            $recaptcha_secret_key = '6LcivXInAAAAAOSU4FzhvY87QghSlLPDMnuTOlt7';
+//            $recaptcha_secret_key = '6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ';
 //            $client = new Client();
 //            $response = $client->post('https://www.google.com/recaptcha/api/siteverify', [
 //                'form_params' => [
@@ -125,12 +123,13 @@
 //                    'response' => $recaptcha_token
 //                ]
 //            ]);
-//
+
 //            $body = json_decode((string)$response->getBody());
 //            if (!$body->success || $body->score < 0.5) {
 //                return redirect()->back()->withInput()->withErrors(['recaptcha' => 'Failed to verify reCAPTCHA.']);
 //            }
 
+            // if ($response) {
             // Send the email
             $email = $request->input('email');
             // Implement your email sending logic here, using Laravel's Mail class or any other email package.
@@ -138,9 +137,15 @@
             Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new NewSubscriberNotification($request->email));
             // Save the email to a text file
             return response()->json(['message' => 'You have been subscribed successfully!']);
+            //  }else {
+            // reCAPTCHA verification failed
+            // return response()->json(['error' => 'reCAPTCHA verification failed'], 422);
+            //}
+
         }
 
-        public function reservations()
+        public
+        function reservations()
         {
             $reservations = Reservation::all('new_date');
             $blockedDates = [];
@@ -165,7 +170,8 @@
 //            // Get the public URL for the file
 //            return response()->json(['location' => "/images/$imageName"]);
 //        }
-        public function uploadImage(Request $request)
+        public
+        function uploadImage(Request $request)
         {
             $uploadedFile = $request->file('file');
 
@@ -179,7 +185,8 @@
             return response()->json(['location' => "/images/$originalFilename"]);
         }
 
-        public function calendarDate(Request $request)
+        public
+        function calendarDate(Request $request)
         {
             $dates = [];
 
@@ -200,7 +207,8 @@
             return response()->json(['message' => 'Reservation dates stored successfully']);
         }
 
-        public function storeAllDates(Request $request)
+        public
+        function storeAllDates(Request $request)
         {
             $selectedDates = $request->input('dates');
 
@@ -214,7 +222,8 @@
             return response()->json(['message' => 'All dates stored successfully']);
         }
 
-        public function destroy($id)
+        public
+        function destroy($id)
         {
             $reservation = Reservation::find($id);
 
@@ -227,7 +236,8 @@
             return response()->json(['message' => 'Reservation deleted successfully']);
         }
 
-        public function deleteByDate(Request $request)
+        public
+        function deleteByDate(Request $request)
         {
             $blockedDate = $request->input('blockedDate');
             Log::info('Blocked Date: ' . $blockedDate);
@@ -245,7 +255,8 @@
         }
 
 
-        public function getUpdatedDatesList()
+        public
+        function getUpdatedDatesList()
         {
 //            return view('partials.dates-list', ['name' => 'John Doe', 'email' => 'john@example.com'] );
             $reservations = Reservation::pluck('new_date');
@@ -256,7 +267,8 @@
             ]);
         }
 
-        public function deleteOrder($id)
+        public
+        function deleteOrder($id)
         {
             $order = Parking::find($id);
             if ($order) {

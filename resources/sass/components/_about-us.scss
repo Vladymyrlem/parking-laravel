@@ -24,6 +24,7 @@
             font-style: normal;
             font-weight: 300;
             line-height: normal;
+            margin-bottom: 20px;
         }
     }
 
@@ -51,6 +52,7 @@
 @media screen and (max-width: 768px) {
     .left-about-us {
         margin-bottom: 30px;
+        text-align: left;
     }
     .about-us .about-us-content p {
         margin-left: 0;

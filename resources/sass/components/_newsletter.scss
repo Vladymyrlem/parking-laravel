@@ -1,11 +1,15 @@
 /* Newsletter
 --------------------------------------------*/
 #newsletter {
-    background-color: #0074b7;
     margin-top: 90px;
-    padding: 90px 0;
     position: relative;
     z-index: 2;
+
+    .container {
+        background-color: #0074b7;
+        padding: 30px;
+        border-radius: 5px;
+    }
 }
 
 #newsletter h3 {
@@ -27,9 +31,9 @@
 
 #newsletter .title {
     color: var(--white, #FFF);
-
+    text-transform: uppercase;
     /* H3 bold */
-    font-family: Lato, sans-serif;
+    font-family: Lato Bold, sans-serif !important;
     font-size: 30px;
     font-style: normal;
     font-weight: 900;
@@ -59,7 +63,7 @@
         font-weight: 800;
         line-height: 20.594px; /* 205.937% */
         text-transform: capitalize;
-        padding-left: 26px;
+        padding-left: 37px;
 
         display: flex;
         align-items: flex-start;
@@ -69,6 +73,7 @@
 
         input {
             flex: 0;
+            width: 0;
         }
     }
 }
@@ -112,6 +117,8 @@
     font-weight: 700;
     line-height: 20px; /* 125% */
     text-transform: capitalize;
+    border: none;
+    box-shadow: none;
 }
 
 .approval {
@@ -260,8 +267,13 @@
     #newsletter {
         padding-bottom: 0;
 
+        .container {
+            //padding: 20px 10px;
+        }
+
         .newsletter-form {
             height: 100% !important;
+            padding: 0 !important;
 
             .input-group {
                 background: transparent;
@@ -269,6 +281,9 @@
                 padding-right: 0;
             }
         }
+    }
+    #newsletter .approval_rodo {
+        padding-top: 0;
     }
     #newsletter .newsletter-form button {
         border-radius: 5px;

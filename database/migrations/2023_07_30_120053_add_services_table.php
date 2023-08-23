@@ -29,6 +29,8 @@
          */
         public function down()
         {
-            Schema::dropIfExists('services');
+            Schema::create('services', function (Blueprint $table) {
+                $table->dropIfExists('services');
+            });
         }
     };

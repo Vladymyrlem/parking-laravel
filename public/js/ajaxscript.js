@@ -808,13 +808,18 @@ $(document).ready(function () {
         'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
       }
     });
+    var count_days = $('#count_days').val();
+    var standart_price = $('#standart_price').val();
+    var promotional_price = $('#promotional_price').val() || null;
+    var start_promotional_date = $('#start_promotional_date').val() || null;
+    var end_promotional_date = $('#end_promotional_date').val() || null;
     e.preventDefault();
     var formData = {
-      count_days: $('#count_days').val(),
-      standart_price: $('#standart_price').val(),
-      promotional_price: $('#promotional_price').val(),
-      start_promotional_date: $('#start_promotional_date').val(),
-      end_promotional_date: $('#end_promotional_date').val()
+      count_days: count_days,
+      standart_price: standart_price,
+      promotional_price: promotional_price,
+      start_promotional_date: start_promotional_date,
+      end_promotional_date: end_promotional_date
     };
 
     //used to determine the http verb to use [add=POST], [update=PUT]
@@ -921,7 +926,7 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         $('#review_id').val(data.id);
-        $('#content').val(data.content);
+        $('#frmReviewBlock #content').val(data.content);
         $('#author').val(data.author);
         $('#btn-save-review').val("update");
         $('#reviewModal').modal('show');
@@ -941,7 +946,7 @@ $(document).ready(function () {
     });
     e.preventDefault();
     var formData = {
-      content: $('#content').val(),
+      content: $('#frmReviewBlock #content').val(),
       author: $('#author').val()
     };
 

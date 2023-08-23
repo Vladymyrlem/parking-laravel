@@ -4,13 +4,20 @@
 
     use App\Models\Newsletter;
     use Illuminate\Http\Request;
+    use Lunaweb\RecaptchaV3\Facades\RecaptchaV3;
 
     class NewsletterController extends Controller
     {
         public function storeNewsletter(Request $request)
         {
             $newsletter = Newsletter::create($request->input());
-            return response()->json($newsletter);
+            $response = RecaptchaV3::verify(request('recaptcha_token'));
+            if ($response->isSuccess()) {
+                return response()->json($newsletter);
+            } else {
+                return response()->json(['error' => 'reCAPTCHA verification failed'], 422);
+            }
+
         }
 
         public function getNewsletter(Request $request)

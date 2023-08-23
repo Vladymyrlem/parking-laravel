@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <button id="btn_add_price" name="btn_add_price" class="btn btn-default pull-right">Add New Price</button>
+            <button id="btn_add_price" name="btn_add_price" class="btn btn-default pull-right mb-3">Add New Price</button>
         </div>
     </div>
 </div>
 <div class="table-responsive">
-    <table class="table table-dark table-valign-middle" id="prices-table">
+    <table class="table table-dark table-valign-middle table-responsive-lg" id="prices-table">
         <thead>
         <tr>
             <th>Count Days</th>

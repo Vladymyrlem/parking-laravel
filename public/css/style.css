@@ -6,9 +6,10 @@
 body {
   font-family: "Lato", sans-serif;
   color: #716d6e;
+  font-weight: 600;
 }
 body * {
-  font-family: "Lato", sans-serif !important;
+  font-family: "Lato", sans-serif;
   color: #716d6e;
 }
 
@@ -201,6 +202,7 @@ header .reservation-link {
   padding: 16px 27px;
   border-radius: 5px;
   border: 2px solid var(--prime, #0074B7);
+  margin-left: 20px;
 }
 
 .reservation-item-mob {
@@ -602,18 +604,30 @@ ul#countries.active {
 }
 
 .nav-collapse a:active,
-.nav-collapse li a.active {
-  border: 2px solid #b8b6b6;
+.nav-collapse li.active a {
+  border: 2px solid var(--prime, #0074B7);
   color: #716d6e;
+  border-radius: 5px;
   background-color: transparent;
 }
 
 @media screen and (min-width: 1240px) {
+  .header-menu {
+    margin-left: auto;
+  }
   .nav-collapse a {
     text-align: center;
     border-top: 0;
     float: left;
     margin: 0;
+  }
+  .main-header {
+    max-height: 94px;
+  }
+  .main-header .js .nav-collapse-0.opened {
+    max-height: 100% !important;
+    height: 100%;
+    background: #fff;
   }
 }
 .nav-collapse ul ul a {
@@ -642,8 +656,8 @@ ul#countries.active {
 --------------------------------------------- */
 @font-face {
   font-family: "responsivenav";
-  src: url("../icons/responsivenav.eot");
-  src: url("../icons/responsivenav.eot?#iefix") format("embedded-opentype"), url("../icons/responsivenav.ttf") format("truetype"), url("../icons/responsivenav.woff") format("woff"), url("../icons/responsivenav.svg#responsivenav") format("svg");
+  src: url("../../icons/responsivenav.eot");
+  src: url("../../icons/responsivenav.eot?#iefix") format("embedded-opentype"), url("../../icons/responsivenav.ttf") format("truetype"), url("../../icons/responsivenav.woff") format("woff"), url("../../icons/responsivenav.svg#responsivenav") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -1165,6 +1179,9 @@ header.large .brand {
   padding-top: 107px;
   padding-bottom: 107px;
 }
+#header-block .header-left {
+  padding-left: 100px;
+}
 #header-block .header-right {
   display: flex;
   align-items: center;
@@ -1190,7 +1207,7 @@ header.large .brand {
 #header-block #headblockCarousel .headblock-title {
   color: var(--white, #FFF);
   /* H1 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 60px;
   font-style: normal;
   font-weight: 800;
@@ -1198,19 +1215,25 @@ header.large .brand {
   margin-bottom: 20px;
 }
 #header-block #headblockCarousel .headblock-subtitle {
-  color: var(--white, #FFF);
+  color: #FFF !important;
   /* H3 */
-  font-family: Lato, sans-serif;
+  font-family: Lato, sans-serif !important;
   font-size: 36px;
   font-style: normal;
   font-weight: 300;
   line-height: normal;
   position: relative;
 }
+#header-block #headblockCarousel .headblock-subtitle * {
+  color: #ffffff;
+}
 
 @media screen and (max-width: 1240px) {
   #header-block {
     margin-top: 75px !important;
+  }
+  #header-block .header-left {
+    padding-left: 20px;
   }
 }
 @media screen and (max-width: 1024px) {
@@ -1247,6 +1270,22 @@ header.large .brand {
     margin-right: auto;
   }
 }
+@media screen and (max-width: 768px) {
+  #header-block .reservation {
+    max-width: 500px !important;
+  }
+}
+@media screen and (max-width: 560px) {
+  #header-block #headblockCarousel .headblock-title {
+    font-size: 35px;
+    font-weight: 400;
+  }
+  #header-block #headblockCarousel .headblock-subtitle {
+    display: block;
+    word-break: break-all;
+    font-size: 25px;
+  }
+}
 .about-us {
   background: linear-gradient(180deg, #ECF2FF 0%, #FFF 100%);
   padding-top: 100px;
@@ -1271,6 +1310,7 @@ header.large .brand {
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+  margin-bottom: 20px;
 }
 .about-us .about-us-content {
   color: var(--black, #151616);
@@ -1294,6 +1334,7 @@ header.large .brand {
 @media screen and (max-width: 768px) {
   .left-about-us {
     margin-bottom: 30px;
+    text-align: left;
   }
   .about-us .about-us-content p {
     margin-left: 0;
@@ -1325,15 +1366,19 @@ h2.prices {
 }
 
 #prices .title {
-  font-size: 36px;
-  font-weight: 900;
-  margin-bottom: 65px;
+  font-size: 50px;
+  font-weight: 700;
+  margin-bottom: 30px;
 }
 
+#prices {
+  padding-left: 0;
+  padding-right: 0;
+}
 #prices h2 {
   color: var(--black, #151616);
   text-align: center;
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 700;
@@ -1341,7 +1386,7 @@ h2.prices {
 }
 #prices .subtitle {
   color: var(--black, #151616);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -1349,38 +1394,50 @@ h2.prices {
   margin-bottom: 0;
 }
 
+.prices-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 0 30px;
+}
+
 #prices .box {
   padding: 10px;
   color: #0074b7;
 }
 
-#prices .box .box_content {
+#prices .box_content {
   background-color: #fff;
+  margin-bottom: 30px;
+  margin-top: 0 !important;
 }
-#prices .box .box_content .top-price-box {
+#prices .box_content:last-child h3 {
+  font-size: 23px;
+}
+#prices .box_content .top-price-box {
   border-radius: 5px 5px 0px 0px;
   border: 1.187px solid var(--grey, #AFADAD);
   padding: 20px;
 }
-#prices .box .box_content .bottom-price-box {
+#prices .box_content .bottom-price-box {
   padding: 20px;
   border-radius: 0px 0px 5px 5px;
   background: var(--prime, #0074B7);
 }
-#prices .box .box_content .bottom-price-box h4 {
+#prices .box_content .bottom-price-box h4 {
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
-#prices .box .box_content .bottom-price-box small {
+#prices .box_content .bottom-price-box small {
   font-size: 30px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 }
 
-#prices .box .box_content h2 {
+#prices .box_content h2 {
   color: var(--prime, #0074B7);
   font-family: Lato, sans-serif;
   font-size: 40px;
@@ -1390,7 +1447,7 @@ h2.prices {
   margin-bottom: 16px;
 }
 
-#prices .box .box_content h3 {
+#prices .box_content h3 {
   color: var(--prime, #0074B7);
   font-family: Lato, sans-serif;
   font-size: 25px;
@@ -1400,16 +1457,16 @@ h2.prices {
   margin-bottom: 0;
 }
 
-#prices .box .box_content h4 {
+#prices .box_content h4 {
   color: var(--white, #FFF);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
   line-height: normal;
 }
 
-#prices .box .box_content small {
+#prices .box_content small {
   color: #fff;
   font-size: 12px;
   text-transform: uppercase;
@@ -1421,21 +1478,51 @@ h2.prices {
   width: 100%;
 }
 
-#prices .box.promo h1,
-#prices .box.promo .box_content .subtitle {
+#prices .box_content.promo h2,
+#prices .box_content.promo .subtitle {
   color: #00a82a;
 }
 
-#prices .box.promo h2 p {
+#prices .box_content.promo h4 {
+  display: flex;
+  flex-flow: column;
+}
+#prices .box_content.promo h4 p {
   color: #017f21;
   font-size: 20px;
 }
 
-#prices .box.promo .box_content h2 {
-  background-color: #00a82a;
+#prices .box_content.promo .promo-range p {
+  font-size: 16px;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 0;
+}
+#prices .box_content.promo .standart-price {
+  line-height: 20px;
+  margin-bottom: 10px;
+}
+#prices .box_content.promo .standart-price s {
+  color: #017f21;
+  font-size: 20px;
 }
 
-#prices .box.promo .box_content {
+#prices .box_content.promo .bottom-price-box {
+  background-color: #00a82a;
+}
+#prices .box_content.promo .bottom-price-box .promotional-price {
+  color: #fff;
+  font-size: 32px;
+  padding: 10px;
+  font-weight: bold;
+}
+#prices .box_content.promo .bottom-price-box .promotional-price small {
+  color: #fff;
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+#prices .box_content.promo .top-price-box {
   border-color: #00a82a;
 }
 
@@ -1602,27 +1689,87 @@ h2.prices {
   margin-right: 7px;
 }
 
+@media screen and (max-width: 1240px) {
+  .prices-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media screen and (max-width: 1090px) {
+  .prices-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 @media screen and (max-width: 768px) {
   #prices .title {
     text-align: left;
+  }
+  .prices-grid {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+  #prices .box_content {
+    margin-bottom: 16px;
   }
 }
 @media screen and (max-width: 560px) {
   #prices .title {
     font-size: 28px;
   }
+  #prices h2 {
+    line-height: 30px !important;
+    font-size: 30px !important;
+  }
   #prices .subtitle {
     font-size: 35px;
+  }
+  #prices .box_content .bottom-price-box h4 {
+    font-size: 30px !important;
+  }
+  #prices {
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+  #prices .box_content:last-child h3 {
+    font-size: 14px !important;
+  }
+  #prices .box_content .bottom-price-box h4, #prices .box_content .bottom-price-box small {
+    font-size: 25px !important;
+  }
+}
+@media screen and (max-width: 475px) {
+  #prices .box_content {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 108px auto;
+  }
+}
+@media screen and (max-width: 420px) {
+  #prices .box_content {
+    grid-template-rows: 110px auto;
+  }
+  #prices .box_content .top-price-box {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #prices .box_content:last-child, #prices .box_content:nth-last-child(2) {
+    grid-template-rows: 130px auto;
   }
 }
 /* Newsletter
 --------------------------------------------*/
 #newsletter {
-  background-color: #0074b7;
   margin-top: 90px;
-  padding: 90px 0;
   position: relative;
   z-index: 2;
+}
+#newsletter .container {
+  background-color: #0074b7;
+  padding: 30px;
+  border-radius: 5px;
 }
 
 #newsletter h3 {
@@ -1643,8 +1790,9 @@ h2.prices {
 
 #newsletter .title {
   color: var(--white, #FFF);
+  text-transform: uppercase;
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -1672,7 +1820,7 @@ h2.prices {
   font-weight: 800;
   line-height: 20.594px; /* 205.937% */
   text-transform: capitalize;
-  padding-left: 26px;
+  padding-left: 37px;
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
@@ -1680,6 +1828,7 @@ h2.prices {
 }
 #newsletter .newsletter-form .custom-checkbox input {
   flex: 0;
+  width: 0;
 }
 
 #newsletter .newsletter-form input {
@@ -1717,6 +1866,8 @@ h2.prices {
   font-weight: 700;
   line-height: 20px; /* 125% */
   text-transform: capitalize;
+  border: none;
+  box-shadow: none;
 }
 
 .approval {
@@ -1866,11 +2017,15 @@ h2.prices {
   }
   #newsletter .newsletter-form {
     height: 100% !important;
+    padding: 0 !important;
   }
   #newsletter .newsletter-form .input-group {
     background: transparent;
     padding-left: 0;
     padding-right: 0;
+  }
+  #newsletter .approval_rodo {
+    padding-top: 0;
   }
   #newsletter .newsletter-form button {
     border-radius: 5px;
@@ -1897,6 +2052,9 @@ h2.prices {
   padding-bottom: 100px;
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
 }
 
 #reviews .stars {
@@ -1924,7 +2082,7 @@ h2.prices {
   color: var(--prime, #0074B7);
   text-align: center;
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -1981,10 +2139,26 @@ h2.prices {
   opacity: 1;
 }
 
+@media screen and (max-width: 1240px) {
+  #reviews-carousel {
+    max-width: 94vw;
+  }
+}
 @media screen and (max-width: 768px) {
   #reviews {
     padding-bottom: 50px;
     margin-top: 100px;
+  }
+  #reviews-carousel {
+    max-width: 90vw !important;
+  }
+}
+@media screen and (max-width: 560px) {
+  #reviews {
+    margin-top: 50px;
+  }
+  #reviews-carousel {
+    max-width: 84vw !important;
   }
 }
 /* Information
@@ -2013,7 +2187,7 @@ h2.prices {
 #information .title {
   color: var(--black, #151616);
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -2027,7 +2201,7 @@ h2.prices {
 
 #information .subtitle {
   color: #131313;
-  font-family: Lato, sans-serif;
+  font-family: Lato, sans-serif !important;
   font-size: 26px;
   font-style: normal;
   font-weight: 300;
@@ -2043,7 +2217,7 @@ h2.prices {
 }
 
 #information p {
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -2112,29 +2286,30 @@ h2.prices {
 #header-block .reservation {
   min-height: 480px;
   background-color: #fff;
-  box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3);
   width: 100%;
   max-width: 370px;
+  border-radius: 10px;
 }
 #header-block .reservation .reservation-block-message {
   margin-bottom: 0;
   padding-left: 20px;
   padding-right: 20px;
+  padding-top: 20px;
 }
 #header-block .reservation .reservation-block-message p {
   color: var(--black, #151616);
   text-align: center;
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 20.594px; /* 128.711% */
-  text-transform: capitalize;
+  text-transform: initial;
   margin-bottom: 0;
 }
 #header-block .reservation .reservation-block-message .reservation-blocked-dates {
   color: var(--prime, #0074B7);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -2149,6 +2324,7 @@ h2.prices {
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  color: #716d6e;
 }
 #header-block form#form_checkout .checkout-title h4 {
   color: #3D405C;
@@ -2157,7 +2333,7 @@ h2.prices {
   font-style: normal;
   font-weight: 700;
   line-height: 20.594px; /* 128.711% */
-  text-transform: capitalize;
+  text-transform: initial;
 }
 #header-block form#form_checkout .checkout-title svg {
   margin-right: 7px;
@@ -2377,14 +2553,17 @@ h2.prices {
 #header-block form .submit {
   width: 100%;
   background-color: #0074b7;
-  color: #fff;
+  color: var(--white, #FFF);
+  border-radius: 5px;
+  /* Add med */
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 20.594px; /* 128.711% */
+  text-transform: capitalize;
   border: none;
-  border-radius: 0;
-  box-shadow: 6px 6px 0 #efe9e9;
-  text-align: center;
-  font-size: 24px;
-  text-transform: uppercase;
-  font-weight: 900;
+  box-shadow: none;
   padding: 10px 0;
   /*margin-top: 30px;*/
   transition: 0.2s;
@@ -2519,10 +2698,36 @@ h2.prices {
     max-width: calc(100vw - 40px);
   }
 }
+@media screen and (max-width: 475px) {
+  #header-block form .time {
+    width: 100%;
+    max-width: 86px;
+  }
+  #header-block form .input-group input {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  #header-block form .input-group-addon {
+    width: auto;
+    max-width: 96px;
+  }
+  #header-block form .input-group-addon svg {
+    display: none;
+  }
+  #header-block form #order_pick_up_date, #header-block form #order_drop_off_date {
+    width: 100%;
+    max-width: 115px;
+  }
+}
+@media screen and (max-width: 375px) {
+  .order_form_wrapper_calendar {
+    left: -6px !important;
+  }
+}
 /* Partners
 --------------------------------------------*/
 #partners {
-  padding: 100px 0;
+  padding: 30px 0;
   background-color: #fff;
   position: relative;
   z-index: 2;
@@ -2536,7 +2741,7 @@ h2.prices {
 #partners h2 {
   color: #131313;
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   text-align: center;
   font-size: 50px;
   font-style: normal;
@@ -2581,7 +2786,7 @@ h2.prices {
 }
 #contacts-section h2 {
   color: var(--black, #151616);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -2599,7 +2804,7 @@ h2.prices {
 #contacts-section .contacts-grid .contact-name {
   color: #888;
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2620,7 +2825,7 @@ h2.prices {
 #contacts-section .address-title {
   color: var(--black, #151616);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2630,7 +2835,7 @@ h2.prices {
 #contacts-section .contact-map-link {
   color: var(--prime, #0074B7);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2661,7 +2866,7 @@ h2.prices {
 #contacts-us-section h2 {
   color: var(--black, #151616);
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -2756,6 +2961,13 @@ h2.prices {
   line-height: normal;
 }
 
+#form_contact .validation {
+  display: none;
+}
+#form_contact .validation.errror {
+  display: block;
+}
+
 @media screen and (max-width: 768px) {
   #contacts-section {
     padding-top: 50px;
@@ -2793,6 +3005,14 @@ h2.prices {
     font-size: 20px;
     margin-bottom: 20px;
   }
+  #contacts-us-section form .custom-checkbox {
+    margin-bottom: 0;
+    padding-left: 45px;
+  }
+  #contacts-us-section form input[type=checkbox] {
+    left: 5px;
+    top: 5px;
+  }
 }
 /* Services
 --------------------------------------------*/
@@ -2810,11 +3030,14 @@ h2.prices {
 #services .services-container .row {
   gap: 30px 0;
 }
+#services .services-container .row .service-item {
+  margin-bottom: 30px;
+}
 
 #services h2 {
   color: #131313;
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -2835,6 +3058,7 @@ h2.prices {
   background-color: #ededed;
   padding: 30px 20px;
   display: grid;
+  border-radius: 5px;
   grid-template-columns: auto 1fr;
   grid-template-rows: 58px auto;
   gap: 16px;
@@ -2852,7 +3076,7 @@ h2.prices {
   color: #757575;
   text-align: left;
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -2894,6 +3118,22 @@ h2.prices {
     max-width: 100%;
   }
 }
+@media screen and (max-width: 768px) {
+  #services h2 {
+    text-align: left;
+    font-size: 36px;
+  }
+  #services .services-container .row {
+    gap: 0;
+  }
+  #services .services-container .row .service-item {
+    margin-bottom: 16px !important;
+  }
+  #services .service-box .service-content {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
 /* Locations
 --------------------------------------------*/
 #locations {
@@ -2922,10 +3162,11 @@ h2.prices {
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 5px;
 }
 
 #locations .location-select h2 {
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   color: #ffffff;
   font-size: 50px;
   font-style: normal;
@@ -2993,10 +3234,11 @@ h2.prices {
   padding: 20px 75px;
   margin: 0 auto;
   position: relative;
+  border-radius: 5px;
   top: -48px;
   color: var(--white, #FFF);
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -3014,7 +3256,7 @@ h2.prices {
   width: 100%;
   max-width: 248px;
   color: var(--prime, #0074B7);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -3028,6 +3270,11 @@ h2.prices {
   background: var(--prime, #0074B7);
 }
 
+@media screen and (max-width: 992px) {
+  .navi, #locations .location-select {
+    border-radius: 0;
+  }
+}
 @media screen and (max-width: 768px) {
   #locations .location-select {
     height: auto !important;
@@ -3041,9 +3288,16 @@ h2.prices {
     align-items: center;
     font-size: 20px;
     top: 0;
+    padding-left: 20px;
+    padding-right: 20px;
   }
   .navi a {
     margin-top: 16px;
+  }
+}
+@media screen and (max-width: 560px) {
+  #newsletter .g-recaptcha {
+    max-width: calc(100vw - 60px) !important;
   }
 }
 /* Footer
@@ -3097,6 +3351,7 @@ footer .foot-left {
   display: flex;
   flex-flow: column;
   align-items: flex-start;
+  padding-left: 0;
 }
 footer .foot-left .foot-logo {
   width: 100%;
@@ -3117,7 +3372,7 @@ footer .foot-left .foot-reservation-block {
 footer .foot-left .foot-reservation-block__title {
   color: var(--white, #FFF);
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -3127,7 +3382,7 @@ footer .foot-left .foot-reservation-block__title {
 footer .foot-left .foot-reservation-block__subtitle {
   color: var(--white, #FFF);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -3141,11 +3396,18 @@ footer .foot-left .foot-reservation-block__link {
   width: 100%;
   max-width: 100%;
   text-align: center;
+  color: var(--prime, #0074B7);
+  font-family: Lato, sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px; /* 125% */
+  text-transform: capitalize;
 }
 footer .foot-label {
   color: var(--black, #151616);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -3162,7 +3424,7 @@ footer .contacts-grid {
 footer .contacts-grid .contact-name {
   color: #888;
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -3179,6 +3441,12 @@ footer .contacts-grid .contact-value {
   font-style: normal;
   font-weight: 300;
   line-height: normal;
+}
+footer .contacts-grid .contact-value a {
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 700;
+  color: var(--prime, #0074B7) !important;
 }
 footer .contacts-grid .contact-value:nth-child(3) {
   display: flex;
@@ -3303,6 +3571,15 @@ footer .footer-nav li a:hover {
     font-size: 20px;
     text-align: center;
     margin-bottom: 30px;
+  }
+}
+@media screen and (max-width: 560px) {
+  footer .footer-nav ul > li {
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  footer .footer-nav {
+    margin-bottom: 0;
   }
 }
 @media screen and (max-width: 475px) {
@@ -3451,6 +3728,9 @@ footer .footer-nav li a:hover {
   font-style: normal;
   font-weight: 400;
   line-height: 140%; /* 25.2px */
+}
+#checkoutModal .info-box .info-box-description span {
+  color: #000;
 }
 
 #checkoutModal .checkout-personal-info {
@@ -3805,12 +4085,12 @@ form .subtitle {
     grid-template-rows: 40px auto;
   }
   #services .service-box .service-icon {
-    height: 38px;
-    width: 38px;
+    height: 43.5px;
+    width: 43.5px;
   }
   #services .service-box .service-icon img {
-    width: 38px;
-    height: 38px;
+    width: 43.5px;
+    height: 43.5px;
   }
   #services .service-box .service-title {
     font-size: 24px;
@@ -4200,6 +4480,14 @@ form .subtitle {
   text-transform: uppercase !important;
 }
 
+strong {
+  font-family: Lato Bold, sans-serif !important;
+}
+
+small {
+  font-family: Lato Medium, sans-serif !important;
+}
+
 /* Terms
 --------------------------------------------*/
 #terms {
@@ -4207,13 +4495,45 @@ form .subtitle {
   position: relative;
   z-index: 2;
 }
+#terms strong {
+  font-family: Lato Bold, sans-serif !important;
+}
+#terms small {
+  font-family: Lato Medium, sans-serif !important;
+}
+#terms ul > li {
+  text-align: left;
+}
+#terms button.open svg {
+  transform: rotate(180deg);
+}
+#terms button:focus {
+  box-shadow: none;
+}
+
+h2 {
+  font-family: Lato Bold, sans-serif !important;
+}
 
 #terms h2 {
+  font-family: Lato Bold, sans-serif !important;
   font-size: 46px;
   font-weight: 900;
   margin: 0 0 25px 0;
   padding: 0;
   text-align: center;
+}
+
+h3 {
+  font-family: Lato Medium, sans-serif !important;
+}
+
+p {
+  font-weight: 600;
+}
+
+#terms h3 {
+  font-family: Lato Medium, sans-serif !important;
 }
 
 a:hover {
@@ -4421,6 +4741,9 @@ p span.price {
 #regulamin * {
   color: var(--black, #151616);
 }
+#regulamin ul {
+  padding-left: 20px;
+}
 #regulamin.expanded {
   max-height: 307px;
   overflow: hidden;
@@ -4434,7 +4757,7 @@ p span.price {
 #gallery h2 {
   color: var(--black, #151616);
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -4446,10 +4769,15 @@ p span.price {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   grid-gap: 30px;
+  width: 100%;
+  max-width: 100%;
 }
 #gallery .gallery img {
   border-radius: 5px;
   border: 2px solid var(--grey, #AFADAD);
+  width: 100%;
+  max-width: 100%;
+  height: auto;
 }
 
 #gallery .box {
@@ -4522,7 +4850,7 @@ p span.price {
   }
   #gallery .gallery img {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
   .container {
     width: 100% !important;
@@ -4544,6 +4872,10 @@ p span.price {
   #gallery .gallery {
     grid-template-columns: repeat(2, 1fr);
     grid-gap: 20px;
+  }
+  #header-block {
+    background-size: auto 100% !important;
+    background-position: left center !important;
   }
 }
 @media screen and (max-width: 560px) {
