@@ -1,5 +1,5 @@
 <div class="col-md-12 mt-1 mb-2">
-    <button type="button" id="btn_add_service" class="btn btn-success">Add</button>
+    <button type="button" id="btn_add_service" class="btn btn-default mb-3">Add Zalet</button>
 </div>
 <div class="card">
     <div class="card-header text-center font-weight-bold">

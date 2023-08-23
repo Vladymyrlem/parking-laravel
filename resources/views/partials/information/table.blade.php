@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <button id="btn_add_info" name="btn_add_info" class="btn btn-default pull-right">Add New Info</button>
+            <button id="btn_add_info" name="btn_add_info" class="btn btn-default pull-right mb-3">Add New Info</button>
         </div>
     </div>
 </div>
@@ -10,8 +10,7 @@
         <thead>
         <tr>
             <th>Text Content</th>
-            <th>Media Content</th>
-            <th colspan="3">Action</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody id="infos-list" name="infos-list" class="table-responsive">

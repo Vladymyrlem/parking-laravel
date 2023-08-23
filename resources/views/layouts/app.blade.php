@@ -62,7 +62,7 @@
         </a>
         <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
 position: relative;" aria-hidden="true">
-            <ul>
+            <ul class="menu-list">
                 <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
@@ -93,6 +93,7 @@ position: relative;" aria-hidden="true">
                         </form>
                     </div>
                 </li>
+
             </ul>
         </nav>
         <!-- Right navbar links -->

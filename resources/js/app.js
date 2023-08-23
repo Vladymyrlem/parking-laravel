@@ -457,7 +457,7 @@ jQuery(function () {
                 // console.log(_d.data.status);
                 $('#contact_form_msg').html('Wiadomość została wysłana').removeClass('hidden').addClass('validation_ok').css('background', '#00a82a');
                 $('#contact_submit_btn').text('wysłano!');
-                
+
                 setTimeout(function () {
                     $('#contact_form_msg').html('').addClass('hidden').removeClass('validation_ok');
 //                            $('#contact_submit_btn').removeAttr('disabled').val('Wyślij wiadomość');
@@ -642,6 +642,18 @@ $(document).ready(function () {
         $('.g-recaptcha').css('transform-origin', '0 0');
         $('.g-recaptcha').css('-webkit-transform-origin', '0 0');
     }
+    $('.user-link').on('click', function (e) {
+        e.preventDefault();
+        $('.user-menu').toggleClass('show');
+    });
+    $('.close-about-us-editor').on('click', function (e) {
+        e.preventDefault();
+        $('#aboutusModal').modal('hide');
+    });
+    $('.close-sections-editor').on('click', function (e) {
+        e.preventDefault();
+        $('#sectionTitleModal').modal('hide');
+    });
 });
 
 

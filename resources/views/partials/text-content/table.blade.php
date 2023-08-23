@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <button id="btn_add_content" name="btn_add_content" class="btn btn-default pull-right">Add New content</button>
+            <button id="btn_add_content" name="btn_add_content" class="btn btn-default pull-right mb-3">Add New Blok tekstowe</button>
         </div>
     </div>
 </div>

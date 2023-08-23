@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <button id="btn_add_title" name="btn_add" class="btn btn-default pull-right">Dodaj nowy tytuł sekcji</button>
+            <button id="btn_add_title" name="btn_add" class="btn btn-default pull-right mb-3">Dodaj nowy tytuł sekcji</button>
         </div>
     </div>
 </div>

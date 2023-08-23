@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">About Us Block Form</h4>
+                <h4 class="modal-title" id="myModalLabel">O Nas Block Form</h4>
                 <button type="button" class="close-about-us-editor" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
             </div>
             <div class="modal-body">

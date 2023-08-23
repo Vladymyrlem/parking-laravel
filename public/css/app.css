@@ -10658,8 +10658,9 @@ ul#countries.active {
 }
 .main-header .nav-collapse {
   width: 100%;
+  overflow: initial !important;
 }
-.main-header .nav-collapse ul {
+.main-header .nav-collapse ul.menu-list {
   display: flex;
   width: 100%;
 }
@@ -10668,12 +10669,14 @@ ul#countries.active {
   background: #fff;
 }
 
-.close-head-editor, #btn_add_about_us, .close-editor, .close-reviews-editor, .close-contacts-editor, .close-service-editor {
+.close-head-editor,
+.close-editor, .close-reviews-editor, .close-contacts-editor, .close-service-editor, .close-about-us-editor, .close-sections-editor {
   font-size: 30px;
   background: transparent;
   border: none;
 }
-.close-head-editor:focus, #btn_add_about_us:focus, .close-editor:focus, .close-reviews-editor:focus, .close-contacts-editor:focus, .close-service-editor:focus {
+.close-head-editor:focus,
+.close-editor:focus, .close-reviews-editor:focus, .close-contacts-editor:focus, .close-service-editor:focus, .close-about-us-editor:focus, .close-sections-editor:focus {
   outline: none;
   box-shadow: none;
 }

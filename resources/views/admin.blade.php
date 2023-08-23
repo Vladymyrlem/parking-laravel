@@ -5,15 +5,15 @@
 
 
         .content-header {
-            margin-top: 70px;
+            margin-top: 0;
         }
     </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">
         <div class="container-fluid">
             <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">{{ __('Dashboard') }}</h1>
+                <div class="col-12">
+                    <h1 class="m-0 text-center">{{ __('Orders table') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -29,7 +29,7 @@
         <!-- /.content-header -->
         <table id="parkingTable" data-toggle="table"
                class="table-responsive-lg"
-               data-search="true"
+               data-search="false"
                data-show-refresh="false"
                data-show-toggle="true"
                data-show-fullscreen="true"
@@ -147,14 +147,18 @@
         </section>
 
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-12 d-flex flex-column">
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!--Header Block-->
-                <div class="header-block" id="header-block" name="#header-block">
-                    <h2 class="fs-2">Header block</h2>
+                <div class="header-block mt-0" id="header-block" name="#header-block">
+                    <h2 class="fs-2 text-center">Slider</h2>
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <button id="btn_add" name="btn_add" class="btn btn-default pull-right">Add New Head Row</button>
+                                <button id="btn_add" name="btn_add" class="btn btn-default pull-right mb-3">Add New Slide</button>
                             </div>
                             <button id="toggleRowsButton" class="btn btn-primary">Show All Rows</button>
 
@@ -188,12 +192,20 @@
                         </div>
                     </div>
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <div class="about-us-block" id="about-us" name="#about-us">
                     @include('partials.about-us-block.table')
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!-- Prices Block -->
                 <div class="prices-block" id="prices" name="#prices">
-                    <h2 class="fs-2">Cennik</h2>
+                    <h2 class="fs-2 text-center">Cennik</h2>
 
                     @include('partials.prices-block.table')
                     @include('partials.prices-block.create')
@@ -217,20 +229,28 @@
                         </div>
                     </div>
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!-- Information Block-->
                 <div class="info-block" id="info" name="#info">
                     @csrf
-                    <h2 class="fs-2">Information block</h2>
+                    <h2 class="fs-2 text-center">Info</h2>
                     @include('partials.information.table')
                     @include('partials.information.create')
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!-- Reviews Block-->
                 <div class="reviews-section" id="reviews" name="#reviews">
-                    <h2 class="fs-2">Reviews</h2>
+                    <h2 class="fs-2 text-center">Reviews</h2>
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <button id="btn_add_review" name="btn_add_review" class="btn btn-default pull-right">Add New Review</button>
+                                <button id="btn_add_review" name="btn_add_review" class="btn btn-default pull-right mb-3">Add New Review</button>
                             </div>
                         </div>
                     </div>
@@ -262,25 +282,37 @@
                         </div>
                     </div>
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!-- Contacts Block-->
                 <div class="contacts-block" id="contacts" name="#contacts">
-                    <h2 class="fs-2">Contacts block</h2>
+                    <h2 class="fs-2 text-center">Kontakt</h2>
                     @include('partials.contacts.table')
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!--Header Block-->
                 <div class="section-title-block" id="titles" name="#titles">
-                    <h2 class="fs-2">Sekcja nagłówków</h2>
+                    <h2 class="fs-2 text-center">Sekcja nagłówków</h2>
                     @include('partials.sections-title.section-title')
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
                 <!-- Services Block-->
                 <div class="services-block" id="services" name="#services">
-                    <h2 class="fs-2">Zalety</h2>
+                    <h2 class="fs-2 text-center">Zalety</h2>
                     @include('partials.services.table')
                 </div>
                 {{--                    @include('partials.newsletter.create')--}}
 
                 <div class="section-text-content" id="text-content" name="#text-content">
-                    <h2 class="fs-2 text-center">Bloki tekstowe Section</h2>
+                    <h2 class="fs-2 text-center">Bloki tekstowe</h2>
                     @include('partials.text-content.table')
                     @include('partials.text-content.create')
                 </div>

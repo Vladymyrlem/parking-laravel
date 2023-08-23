@@ -73,10 +73,14 @@ $fa-font-path: '../webfonts';
 .main-header {
     max-height: 65px;
 
+    .js .nav-collapse {
+    }
+
     .nav-collapse {
         width: 100%;
+        overflow: initial !important;
 
-        ul {
+        ul.menu-list {
             display: flex;
             width: 100%;
         }
@@ -88,8 +92,11 @@ $fa-font-path: '../webfonts';
     }
 }
 
+#btn_add_about_us {
+}
 
-.close-head-editor, #btn_add_about_us, .close-editor, .close-reviews-editor, .close-contacts-editor, .close-service-editor {
+.close-head-editor,
+.close-editor, .close-reviews-editor, .close-contacts-editor, .close-service-editor, .close-about-us-editor, .close-sections-editor {
     font-size: 30px;
     background: transparent;
     border: none;

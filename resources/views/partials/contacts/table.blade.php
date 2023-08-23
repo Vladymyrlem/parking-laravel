@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <button id="btn_add_contact" name="btn_add" class="btn btn-default pull-right">Add New Contacts Data</button>
+            <button id="btn_add_contact" name="btn_add" class="btn btn-default pull-right mb-3">Add New Kontakt</button>
         </div>
     </div>
 </div>
