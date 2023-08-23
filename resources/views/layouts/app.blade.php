@@ -363,6 +363,10 @@ position: relative;" aria-hidden="true">
     jQuery(function ($) {
         const url = $('#url').val();
 
+        const getData = <?php echo json_encode($arrayData); ?>;
+
+        console.log('data: ', getData)
+
         window.filterDatesFromToday = function (dates) {
             const today = new Date().setHours(0, 0, 0, 0);
 
