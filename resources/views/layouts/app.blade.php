@@ -63,7 +63,8 @@
         <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
 position: relative;" aria-hidden="true">
             <ul class="menu-list">
-                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Start</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Orders</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Kalendarz</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
@@ -72,7 +73,6 @@ position: relative;" aria-hidden="true">
                 <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Sekcja nagłówków</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Zalety</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Bloki tekstowe</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Kalendarz</a></li>
                 <li class="nav-item dropdown ml-auto">
                     <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">
                         {{ Auth::user()->name }}

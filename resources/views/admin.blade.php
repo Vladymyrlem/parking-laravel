@@ -271,7 +271,7 @@
                                         <td>{{$review->id}}</td>
                                         <td>{{$review->content}}</td>
                                         <td>{{$review->author}}</td>
-                                        <td width="35%">
+                                        <td width="150">
                                             <button class="btn btn-warning btn-detail open_review_modal" value="{{$review->id}}">Edit</button>
                                             <button class="btn btn-danger btn-delete delete-review" value="{{$review->id}}">Delete</button>
                                         </td>

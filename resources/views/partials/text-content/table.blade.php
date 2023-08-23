@@ -23,7 +23,7 @@
                 <td>
                     {{ $content->slug }}
                 </td>
-                <td width="250">
+                <td width="270">
                     <button class="btn btn-warning btn-detail open_content" value="{{$content->id}}">Edit content</button>
                     <button class="btn btn-danger btn-delete delete-content" value="{{$content->id}}">Delete content</button>
                 </td>

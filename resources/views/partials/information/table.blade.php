@@ -10,10 +10,11 @@
         <thead>
         <tr>
             <th>Text Content</th>
+            <th>Media Content</th>
             <th>Action</th>
         </tr>
         </thead>
-        <tbody id="infos-list" name="infos-list" class="table-responsive">
+        <tbody id="infos-list" name="infos-list" class="">
         @foreach($information as $info)
             <tr id="inforow-{{$info->id}}">
                 <td>{!! $info->description !!}</td>

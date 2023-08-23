@@ -926,7 +926,7 @@ $(document).ready(function () {
       success: function success(data) {
         console.log(data);
         $('#review_id').val(data.id);
-        $('#content').val(data.content);
+        $('#frmReviewBlock #content').val(data.content);
         $('#author').val(data.author);
         $('#btn-save-review').val("update");
         $('#reviewModal').modal('show');
@@ -946,7 +946,7 @@ $(document).ready(function () {
     });
     e.preventDefault();
     var formData = {
-      content: $('#content').val(),
+      content: $('#frmReviewBlock #content').val(),
       author: $('#author').val()
     };
 

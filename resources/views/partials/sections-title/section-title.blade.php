@@ -24,7 +24,7 @@
                     <td> {{$title->title}} </td>
                     <td> {{$title->subtitle}} </td>
                     <td> {{$title->slug}} </td>
-                    <td width="350px">
+                    <td width="220px">
                         <button class="btn btn-warning btn-detail open_section_title_modal" value="{{$title->id}}">Edit Title</button>
                         <button class="btn btn-danger btn-delete delete-section-title" value="{{$title->id}}">Delete Title</button>
                     </td>

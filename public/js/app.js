@@ -516,7 +516,7 @@ jQuery(window).on('load', function () {
   $(".scroll-to").click(function (event) {
     $('.modal').modal('hide');
     var position = $(document).scrollTop();
-    var scrollOffset = 110;
+    var scrollOffset = 150;
     if (position < 39) {
       scrollOffset = 260;
     }

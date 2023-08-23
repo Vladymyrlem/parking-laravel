@@ -273,7 +273,7 @@ ul#countries {
 }
 
 .nav-collapse a:active,
-.nav-collapse li a.active, .nav-collapse li.active a {
+.nav-collapse li.active a {
     border: 2px solid var(--prime, #0074B7);
     color: #716d6e;
     border-radius: 5px;
