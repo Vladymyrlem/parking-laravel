@@ -1933,6 +1933,7 @@ p span.price {
     position: relative;
     z-index: 2;
 
+
     h2 {
         color: var(--black, #151616);
 
@@ -1950,11 +1951,15 @@ p span.price {
         grid-template-columns: repeat(4, 1fr);
         grid-template-rows: auto;
         grid-gap: 30px;
-
+        width: 100%;
+        max-width: 100%;
 
         img {
             border-radius: 5px;
             border: 2px solid var(--grey, #AFADAD);
+            width: 100%;
+            max-width: 100%;
+            height: auto;
         }
     }
 }

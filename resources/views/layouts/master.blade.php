@@ -108,21 +108,40 @@
             /*
                       * Create info text
                       */
-            const textWrap = document.querySelector('#reservation-blocked-dates');
-            if (textWrap) {
-                textWrap.innerText = `${
-                    $blockedDates
-                        .filter(elem => {
-                            const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
-                            const date = new Date().setHours(0, 0, 0, 0);
-                            return currDate >= date;
-                        })
-                        .map(elem => elem.new_date)
-                        .join(', ')
-                }`;
-            }
+            // const textWrap = document.querySelector('.reservation-blocked-dates');
+            // if (textWrap) {
+            //     textWrap.innerText = `${
+            //         $blockedDates
+            //             .filter(elem => {
+            //                 const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
+            //                 const date = new Date().setHours(0, 0, 0, 0);
+            //                 return currDate >= date;
+            //             })
+            //             .map(elem => elem.new_date)
+            //             .join(', ')
+            //     }`;
+            // }
 
+            var datesArray = <?php echo json_encode($blockedDates); ?>;
 
+            var currentDate = new Date();
+
+            // Filter out old dates
+            var excludedDates = datesArray.filter(function(dateObj) {
+                var dateParts = dateObj['new_date'].split('/');
+                var rawDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Month is zero-based
+                return rawDate >= currentDate;
+            });
+
+            // Extract the new_date values from the excluded dates
+            var excludedDateStrings = excludedDates.map(function(dateObj) {
+                return dateObj['new_date'];
+            });
+            var joinedExcludedDates = excludedDateStrings.join(', ');
+
+            console.log(joinedExcludedDates);
+            {{--// Insert the joined dates into the div with class 'reservations-list'--}}
+            $('.reservation-blocked-dates').text(joinedExcludedDates);
             /*
              * Create Wrapper For Calendar
              */
@@ -167,7 +186,7 @@
                         ofCalendar.ofInputActive = $input;
                         ofCalendar.ofInputActiveId = $input.dataset.inputId;
                         ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick( true, ofHideCalendarClassName );
+                        ofCalendar.setActionOnDateClick(true, ofHideCalendarClassName);
                     })
                 }
             })
