@@ -28,11 +28,13 @@ h2.prices {
 }
 
 #prices {
+    padding-left: 0;
+    padding-right: 0;
 
     h2 {
         color: var(--black, #151616);
         text-align: center;
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato Bold, sans-serif !important;
         font-size: 50px;
         font-style: normal;
         font-weight: 700;
@@ -41,13 +43,20 @@ h2.prices {
 
     .subtitle {
         color: var(--black, #151616);
-        font-family: Lato, sans-serif !important;
+        font-family: Lato Medium, sans-serif !important;
         font-size: 50px;
         font-style: normal;
         font-weight: 400;
         line-height: 110%;
         margin-bottom: 0;
     }
+}
+
+.prices-grid {
+    display: grid !important;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: auto;
+    gap: 0 30px
 }
 
 #prices .box {
@@ -58,6 +67,13 @@ h2.prices {
 #prices .box_content {
     background-color: #fff;
     margin-bottom: 30px;
+    margin-top: 0 !important;
+
+    &:last-child {
+        h3 {
+            font-size: 23px;
+        }
+    }
 
     .top-price-box {
         border-radius: 5px 5px 0px 0px;
@@ -108,7 +124,7 @@ h2.prices {
 
 #prices .box_content h4 {
     color: var(--white, #FFF);
-    font-family: Lato, sans-serif;
+    font-family: Lato Medium, sans-serif !important;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
@@ -348,6 +364,19 @@ h2.prices {
 
 #prices .reserve-button span {
     margin-right: 7px;
+}
+
+@media screen and (max-width: 1240px) {
+    .prices-grid {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+}
+
+@media screen and (max-width: 1090px) {
+    .prices-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
 }
 
 @media screen and (max-width: 768px) {

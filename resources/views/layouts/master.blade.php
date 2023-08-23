@@ -75,6 +75,7 @@
             infinite: false,
             variableWidth: false,
             centerMode: false,
+            adaptiveHeight: true,
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false
@@ -166,7 +167,7 @@
                         ofCalendar.ofInputActive = $input;
                         ofCalendar.ofInputActiveId = $input.dataset.inputId;
                         ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick();
+                        ofCalendar.setActionOnDateClick( true, ofHideCalendarClassName );
                     })
                 }
             })

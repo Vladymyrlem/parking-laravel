@@ -11,7 +11,7 @@
             @foreach($prices as $price)
                 {{--                <div class=" box">--}}
 
-                <div class=" col-12 col-md-6 col-lg-4 col-xl-3 text-center box_content @if( !empty($price->promotional_price) && $price->end_promotional_date >= $now )  promo @endif">
+                <div class=" text-center box_content @if( !empty($price->promotional_price) && $price->end_promotional_date >= $now )  promo @endif">
                     <div class="top-price-box">
                         <h2>{{$price->count_days}}</h2>
                         <h3 class="subtitle">
@@ -44,7 +44,7 @@
                 {{--                </div>--}}
             @endforeach
             {{--            <div class=" box">--}}
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3 m-md-auto text-center box_content">
+            <div class=" text-center box_content">
                 <div class="top-price-box">
                     <h2>&gt; 15 dni</h2>
                     <h3 class="subtitle">każdy kolejny dzień</h3>

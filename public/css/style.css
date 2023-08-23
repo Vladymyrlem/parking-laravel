@@ -6,9 +6,10 @@
 body {
   font-family: "Lato", sans-serif;
   color: #716d6e;
+  font-weight: 600;
 }
 body * {
-  font-family: "Lato", sans-serif !important;
+  font-family: "Lato", sans-serif;
   color: #716d6e;
 }
 
@@ -655,8 +656,8 @@ ul#countries.active {
 --------------------------------------------- */
 @font-face {
   font-family: "responsivenav";
-  src: url("../icons/responsivenav.eot");
-  src: url("../icons/responsivenav.eot?#iefix") format("embedded-opentype"), url("../icons/responsivenav.ttf") format("truetype"), url("../icons/responsivenav.woff") format("woff"), url("../icons/responsivenav.svg#responsivenav") format("svg");
+  src: url("../../icons/responsivenav.eot");
+  src: url("../../icons/responsivenav.eot?#iefix") format("embedded-opentype"), url("../../icons/responsivenav.ttf") format("truetype"), url("../../icons/responsivenav.woff") format("woff"), url("../../icons/responsivenav.svg#responsivenav") format("svg");
   font-weight: normal;
   font-style: normal;
 }
@@ -1370,10 +1371,14 @@ h2.prices {
   margin-bottom: 30px;
 }
 
+#prices {
+  padding-left: 0;
+  padding-right: 0;
+}
 #prices h2 {
   color: var(--black, #151616);
   text-align: center;
-  font-family: Lato Medium, sans-serif !important;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 700;
@@ -1381,12 +1386,19 @@ h2.prices {
 }
 #prices .subtitle {
   color: var(--black, #151616);
-  font-family: Lato, sans-serif !important;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
   line-height: 110%;
   margin-bottom: 0;
+}
+
+.prices-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto;
+  gap: 0 30px;
 }
 
 #prices .box {
@@ -1397,6 +1409,10 @@ h2.prices {
 #prices .box_content {
   background-color: #fff;
   margin-bottom: 30px;
+  margin-top: 0 !important;
+}
+#prices .box_content:last-child h3 {
+  font-size: 23px;
 }
 #prices .box_content .top-price-box {
   border-radius: 5px 5px 0px 0px;
@@ -1443,7 +1459,7 @@ h2.prices {
 
 #prices .box_content h4 {
   color: var(--white, #FFF);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
@@ -1673,6 +1689,17 @@ h2.prices {
   margin-right: 7px;
 }
 
+@media screen and (max-width: 1240px) {
+  .prices-grid {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+@media screen and (max-width: 1090px) {
+  .prices-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 @media screen and (max-width: 768px) {
   #prices .title {
     text-align: left;
@@ -2055,7 +2082,7 @@ h2.prices {
   color: var(--prime, #0074B7);
   text-align: center;
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2160,7 +2187,7 @@ h2.prices {
 #information .title {
   color: var(--black, #151616);
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -2174,7 +2201,7 @@ h2.prices {
 
 #information .subtitle {
   color: #131313;
-  font-family: Lato, sans-serif;
+  font-family: Lato, sans-serif !important;
   font-size: 26px;
   font-style: normal;
   font-weight: 300;
@@ -2190,7 +2217,7 @@ h2.prices {
 }
 
 #information p {
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 18px;
   font-style: normal;
   font-weight: 400;
@@ -2272,7 +2299,7 @@ h2.prices {
 #header-block .reservation .reservation-block-message p {
   color: var(--black, #151616);
   text-align: center;
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -2282,7 +2309,7 @@ h2.prices {
 }
 #header-block .reservation .reservation-block-message .reservation-blocked-dates {
   color: var(--prime, #0074B7);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -2714,7 +2741,7 @@ h2.prices {
 #partners h2 {
   color: #131313;
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   text-align: center;
   font-size: 50px;
   font-style: normal;
@@ -2759,7 +2786,7 @@ h2.prices {
 }
 #contacts-section h2 {
   color: var(--black, #151616);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -2777,7 +2804,7 @@ h2.prices {
 #contacts-section .contacts-grid .contact-name {
   color: #888;
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2798,7 +2825,7 @@ h2.prices {
 #contacts-section .address-title {
   color: var(--black, #151616);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2808,7 +2835,7 @@ h2.prices {
 #contacts-section .contact-map-link {
   color: var(--prime, #0074B7);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -2839,7 +2866,7 @@ h2.prices {
 #contacts-us-section h2 {
   color: var(--black, #151616);
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
@@ -3139,7 +3166,7 @@ h2.prices {
 }
 
 #locations .location-select h2 {
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   color: #ffffff;
   font-size: 50px;
   font-style: normal;
@@ -3211,7 +3238,7 @@ h2.prices {
   top: -48px;
   color: var(--white, #FFF);
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -3229,7 +3256,7 @@ h2.prices {
   width: 100%;
   max-width: 248px;
   color: var(--prime, #0074B7);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -3345,7 +3372,7 @@ footer .foot-left .foot-reservation-block {
 footer .foot-left .foot-reservation-block__title {
   color: var(--white, #FFF);
   /* H3 bold */
-  font-family: Lato, sans-serif;
+  font-family: Lato Bold, sans-serif !important;
   font-size: 30px;
   font-style: normal;
   font-weight: 900;
@@ -3355,7 +3382,7 @@ footer .foot-left .foot-reservation-block__title {
 footer .foot-left .foot-reservation-block__subtitle {
   color: var(--white, #FFF);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -3380,7 +3407,7 @@ footer .foot-left .foot-reservation-block__link {
 footer .foot-label {
   color: var(--black, #151616);
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 20px;
   font-style: normal;
   font-weight: 700;
@@ -3397,7 +3424,7 @@ footer .contacts-grid {
 footer .contacts-grid .contact-name {
   color: #888;
   /* H4 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
@@ -4453,12 +4480,26 @@ form .subtitle {
   text-transform: uppercase !important;
 }
 
+strong {
+  font-family: Lato Bold, sans-serif !important;
+}
+
+small {
+  font-family: Lato Medium, sans-serif !important;
+}
+
 /* Terms
 --------------------------------------------*/
 #terms {
   margin-top: 90px;
   position: relative;
   z-index: 2;
+}
+#terms strong {
+  font-family: Lato Bold, sans-serif !important;
+}
+#terms small {
+  font-family: Lato Medium, sans-serif !important;
 }
 #terms ul > li {
   text-align: left;
@@ -4470,12 +4511,29 @@ form .subtitle {
   box-shadow: none;
 }
 
+h2 {
+  font-family: Lato Bold, sans-serif !important;
+}
+
 #terms h2 {
+  font-family: Lato Bold, sans-serif !important;
   font-size: 46px;
   font-weight: 900;
   margin: 0 0 25px 0;
   padding: 0;
   text-align: center;
+}
+
+h3 {
+  font-family: Lato Medium, sans-serif !important;
+}
+
+p {
+  font-weight: 600;
+}
+
+#terms h3 {
+  font-family: Lato Medium, sans-serif !important;
 }
 
 a:hover {
@@ -4699,7 +4757,7 @@ p span.price {
 #gallery h2 {
   color: var(--black, #151616);
   /* H2 */
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
   font-weight: 400;
