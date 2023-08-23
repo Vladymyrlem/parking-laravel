@@ -27,8 +27,6 @@
          */
         public function down()
         {
-            Schema::table('about_us', function (Blueprint $table) {
-                //
-            });
+            Schema::dropIfExists('about_us');
         }
     };

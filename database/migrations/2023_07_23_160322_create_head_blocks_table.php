@@ -17,6 +17,7 @@
                 $table->string('title');
                 $table->string('subtitle');
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
 

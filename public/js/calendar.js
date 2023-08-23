@@ -99,17 +99,13 @@ class CalendarIk {
     }
 
     // Function ONClick Date Calendar
-    setActionOnDateClick = () => {
-
-        // console.log(this)
-
+    setActionOnDateClick = ( closeAfterSelection = false, classNameClosedCalendar = '' ) => {
         const dates = this.calendar._target.querySelectorAll(' .calendar_date');
         dates?.forEach(date => {
-            if (!date.classList.contains('disabled')
-                || !date.classList.contains('no_select')) {
+
+            if ( ! ( date.classList.contains('disabled') || date.classList.contains('no_select') ) ) {
 
                 date.addEventListener('click', event => {
-
                     if (this.ofInputActive) {
                         this.ofInputActive.value = date.dataset.calendarDate.split('/').reverse().join('-');
                         this.ofInputActive.setAttribute('data-selected-date', date.dataset.calendarDate);
@@ -122,12 +118,15 @@ class CalendarIk {
                         this.ofDateTo = new Date(date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
                     }
 
-                    this.calendar.refresh();
+                    // Close Calendar After Click Date
+                    if ( closeAfterSelection ) {
+                        this.calendar._target.classList.add( classNameClosedCalendar || this.class.hide );
+                    }
 
+                    this.calendar.refresh();
                 })
             }
         });
-
     }
 
 

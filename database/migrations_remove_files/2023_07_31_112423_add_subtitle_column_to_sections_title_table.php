@@ -13,7 +13,7 @@
         public function up()
         {
             Schema::table('sections_title', function (Blueprint $table) {
-                $table->string('subtitle');
+//                $table->string('subtitle');
             });
         }
 
@@ -25,7 +25,7 @@
         public function down()
         {
             Schema::table('sections_title', function (Blueprint $table) {
-                $table->dropColumn('subtitle');
+//                $table->dropColumn('subtitle');
             });
         }
     };

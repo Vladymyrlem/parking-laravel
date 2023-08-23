@@ -89,8 +89,8 @@
             const ofHideCalendarClassName = 'hide';
 
             /*
-                      * Create info text
-                      */
+             * Create info text
+             */
             const textWrap = document.querySelector('#reservation-blocked-dates');
             if (textWrap) {
                 textWrap.innerText = `${
@@ -149,7 +149,7 @@
                         ofCalendar.ofInputActive = $input;
                         ofCalendar.ofInputActiveId = $input.dataset.inputId;
                         ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick();
+                        ofCalendar.setActionOnDateClick( true, ofHideCalendarClassName );
                     })
                 }
             })
