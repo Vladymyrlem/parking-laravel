@@ -4,31 +4,30 @@
 #header-block .reservation {
     min-height: 480px;
     background-color: #fff;
+    box-shadow: 0 9px 0px 0px white, 0 -9px 0px 0px white, 7px 0 15px -4px rgba(0, 0, 0, 0.3), -7px 0 15px -4px rgba(0, 0, 0, 0.3);
     width: 100%;
     max-width: 370px;
-    border-radius: 10px;
 
     .reservation-block-message {
         margin-bottom: 0;
         padding-left: 20px;
         padding-right: 20px;
-        padding-top: 20px;
 
         p {
             color: var(--black, #151616);
             text-align: center;
-            font-family: Lato Medium, sans-serif !important;
+            font-family: Lato, sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
             line-height: 20.594px; /* 128.711% */
-            text-transform: initial;
+            text-transform: capitalize;
             margin-bottom: 0;
         }
 
         .reservation-blocked-dates {
             color: var(--prime, #0074B7);
-            font-family: Lato Medium, sans-serif !important;
+            font-family: Lato, sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
@@ -50,7 +49,6 @@
             display: flex;
             justify-content: flex-start;
             align-items: center;
-            color: #716d6e;
 
             h4 {
                 color: #3D405C;
@@ -59,7 +57,7 @@
                 font-style: normal;
                 font-weight: 700;
                 line-height: 20.594px; /* 128.711% */
-                text-transform: initial;
+                text-transform: capitalize;
             }
 
             svg {
@@ -291,17 +289,14 @@
 #header-block form .submit {
     width: 100%;
     background-color: #0074b7;
-    color: var(--white, #FFF);
-    border-radius: 5px;
-    /* Add med */
-    font-family: Lato, sans-serif;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 20.594px; /* 128.711% */
-    text-transform: capitalize;
+    color: #fff;
     border: none;
-    box-shadow: none;
+    border-radius: 0;
+    box-shadow: 6px 6px 0 #efe9e9;
+    text-align: center;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 900;
     padding: 10px 0;
     /*margin-top: 30px;*/
     transition: 0.2s;
@@ -438,56 +433,5 @@
 
     #checkoutModal .modal-dialog {
         max-width: calc(100vw - 40px);
-    }
-}
-
-@media screen and (max-width: 475px) {
-
-    #header-block form {
-
-        .datetime {
-
-            //flex-wrap: wrap;
-        }
-
-        .date {
-            //width: 100%;
-            //flex: 0 0 100%;
-            //margin-bottom: 20px;
-        }
-
-        .time {
-            width: 100%;
-            max-width: 86px;
-        }
-
-        .input-group input {
-            padding-left: 10px;
-            padding-right: 10px;
-        }
-
-        .input-group-addon {
-            width: auto;
-            max-width: 96px;
-
-            svg {
-                display: none;
-            }
-        }
-
-        #order_pick_up_date, #order_drop_off_date {
-            width: 100%;
-            max-width: 115px;
-        }
-
-        .styled-select-time {
-            //margin: 0 auto;
-        }
-    }
-}
-
-@media screen and (max-width: 375px) {
-    .order_form_wrapper_calendar {
-        left: - 6px !important;
     }
 }

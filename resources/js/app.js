@@ -656,8 +656,38 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+    var $window = $(window);
+    var $navbarCollapse = $('.navbar-collapse');
+    var $navbarToggler = $('.navbar-toggler');
 
+    function adjustNavbar() {
+        if ($window.width() <= 1240) {
+            // Add classes to show responsive menu
+            // $navbarCollapse.addClass('show');
+            $navbarToggler.addClass('collapsed');
+        } else {
+            // Remove classes to hide responsive menu
+            $navbarCollapse.removeClass('show');
+            $navbarToggler.removeClass('collapsed');
+        }
+    }
 
+    // Initial adjustment on page load
+    adjustNavbar();
+
+    // Adjust the menu on window resize
+    $window.on('resize', adjustNavbar);
+
+    $('.navbar-collapse li.menu-item a').on('click', function (e) {
+        e.preventDefault();
+        $navbarCollapse.removeClass('show');
+        $navbarToggler.removeClass('collapsed');
+    });
+    $navbarToggler.on('click', function (e) {
+        $(this).toggleClass('active');
+    })
+});
 
 
 

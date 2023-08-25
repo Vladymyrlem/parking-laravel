@@ -18,8 +18,6 @@
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Mail;
     use Illuminate\Support\Facades\Validator;
-    use TimeHunter\LaravelGoogleReCaptchaV2\Facades\GoogleReCaptchaV2;
-
     class HomeController extends Controller
     {
         /**
@@ -76,18 +74,14 @@
             $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
 
 //            if ($validator->passes()) {
-            // Return the total price as a JSON response (optional)
-            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
+                // Return the total price as a JSON response (optional)
+                Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
 
-            return response()->json(['message' => 'Message sent successfully']);
+                return response()->json(['message' => 'Message sent successfully']);
 //            } else {
 //                return response()->json(['error' => $validator->errors()]);
 //            }
         }
 
-        public function verify(Request $request)
-        {
-            dd(GoogleReCaptchaV2::verifyResponse($request->input('g-recaptcha-response'))->getMessage());
-        }
 
     }

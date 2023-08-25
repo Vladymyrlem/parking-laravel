@@ -17,11 +17,12 @@
         {
             // \App\Models\User::factory(10)->create();
 
-            // \App\Models\User::factory()->create([
-            //     'name' => 'Test User',
-            //     'email' => 'test@example.com',
-            // ]);
+             \App\Models\User::factory()->create([
+                 'name' => 'Yevhenii',
+                 'email' => 'admin@example.com',
+                 'password' => bcrypt('password')
+             ]);
 //            $this->call(ReservationSeeder::class);
-            $this->call(ParkingOrders::class);
+//            $this->call(ParkingOrders::class);
         }
     }

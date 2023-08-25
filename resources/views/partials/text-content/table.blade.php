@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-right">
-            <button id="btn_add_content" name="btn_add_content" class="btn btn-default pull-right mb-3">Add New Blok tekstowe</button>
+            <button id="btn_add_content" name="btn_add_content" class="btn btn-default pull-right mb-3">Dodaj nowy blok tekstowy</button>
         </div>
     </div>
 </div>
@@ -10,8 +10,8 @@
         <thead>
         <tr>
             <th>Bloki tekstowe</th>
-            <th>Content Slug</th>
-            <th colspan="3">Action</th>
+            <th>Zawartość Slug</th>
+            <th colspan="3">Akcja</th>
         </tr>
         </thead>
         <tbody id="contents-list" name="contents-list">
@@ -23,9 +23,9 @@
                 <td>
                     {{ $content->slug }}
                 </td>
-                <td width="270">
-                    <button class="btn btn-warning btn-detail open_content" value="{{$content->id}}">Edit content</button>
-                    <button class="btn btn-danger btn-delete delete-content" value="{{$content->id}}">Delete content</button>
+                <td width="320">
+                    <button class="btn btn-warning btn-detail open_content" value="{{$content->id}}">Edycja zawartości</button>
+                    <button class="btn btn-danger btn-delete delete-content" value="{{$content->id}}">Usuń zawartość</button>
                 </td>
             </tr>
         @endforeach

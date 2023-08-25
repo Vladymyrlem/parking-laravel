@@ -98,96 +98,134 @@
     {{-- Calendar --}}
     <script type="text/javascript">
         $(document).ready(function () {
-            window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
+            var blockedDates = <?php echo json_encode($blockedDates); ?>;
 
-            const orderForm = document.querySelector('#orderForm');
+            var _reservationDates = <?php echo json_encode($blockedDates); ?>;
+            // Array(3) [ {…}, {…}, {…} ]
+            // [ { new_date: "2023-08-24" }, { new_date: "2023-08-25" }, { new_date: "2023-08-26" } ]
+
+            var reservationDates = _reservationDates
+                .filter(dateStr => new Date(dateStr.new_date) >= new Date().setHours(0, 0, 0, 0) - 1)
+                .sort((a, b) => new Date(a.new_date) - new Date(b.new_date));
+
+            console.log( 'reservationDates: ', reservationDates )
+
+            const orderForm = $('#orderForm');
             const ofInputsIds = ['#order_pick_up_date', '#order_drop_off_date'];
             const ofWrapperCalendarClassName = 'order_form_wrapper_calendar';
             const ofHideCalendarClassName = 'hide';
 
             /*
-                      * Create info text
-                      */
-            // const textWrap = document.querySelector('.reservation-blocked-dates');
-            // if (textWrap) {
-            //     textWrap.innerText = `${
-            //         $blockedDates
-            //             .filter(elem => {
-            //                 const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
-            //                 const date = new Date().setHours(0, 0, 0, 0);
-            //                 return currDate >= date;
-            //             })
-            //             .map(elem => elem.new_date)
-            //             .join(', ')
-            //     }`;
-            // }
+             * Create info text
+             */
+            (() => {
+                var datesArray = <?php echo json_encode($blockedDates); ?>;
+                console.log(datesArray);
+                var currentDate = new Date();
 
-            var datesArray = <?php echo json_encode($blockedDates); ?>;
+                // Filter out old dates
+                var filteredDatesArray = datesArray.filter(function (dateObj) {
+                    var rawDate = new Date(dateObj['new_date']);
+                    return rawDate >= currentDate;
+                });
 
-            var currentDate = new Date();
+                // Convert filtered dates to custom format 'dd/mm/yyyy'
+                var formattedDates = filteredDatesArray.map(function (dateObj) {
+                    var rawDate = new Date(dateObj['new_date']);
+                    var formatted = ("0" + rawDate.getDate()).slice(-2) + "/" + ("0" + (rawDate.getMonth() + 1)).slice(-2) + "/" + rawDate.getFullYear();
+                    return formatted;
+                });
 
-            // Filter out old dates
-            var excludedDates = datesArray.filter(function(dateObj) {
-                var dateParts = dateObj['new_date'].split('/');
-                var rawDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Month is zero-based
-                return rawDate >= currentDate;
-            });
+                // Join the formatted dates with commas
+                var joinedDates = formattedDates.join(', ');
 
-            // Extract the new_date values from the excluded dates
-            var excludedDateStrings = excludedDates.map(function(dateObj) {
-                return dateObj['new_date'];
-            });
-            var joinedExcludedDates = excludedDateStrings.join(', ');
+                console.log(joinedDates);
+                {{--// Insert the joined dates into the div with class 'reservations-list'--}}
+                $('.reservation-blocked-dates').text(joinedDates);
+            })();
 
-            console.log(joinedExcludedDates);
-            {{--// Insert the joined dates into the div with class 'reservations-list'--}}
-            $('.reservation-blocked-dates').text(joinedExcludedDates);
             /*
              * Create Wrapper For Calendar
              */
-            const ofWrapperCalendar = document.createElement('div');
-            ofWrapperCalendar.classList.add(ofWrapperCalendarClassName);
-            ofWrapperCalendar.classList.add(ofHideCalendarClassName);
-            orderForm.append(ofWrapperCalendar);
+            orderForm.append(`<div class="${ofWrapperCalendarClassName} ${ofHideCalendarClassName}"></div>`);
 
             /*
              * Create Calendar
              */
             window.ofCalendar = new CalendarIk({
-                dates: window.$blockedDates,
+                dates: <?php echo json_encode($blockedDates); ?>,
                 calendarWrapperClass: '.' + ofWrapperCalendarClassName,
-                ofInputDateFrom: document.querySelector(ofInputsIds[0]),
-                ofInputDateTo: document.querySelector(ofInputsIds[1]),
+                ofInputDateFrom: $(ofInputsIds[0]),
+                ofInputDateTo: $(ofInputsIds[1]),
             });
+
 
             /*
              * Create Events for Inputs
              */
-            ofInputsIds.forEach((input, i) => {
-                const $input = document.querySelector(input);
-                if ($input) {
+            $(document).on( 'click', '.datetime input', function (event) {
+                event.preventDefault();
 
-                    $input.setAttribute('data-input-id', i);
-                    $input.setAttribute('readonly', 'readonly');
+                $('.date_error').each( (i, elem) => { elem.remove(); })
 
-                    $input.addEventListener('click', e => {
-                        e.preventDefault();
+                var $input = $(event.target);
+                $input.prop("readonly", true);
+                var $dateTimeBox = $input.closest('.datetime');
 
-                        const inputTop = $('#order_pick_up_date').height();
-                        // Set Calendar position
-                        const posForm = orderForm.getBoundingClientRect();
-                        const posInput = e.target.getBoundingClientRect();
-                        const posLeft = posInput.left - posForm.left + posInput.width;
-                        const posTop = posInput.top - posForm.top + inputTop;
-                        ofCalendar.calendar._target.style.top = posTop + 20 + 'px';
-                        ofCalendar.calendar._target.style.left = 16 + 'px';
+                $(ofCalendar.calendar._target)
+                    .removeClass(ofHideCalendarClassName)
+                    .attr('data-input-active-id', $input.attr('id'))
+                    .css({ top: $dateTimeBox.position().top + $dateTimeBox.height() + 'px' })
 
-                        ofCalendar.calendar._target.classList.remove(ofHideCalendarClassName);
-                        ofCalendar.ofInputActive = $input;
-                        ofCalendar.ofInputActiveId = $input.dataset.inputId;
-                        ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick(true, ofHideCalendarClassName);
-                    })
+                ofCalendar.selectDate = $input.val();
+                ofCalendar.calendar.refresh();
+            })
+
+            $(document).on('click', '.calendar_date', function (event) {
+                var $td = $(event.target);
+                var $wrapperCalendar = $('.' + ofWrapperCalendarClassName);
+                var $inputActive = $('#' + $wrapperCalendar.attr('data-input-active-id'));
+                var isDateStart = '#' + $inputActive.attr('id') === ofInputsIds[0]// ? 'from' : 'to';
+
+                if (!$td.hasClass('disabled')) {
+                    var date = $td.attr('data-calendar-date');
+                    var from = $wrapperCalendar.attr('data-date-from');
+                    var to = $wrapperCalendar.attr('data-date-to');
+                    var errorText = 'Data zakończenia musi być późniejsza niż data rozpoczęcia.';
+
+                    if ( isDateStart ) {
+
+                        if ((to && new Date(to).getTime() - new Date(date).getTime() > 0) === false) {
+                            var errTxt = 'Data Od dnia musi być wcześniejsza niż data Do dnia.';
+                            console.log( errTxt );
+                            createError( errTxt );
+                        } else {
+                            $inputActive.val(date)
+                            $wrapperCalendar.attr('data-date-from', date)
+                        }
+
+                    } else {
+
+                        if ((from && new Date(from).getTime() - new Date(date).getTime() < 0) === false) {
+                            var errTxt = 'Data zakończenia musi być późniejsza niż data rozpoczęcia.';
+                            console.log( errTxt );
+                            createError( errTxt );
+                        } else {
+                            $inputActive.val(date)
+                            $wrapperCalendar.attr('data-date-to', date)
+                        }
+
+                    }
+
+                    function createError(text) {
+                        $inputActive.closest('.datetime').css({ position: 'relative' })
+                            .prepend(`<div class="date_error" style="position:absolute;z-index:1;top:calc(100% - 6px);left:0;color:red;font-size:12px;">${text}</div>`);
+                    }
+
+
+
+
+                    $wrapperCalendar.addClass(ofHideCalendarClassName)
                 }
             })
 

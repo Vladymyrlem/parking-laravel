@@ -13,7 +13,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-12">
-                    <h1 class="m-0 text-center">{{ __('Orders table') }}</h1>
+                    <h1 class="m-0 text-center">{{ __('Tablica zamówień') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -71,7 +71,7 @@
                 <tr>
                     <td class="id">{{ $parking->id }}</td>
                     <td class="created-date">{{ $parking->created_at }}
-                        <button class="btn btn-danger delete-btn" data-order-id="{{ $parking->id }}">Delete</button>
+                        <button class="btn btn-danger delete-btn" data-order-id="{{ $parking->id }}">Usuń</button>
                     </td>
                     <td class="created-date-without-time d-none">{{ getConvertedDate($parking->created_at) }}
                     </td>
@@ -129,15 +129,19 @@
                     <div class="calendar__main_calendar"></div>
                 </div>
                 <div class="calendar__date_list_wrapper">
-                    <ul class="calendar__date_list js_list_blocked_dates">
-                        {{--                            <li class="calendar__date_item"><span>07/08/2023 [ </span><a href="#">usuń</a><span> ]</span></li>--}}
-                    </ul>
+
+                    <div class="calendar__add_date_preloader hidden"><div></div><div></div><div></div><div></div></div>
+
+                    <ul class="calendar__date_list"></ul>
+
                     <div class="calendar__add_date_w">
+
                         <ul class="calendar__add_date_list"></ul>
 
                         <div class="calendar__add_date_btn_w">
                             <button type="button" class="calendar__add_date_btn js_select_repeater">dodaj nowy</button>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -158,9 +162,9 @@
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <button id="btn_add" name="btn_add" class="btn btn-default pull-right mb-3">Add New Slide</button>
+                                <button id="btn_add" name="btn_add" class="btn btn-default pull-right mb-3">Dodaj nowy slide</button>
                             </div>
-                            <button id="toggleRowsButton" class="btn btn-primary">Show All Rows</button>
+                            <button id="toggleRowsButton" class="btn btn-primary">Pokaż wszystkie wierzy</button>
 
                         </div>
                     </div>
@@ -171,8 +175,8 @@
                                 <thead>
                                 <tr class="info">
                                     <th>ID</th>
-                                    <th>Title</th>
-                                    <th>Subtitle</th>
+                                    <th id="slide-title">Nagłówek</th>
+                                    <th id="slide-subtitle">Podtytuł</th>
                                 </tr>
                                 </thead>
                                 <tbody id="headblock-list" name="headblock-list">
@@ -182,8 +186,8 @@
                                         <td> {{$headBlock->title}} </td>
                                         <td>{!! $headBlock->subtitle !!}</td>
                                         <td width="150">
-                                            <button class="btn btn-warning btn-detail open_header_modal" value="{{$headBlock->id}}">Edit</button>
-                                            <button class="btn btn-danger btn-delete delete-product" value="{{$headBlock->id}}">Delete</button>
+                                            <button class="btn btn-warning btn-detail open_header_modal" value="{{$headBlock->id}}">Edytuj</button>
+                                            <button class="btn btn-danger btn-delete delete-product" value="{{$headBlock->id}}">Usuń</button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -236,7 +240,7 @@
                 <!-- Information Block-->
                 <div class="info-block" id="info" name="#info">
                     @csrf
-                    <h2 class="fs-2 text-center">Info</h2>
+                    <h2 class="fs-2 text-center">Informacja</h2>
                     @include('partials.information.table')
                     @include('partials.information.create')
                 </div>
@@ -246,11 +250,11 @@
                      style="opacity: 1">
                 <!-- Reviews Block-->
                 <div class="reviews-section" id="reviews" name="#reviews">
-                    <h2 class="fs-2 text-center">Reviews</h2>
+                    <h2 class="fs-2 text-center">Opinia</h2>
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <button id="btn_add_review" name="btn_add_review" class="btn btn-default pull-right mb-3">Add New Review</button>
+                                <button id="btn_add_review" name="btn_add_review" class="btn btn-default pull-right mb-3">Dodaj nowe opinia</button>
                             </div>
                         </div>
                     </div>
@@ -261,8 +265,8 @@
                                 <thead>
                                 <tr class="reviews">
                                     <th>ID</th>
-                                    <th>Content</th>
-                                    <th>Author</th>
+                                    <th id="reviews-content">Zawartość</th>
+                                    <th id="reviews-author">Autor</th>
                                 </tr>
                                 </thead>
                                 <tbody id="reviews-list" name="reviews-list">
@@ -272,8 +276,8 @@
                                         <td>{{$review->content}}</td>
                                         <td>{{$review->author}}</td>
                                         <td width="150">
-                                            <button class="btn btn-warning btn-detail open_review_modal" value="{{$review->id}}">Edit</button>
-                                            <button class="btn btn-danger btn-delete delete-review" value="{{$review->id}}">Delete</button>
+                                            <button class="btn btn-warning btn-detail open_review_modal" value="{{$review->id}}">Edycja</button>
+                                            <button class="btn btn-danger btn-delete delete-review" value="{{$review->id}}">Usuń</button>
                                         </td>
                                     </tr>
                                 @endforeach

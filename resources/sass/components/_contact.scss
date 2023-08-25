@@ -4,7 +4,7 @@
 
     h2 {
         color: var(--black, #151616);
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 50px;
         font-style: normal;
         font-weight: 400;
@@ -23,7 +23,7 @@
         .contact-name {
             color: #888;
             /* H4 */
-            font-family: Lato Medium, sans-serif !important;
+            font-family: Lato, sans-serif;
             font-size: 20px;
             font-style: normal;
             font-weight: 700;
@@ -47,7 +47,7 @@
     .address-title {
         color: var(--black, #151616);
         /* H4 */
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
@@ -58,7 +58,7 @@
     .contact-map-link {
         color: var(--prime, #0074B7);
         /* H4 */
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
@@ -91,7 +91,7 @@
     h2 {
         color: var(--black, #151616);
         /* H2 */
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 50px;
         font-style: normal;
         font-weight: 400;
@@ -214,16 +214,6 @@
     }
 }
 
-#form_contact {
-    .validation {
-        display: none;
-
-        &.errror {
-            display: block;
-        }
-    }
-}
-
 @media screen and (max-width: 768px) {
     #contacts-section {
         padding-top: 50px;
@@ -269,13 +259,5 @@
             font-size: 20px;
             margin-bottom: 20px;
         }
-    }
-    #contacts-us-section form .custom-checkbox {
-        margin-bottom: 0;
-        padding-left: 45px;
-    }
-    #contacts-us-section form input[type=checkbox] {
-        left: 5px;
-        top: 5px;
     }
 }

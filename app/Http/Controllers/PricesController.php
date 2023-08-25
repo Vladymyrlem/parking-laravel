@@ -31,9 +31,6 @@
         public function index(Request $request)
         {
             $prices = Price::all();
-            $price_promotional = Price::all('promotional_price');
-            $start_promotional = Price::all('start_promotional_date');
-            $end_promotional = Price::all('end_promotional_date');
             return view('admin', compact('prices'));
         }
 

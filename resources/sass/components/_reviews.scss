@@ -5,9 +5,6 @@
     padding-bottom: 100px;
     position: relative;
     z-index: 2;
-    display: flex;
-    flex-flow: row;
-    justify-content: center;
 }
 
 #reviews .stars {
@@ -37,7 +34,7 @@
     text-align: center;
 
     /* H4 */
-    font-family: Lato Medium, sans-serif !important;
+    font-family: Lato, sans-serif;
     font-size: 20px;
     font-style: normal;
     font-weight: 700;
@@ -97,36 +94,9 @@
     }
 }
 
-@media screen and (max-width: 1240px) {
-    //#reviews {
-    //    width: 100vw;
-    //
-    #reviews-carousel {
-
-        //width: auto;
-        max-width: 94vw;
-    }
-    //}
-}
-
 @media screen and (max-width: 768px) {
     #reviews {
         padding-bottom: 50px;
         margin-top: 100px;
-    }
-    #reviews-carousel {
-        max-width: 90vw !important;
-
-    }
-}
-
-@media screen and (max-width: 560px) {
-    #reviews {
-        //padding-bottom: 30px;
-        margin-top: 50px;
-    }
-    #reviews-carousel {
-        max-width: 84vw !important;
-
     }
 }

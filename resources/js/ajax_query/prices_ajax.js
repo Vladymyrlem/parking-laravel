@@ -60,18 +60,14 @@ $(document).ready(function () {
                 'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
             }
         })
-        const count_days = $('#count_days').val();
-        const standart_price = $('#standart_price').val();
-        const promotional_price = $('#promotional_price').val() || null;
-        const start_promotional_date = $('#start_promotional_date').val() || null;
-        const end_promotional_date = $('#end_promotional_date').val() || null;
+
         e.preventDefault();
         var formData = {
-            count_days: count_days,
-            standart_price: standart_price,
-            promotional_price: promotional_price,
-            start_promotional_date: start_promotional_date,
-            end_promotional_date: end_promotional_date,
+            count_days: $('#count_days').val(),
+            standart_price: $('#standart_price').val(),
+            promotional_price: $('#promotional_price').val(),
+            start_promotional_date: $('#start_promotional_date').val(),
+            end_promotional_date: $('#end_promotional_date').val(),
         }
 
         //used to determine the http verb to use [add=POST], [update=PUT]

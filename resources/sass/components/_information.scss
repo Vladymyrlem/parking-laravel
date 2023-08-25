@@ -11,13 +11,11 @@
     margin-bottom: 90px;
 }
 
-
 #information img {
     width: auto;
     max-width: 470px;
     height: auto;
 }
-
 
 #information .row:nth-child(even) {
     flex-flow: row-reverse;
@@ -26,7 +24,7 @@
 #information .title {
     color: var(--black, #151616);
     /* H3 bold */
-    font-family: Lato Bold, sans-serif !important;
+    font-family: Lato, sans-serif;
     font-size: 30px;
     font-style: normal;
     font-weight: 900;
@@ -40,7 +38,7 @@
 
 #information .subtitle {
     color: #131313;
-    font-family: Lato, sans-serif !important;
+    font-family: Lato, sans-serif;
     font-size: 26px;
     font-style: normal;
     font-weight: 300;
@@ -56,7 +54,7 @@
 }
 
 #information p {
-    font-family: Lato Medium, sans-serif !important;
+    font-family: Lato, sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;

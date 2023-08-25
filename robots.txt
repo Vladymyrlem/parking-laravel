@@ -1,0 +1,7 @@
+User-agent: *
+Host: parking-rondo.pl
+Crawl-delay: 2
+Disallow: /app # Закрываем админку.
+allow: /public
+Disallow: /app              # Поиск.
+Sitemap: http://parking-rondo.pl/sitemap.xml

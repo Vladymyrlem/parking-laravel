@@ -22,19 +22,17 @@ h2.prices {
 }
 
 #prices .title {
-    font-size: 50px;
-    font-weight: 700;
-    margin-bottom: 30px;
+    font-size: 36px;
+    font-weight: 900;
+    margin-bottom: 65px;
 }
 
 #prices {
-    padding-left: 0;
-    padding-right: 0;
 
     h2 {
         color: var(--black, #151616);
         text-align: center;
-        font-family: Lato Bold, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 50px;
         font-style: normal;
         font-weight: 700;
@@ -43,7 +41,7 @@ h2.prices {
 
     .subtitle {
         color: var(--black, #151616);
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 50px;
         font-style: normal;
         font-weight: 400;
@@ -52,28 +50,13 @@ h2.prices {
     }
 }
 
-.prices-grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: auto;
-    gap: 0 30px
-}
-
 #prices .box {
     padding: 10px;
     color: #0074b7;
 }
 
-#prices .box_content {
+#prices .box .box_content {
     background-color: #fff;
-    margin-bottom: 30px;
-    margin-top: 0 !important;
-
-    &:last-child {
-        h3 {
-            font-size: 23px;
-        }
-    }
 
     .top-price-box {
         border-radius: 5px 5px 0px 0px;
@@ -102,7 +85,7 @@ h2.prices {
     }
 }
 
-#prices .box_content h2 {
+#prices .box .box_content h2 {
     color: var(--prime, #0074B7);
     font-family: Lato, sans-serif;
     font-size: 40px;
@@ -112,7 +95,7 @@ h2.prices {
     margin-bottom: 16px;
 }
 
-#prices .box_content h3 {
+#prices .box .box_content h3 {
     color: var(--prime, #0074B7);
     font-family: Lato, sans-serif;
     font-size: 25px;
@@ -122,16 +105,16 @@ h2.prices {
     margin-bottom: 0;
 }
 
-#prices .box_content h4 {
+#prices .box .box_content h4 {
     color: var(--white, #FFF);
-    font-family: Lato Medium, sans-serif !important;
+    font-family: Lato, sans-serif;
     font-size: 40px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
 }
 
-#prices .box_content small {
+#prices .box .box_content small {
     color: #fff;
     font-size: 12px;
     text-transform: uppercase;
@@ -143,63 +126,21 @@ h2.prices {
     width: 100%;
 }
 
-#prices .box_content.promo h2,
-#prices .box_content.promo .subtitle {
+#prices .box.promo h1,
+#prices .box.promo .box_content .subtitle {
     color: #00a82a;
 }
 
-#prices .box_content.promo h4 {
-    display: flex;
-    flex-flow: column;
-
-    p {
-        color: #017f21;
-        font-size: 20px;
-    }
-
+#prices .box.promo h2 p {
+    color: #017f21;
+    font-size: 20px;
 }
 
-#prices .box_content.promo {
-    .promo-range {
-
-        p {
-            font-size: 16px;
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 0;
-        }
-    }
-
-    .standart-price {
-        line-height: 20px;
-        margin-bottom: 10px;
-
-        s {
-            color: #017f21;
-            font-size: 20px;
-        }
-
-    }
-}
-
-#prices .box_content.promo .bottom-price-box {
+#prices .box.promo .box_content h2 {
     background-color: #00a82a;
-
-    .promotional-price {
-        color: #fff;
-        font-size: 32px;
-        padding: 10px;
-        font-weight: bold;
-
-        small {
-            color: #fff;
-            font-size: 12px;
-            text-transform: uppercase;
-        }
-    }
 }
 
-#prices .box_content.promo .top-price-box {
+#prices .box.promo .box_content {
     border-color: #00a82a;
 }
 
@@ -366,30 +307,9 @@ h2.prices {
     margin-right: 7px;
 }
 
-@media screen and (max-width: 1240px) {
-    .prices-grid {
-        padding-left: 20px;
-        padding-right: 20px;
-    }
-}
-
-@media screen and (max-width: 1090px) {
-    .prices-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
 @media screen and (max-width: 768px) {
     #prices .title {
         text-align: left;
-    }
-    .prices-grid {
-        display: grid !important;
-        grid-template-columns: repeat(2, 1fr);
-        grid-template-rows: auto;
-    }
-    #prices .box_content {
-        margin-bottom: 16px;
     }
 }
 
@@ -397,50 +317,7 @@ h2.prices {
     #prices .title {
         font-size: 28px;
     }
-    #prices h2 {
-        line-height: 30px !important;
-        font-size: 30px !important;
-    }
     #prices .subtitle {
         font-size: 35px;
-    }
-    #prices .box_content .bottom-price-box h4 {
-        font-size: 30px !important;
-    }
-
-    #prices {
-        padding-left: 5px;
-        padding-right: 5px;
-    }
-    #prices .box_content:last-child h3 {
-        font-size: 14px !important;
-    }
-    #prices .box_content .bottom-price-box h4, #prices .box_content .bottom-price-box small {
-        font-size: 25px !important;
-    }
-}
-
-@media screen and (max-width: 475px) {
-    #prices .box_content {
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: 108px  auto;
-    }
-}
-
-@media screen and (max-width: 420px) {
-    #prices .box_content {
-        grid-template-rows: 110px  auto;
-
-        .top-price-box {
-            display: flex;
-            flex-flow: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        &:last-child, &:nth-last-child(2) {
-            grid-template-rows: 130px  auto;
-        }
     }
 }

@@ -25,7 +25,7 @@ $(document).ready(function () {
             success: function (data) {
                 console.log(data);
                 $('#review_id').val(data.id);
-                $('#frmReviewBlock #content').val(data.content);
+                $('#content').val(data.content);
                 $('#author').val(data.author);
                 $('#btn-save-review').val("update");
                 $('#reviewModal').modal('show');
@@ -47,7 +47,7 @@ $(document).ready(function () {
 
         e.preventDefault();
         var formData = {
-            content: $('#frmReviewBlock #content').val(),
+            content: $('#content').val(),
             author: $('#author').val(),
         }
 

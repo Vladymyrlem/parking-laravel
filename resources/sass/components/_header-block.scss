@@ -2,10 +2,6 @@
     padding-top: 107px;
     padding-bottom: 107px;
 
-    .header-left {
-        padding-left: 100px;
-    }
-
     .header-right {
         display: flex;
         align-items: center;
@@ -35,7 +31,7 @@
             color: var(--white, #FFF);
 
             /* H1 */
-            font-family: Lato Bold, sans-serif !important;
+            font-family: Lato, sans-serif;
             font-size: 60px;
             font-style: normal;
             font-weight: 800;
@@ -44,18 +40,15 @@
         }
 
         .headblock-subtitle {
-            color: #FFF !important;
+            color: var(--white, #FFF);
             /* H3 */
-            font-family: Lato, sans-serif !important;
+            font-family: Lato, sans-serif;
             font-size: 36px;
             font-style: normal;
             font-weight: 300;
             line-height: normal;
             position: relative;
 
-            * {
-                color: #ffffff;
-            }
 
         }
     }
@@ -64,10 +57,6 @@
 @media screen and (max-width: 1240px) {
     #header-block {
         margin-top: 75px !important;
-
-        .header-left {
-            padding-left: 20px;
-        }
     }
 }
 
@@ -112,23 +101,5 @@
             margin-left: auto;
             margin-right: auto;
         }
-    }
-}
-
-@media screen and (max-width: 768px) {
-    #header-block .reservation {
-        max-width: 500px !important;
-    }
-}
-
-@media screen and (max-width: 560px) {
-    #header-block #headblockCarousel .headblock-title {
-        font-size: 35px;
-        font-weight: 400;
-    }
-    #header-block #headblockCarousel .headblock-subtitle {
-        display: block;
-        word-break: break-all;
-        font-size: 25px;
     }
 }

@@ -1,21 +1,17 @@
 class CalendarIk {
     calendar = null;
     dates = [];
-    ofDateFrom = null;
-    ofDateTo = null;
-    ofInputActive = null;
-    ofInputActiveId = -1;
+    selectDate = '';
+    selectDateFrom = '';
+    selectDateTo = '';
 
     class = {
         hide: 'hide',
         disabled: 'disabled',
         select: 'select',
-        noSelect: 'no_select',
-        dateFrom: 'day_from',
-        dateTo: 'day_to',
     }
 
-    constructor({...args}) {
+    constructor( args ) {
         this.class.wrapper = args.calendarWrapperClass;
         this.class.calendarTitleName = this.class.wrapper + ' ' + 'table .jsCalendar-title .jsCalendar-title-name';
         this.dates = args.dates;
@@ -42,48 +38,27 @@ class CalendarIk {
     }
 
     dayRender(index, element, info) {
-        if (index === 0 || index === 6) {
-            this.setClassNames(index, element);
-        }
+        this.setClassNames(index, element);
     }
 
     dateRender(date, element, info) {
         const fDate = this.formatDate(date);
 
-        element.classList.add('calendar_date');
-        element.setAttribute("data-calendar-date", fDate);
+        $(element).addClass('calendar_date');
+        $(element).attr("data-calendar-date", fDate);
+
+        // Selected Date
+        if ( fDate === this.selectDate || fDate === this.selectDateFrom || fDate === this.selectDateTo ) {
+            $(element).addClass(this.class.select);
+        }
 
         // Disabled Date
         if (this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date) {
-            element.classList.add(this.class.disabled);
-        }
-
-        // No Selected Date
-        if (!(this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date)) {
-
-            if (this.ofInputActiveId === '1' && this.ofDateFrom && date <= this.ofDateFrom) {
-                element.classList.add(this.class.noSelect);
-            }
-
-            if (this.ofInputActiveId === '0' && this.ofDateTo && date >= this.ofDateTo) {
-                element.classList.add(this.class.noSelect);
-            }
-
-            const dCurr = date?.setHours(0, 0, 0, 0);
-            const dFrom = this.ofDateFrom?.setHours(0, 0, 0, 0);
-            const dTo = this.ofDateTo?.setHours(0, 0, 0, 0);
-
-            if (dCurr && dFrom && dCurr === dFrom) {
-                element.classList.add(this.class.dateFrom);
-            }
-
-            if (dCurr && dTo && dCurr === dTo) {
-                element.classList.add(this.class.dateTo);
-            }
+            $(element).addClass(this.class.disabled);
         }
 
         // weekend
-        if (!info.isCurrent && (date.getDay() === 0 || date.getDay() === 6)) {
+        if (!info.isCurrent) {
             this.setClassNames(date.getDay(), element)
         }
     }
@@ -98,46 +73,15 @@ class CalendarIk {
         }
     }
 
-
-    setActionOnDateClick = (closeAfterSelection = false, classNameClosedCalendar = '') => {
-        const dates = this.calendar._target.querySelectorAll(' .calendar_date');
-        dates?.forEach(date => {
-
-            if (!(date.classList.contains('disabled') || date.classList.contains('no_select'))) {
-
-                date.addEventListener('click', event => {
-                    if (this.ofInputActive) {
-                        this.ofInputActive.value = date.dataset.calendarDate.split('/').reverse().join('-');
-                        this.ofInputActive.setAttribute('data-selected-date', date.dataset.calendarDate);
-                    }
-
-                    if (this.ofInputActiveId === '0') {
-                        this.ofDateFrom = new Date(date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
-                    }
-                    if (this.ofInputActiveId === '1') {
-                        this.ofDateTo = new Date(date.dataset.calendarDate.split('/').reverse().join('-') + ' 0:0:0:000');
-                    }
-
-// Close Calendar After Click Date
-                    if (closeAfterSelection) {
-                        this.calendar._target.classList.add(classNameClosedCalendar || this.class.hide);
-                    }
-
-                    this.calendar.refresh();
-                })
-            }
-        });
-    }
-
     // Helpers
     setClassNames = function (index, element) {
         if (index === 0 || index === 6) {
-            element.classList.add('weekend');
+            $(element).addClass('weekend');
 
             if (index === 0) {
-                element.classList.add('sunday');
+                $(element).addClass('sunday');
             } else {
-                element.classList.add('saturday');
+                $(element).addClass('saturday');
             }
 
         }
@@ -159,21 +103,20 @@ class CalendarIk {
         return previous;
     }
 
-    pad = function (d) {
-        return (d < 10) ? '0' + d.toString() : d.toString()
-    };
-
-    formatDate = function (date) {
-        return this.pad(date.getDate()) + '/' + this.pad(date.getMonth() + 1) + '/' + date.getFullYear();
-    }
+    // return format YYYY-MM-DD
+    formatDate = date => date.getFullYear() + '-' + String(date.getMonth() + 1).padStart(2, '0') + '-' + String(date.getDate()).padStart(2, '0');
 }
 
 class DatesList {
     class = {};
     dates = [];
+    mainCalendar = null;
+    calendarsWatch = {
+        list: [],
+    };
 
-    constructor({...args}) {
-        this.calendar = args.calendar;
+    constructor( args ) {
+        this.mainCalendar = args.mainCalendar;
         this.dates = args.dates;
         this.class.dateList = args.dateListClass;
 
@@ -187,25 +130,26 @@ class DatesList {
 
     // Render Dates List
     listDatesRender() {
-        const listDates = document.querySelector('.' + this.class.dateList);
+        const listDates = $('.' + this.class.dateList);
+
         if (!listDates) {
             return -1;
         }
 
-        this.dates.forEach(date => {
-            if (this.compareDate(date)) {
+        this.dates
+            .filter(d => new Date(d.new_date) >= new Date().setHours(0, 0, 0, 0) - 1)
+            .sort((a, b) => new Date(a.new_date) - new Date(b.new_date))
+            .map(d => d.new_date)
+            .forEach(date => {
                 var token = $('meta[name="csrf-token"]').attr('content');
-                const item = document.createElement('LI');
-                item.innerHTML = `
-                <span class="d-flex">${date.new_date} [
-                  <form class="delete-form" method="POST">
-       <input type="hidden" name="_token" value="${token}">
-        <input type="hidden" name="blockedDate" value="${date.new_date}">
-        <button type="submit" class="delete-button btn btn-link">usuń</button>
-    </form>]</span>`;
-                listDates.append(item);
-            }
-        });
+                listDates.append(`<li><span class="d-flex">${date.split('-').reverse().join('/')} [
+                    <form class="delete-form" method="POST">
+                        <input type="hidden" name="_token" value="${token}">
+                        <input type="hidden" name="blockedDate" value="${date}">
+                        <button type="submit" class="delete-button btn btn-link" style="padding: 0 4px; margin-top:-5px;">usuń</button>
+                    </form>]</span>
+                </li>`);
+            })
     }
 
 
@@ -214,104 +158,70 @@ class DatesList {
      */
     createItemsInputs = () => {
         // an array of inputs for selecting new dates that need to be blocked
-        const calendarsBox = [];
-        let itemCount = 0;
+        var itemCount = 0;
 
         /* CREATE ITEMS INPUTS */
-        const buttonAddNewDate = document.querySelector('.calendar__add_date_btn');
-        buttonAddNewDate.addEventListener('click', e => {
+        $('.calendar__add_date_btn').on('click', e => {
             e.preventDefault();
             itemCount++;
 
-            const template = `<label class="calendar__add_date_label" data-add_date_id="${itemCount}">
+            var item = $('<li>', { class: 'calendar__add_date_item' });
+
+            item.append(`<label class="calendar__add_date_label" data-add_date_id="${itemCount}">
                 <input class="calendar__add_date_input inpt_trgt_ind_${itemCount}" name="field_date_${itemCount}" type="text" placeholder="wybierz datę..."  autocomplete="off" >
-                <div class="calendar__add_date_preloader hidden"><div></div><div></div><div></div><div></div></div>
             </label>
-            <div class="calendar__add_date_select calendar_box_${itemCount}"></div>`;
+            <div class="calendar__add_date_select calendar_box_${itemCount}"></div>`);
 
-            const item = document.createElement('LI');
-            item.classList.add('calendar__add_date_item');
-            item.innerHTML = template;
+            $('.calendar__add_date_list').append(item);
 
-            const inputsList = document.querySelector('.calendar__add_date_list');
-            inputsList.append(item);
+            item.find('input').on('focus', createCalendar);
+            item.find('input').on('focus', showCalendar);
 
-            item.querySelector('input').addEventListener('focus', createCalendar.bind(this, fData), {once: true});
-            item.querySelector('input').addEventListener('focus', showCalendar);
         })
 
-        const createCalendar = (data, event) => {
+        const createCalendar = event => {
             event.preventDefault();
-            const calendarBox = event.target.parentElement.nextElementSibling;
-            calendarsBox.push(calendarBox);
-            const value = event.target.value;
 
-            this.toggleClassList(calendarBox, false);
+            if ( ! $(event.target).attr('data-is-calendar') ) {
+                const calendarBox = $(event.target).parent().next();
+                this.calendarsWatch.list.push(calendarBox);
 
-            const calend = new CalendarIk({
-                dates: this.dates,
-                calendarWrapperClass: '.' + calendarBox.classList[1],
-            });
-            onDateClick(calendarBox, '.' + event.target.classList[1], '.' + calendarBox.classList[1]);
+                this.toggleClassList(calendarBox, false);
+                new CalendarIk({
+                    dates: this.dates,
+                    calendarWrapperClass: '.' + calendarBox.attr('class').split(' ')[1],
+                });
+                $(event.target).attr('data-is-calendar', true );
+            }
         }
 
-        // Function ONClick Date Calendar
-        const onDateClick = (calendarBox, inputSelector, calendSelector) => {
-
-            const dates = document.querySelectorAll(calendSelector + ' .calendar_date');
-
-            dates.forEach(date => {
-                if (!date.classList.contains('disabled')) {
-
-                    date.addEventListener('click', event => {
-                        dates.forEach(d => d.classList.remove('select'));
-                        date.classList.add('select');
-
-                        const $input = document.querySelector(inputSelector);
-                        if ($input) {
-                            $input.value = date.dataset.calendarDate;
-                        }
-
-                        this.toggleClassList(calendarBox);
-                    })
-                }
-            });
-
+        const showCalendar = event => {
+            const calendarBox = $(event.target).parent().next();
+            this.calendarsWatch.list.push(calendarBox);
+            this.toggleClassList(calendarBox, false);
         }
 
         // hide Calendars
         (() => {
-            document.addEventListener('click', event => {
-                if (!(event.target.closest('.calendar__add_date_item'))) {
-                    while (calendarsBox.length) {
-                        this.toggleClassList(calendarsBox.pop());
+            $(document).on('click', event => {
+                if ( ! $(event.target).closest('.calendar__add_date_item').length ) {
+                    while (this.calendarsWatch.list.length) {
+                        var calendar = this.calendarsWatch.list.pop()
+                        this.toggleClassList(calendar);
                     }
                 }
             })
-        })()
-
-        const showCalendar = event => {
-            const calendarBox = event.target.parentElement.nextElementSibling;
-            calendarsBox.push(calendarBox);
-            this.toggleClassList(calendarBox, false);
-        }
+        })();
     }
 
     // HELPERS
-    compareDate = function (date) {
-        const d = date.new_date.split('/');
-        const date1 = new Date(d[2], d[1] - 1, d[0]);
-        const date2 = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 1, 23, 59, 59, 999);
-        return date1 > date2;
-    }
-
     toggleClassList = (elem, collapse = true) => {
         if (collapse) {
-            elem.classList.add('collapse_calendar');
-            elem.classList.remove('expand_calendar');
+            $(elem).addClass('collapse_calendar');
+            $(elem).removeClass('expand_calendar');
         } else {
-            elem.classList.add('expand_calendar');
-            elem.classList.remove('collapse_calendar');
+            $(elem).addClass('expand_calendar');
+            $(elem).removeClass('collapse_calendar');
         }
     }
 }

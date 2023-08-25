@@ -6,11 +6,24 @@
 body {
   font-family: "Lato", sans-serif;
   color: #716d6e;
-  font-weight: 600;
 }
 body * {
   font-family: "Lato", sans-serif;
   color: #716d6e;
+}
+body strong {
+  font-family: Lato Medium, sans-serif !important;
+}
+body strong * {
+  font-family: Lato Medium, sans-serif !important;
+}
+
+.lato-md {
+  font-family: Lato Medium, sans-serif !important;
+}
+
+.lato-bold {
+  font-family: Lato Bold, sans-serif !important;
 }
 
 /* Animation Delay
@@ -153,7 +166,7 @@ p {
 --------------------------------------------*/
 header {
   height: auto;
-  max-height: 94px;
+  max-height: 108px;
   width: 100%;
   top: 0;
   z-index: 100;
@@ -325,12 +338,13 @@ header.large .brand {
   }
   .header-menu {
     align-items: flex-end;
+    width: 100%;
+    max-width: 300px;
   }
-  .header-menu .nav-collapse ul {
+  .header-menu .navbar-collapse ul {
     background: #ffffff;
-    padding: 20px;
   }
-  .header-menu .nav-collapse ul > li a {
+  .header-menu .navbar-collapse ul > li a {
     padding-left: 0;
     padding-right: 0;
   }
@@ -343,7 +357,9 @@ header.large .brand {
   }
   .reservation-item-mob a.reservation-link {
     display: block;
-    width: 100%;
+    width: auto;
+    margin-left: 0;
+    margin-right: auto;
   }
 }
 @media screen and (max-width: 375px) {
@@ -388,7 +404,19 @@ a:hover {
 /* ------------------------------------------
   RESPONSIVE NAV STYLES
 --------------------------------------------- */
-.nav-collapse ul {
+.navbar-toggleable-sm .navbar-collapse {
+  display: -webkit-box !important;
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+  width: 100%;
+}
+
+.navbar-toggler span {
+  display: none;
+}
+
+.navbar-collapse ul {
   margin: 0;
   padding: 0;
   width: 100%;
@@ -396,21 +424,18 @@ a:hover {
   list-style: none;
 }
 
-.nav-collapse li {
+.navbar-collapse li {
   width: 100%;
   display: block;
 }
 
-.js .nav-collapse {
-  clip: rect(0 0 0 0);
+.js .navbar-collapse {
   max-height: 0;
-  position: absolute;
+  position: relative;
   display: block;
-  overflow: hidden;
-  zoom: 1;
 }
 
-.nav-collapse.opened {
+.navbar-collapse.opened {
   max-height: 9999px;
 }
 
@@ -429,10 +454,10 @@ a:hover {
 }
 
 @media screen and (min-width: 1240px) {
-  .js .nav-collapse {
+  .js .navbar-collapse {
     position: relative;
   }
-  .js .nav-collapse.closed {
+  .js .navbar-collapse.closed {
     max-height: none;
   }
   .nav-toggle {
@@ -540,31 +565,38 @@ ul#countries.active {
   top: 0;
 }
 
-.nav-collapse,
-.nav-collapse * {
+.navbar-collapse,
+.navbar-collapse * {
   -webkit-box-sizing: border-box;
   -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 
-.nav-collapse,
-.nav-collapse ul {
+.navbar-collapse,
+.navbar-collapse ul {
   list-style: none;
   width: 100%;
   float: left;
 }
 
-.js .nav-collapse-0.opened {
-  max-height: 229px !important;
+.js .navbar-collapse.show {
+  max-height: 590px !important;
+  background: #ffffff;
+  top: 60px;
+  width: 100%;
+  right: 0;
+  max-width: 300px;
+  position: absolute;
+  padding: 20px 50px 20px 20px;
 }
 
-.js .nav-collapse-0.opened.dropdown-active {
+.js .navbar-collapse-0.opened.dropdown-active {
   max-height: 9999px !important;
   background: #ffffff;
 }
 
 @media screen and (min-width: 1240px) {
-  .nav-collapse {
+  .navbar-collapse {
     float: right;
     width: auto;
   }
@@ -576,35 +608,36 @@ ul#countries.active {
     margin-top: 75px !important;
   }
 }
-.nav-collapse li {
+.navbar-collapse li {
   float: left;
   width: 100%;
 }
 
 @media screen and (min-width: 1240px) {
-  .nav-collapse li {
+  .navbar-collapse li {
     width: auto;
   }
-  .nav-collapse li.reservation-item-mob {
+  .navbar-collapse li.reservation-item-mob {
     display: none;
   }
 }
-.nav-collapse a {
+.navbar-collapse a {
   text-decoration: none;
   padding: 8px 10px 7px 11px !important;
   color: #151616;
   width: 100%;
   float: left;
+  font-family: Lato Medium, sans-serif !important;
 }
 
-.nav-collapse a:hover {
+.navbar-collapse a:hover {
   color: #555;
   text-decoration: underline;
   background-color: #e7e7e7;
 }
 
-.nav-collapse a:active,
-.nav-collapse li.active a {
+.navbar-collapse a:active,
+.navbar-collapse li.active a {
   border: 2px solid var(--prime, #0074B7);
   color: #716d6e;
   border-radius: 5px;
@@ -615,7 +648,7 @@ ul#countries.active {
   .header-menu {
     margin-left: auto;
   }
-  .nav-collapse a {
+  .navbar-collapse a {
     text-align: center;
     border-top: 0;
     float: left;
@@ -624,31 +657,46 @@ ul#countries.active {
   .main-header {
     max-height: 94px;
   }
-  .main-header .js .nav-collapse-0.opened {
+  .main-header .js .navbar-collapse-0.opened {
     max-height: 100% !important;
     height: 100%;
     background: #fff;
   }
 }
-.nav-collapse ul ul a {
+.navbar-collapse ul ul a {
   background: transparent;
   padding-left: 2em;
 }
 
 @media screen and (min-width: 1240px) {
-  .nav-collapse ul ul a {
+  .navbar-collapse ul ul a {
     display: none;
   }
-  .js .nav-collapse-0.opened {
+  .js .navbar-collapse-0.opened {
     max-height: 100% !important;
   }
 }
 @media screen and (max-width: 1240px) {
-  .nav-toggle {
+  header {
+    height: 100%;
+    max-height: 75px;
+  }
+  .navbar-toggler {
     position: absolute !important;
-    top: 0;
+    top: -5px;
     z-index: 999;
-    right: 0;
+    right: 15px;
+    width: 47px;
+    height: 65px;
+  }
+  nav.navbar-collapse ul, .navbar-collapse ul {
+    display: none;
+  }
+  nav.navbar-collapse.show ul, .navbar-collapse.show ul {
+    display: flex !important;
+  }
+  .navbar-toggler:focus, .navbar-toggler:hover {
+    outline: none;
   }
 }
 /* ------------------------------------------
@@ -673,12 +721,12 @@ ul#countries.active {
   float: right;
 }
 
-.nav-toggle:before {
+.navbar-toggler:before {
   color: #000b16; /* Edit this to change the icon color */
-  font: normal 28px/55px "responsivenav"; /* Edit font-size (28px) to change the icon size */
+  font: normal 36px/55px "Fontawesome"; /* Edit font-size (28px) to change the icon size */
   text-transform: none;
   text-align: center;
-  position: absolute;
+  position: relative;
   content: "≡"; /* Hamburger icon */
   text-indent: 0;
   speak: none;
@@ -687,8 +735,9 @@ ul#countries.active {
   top: 0;
 }
 
-.nav-toggle.active:before {
-  font-size: 24px;
+.navbar-toggler.active:before {
+  font-size: 32px;
+  line-height: 38px;
   content: "x"; /* Close icon */
 }
 
@@ -1278,11 +1327,11 @@ header.large .brand {
 @media screen and (max-width: 560px) {
   #header-block #headblockCarousel .headblock-title {
     font-size: 35px;
-    font-weight: 400;
+    font-weight: 600;
   }
   #header-block #headblockCarousel .headblock-subtitle {
     display: block;
-    word-break: break-all;
+    word-break: break-word;
     font-size: 25px;
   }
 }
@@ -1318,7 +1367,7 @@ header.large .brand {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 .about-us .about-us-content p {
@@ -1389,7 +1438,7 @@ h2.prices {
   font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 110%;
   margin-bottom: 0;
 }
@@ -1433,13 +1482,13 @@ h2.prices {
 #prices .box_content .bottom-price-box small {
   font-size: 30px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
 #prices .box_content h2 {
   color: var(--prime, #0074B7);
-  font-family: Lato, sans-serif;
+  font-family: Lato Medium, sans-serif !important;
   font-size: 40px;
   font-style: normal;
   font-weight: 700;
@@ -1452,7 +1501,7 @@ h2.prices {
   font-family: Lato, sans-serif;
   font-size: 25px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   margin-bottom: 0;
 }
@@ -2220,7 +2269,7 @@ h2.prices {
   font-family: Lato Medium, sans-serif !important;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%;
   color: var(--black, #151616);
   text-align: left;
@@ -2292,12 +2341,12 @@ h2.prices {
 }
 #header-block .reservation .reservation-block-message {
   margin-bottom: 0;
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 20px;
+  padding: 20px;
+  background-color: #0074B7;
+  border-radius: 10px 10px 0 0;
 }
 #header-block .reservation .reservation-block-message p {
-  color: var(--black, #151616);
+  color: #fff;
   text-align: center;
   font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
@@ -2308,13 +2357,15 @@ h2.prices {
   margin-bottom: 0;
 }
 #header-block .reservation .reservation-block-message .reservation-blocked-dates {
-  color: var(--prime, #0074B7);
+  color: #fff;
   font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
   font-weight: 700;
   line-height: 20.594px;
   text-transform: capitalize;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 #header-block form#orderForm {
@@ -2344,7 +2395,7 @@ h2.prices {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 
@@ -2745,7 +2796,7 @@ h2.prices {
   text-align: center;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   margin: 0 0 25px 0;
   padding: 0;
@@ -2789,7 +2840,7 @@ h2.prices {
   font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 110%; /* 55px */
   margin-bottom: 30px;
 }
@@ -2869,7 +2920,7 @@ h2.prices {
   font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   display: flex;
   flex-flow: column;
@@ -2883,7 +2934,7 @@ h2.prices {
   font-family: Lato, sans-serif;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 #contacts-us-section h3 {
@@ -2909,7 +2960,7 @@ h2.prices {
   font-family: Lato, sans-serif;
   font-size: 12px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 16.8px */
   text-transform: capitalize;
   padding-left: 60px;
@@ -2936,7 +2987,7 @@ h2.prices {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 #contacts-us-section form input[type=checkbox] {
@@ -3040,7 +3091,7 @@ h2.prices {
   font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   margin: 0 auto 20px auto;
   padding: 0;
@@ -3094,7 +3145,7 @@ h2.prices {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
   text-align: left;
   grid-row: 2;
@@ -3170,7 +3221,7 @@ h2.prices {
   color: #ffffff;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
 }
 
@@ -3324,7 +3375,7 @@ footer .bottom-footer .rights-reserved {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 footer .bottom-footer .created-by {
@@ -3333,7 +3384,7 @@ footer .bottom-footer .created-by {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 footer .bottom-footer .created-by a {
@@ -3342,7 +3393,7 @@ footer .bottom-footer .created-by a {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%;
 }
 footer .foot-left {
@@ -3478,7 +3529,7 @@ footer .footer-nav li a {
   font-family: Lato, sans-serif;
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 20px; /* 125% */
   padding: 0;
 }
@@ -3726,7 +3777,7 @@ footer .footer-nav li a:hover {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 #checkoutModal .info-box .info-box-description span {
@@ -3797,7 +3848,7 @@ footer .footer-nav li a:hover {
   font-family: Lato, sans-serif;
   font-size: 12px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 16.8px */
   text-transform: capitalize;
 }
@@ -3806,7 +3857,7 @@ footer .footer-nav li a:hover {
   font-family: Lato, sans-serif;
   font-size: 12px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 16.8px */
   text-transform: capitalize;
 }
@@ -3827,7 +3878,7 @@ footer .footer-nav li a:hover {
   font-family: Lato, sans-serif;
   font-size: 18px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 25.2px */
 }
 
@@ -3904,7 +3955,7 @@ form input[type=checkbox]:checked + label:before {
   font-family: Lato, sans-serif;
   font-size: 12px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 140%; /* 16.8px */
   text-transform: capitalize;
 }
@@ -4424,6 +4475,9 @@ form .subtitle {
   .navbar-collapse.collapse {
     display: none !important;
   }
+  .navbar-collapse.collapse.show {
+    display: flex !important;
+  }
   .navbar-nav {
     float: none !important;
     margin-top: 7.5px;
@@ -4744,6 +4798,14 @@ p span.price {
 #regulamin ul {
   padding-left: 20px;
 }
+#regulamin ul > li {
+  color: var(--black, #151616) !important;
+  text-align: left;
+}
+#regulamin ol > li {
+  text-align: left;
+  color: var(--black, #151616) !important;
+}
 #regulamin.expanded {
   max-height: 307px;
   overflow: hidden;
@@ -4760,7 +4822,7 @@ p span.price {
   font-family: Lato Medium, sans-serif !important;
   font-size: 50px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 600;
   line-height: normal;
   margin-bottom: 30px;
 }

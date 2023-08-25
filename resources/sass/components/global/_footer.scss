@@ -56,7 +56,6 @@ footer {
         display: flex;
         flex-flow: column;
         align-items: flex-start;
-        padding-left: 0;
 
         .foot-logo {
             width: 100%;
@@ -79,7 +78,7 @@ footer {
                 color: var(--white, #FFF);
 
                 /* H3 bold */
-                font-family: Lato Bold, sans-serif !important;
+                font-family: Lato, sans-serif;
                 font-size: 30px;
                 font-style: normal;
                 font-weight: 900;
@@ -91,7 +90,7 @@ footer {
                 color: var(--white, #FFF);
 
                 /* H4 */
-                font-family: Lato Medium, sans-serif !important;
+                font-family: Lato, sans-serif;
                 font-size: 20px;
                 font-style: normal;
                 font-weight: 700;
@@ -106,13 +105,6 @@ footer {
                 width: 100%;
                 max-width: 100%;
                 text-align: center;
-                color: var(--prime, #0074B7);
-                font-family: Lato, sans-serif;
-                font-size: 16px;
-                font-style: normal;
-                font-weight: 700;
-                line-height: 20px; /* 125% */
-                text-transform: capitalize;
             }
         }
     }
@@ -120,7 +112,7 @@ footer {
     .foot-label {
         color: var(--black, #151616);
         /* H4 */
-        font-family: Lato Medium, sans-serif !important;
+        font-family: Lato, sans-serif;
         font-size: 20px;
         font-style: normal;
         font-weight: 700;
@@ -138,7 +130,7 @@ footer {
         .contact-name {
             color: #888;
             /* H4 */
-            font-family: Lato Medium, sans-serif !important;
+            font-family: Lato, sans-serif;
             font-size: 16px;
             font-style: normal;
             font-weight: 700;
@@ -156,13 +148,6 @@ footer {
             font-style: normal;
             font-weight: 300;
             line-height: normal;
-
-            a {
-                font-size: 20px;
-                font-style: normal;
-                font-weight: 700;
-                color: var(--prime, #0074B7) !important;
-            }
 
             &:nth-child(3) {
                 display: flex;
@@ -309,16 +294,6 @@ footer .footer-nav li a:hover {
             }
 
         }
-    }
-}
-
-@media screen and (max-width: 560px) {
-    footer .footer-nav ul > li {
-        margin-left: 15px;
-        margin-right: 15px;
-    }
-    footer .footer-nav {
-        margin-bottom: 0;
     }
 }
 
