@@ -42,7 +42,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
+    <link rel="stylesheet" href="{{ asset('css/navbar-fixed.css') }}">
+{{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
 
     {{--    @yield('styles')--}}
 
@@ -61,9 +62,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 {{--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>--}}
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
-<script src="{{ asset('js/navbar/scroll.js') }}" async></script>
-<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
+<script src="{{ asset('js/navbar/navbar-fixed.js') }}" async></script>
+{{--<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>--}}
+{{--<script src="{{ asset('js/navbar/scroll.js') }}" async></script>--}}
+{{--<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>--}}
 
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.lang.pl.js') }}"></script>
@@ -123,25 +125,25 @@
             // }
 
             var datesArray = <?php echo json_encode($blockedDates); ?>;
-
             var currentDate = new Date();
 
             // Filter out old dates
-            var excludedDates = datesArray.filter(function(dateObj) {
-                var dateParts = dateObj['new_date'].split('/');
-                var rawDate = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]); // Month is zero-based
+            var filteredDatesArray = datesArray.filter(function (dateObj) {
+                var rawDate = new Date(dateObj['new_date']);
                 return rawDate >= currentDate;
             });
 
-            // Extract the new_date values from the excluded dates
-            var excludedDateStrings = excludedDates.map(function(dateObj) {
-                return dateObj['new_date'];
+            // Convert filtered dates to custom format 'dd/mm/yyyy'
+            var formattedDates = filteredDatesArray.map(function (dateObj) {
+                var rawDate = new Date(dateObj['new_date']);
+                return ("0" + rawDate.getDate()).slice(-2) + "/" + ("0" + (rawDate.getMonth() + 1)).slice(-2) + "/" + rawDate.getFullYear();
             });
-            var joinedExcludedDates = excludedDateStrings.join(', ');
 
-            console.log(joinedExcludedDates);
+            // Join the formatted dates with commas
+            var joinedDates = formattedDates.join(', ');
+
             {{--// Insert the joined dates into the div with class 'reservations-list'--}}
-            $('.reservation-blocked-dates').text(joinedExcludedDates);
+            $('.reservation-blocked-dates').text(joinedDates);
             /*
              * Create Wrapper For Calendar
              */

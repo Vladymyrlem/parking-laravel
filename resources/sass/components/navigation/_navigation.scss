@@ -39,8 +39,19 @@ a:hover {
 /* ------------------------------------------
   RESPONSIVE NAV STYLES
 --------------------------------------------- */
+.navbar-toggleable-sm .navbar-collapse {
+    display: -webkit-box !important;
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
+    width: 100%;
+}
 
-.nav-collapse ul {
+.navbar-toggler span {
+    display: none;
+}
+
+.navbar-collapse ul {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -48,21 +59,18 @@ a:hover {
     list-style: none;
 }
 
-.nav-collapse li {
+.navbar-collapse li {
     width: 100%;
     display: block;
 }
 
-.js .nav-collapse {
-    clip: rect(0 0 0 0);
+.js .navbar-collapse {
     max-height: 0;
-    position: absolute;
+    position: relative;
     display: block;
-    overflow: hidden;
-    zoom: 1;
 }
 
-.nav-collapse.opened {
+.navbar-collapse.opened {
     max-height: 9999px;
 }
 
@@ -81,10 +89,10 @@ a:hover {
 }
 
 @media screen and (min-width: 1240px) {
-    .js .nav-collapse {
+    .js .navbar-collapse {
         position: relative;
     }
-    .js .nav-collapse.closed {
+    .js .navbar-collapse.closed {
         max-height: none;
     }
     .nav-toggle {
@@ -205,31 +213,38 @@ ul#countries {
     top: 0;
 }
 
-.nav-collapse,
-.nav-collapse * {
+.navbar-collapse,
+.navbar-collapse * {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
 
-.nav-collapse,
-.nav-collapse ul {
+.navbar-collapse,
+.navbar-collapse ul {
     list-style: none;
     width: 100%;
     float: left;
 }
 
-.js .nav-collapse-0.opened {
-    max-height: 229px !important
+.js .navbar-collapse.show {
+    max-height: 590px !important;
+    background: #ffffff;
+    top: 60px;
+    width: 100%;
+    right: 0;
+    max-width: 300px;
+    position: absolute;
+    padding: 20px 50px 20px 20px;
 }
 
-.js .nav-collapse-0.opened.dropdown-active {
+.js .navbar-collapse-0.opened.dropdown-active {
     max-height: 9999px !important;
     background: #ffffff;
 }
 
 @media screen and (min-width: 1240px) {
-    .nav-collapse {
+    .navbar-collapse {
         float: right;
         width: auto;
     }
@@ -243,13 +258,13 @@ ul#countries {
     }
 }
 
-.nav-collapse li {
+.navbar-collapse li {
     float: left;
     width: 100%;
 }
 
 @media screen and (min-width: 1240px) {
-    .nav-collapse li {
+    .navbar-collapse li {
         width: auto;
 
         &.reservation-item-mob {
@@ -258,7 +273,7 @@ ul#countries {
     }
 }
 
-.nav-collapse a {
+.navbar-collapse a {
     text-decoration: none;
     padding: 8px 10px 7px 11px !important;
     color: #151616;
@@ -266,14 +281,14 @@ ul#countries {
     float: left;
 }
 
-.nav-collapse a:hover {
+.navbar-collapse a:hover {
     color: #555;
     text-decoration: underline;
     background-color: #e7e7e7;
 }
 
-.nav-collapse a:active,
-.nav-collapse li.active a {
+.navbar-collapse a:active,
+.navbar-collapse li.active a {
     border: 2px solid var(--prime, #0074B7);
     color: #716d6e;
     border-radius: 5px;
@@ -284,7 +299,7 @@ ul#countries {
     .header-menu {
         margin-left: auto;
     }
-    .nav-collapse a {
+    .navbar-collapse a {
         text-align: center;
         border-top: 0;
         float: left;
@@ -293,7 +308,7 @@ ul#countries {
     .main-header {
         max-height: 94px;
 
-        .js .nav-collapse-0.opened {
+        .js .navbar-collapse-0.opened {
             max-height: 100% !important;
             height: 100%;
             background: #fff;
@@ -301,26 +316,42 @@ ul#countries {
     }
 }
 
-.nav-collapse ul ul a {
+.navbar-collapse ul ul a {
     background: transparent;
     padding-left: 2em;
 }
 
 @media screen and (min-width: 1240px) {
-    .nav-collapse ul ul a {
+    .navbar-collapse ul ul a {
         display: none;
     }
-    .js .nav-collapse-0.opened {
+    .js .navbar-collapse-0.opened {
         max-height: 100% !important;
     }
+
 }
 
 @media screen and (max-width: 1240px) {
-    .nav-toggle {
+    header {
+        height: 100%;
+        max-height: 75px;
+    }
+    .navbar-toggler {
         position: absolute !important;
-        top: 0;
+        top: -5px;
         z-index: 999;
-        right: 0;
+        right: 15px;
+        width: 47px;
+        height: 65px;
+    }
+    nav.navbar-collapse ul, .navbar-collapse ul {
+        display: none;
+    }
+    nav.navbar-collapse.show ul, .navbar-collapse.show ul {
+        display: flex !important;
+    }
+    .navbar-toggler:focus, .navbar-toggler:hover {
+        outline: none;
     }
 }
 
@@ -351,12 +382,12 @@ ul#countries {
     float: right;
 }
 
-.nav-toggle:before {
+.navbar-toggler:before {
     color: #000b16; /* Edit this to change the icon color */
-    font: normal 28px/55px "responsivenav"; /* Edit font-size (28px) to change the icon size */
+    font: normal 36px/55px "Fontawesome"; /* Edit font-size (28px) to change the icon size */
     text-transform: none;
     text-align: center;
-    position: absolute;
+    position: relative;
     content: "\2261"; /* Hamburger icon */
     text-indent: 0;
     speak: none;
@@ -365,7 +396,8 @@ ul#countries {
     top: 0;
 }
 
-.nav-toggle.active:before {
-    font-size: 24px;
+.navbar-toggler.active:before {
+    font-size: 32px;
+    line-height: 38px;
     content: "\78"; /* Close icon */
 }

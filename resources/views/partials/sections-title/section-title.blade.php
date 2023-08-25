@@ -12,8 +12,8 @@
             <thead>
             <tr class="info">
                 <th>ID</th>
-                <th>Title</th>
-                <th>SubTitle</th>
+                <th>Nagłówek</th>
+                <th>Podtytuł</th>
                 <th>Slug</th>
             </tr>
             </thead>
@@ -25,8 +25,8 @@
                     <td> {{$title->subtitle}} </td>
                     <td> {{$title->slug}} </td>
                     <td width="220px">
-                        <button class="btn btn-warning btn-detail open_section_title_modal" value="{{$title->id}}">Edit Title</button>
-                        <button class="btn btn-danger btn-delete delete-section-title" value="{{$title->id}}">Delete Title</button>
+                        <button class="btn btn-warning btn-detail open_section_title_modal" value="{{$title->id}}">Edycja nagłówku</button>
+                        <button class="btn btn-danger btn-delete delete-section-title" value="{{$title->id}}">Usuń nagłówek</button>
                     </td>
                 </tr>
             @endforeach

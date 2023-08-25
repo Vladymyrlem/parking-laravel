@@ -72,6 +72,13 @@ $fa-font-path: '../webfonts';
 
 .main-header {
     max-height: 65px;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: nowrap;
+
+    .brand-link {
+        flex: 0 0 auto;
+    }
 
     .js .nav-collapse {
     }
@@ -79,6 +86,7 @@ $fa-font-path: '../webfonts';
     .nav-collapse {
         width: 100%;
         overflow: initial !important;
+        right: 0;
 
         ul.menu-list {
             display: flex;
@@ -115,10 +123,63 @@ $fa-font-path: '../webfonts';
     box-shadow: none;
 }
 
-@media screen and (max-width: 1240px) {
-    .main-header {
+.user-menu.show {
+    position: absolute !important;
+}
 
-        .nav-collapse {
+.user-link {
+    svg {
+        transform: rotate(95deg);
+        margin-top: -6px;
+    }
+}
+
+.user-link:active, .user-link:focus {
+    outline: none !important;
+    border: none !important;
+}
+
+.navbar-toggler {
+    display: none;
+}
+
+@media screen and (min-width: 1240px) {
+    .js .navbar-collapse {
+        display: block !important;
+        height: auto;
+        max-height: 100%;
+        width: 100%;
+        max-width: 100%;
+        flex: 1;
+
+        ul {
+            display: flex;
+            flex-flow: row;
+
+            > li:first-child {
+                margin-left: auto;
+            }
+        }
+    }
+    .user-menu.show {
+        position: absolute !important;
+    }
+}
+
+@media screen and (max-width: 1240px) {
+    .user-menu.show {
+        position: relative !important;
+        width: 100%;
+        float: left !important;
+    }
+    .navbar-toggler {
+        display: block !important;
+    }
+    .main-header {
+        height: 100%;
+        max-height: 75px;
+
+        .navbar-collapse {
             ul {
                 flex-flow: column;
             }

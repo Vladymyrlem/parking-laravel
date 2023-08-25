@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
+    {{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
 
@@ -43,6 +43,12 @@
             opacity: 0;
         }
 
+        .navbar-toggler.opened:before {
+            font-size: 32px;
+            line-height: 38px;
+            content: "\78"; /* Close icon */
+        }
+
         nav ul > li a {
             height: auto;
         }
@@ -53,22 +59,24 @@
 <div class="wrapper">
 
     <!-- Navbar -->
-    <header class="main-header navbar navbar-expand navbar-white navbar-light">
+    <header class="main-header navbar">
         <a href="/admin" class="brand-link logo">
             <img src="{{ asset('images/parking-logo.png') }}"
                  alt="Parking Rondo Logo"
                  class="brand-image"
                  style="opacity: 1">
         </a>
-        <nav class="nav-collapse nav-collapse-0 closed" style="transition: max-height 284ms ease 0s;
-position: relative;" aria-hidden="true">
-            <ul class="menu-list">
-                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Orders</a></li>
+        <button class="navbar-toggler position-relative collapsed" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent"
+                aria-expanded="false" aria-label="Toggle navigation">
+        </button>
+        <nav class="navbar-collapse justify-content-end collapse" id="navbarContent" aria-expanded="false" style="">
+            <ul class="navbar-nav">
+                <li class="menu-item"><a class="nav-link scroll-to" href="#orders-table" data-scroll>Zamowienia</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#calendar" data-scroll>Kalendarz</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#about-us" data-scroll>O Nas</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#prices" data-scroll>Cennik</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#info" data-scroll>Info</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Reviews</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#reviews" data-scroll>Opinia</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Sekcja nagłówków</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Zalety</a></li>
@@ -76,6 +84,14 @@ position: relative;" aria-hidden="true">
                 <li class="nav-item dropdown ml-auto">
                     <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">
                         {{ Auth::user()->name }}
+                        <svg class="ml-2" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M13.3538 6.85378L8.35378 11.8538C8.30735 11.9003 8.2522 11.9372 8.1915 11.9623C8.13081 11.9875 8.06574 12.0004 8.00003 12.0004C7.93433 12.0004 7.86926 11.9875 7
+                            .80856 11.9623C7.74786 11.9372 7.69272 11.9003 7.64628 11.8538L2.64628 6.85378C2.55246 6.75996 2.49976 6.63272 2.49976 6.50003C2.49976 6.36735 2.55246 6.2401 2.64628 6
+                            .14628C2.7401 6.05246 2.86735 5.99976 3.00003 5.99976C3.13272 5.99976 3.25996 6.05246 3.35378 6.14628L8.00003 10.7932L12.6463 6.14628C12.6927 6.09983 12.7479 6.06298 12
+                            .8086 6.03784C12.8693 6.0127 12.9343 5.99976 13 5.99976C13.0657 5.99976 13.1308 6.0127 13.1915 6.03784C13.2522 6.06298 13.3073 6.09983 13.3538 6.14628C13.4002 6.19274 13.4371 6.24789 13.4622 6.30859C13.4874 6.36928 13.5003 6.43434 13.5003 6.50003C13.5003 6.56573 13.4874 6.63079 13.4622 6.69148C13.4371 6.75218 13.4002 6.80733 13.3538 6.85378Z"
+                                  fill="#000"/>
+                        </svg>
+
                     </a>
                     <div class="dropdown-menu dropdown-menu-right user-menu" style="left: inherit; right: 0px;">
                         <a href="{{ route('profile.show') }}" class="dropdown-item">
@@ -189,9 +205,10 @@ position: relative;" aria-hidden="true">
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
 <script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
-<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>
-<script src="{{ asset('js/navbar/scroll.js') }}" async></script>
-<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>
+{{--<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>--}}
+{{--<script src="{{ asset('js/navbar/scroll.js') }}" async></script>--}}
+{{--<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>--}}
+<script src="{{ asset('js/navbar/navbar-fixed.js') }}" async></script>
 <script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 <script src="{{ asset('js/bootstrap-table-pl-PL.js') }}"></script>
@@ -309,7 +326,13 @@ position: relative;" aria-hidden="true">
             toolbar: '#customToolbar'
         });
     });
+    var $navbarToggler = $('.navbar-toggler');
 
+    $navbarToggler.on('click', function (e) {
+        $(this).toggleClass('active opened');
+        $('.js .navbar-collapse, .navbar-collapse').toggleClass('open show');
+
+    })
 
 </script>
 <script>

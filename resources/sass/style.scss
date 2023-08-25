@@ -5,12 +5,27 @@
 body {
     font-family: 'Lato', sans-serif;
     color: #716d6e;
-    font-weight: 600;
 
     * {
         font-family: 'Lato', sans-serif;
         color: #716d6e;
     }
+
+    strong {
+        font-family: Lato Medium, sans-serif !important;
+
+        * {
+            font-family: Lato Medium, sans-serif !important;
+        }
+    }
+}
+
+.lato-md {
+    font-family: Lato Medium, sans-serif !important;
+}
+
+.lato-bold {
+    font-family: Lato Bold, sans-serif !important;
 }
 
 @import "components/animation";
@@ -751,7 +766,7 @@ header.large .brand {
     font-family: Lato, sans-serif;
     font-size: 18px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 140%; /* 25.2px */
     span {
         color: #000;
@@ -823,7 +838,7 @@ header.large .brand {
     font-family: Lato, sans-serif;
     font-size: 12px;
     font-style: normal;
-    font-weight: 400;
+    font-weight: 600;
     line-height: 140%; /* 16.8px */
     text-transform: capitalize;
 
@@ -832,7 +847,7 @@ header.large .brand {
         font-family: Lato, sans-serif;
         font-size: 12px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: 140%; /* 16.8px */
         text-transform: capitalize;
     }
@@ -856,7 +871,7 @@ header.large .brand {
         font-family: Lato, sans-serif;
         font-size: 18px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: 140%; /* 25.2px */
     }
 }
@@ -938,7 +953,7 @@ form input[type=checkbox]:checked + label:before {
                 font-family: Lato, sans-serif;
                 font-size: 12px;
                 font-style: normal;
-                font-weight: 400;
+                font-weight: 600;
                 line-height: 140%; /* 16.8px */
                 text-transform: capitalize;
             }
@@ -1566,6 +1581,10 @@ form .subtitle {
 
     .navbar-collapse.collapse {
         display: none !important;
+
+        &.show {
+            display: flex !important;
+        }
     }
 
     .navbar-nav {
@@ -1941,7 +1960,7 @@ p span.price {
         font-family: Lato Medium, sans-serif !important;
         font-size: 50px;
         font-style: normal;
-        font-weight: 400;
+        font-weight: 600;
         line-height: normal;
         margin-bottom: 30px;
     }

@@ -183,10 +183,12 @@ header.large .brand {
     }
     .header-menu {
         align-items: flex-end;
+        width: 100%;
+        max-width: 300px;
 
-        .nav-collapse ul {
+        .navbar-collapse ul {
             background: #ffffff;
-            padding: 20px;
+            //padding: 20px;
 
             > li a {
                 padding-left: 0;
@@ -203,7 +205,9 @@ header.large .brand {
 
         a.reservation-link {
             display: block;
-            width: 100%;
+            width: auto;
+            margin-left: 0;
+            margin-right: auto;
         }
     }
 }

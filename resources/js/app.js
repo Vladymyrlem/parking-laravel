@@ -523,20 +523,20 @@ jQuery(function () {
 
 jQuery(window).on('load', function () {
 
-    $('.scrollup, .navbar-brand').click(function () {
-        var new_hash = $(this).attr('href');
-        $("html, body").animate({scrollTop: 0}, 'slow', function () {
-            $("nav li a").removeClass('active');
-            var hash = $(location).attr('hash');
-            if (!hash) {
-                var new_anchor = $(location).attr('href') + new_hash;
-            } else {
-                var new_anchor = $(location).attr('href').replace(hash, new_hash);
-            }
-            $(location).attr('href', new_anchor);
-        });
-        return false;
-    });
+    // $('.scrollup, .navbar-brand').click(function () {
+    //     var new_hash = $(this).attr('href');
+    //     $("html, body").animate({scrollTop: 0}, 'slow', function () {
+    //         $("nav li a").removeClass('active');
+    //         var hash = $(location).attr('hash');
+    //         if (!hash) {
+    //             var new_anchor = $(location).attr('href') + new_hash;
+    //         } else {
+    //             var new_anchor = $(location).attr('href').replace(hash, new_hash);
+    //         }
+    //         $(location).attr('href', new_anchor);
+    //     });
+    //     return false;
+    // });
     $(".scroll-to").click(function (event) {
         $('.modal').modal('hide');
         var position = $(document).scrollTop();
@@ -559,22 +559,22 @@ jQuery(window).on('load', function () {
         return false;
     });
 
-    var hash = $(location).attr('hash');
-    if (hash) {
-        console.log('hash: ' + hash);
-        var g = $(hash).offset();
-        if (g) {
-            console.log('hash top: ' + g.top);
-            var h_position = $(document).scrollTop();
-            console.log('h position: ' + h_position);
-            var h_scrollOffset = 300;
-            $('html, body').animate({scrollTop: g.top - h_scrollOffset}, 'slow');
-        } else {
-            console.log('no hash offset');
-        }
-    } else {
-        console.log('no hash');
-    }
+    // var hash = $(location).attr('hash');
+    // if (hash) {
+    //     console.log('hash: ' + hash);
+    //     var g = $(hash).offset();
+    //     if (g) {
+    //         console.log('hash top: ' + g.top);
+    //         var h_position = $(document).scrollTop();
+    //         console.log('h position: ' + h_position);
+    //         var h_scrollOffset = 300;
+    //         $('html, body').animate({scrollTop: g.top - h_scrollOffset}, 'slow');
+    //     } else {
+    //         console.log('no hash offset');
+    //     }
+    // } else {
+    //     console.log('no hash');
+    // }
 });
 $(document).ready(function () {
     $('.show-button').click(function () {
@@ -656,8 +656,41 @@ $(document).ready(function () {
 });
 
 
+$(document).ready(function () {
+    var $window = $(window);
+    var $navbarCollapse = $('.navbar-collapse');
+    var $navbarToggler = $('.navbar-toggler');
 
+    function adjustNavbar() {
+        if ($window.width() <= 1240) {
+            // Add classes to show responsive menu
+            // $navbarCollapse.addClass('show');
+            $navbarToggler.addClass('collapsed');
+        } else {
+            // Remove classes to hide responsive menu
+            $navbarCollapse.removeClass('show');
+            $navbarToggler.removeClass('collapsed');
+        }
+    }
 
+    // Initial adjustment on page load
+    adjustNavbar();
+
+    // Adjust the menu on window resize
+    $window.on('resize', adjustNavbar);
+
+    $('.navbar-collapse li.menu-item a').on('click', function (e) {
+        e.preventDefault();
+        $navbarCollapse.removeClass('show');
+        $navbarToggler.removeClass('collapsed');
+        $navbarToggler.removeClass('active');
+    });
+    $navbarToggler.on('click', function (e) {
+        $(this).toggleClass('active');
+        $('.js .navbar-collapse, .navbar-collapse').toggleClass('open');
+
+    })
+});
 
 
 

@@ -67,11 +67,14 @@ section.calendar {
         tbody {
 
             td {
+                background: #0074b7;
+                color: #fff;
                 &.disabled {
-                    color: #fff !important;
-                    background: #FF4C4C;
+                    color: #ff0000 !important;
+                    background: #ffeded;
                     cursor: not-allowed;
                 }
+
                 &.weekend {
                     font-weight: bold;
                     color: #c32525;
@@ -83,6 +86,7 @@ section.calendar {
                         color: #fff !important;
                         background: #EEB1B1;
                     }
+
                     &.weekend {
                         color: #ffc3c3;
                     }
@@ -100,10 +104,12 @@ section.calendar {
 #orderForm {
     position: relative;
 }
+
 #order_pick_up_date,
 #order_drop_off_date {
     width: 140px;
 }
+
 .order_form_wrapper_calendar {
     position: absolute;
     top: 0;
@@ -126,6 +132,7 @@ section.calendar {
     .no_select {
         opacity: .3;
         cursor: not-allowed;
+
         &:hover {
             pointer-events: none;
         }
@@ -142,6 +149,7 @@ section.calendar {
         animation: collapseCalendar .3s ease-in-out;
         animation-fill-mode: forwards;
     }
+
     &.expand_calendar {
         animation: expandCalendar .3s ease-in-out;
         animation-fill-mode: forwards;
@@ -200,12 +208,15 @@ section.calendar {
         &:nth-child(1) {
             animation-delay: -0.45s;
         }
+
         &:nth-child(2) {
             animation-delay: -0.3s;
         }
+
         &:nth-child(3) {
             animation-delay: -0.15s;
         }
+
         &:nth-child(4) {
             animation-delay: -0.45s;
         }

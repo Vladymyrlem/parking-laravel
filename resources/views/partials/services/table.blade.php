@@ -1,5 +1,5 @@
 <div class="col-md-12 mt-1 mb-2">
-    <button type="button" id="btn_add_service" class="btn btn-default mb-3">Add Zalet</button>
+    <button type="button" id="btn_add_service" class="btn btn-default mb-3">Dodać zaletę</button>
 </div>
 <div class="card">
     <div class="card-header text-center font-weight-bold">
@@ -26,10 +26,10 @@
                     </td>
                     <td>
                         <!-- Edit button -->
-                        <button type="button" class="btn btn-primary btn-sm btn-edit open_service_modal" value="{{$post->id}}">Edit</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-edit open_service_modal" value="{{$post->id}}">Edycja</button>
 
                         <!-- Delete button -->
-                        <button type="button" class="btn btn-danger btn-sm" value="{{$post->id}}">Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm" value="{{$post->id}}">Usuń</button>
                     </td>
                 </tr>
             @endforeach
