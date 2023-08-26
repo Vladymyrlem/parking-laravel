@@ -166,7 +166,7 @@ p {
 --------------------------------------------*/
 header {
   height: auto;
-  max-height: 94px;
+  max-height: 108px;
   width: 100%;
   top: 0;
   z-index: 100;
@@ -627,6 +627,7 @@ ul#countries.active {
   color: #151616;
   width: 100%;
   float: left;
+  font-family: Lato Medium, sans-serif !important;
 }
 
 .navbar-collapse a:hover {
@@ -4796,6 +4797,14 @@ p span.price {
 }
 #regulamin ul {
   padding-left: 20px;
+}
+#regulamin ul > li {
+  color: var(--black, #151616) !important;
+  text-align: left;
+}
+#regulamin ol > li {
+  text-align: left;
+  color: var(--black, #151616) !important;
 }
 #regulamin.expanded {
   max-height: 307px;

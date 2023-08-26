@@ -7,3 +7,4 @@ mix.js('resources/js/ajaxscript.js', 'public/js');
 // mix.js('resources/js/navbar/fastclick.js', 'public/js');
 // mix.js('resources/js/navbar/scroll.js', 'public/js');
 // mix.js('resources/js/navbar/fixed-responsive-nav.js', 'public/js');
+// mix.sass('resources/sass/calendar.scss', 'public/css');

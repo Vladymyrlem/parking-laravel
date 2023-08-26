@@ -10554,6 +10554,7 @@ ul#countries.active {
   color: #151616;
   width: 100%;
   float: left;
+  font-family: Lato Medium, sans-serif !important;
 }
 
 .navbar-collapse a:hover {

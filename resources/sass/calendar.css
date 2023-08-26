@@ -32,13 +32,6 @@ section.calendar .calendar__title {
   }
 }
 
-.order_form_wrapper_calendar table {
-  -webkit-box-shadow: 0 56px 147px -41px rgb(0, 10, 15);
-  -moz-box-shadow: 0 56px 147px -41px rgb(0, 10, 15);
-  box-shadow: 0 56px 147px -41px rgb(0, 10, 15);
-  border-radius: 0;
-}
-
 .order_form_wrapper_calendar table,
 .calendar__add_date_select table,
 .calendar__main_calendar table {
@@ -70,14 +63,8 @@ section.calendar .calendar__title {
 .order_form_wrapper_calendar table tbody td,
 .calendar__add_date_select table tbody td,
 .calendar__main_calendar table tbody td {
-  color: #716d6e !important;
-  background: #72cbff;
-}
-.order_form_wrapper_calendar table tbody td:hover,
-.calendar__add_date_select table tbody td:hover,
-.calendar__main_calendar table tbody td:hover {
-  color: #bee6ff !important;
   background: #0074b7;
+  color: #fff;
 }
 .order_form_wrapper_calendar table tbody td.disabled,
 .calendar__add_date_select table tbody td.disabled,
@@ -89,37 +76,28 @@ section.calendar .calendar__title {
 .order_form_wrapper_calendar table tbody td.weekend,
 .calendar__add_date_select table tbody td.weekend,
 .calendar__main_calendar table tbody td.weekend {
+  font-weight: bold;
   color: #c32525;
-}
-.order_form_wrapper_calendar table tbody td.jsCalendar-next, .order_form_wrapper_calendar table tbody td.jsCalendar-previous,
-.calendar__add_date_select table tbody td.jsCalendar-next,
-.calendar__add_date_select table tbody td.jsCalendar-previous,
-.calendar__main_calendar table tbody td.jsCalendar-next,
-.calendar__main_calendar table tbody td.jsCalendar-previous {
-  opacity: 0.4;
-  color: #ffffff !important;
 }
 .order_form_wrapper_calendar table tbody td.jsCalendar-next.disabled, .order_form_wrapper_calendar table tbody td.jsCalendar-previous.disabled,
 .calendar__add_date_select table tbody td.jsCalendar-next.disabled,
 .calendar__add_date_select table tbody td.jsCalendar-previous.disabled,
 .calendar__main_calendar table tbody td.jsCalendar-next.disabled,
 .calendar__main_calendar table tbody td.jsCalendar-previous.disabled {
-  color: #ff0000 !important;
-  background: #ffeded;
+  color: #fff !important;
+  background: #EEB1B1;
 }
 .order_form_wrapper_calendar table tbody td.jsCalendar-next.weekend, .order_form_wrapper_calendar table tbody td.jsCalendar-previous.weekend,
 .calendar__add_date_select table tbody td.jsCalendar-next.weekend,
 .calendar__add_date_select table tbody td.jsCalendar-previous.weekend,
 .calendar__main_calendar table tbody td.jsCalendar-next.weekend,
 .calendar__main_calendar table tbody td.jsCalendar-previous.weekend {
-  font-weight: bold;
-  color: #c32525;
+  color: #ffc3c3;
 }
 .order_form_wrapper_calendar table tbody td.select,
 .calendar__add_date_select table tbody td.select,
 .calendar__main_calendar table tbody td.select {
-  color: #ffffff !important;
-  background: #2a8e00;
+  background: #9CDFFF;
 }
 
 #orderForm {
@@ -134,12 +112,11 @@ section.calendar .calendar__title {
 .order_form_wrapper_calendar {
   position: absolute;
   top: 0;
-  left: 50%;
+  left: 100%;
   z-index: 10;
   display: block;
   width: 298px;
   height: auto;
-  transform: translateX(-50%);
 }
 .order_form_wrapper_calendar.hide {
   display: none;
@@ -157,6 +134,7 @@ section.calendar .calendar__title {
 }
 
 .calendar__add_date_select {
+  padding: 10px;
   overflow: hidden;
   transition: height 10s ease-in-out;
 }
@@ -190,17 +168,12 @@ section.calendar .calendar__title {
   }
 }
 .calendar__add_date_preloader {
+  display: inline-block;
   position: absolute;
-  top: 0;
-  left: 0;
-  display: flex;
-  align-content: center;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  z-index: 1;
-  user-select: none;
+  top: -6px;
+  left: -6px;
+  width: 40px;
+  height: 40px;
 }
 .calendar__add_date_preloader.hidden {
   display: none;
@@ -239,7 +212,6 @@ section.calendar .calendar__title {
   }
 }
 .calendar__date_list_wrapper {
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -252,7 +224,6 @@ section.calendar .calendar__title {
   width: 100%;
 }
 .calendar__date_list_wrapper .calendar__add_date_list {
-  position: relative;
   margin-bottom: 30px;
 }
 .calendar__date_list_wrapper .calendar__add_date_item {
@@ -295,5 +266,3 @@ section.calendar .calendar__title {
 #orderForm .date input, #orderForm .date select, #orderForm .time input, #orderForm .time select {
   cursor: pointer;
 }
-
-/*# sourceMappingURL=calendar.css.map */

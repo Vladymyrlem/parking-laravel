@@ -43,7 +43,7 @@
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('css/navbar-fixed.css') }}">
-{{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
+    {{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
 
     {{--    @yield('styles')--}}
 
@@ -141,12 +141,20 @@
 
             // Join the formatted dates with commas
             var joinedDates = formattedDates.join(', ');
-
-            {{--// Insert the joined dates into the div with class 'reservations-list'--}}
-            $('.reservation-blocked-dates').text(joinedDates);
+            let count_blocked_days = formattedDates.length;
+            let reservation_block = $('.reservation-blocked-dates');
+            if (count_blocked_days >= 1) {
+                {{--// Insert the joined dates into the div with class 'reservations-list'--}}
+                reservation_block.text(joinedDates);
+            } else {
+                reservation_block.hide();
+                $('.reservation-block-message p:first-child').hide();
+            }
             /*
              * Create Wrapper For Calendar
              */
+            // console.log(formattedDates);
+            // console.log(formattedDates.length);
             const ofWrapperCalendar = document.createElement('div');
             ofWrapperCalendar.classList.add(ofWrapperCalendarClassName);
             ofWrapperCalendar.classList.add(ofHideCalendarClassName);

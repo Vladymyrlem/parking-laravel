@@ -1,21 +1,17 @@
 class CalendarIk {
     calendar = null;
     dates = [];
-    ofDateFrom = null;
-    ofDateTo = null;
-    ofInputActive = null;
-    ofInputActiveId = '-1';
+    selectDate = '';
+    selectDateFrom = '';
+    selectDateTo = '';
 
     class = {
         hide: 'hide',
         disabled: 'disabled',
         select: 'select',
-        noSelect: 'no_select',
-        dateFrom: 'day_from',
-        dateTo: 'day_to',
     }
 
-    constructor({...args}) {
+    constructor( args ) {
         this.class.wrapper = args.calendarWrapperClass;
         this.class.calendarTitleName = this.class.wrapper + ' ' + 'table .jsCalendar-title .jsCalendar-title-name';
         this.dates = args.dates;
@@ -51,36 +47,18 @@ class CalendarIk {
         $(element).addClass('calendar_date');
         $(element).attr("data-calendar-date", fDate);
 
+        // Selected Date
+        if ( fDate === this.selectDate || fDate === this.selectDateFrom || fDate === this.selectDateTo ) {
+            $(element).addClass(this.class.select);
+        }
+
         // Disabled Date
         if (this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date) {
             $(element).addClass(this.class.disabled);
         }
 
-        // No Selected Date
-        if (!(this.containsValueInArray(this.dates, fDate) || this.getPreviousDay() >= date)) {
-
-            // Block dates before and after date selection
-            if (this.ofInputActiveId === '0' && this.ofDateTo && date >= this.ofDateTo) {
-                $(element).addClass(this.class.noSelect);
-            }
-            if (this.ofInputActiveId === '1' && this.ofDateFrom && date <= this.ofDateFrom) {
-                $(element).addClass(this.class.noSelect);
-            }
-
-            // Marked selected dates
-            const currDate = date.setHours(0, 0, 0, 0);
-            const dateFrom = this.ofDateFrom?.setHours(0, 0, 0, 0);
-            const dateTo = this.ofDateTo?.setHours(0, 0, 0, 0);
-            if (currDate && dateFrom && currDate === dateFrom) {
-                $(element).addClass(this.class.dateFrom);
-            }
-            if (currDate && dateTo && currDate === dateTo) {
-                $(element).addClass(this.class.dateTo);
-            }
-        }
-
         // weekend
-        if (!info.isCurrent && (date.getDay() === 0 || date.getDay() === 6)) {
+        if (!info.isCurrent) {
             this.setClassNames(date.getDay(), element)
         }
     }
@@ -94,33 +72,6 @@ class CalendarIk {
             $title.innerHTML = parts[0] + '/<span>' + parts[1] + '</span>';
         }
     }
-
-    setActionOnDateClick = (closeAfterSelection = false, classNameClosedCalendar = '') => {
-        $('.calendar_date').each(function () {
-            if (!$(this).hasClass('disabled') && !$(this).hasClass('no_select')) {
-                $(this).on('click', (event) => {
-                    if (this.ofInputActive) {
-                        this.ofInputActive.value = $(this).data('calendarDate');
-                        this.ofInputActive.setAttribute('data-selected-date', $(this).data('calendarDate'));
-                    }
-
-                    if (this.ofInputActiveId === '0') {
-                        this.ofDateFrom = new Date($(this).data('calendarDate'));
-                    }
-                    if (this.ofInputActiveId === '1') {
-                        this.ofDateTo = new Date($(this).data('calendarDate'));
-                    }
-
-                    // Close Calendar After Click Date
-                    if (closeAfterSelection) {
-                        this.calendar._target.addClass(classNameClosedCalendar || this.class.hide);
-                    }
-
-                    this.calendar.refresh();
-                });
-            }
-        });
-    };
 
     // Helpers
     setClassNames = function (index, element) {
@@ -241,7 +192,6 @@ class DatesList {
                     calendarWrapperClass: '.' + calendarBox.attr('class').split(' ')[1],
                 });
                 $(event.target).attr('data-is-calendar', true );
-                onDateClick(calendarBox, '.' + $(event.target).attr('class').split(' ')[1], '.' + calendarBox.attr('class').split(' ')[1]);
             }
         }
 
@@ -249,23 +199,6 @@ class DatesList {
             const calendarBox = $(event.target).parent().next();
             this.calendarsWatch.list.push(calendarBox);
             this.toggleClassList(calendarBox, false);
-        }
-
-        // Function ONClick Date Calendar
-        const onDateClick = (calendarBox, inputSelector, calendSelector) => {
-
-            const dates = $(calendSelector + ' .calendar_date');
-
-            dates.each((i, date) => {
-                if ( ! $(date).hasClass('disabled')) {
-                    $(date).on('click', event => {
-                        dates.each(d => $(d).removeClass('select'));
-                        $(event.target).addClass('select');
-                        $(inputSelector).val($(event.target).attr('data-calendar-date'));
-                        this.toggleClassList(calendarBox);
-                    })
-                }
-            });
         }
 
         // hide Calendars

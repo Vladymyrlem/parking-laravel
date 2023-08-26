@@ -1937,6 +1937,17 @@ p span.price {
 
     ul {
         padding-left: 20px;
+
+        > li {
+            color: var(--black, #151616) !important;
+            text-align: left;
+        }
+    }
+
+    ol > li {
+        text-align: left;
+        color: var(--black, #151616) !important;
+
     }
 
     &.expanded {

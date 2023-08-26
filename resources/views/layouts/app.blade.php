@@ -18,7 +18,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    {{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
+    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.css">
 
@@ -84,7 +84,7 @@
                 <li class="nav-item dropdown ml-auto">
                     <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">
                         {{ Auth::user()->name }}
-                        <svg class="ml-2" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.3538 6.85378L8.35378 11.8538C8.30735 11.9003 8.2522 11.9372 8.1915 11.9623C8.13081 11.9875 8.06574 12.0004 8.00003 12.0004C7.93433 12.0004 7.86926 11.9875 7
                             .80856 11.9623C7.74786 11.9372 7.69272 11.9003 7.64628 11.8538L2.64628 6.85378C2.55246 6.75996 2.49976 6.63272 2.49976 6.50003C2.49976 6.36735 2.55246 6.2401 2.64628 6
                             .14628C2.7401 6.05246 2.86735 5.99976 3.00003 5.99976C3.13272 5.99976 3.25996 6.05246 3.35378 6.14628L8.00003 10.7932L12.6463 6.14628C12.6927 6.09983 12.7479 6.06298 12
@@ -157,21 +157,13 @@
     </aside>
     <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-    </footer>
 </div>
 <!-- ./wrapper -->
 
 <!-- REQUIRED SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 <script type="text/javascript" src="{{ asset('js/jsCalendar/jsCalendar.min.js') }}"></script>
@@ -384,97 +376,85 @@
 @endif
 <script>
     jQuery(function ($) {
-        const url = $('#url').val();
+        var url = $('#url').val();
 
-        window.filterDatesFromToday = function (dates) {
-            const today = new Date().setHours(0, 0, 0, 0);
+        var _reservationDates = <?php echo json_encode($arrayData); ?>;
+        // Array(3) [ {…}, {…}, {…} ]
+        // [ { new_date: "2023-08-24" }, { new_date: "2023-08-25" }, { new_date: "2023-08-26" } ]
 
-            return dates
-                .filter(dateStr => {
-                    const [day, month, year] = dateStr.new_date.split('/');
-                    const date = new Date(`${year}-${month}-${day}`);
-                    return date >= today - 1;
-                })
-                .sort((a, b) => {
-                    var dateA = new Date(a.new_date.split('/').reverse().join('/'));
-                    var dateB = new Date(b.new_date.split('/').reverse().join('/'));
-                    return dateA - dateB;
-                });
-        }
+        var reservationDates = _reservationDates
+            .filter(dateStr => new Date(dateStr.new_date) >= new Date().setHours(0, 0, 0, 0) - 1)
+            .sort((a, b) => new Date(a.new_date) - new Date(b.new_date));
 
-        window.fData = filterDatesFromToday( <?php echo json_encode($arrayData); ?> );
+        console.log( 'start: ', reservationDates )
 
-        window.calendarMain = new CalendarIk({
-            dates: window.fData,
+        var mainCalendar = new CalendarIk({
+            dates: reservationDates,
             calendarWrapperClass: '.calendar__main_calendar',
         });
 
         window.datesList = new DatesList({
-            dates: window.fData,
-            calendar: window.calendarMain.calendar,
+            dates: reservationDates,
+            mainCalendar: mainCalendar,
             dateListClass: 'calendar__date_list',
         });
+
+        $(document).on( 'click', '.calendar__main_calendar .calendar_date ', function (event) {
+            if ( ! $(event.target).hasClass('disabled')) {
+                $('.calendar__add_date_btn').click();
+                $('.calendar__add_date_list').children().last().find('input')//.focus()
+                    .val( $(event.target).attr('data-calendar-date') )
+            }
+        })
+
+        $(document).on( 'click', '.calendar__add_date_item .calendar_date', function (event) {
+            if ( ! $(event.target).hasClass('disabled')) {
+                var $td = $(event.target);
+                var date = $td.attr('data-calendar-date');
+                var $parent = $td.closest('.calendar__add_date_item');
+                var $input = $parent.find('input');
+                $input.val( date )
+                window.datesList.toggleClassList( $td.closest('.calendar__add_date_select') );
+            }
+        })
 
 
         /*
          * SAVE DATES
          */
-        const submitButton = document.querySelector('.js_btn_submit');
-        submitButton.addEventListener('click', event => {
+        $('.js_btn_submit').on('click', event => {
             event.preventDefault();
 
-            const items = document.querySelectorAll('.calendar__add_date_item');
             const selectedDates = {}; // Initialize the selectedDates object
 
-            items.forEach(item => {
-                const input = item.querySelector('input');
-                const value = input?.value;
+            $('.calendar__add_date_item').each( (i, item) => {
+                const input = $(item).find('input');
+                const value = input.val();
 
                 if (!value) return;
 
-                const key = input.getAttribute('name').substr(11); // Extract the key
+                const key = input.attr('name').substr(11); // Extract the key
                 selectedDates[key] = value; // Add key-value pair to selectedDates object
-
-                const new_date = {new_date: value};
-
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
-                    }
-                });
-
-                // SAVE
-                $.ajax({
-                    type: 'POST',
-                    url: url + '/blocked-dates',
-                    data: new_date,
-                    success: function (response) {
-                        console.log(response);
-                        reloadDatesList();
-                    },
-                    error: function (info) {
-                        console.log('Error:', info);
-                    },
-                    beforeSend: function (a, b, c) {
-                        input.nextElementSibling.classList.remove('hidden');
-                    },
-                    complete: function () {
-                        input.nextElementSibling.classList.add('hidden');
-                    },
-                });
             });
 
             // Perform a final AJAX request to send the entire selectedDates object
             $.ajax({
                 type: 'POST',
+                cache: false,
                 url: url + '/store-all-dates', // Replace with the appropriate URL
                 data: {dates: selectedDates, _token: $('meta[name="_token"]').attr('content')},
                 success: function (response) {
-                    console.log(response);
+                    console.log('save 2: ', response);
                     reloadDatesList();
                 },
                 error: function (info) {
                     console.log('Error storing all dates:', info);
+                },
+                beforeSend: function (a, b, c) {
+                    $('.calendar__add_date_preloader').removeClass('hidden');
+                },
+                complete: function () {
+                    $('.calendar__add_date_preloader').addClass('hidden');
                 },
             });
         });
@@ -484,28 +464,31 @@
          * RELOAD DATES
          */
         function reloadDatesList() {
-
             $.ajax({
                 type: 'GET',
+                cache: false,
                 url: url + '/get-updated-dates-list',
                 success: function (response) {
                     if (response.success) {
+                        console.log( response.message )
 
-                        window.fData = window.filterDatesFromToday(response.data.map(d => ({new_date: d})));
+                        const reservationDates = response.data
+                            .filter(d => new Date(d) >= new Date().setHours(0, 0, 0, 0) - 1)
+                            .sort((a, b) => new Date(a) - new Date(b))
+                            .map(d => ({ new_date: d }))
 
-                        window.calendarMain.dates = window.fData;
-                        window.calendarMain.calendar.refresh();
+                        console.log('reservationDates: ', reservationDates)
+                        console.log('calendar: ',  window.datesList )
 
-                        Array.from(document.querySelectorAll('.js_list_blocked_dates li'))
-                            .forEach(elem => elem.remove());
+                        window.datesList.mainCalendar.dates = reservationDates;
+                        window.datesList.mainCalendar.calendar.refresh();
 
-                        Array.from(document.querySelectorAll('.calendar__add_date_list li'))
-                            .forEach(elem => elem.remove());
+                        $('.calendar__date_list li').empty();
+                        $('.calendar__add_date_list li').empty();
 
-                        window.datesList.dates = window.fData;
+                        window.datesList.dates = reservationDates;
                         window.datesList.listDatesRender();
                     }
-                    console.log(response);
                 },
                 error: function (error) {
                     console.error(error);
@@ -518,17 +501,15 @@
          * DELETE DATE
          */
         $(document).on('submit', '.delete-form', function (event) {
-
             event.preventDefault(); // Prevent default form submission behavior
-
-            var form = this;
-            var blockedDate = $(form).find('input[name="blockedDate"]').val(); // Get the blocked date from the form
+            var blockedDate = $(this).find('input[name="blockedDate"]').val(); // Get the blocked date from the form
 
             $.ajax({
-                type: 'DELETE', // Use POST method since you are deleting
-                url: url + '/delete-by-date', // Adjust the route URL
+                type: 'DELETE',
+                cache: false,
+                url: url + '/delete-by-date',
                 data: {
-                    blockedDate: blockedDate, // Send the blocked date to the server
+                    blockedDate: blockedDate,
                     _token: $('meta[name="csrf-token"]').attr('content')
                 },
                 success: function (response) {
@@ -536,7 +517,13 @@
                 },
                 error: function (error) {
                     console.error(error);
-                }
+                },
+                beforeSend: function (a, b, c) {
+                    $('.calendar__add_date_preloader').removeClass('hidden');
+                },
+                complete: function () {
+                    $('.calendar__add_date_preloader').addClass('hidden');
+                },
             });
         });
 

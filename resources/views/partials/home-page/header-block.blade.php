@@ -106,7 +106,7 @@ margin-top: 94px">
                         </div>
                         <div id="validation_client_email" class="validation"></div>
 
-                        <button type="submit" id="order_submit_btn" class="submit" disabled>dokończ rezerwację</button>
+                        <button type="submit" id="order_submit_btn" class="submit lato-bold" disabled>dokończ rezerwację</button>
                     </form>
                 </div>
                 @include('partials.modal.reservation-modal')
