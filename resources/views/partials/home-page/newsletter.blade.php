@@ -35,7 +35,7 @@
                 <form id="newsletter-form" class="newsletter-form" method="post">
                     @csrf
                     <div class="input-group row{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <div class="col-md-6 col-12 p-0 newsletter-email-col">
+                        <div class="col-md-6 col-12 p-0 newsletter-email-col mb-3 mb-md-0">
                             <input type="email" id="newsletter_email" class="form-control form_element" placeholder="Wpisz swój adres e-mail" name="email" value="">
                             @if ($errors->has('email'))
                                 <span class="help-block">
@@ -43,7 +43,7 @@
                                     </span>
                             @endif
                         </div>
-                        <div class="col-md-6 col-12 pr-0 newsletter-button-col">
+                        <div class="col-md-6 col-12 pr-0 newsletter-button-col mt-0">
                             <button type="submit" id="newsletter_submit_btn" disabled>Wyślij</button>
                         </div>
                     </div>

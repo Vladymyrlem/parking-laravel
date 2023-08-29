@@ -11,6 +11,7 @@
     use App\Models\Reservation;
     use App\Models\Reviews;
     use App\Models\Services;
+    use Carbon\Carbon;
     use DateInterval;
     use DatePeriod;
     use DateTime;
@@ -57,9 +58,16 @@
                 $blockedDates[] = $reservation->custom_date;
             }
             $blockedDatesJson = json_encode($blockedDates);
+            $today = Carbon::today()->format('Y-m-d');
+
+// Filter out old dates and keep only dates from today onwards
+            $newReservations = $reservations->filter(function ($reservation) use ($today) {
+                // Compare the 'new_date' string with today's date string
+                return $reservation->new_date >= $today;
+            });
             // Pass the $blockedDates variable to the view
             return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
-                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services'));
+                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services', 'reservations','newReservations'));
         }
 
         public function sendContactUs(Request $request)

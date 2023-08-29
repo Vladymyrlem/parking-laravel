@@ -2346,7 +2346,7 @@ h2.prices {
   border-radius: 10px 10px 0 0;
 }
 #header-block .reservation .reservation-block-message p {
-  color: #fff;
+  color: #fff !important;
   text-align: center;
   font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
@@ -2356,8 +2356,14 @@ h2.prices {
   text-transform: initial;
   margin-bottom: 0;
 }
+#header-block .reservation .reservation-block-message p * {
+  color: #fff !important;
+}
+#header-block .reservation .reservation-block-message p:focus, #header-block .reservation .reservation-block-message p:hover, #header-block .reservation .reservation-block-message p:active {
+  color: #fff !important;
+}
 #header-block .reservation .reservation-block-message .reservation-blocked-dates {
-  color: #fff;
+  color: #fff !important;
   font-family: Lato Medium, sans-serif !important;
   font-size: 16px;
   font-style: normal;
@@ -2503,7 +2509,9 @@ h2.prices {
 }
 
 #header-block form .form-control {
-  height: 43px;
+  height: auto;
+  min-height: 43px;
+  max-height: 50px;
   border: 2px solid #efe9e9;
   box-shadow: none;
 }
@@ -2555,7 +2563,7 @@ h2.prices {
   font-size: 16px;
   color: #716d6e;
   text-align: left;
-  width: 96px;
+  width: 100px;
   align-items: center;
 }
 #header-block form .input-group-addon svg {
@@ -2768,11 +2776,6 @@ h2.prices {
   #header-block form #order_pick_up_date, #header-block form #order_drop_off_date {
     width: 100%;
     max-width: 115px;
-  }
-}
-@media screen and (max-width: 375px) {
-  .order_form_wrapper_calendar {
-    left: -6px !important;
   }
 }
 /* Partners
@@ -3822,7 +3825,7 @@ footer .footer-nav li a:hover {
 
 #checkoutModal form .styled-select-age:after {
   content: "";
-  background: #ffffff url("../images/dropdown-icon.png") no-repeat 5px 18px;
+  background: #ffffff url("../images/dropdown-icon.png") no-repeat 5px 11px;
   right: 0px;
   top: 0px;
   width: 29px;
@@ -3864,11 +3867,13 @@ footer .footer-nav li a:hover {
 
 #checkoutModal form input {
   background-color: #fff;
-  height: 45px;
+  height: auto;
+  min-height: 45px;
+  max-height: 50px;
   border-radius: 5px;
   border: 1px solid #E0DDDD;
   box-shadow: none;
-  line-height: 45px;
+  line-height: 100%;
   font-size: 18px;
   padding: 10px;
 }
@@ -4437,12 +4442,12 @@ form .subtitle {
     float: none;
     width: 100%;
     max-width: 100%;
-    padding: 0 45px 0 45px;
+    padding: 0 45px 0 20px;
   }
   #checkoutModal .checkout-info-left,
   #checkoutModal .checkout-info-right {
     width: 100%;
-    padding: 0 0 0 45px;
+    padding: 0 0 0 0;
     float: none;
   }
 }
@@ -4627,6 +4632,10 @@ a:hover {
 }
 .alert.hidden {
   display: none;
+}
+
+.order_form_wrapper_calendar {
+  left: 164px !important;
 }
 
 #contact .form-group_left {
@@ -4926,6 +4935,17 @@ p span.price {
   #gallery .gallery {
     grid-template-columns: repeat(3, 1fr);
   }
+  #checkoutModal .checkout-personal-info .form-group {
+    float: left;
+    width: 100%;
+    min-height: 70px;
+  }
+  #checkoutModal form input {
+    height: auto !important;
+    min-height: 43px !important;
+    max-height: 100%;
+    line-height: 100%;
+  }
 }
 @media screen and (max-width: 768px) {
   .container {
@@ -4939,9 +4959,18 @@ p span.price {
     background-size: auto 100% !important;
     background-position: left center !important;
   }
+  .scrollup {
+    bottom: 20px;
+    right: 10px;
+  }
 }
 @media screen and (max-width: 560px) {
   #gallery .gallery {
     grid-template-columns: 1fr;
+  }
+}
+@media screen and (max-width: 375px) {
+  .order_form_wrapper_calendar {
+    left: 144px !important;
   }
 }

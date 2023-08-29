@@ -7,12 +7,17 @@ margin-top: 94px">
         <div class="row">
             <div class="col-lg-7 col-12 header-left">
                 <div class="reservation" id="rezerwui">
+
+                    @if( count($newReservations) >= 1 )
+
                     <div class="reservation-block-message d-flex flex-column align-items-center text-center">
-                        <p>Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
+                            <p class="first-message">Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
                         <div class="reservation-blocked-dates" id="reservation-blocked-dates">
                         </div>
-                        <p>W razie zapytań prosimy o telefon - 606 550 570</p>
+                        <p class="text-light">W razie zapytań prosimy o telefon - 606 550 570</p>
                     </div>
+                    @endif
+
                     <form id="orderForm" enctype="multipart/form-data">
                         @csrf
                         @method('POST')

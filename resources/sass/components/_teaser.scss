@@ -15,7 +15,7 @@
         border-radius: 10px 10px 0 0;
 
         p {
-            color: #fff;
+            color: #fff !important;
             text-align: center;
             font-family: Lato Medium, sans-serif !important;
             font-size: 16px;
@@ -24,10 +24,20 @@
             line-height: 20.594px; /* 128.711% */
             text-transform: initial;
             margin-bottom: 0;
+
+            * {
+                color: #fff !important;
+
+            }
+
+            &:focus, &:hover, &:active {
+                color: #fff !important;
+
+            }
         }
 
         .reservation-blocked-dates {
-            color: #fff;
+            color: #fff !important;
             font-family: Lato Medium, sans-serif !important;
             font-size: 16px;
             font-style: normal;
@@ -187,7 +197,9 @@
 }
 
 #header-block form .form-control {
-    height: 43px;
+    height: auto;
+    min-height: 43px;
+    max-height: 50px;
     border: 2px solid #efe9e9;
     box-shadow: none;
 }
@@ -241,7 +253,7 @@
     font-size: 16px;
     color: #716d6e;
     text-align: left;
-    width: 96px;
+    width: 100px;
     align-items: center;
 
     svg {
@@ -489,7 +501,7 @@
 }
 
 @media screen and (max-width: 375px) {
-    .order_form_wrapper_calendar {
-        left: - 6px !important;
-    }
+    //.order_form_wrapper_calendar {
+    //    left: - 6px !important;
+    //}
 }

@@ -70,7 +70,7 @@ section.calendar .calendar__title {
 .order_form_wrapper_calendar table tbody td,
 .calendar__add_date_select table tbody td,
 .calendar__main_calendar table tbody td {
-  color: #716d6e !important;
+  color: #ff0000 !important;
   background: #72cbff;
 }
 .order_form_wrapper_calendar table tbody td:hover,
@@ -89,15 +89,8 @@ section.calendar .calendar__title {
 .order_form_wrapper_calendar table tbody td.weekend,
 .calendar__add_date_select table tbody td.weekend,
 .calendar__main_calendar table tbody td.weekend {
+  font-weight: bold;
   color: #c32525;
-}
-.order_form_wrapper_calendar table tbody td.jsCalendar-next, .order_form_wrapper_calendar table tbody td.jsCalendar-previous,
-.calendar__add_date_select table tbody td.jsCalendar-next,
-.calendar__add_date_select table tbody td.jsCalendar-previous,
-.calendar__main_calendar table tbody td.jsCalendar-next,
-.calendar__main_calendar table tbody td.jsCalendar-previous {
-  opacity: 0.4;
-  color: #ffffff !important;
 }
 .order_form_wrapper_calendar table tbody td.jsCalendar-next.disabled, .order_form_wrapper_calendar table tbody td.jsCalendar-previous.disabled,
 .calendar__add_date_select table tbody td.jsCalendar-next.disabled,
@@ -106,6 +99,7 @@ section.calendar .calendar__title {
 .calendar__main_calendar table tbody td.jsCalendar-previous.disabled {
   color: #ff0000 !important;
   background: #ffeded;
+  opacity: 0.5;
 }
 .order_form_wrapper_calendar table tbody td.jsCalendar-next.weekend, .order_form_wrapper_calendar table tbody td.jsCalendar-previous.weekend,
 .calendar__add_date_select table tbody td.jsCalendar-next.weekend,
@@ -114,6 +108,7 @@ section.calendar .calendar__title {
 .calendar__main_calendar table tbody td.jsCalendar-previous.weekend {
   font-weight: bold;
   color: #c32525;
+  opacity: 0.5;
 }
 .order_form_wrapper_calendar table tbody td.select,
 .calendar__add_date_select table tbody td.select,
@@ -295,5 +290,3 @@ section.calendar .calendar__title {
 #orderForm .date input, #orderForm .date select, #orderForm .time input, #orderForm .time select {
   cursor: pointer;
 }
-
-/*# sourceMappingURL=calendar.css.map */

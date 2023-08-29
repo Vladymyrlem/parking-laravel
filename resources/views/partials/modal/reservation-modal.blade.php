@@ -231,19 +231,19 @@
 
                             <div class="clearfix"></div>
 
-                            <h3>Płatność:</h3>
-                            <div class="row">
-                                <div class="form-group all">
-                                    <label for="checkout_payment">Rodzaj płatności:</label>
-                                    <div class="styled-select-age">
-                                        <select name="checkout_payment" id="checkout_payment" class="form_element" data-rule="required" data-msg="to pole jest wymagane">
-                                            <option value="1">Płatność na parkingu gotówką lub kartą</option>
-                                            <!--<option value="2">Płatność przez płatności online</option>//-->
-                                        </select>
-                                    </div>
-                                    <div id="validation_checkout_payment" class="validation"></div>
-                                </div>
-                            </div>
+{{--                            <h3>Płatność:</h3>--}}
+{{--                            <div class="row">--}}
+{{--                                <div class="form-group all">--}}
+{{--                                    <label for="checkout_payment">Rodzaj płatności:</label>--}}
+{{--                                    <div class="styled-select-age">--}}
+{{--                                        <select name="checkout_payment" id="checkout_payment" class="form_element" data-rule="required" data-msg="to pole jest wymagane">--}}
+{{--                                            <option value="1">Płatność na parkingu gotówką lub kartą</option>--}}
+{{--                                            <!--<option value="2">Płatność przez płatności online</option>//-->--}}
+{{--                                        </select>--}}
+{{--                                    </div>--}}
+{{--                                    <div id="validation_checkout_payment" class="validation"></div>--}}
+{{--                                </div>--}}
+{{--                            </div>--}}
                             <div class="clearfix"></div>
 
                             <h3>Niezbędne zgody:</h3>

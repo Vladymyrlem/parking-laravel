@@ -811,7 +811,7 @@ header.large .brand {
 
 #checkoutModal form .styled-select-age:after {
     content: '';
-    background: #ffffff url('../images/dropdown-icon.png') no-repeat 5px 18px;
+    background: #ffffff url('../images/dropdown-icon.png') no-repeat 5px 11px;
     right: 0px;
     top: 0px;
     width: 29px;
@@ -856,11 +856,13 @@ header.large .brand {
 
 #checkoutModal form input {
     background-color: #fff;
-    height: 45px;
+    height: auto;
+    min-height: 45px;
+    max-height: 50px;
     border-radius: 5px;
     border: 1px solid #E0DDDD;
     box-shadow: none;
-    line-height: 45px;
+    line-height: 100%;
     font-size: 18px;
     padding: 10px;
 
@@ -1536,13 +1538,13 @@ form .subtitle {
         float: none;
         width: 100%;
         max-width: 100%;
-        padding: 0 45px 0 45px;
+        padding: 0 45px 0 20px;
     }
 
     #checkoutModal .checkout-info-left,
     #checkoutModal .checkout-info-right {
         width: 100%;
-        padding: 0 0 0 45px;
+        padding: 0 0 0 0;
         float: none;
     }
 }
@@ -1752,6 +1754,10 @@ a:hover {
     &.hidden {
         display: none;
     }
+}
+
+.order_form_wrapper_calendar {
+    left: 164px !important;
 }
 
 #contact .form-group_left {
@@ -2081,6 +2087,17 @@ p span.price {
     #gallery .gallery {
         grid-template-columns: repeat(3, 1fr);
     }
+    #checkoutModal .checkout-personal-info .form-group {
+        float: left;
+        width: 100%;
+        min-height: 70px;
+    }
+    #checkoutModal form input {
+        height: auto !important;
+        min-height: 43px !important;
+        max-height: 100%;
+        line-height: 100%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -2095,6 +2112,10 @@ p span.price {
         background-size: auto 100% !important;
         background-position: left center !important;
     }
+    .scrollup {
+        bottom: 20px;
+        right: 10px;
+    }
 }
 
 @media screen and (max-width: 560px) {
@@ -2104,8 +2125,10 @@ p span.price {
     }
 }
 
-@media screen and (max-width: 445px) {
-
+@media screen and (max-width: 375px) {
+    .order_form_wrapper_calendar {
+        left: 144px !important;
+    }
 }
 
 

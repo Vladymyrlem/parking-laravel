@@ -77,7 +77,7 @@ Ilość dni: <b>
 
 <b>Informacja dotycząca płatności</b>
 
-<p>Do zapłaty za parkowanie: <b>{{ $order->price }}</b>&nbsp;PLN</p>
+<p>Do zapłaty za parkowanie: <b>{{ $order->price }}</b></p>
 <p>Płatność na parkingu gotówką lub kartą</p>
 
 <b>Położenie i dojazd</b>
