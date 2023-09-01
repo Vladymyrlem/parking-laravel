@@ -15,6 +15,7 @@
     use DateInterval;
     use DatePeriod;
     use DateTime;
+    use DateTimeZone;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Mail;
@@ -42,7 +43,7 @@
             $prices = Price::all();
             $headBlocks = HeadBlock::all();
             $information = Information::all();
-            $reservations = Reservation::all();
+            $reservations = Reservation::all('new_date');
             $reviews = Reviews::all();
             $contacts = Contacts::all();
             $services = Services::all();
@@ -58,7 +59,7 @@
                 $blockedDates[] = $reservation->custom_date;
             }
             $blockedDatesJson = json_encode($blockedDates);
-            $today = Carbon::today()->format('Y-m-d');
+            $today = Carbon::now(new DateTimeZone('Europe/Warsaw'))->startOfDay();  // Get the start of the day in Warsaw timezone
 
 // Filter out old dates and keep only dates from today onwards
             $newReservations = $reservations->filter(function ($reservation) use ($today) {
@@ -67,7 +68,7 @@
             });
             // Pass the $blockedDates variable to the view
             return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
-                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services', 'reservations','newReservations'));
+                'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services', 'reservations', 'newReservations'));
         }
 
         public function sendContactUs(Request $request)
@@ -85,7 +86,7 @@
 
 //            if ($validator->passes()) {
             // Return the total price as a JSON response (optional)
-            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new ContactMail($request->all()));
+            Mail::mailer('reservation')->to('kontakt@parkingrondo.pl')->send(new ContactMail($request->all()));
 
             return response()->json(['message' => 'Message sent successfully']);
 //            } else {

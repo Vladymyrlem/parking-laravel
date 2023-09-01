@@ -2340,6 +2340,9 @@ h2.prices {
   border-radius: 10px;
 }
 #header-block .reservation .reservation-block-message {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
   margin-bottom: 0;
   padding: 20px;
   background-color: #0074B7;

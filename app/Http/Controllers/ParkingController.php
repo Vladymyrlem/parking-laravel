@@ -2,6 +2,7 @@
 
     namespace App\Http\Controllers;
 
+    use App\Mail\OrderMail;
     use App\Models\Contacts;
     use App\Models\Parking;
     use App\Models\Price;
@@ -38,7 +39,6 @@
             // Create a new order record in the database and save the calculated price
             $order = Parking::create($request->input());
             $order->fill($request->all());
-
 //            $order->arrival = $combinedStartDateTime;
 //            $order->departure = $combinedEndDateTime;
 //            $order->number_days = $differenceInDays;
@@ -58,17 +58,20 @@
             $order["body"] = "Laravel 8 send email with attachment";
             $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->arrival)->format('d/m/Y H:i');
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->departure)->format('d/m/Y H:i');
+            $orderDate = now('Europe/Warsaw');
+            $arrivalOrder = Carbon::createFromFormat('Y-m-d H:i:s', $order->arrival)->format('d/m/Y');
+
             $contacts = Contacts::all();
-            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'departureDate','contacts'));
+            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'departureDate', 'contacts', 'orderDate', 'arrivalOrder'));
             $pdf->setOption('encoding', 'utf-8');
 
             $filename = 'order_' . $order->id . '.pdf';
 
             $pdf->save(public_path('order/' . $filename));
 
-            $adminEmail = config('mail.from.address'); // This will retrieve the admin email from the .env file
-            Mail::mailer('ukrnet')->to($order->email)->send(new OrderConfirmation($order, $filename));
-            Mail::mailer('ukrnet')->to($adminEmail)->send(new OrderConfirmation($order, $filename));
+            $adminEmail ='rezerwacje@parkingrondo.pl'; // This will retrieve the admin email from the .env file
+            Mail::mailer('reservation')->to($order->email)->send(new OrderConfirmation($order, $filename));
+            Mail::mailer('reservation')->to($adminEmail)->send(new OrderConfirmation($order, $filename));
             // Return the total price as a JSON response (optional)
             return response()->json([
                 'message' => 'Order created successfully!',

@@ -73,15 +73,18 @@ jQuery(function () {
       // car_select = 'samochód osobowy';
       $('#checkout_car_desc').html('samochód osobowy');
       $('#checkout_car_desc').text('samochód osobowy');
-    } else if (getValueByName('order_car_select') == 2) {
-      $('#checkout_car_desc').html('samochód dostawczy');
-      $('#checkout_car_desc').text('samochód dostawczy');
+      $('input#checkout_car').val(1);
 
-      // car_select = 'samochód dostawczy';
+      // } else if (getValueByName('order_car_select') == 2) {
+      //     $('#checkout_car_desc').html('samochód dostawczy');
+      //     $('#checkout_car_desc').text('samochód dostawczy');
+      //
+      //     // car_select = 'samochód dostawczy';
     } else {
       // car_select = 'SUV / VAN';
       $('#checkout_car_desc').html('SUV / VAN');
       $('#checkout_car_desc').text('SUV / VAN');
+      $('input#checkout_car').val(2);
     }
     // $('#order_car_select').change(function () {
     //     var selectedOption = $(this).find('option:selected');
@@ -90,7 +93,7 @@ jQuery(function () {
     //     console.log(selectedText);
     // });
     // Create an empty string to store the HTML markup
-    $('input#checkout_car').val(getValueByName('order_car_select'));
+    // $('input#checkout_car').val(getValueByName('order_car_select'));
     // Wrap the email value in a div tag with a specific style
     $('input#checkout_pick_up_date').val(getValueByName("order_pick_up_date"));
     $('#checkout_pick_up_date_desc').html(getValueByName("order_pick_up_date"));
@@ -173,7 +176,7 @@ jQuery(function () {
       totalPrice = priceFor15Days + additionalPrice;
     }
     $('#checkout_price').val(totalPrice);
-    $('#checkout_price_desc').html(totalPrice + 'PLN');
+    $('#checkout_price_desc').html(totalPrice + '&nbsp;PLN');
     // Show the modal
     $('#checkoutModal').modal('show');
   });
@@ -215,7 +218,7 @@ jQuery(function () {
       arrival: combinedStartDateTime,
       departure: combinedEndDateTime,
       number_days: $('input#checkout_days').val(),
-      price: $('#checkout_price_desc').text(),
+      price: $('#checkout_price').val(),
       number_peoples: selectedCountPeoples,
       client_name: $('input#checkout_firstname').val(),
       client_surname: $('input#checkout_lastname').val(),

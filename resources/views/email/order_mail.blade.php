@@ -24,31 +24,31 @@
 </head>
 <body class="pdf-template">
 <p>Witamy!</p>
-<p>Potwierdzenie rezerwacji użytkownika <b>{{ $order->client_name }}</b> &nbsp; <b>{{ $order->client_surname }}</b></p>
+<p>Potwierdzenie rezerwacji użytkownika <b>{{ $order_mail->client_name }}</b> &nbsp; <b>{{ $order_mail->client_surname }}</b></p>
 <p>numer:
     <b>
-        {{ $order->id }}/{{ $arrivalOrder }}
+        {{ $order_mail->id }}/{{ $arrivalDate }}
     </b>
 </p>
 <p>
-    z dnia: {{ $orderDate }}</p>
+    z dnia: {{ $order_mail->arrival }}</p>
 <br>
 <b>Proszę wydrukować niniejsze potwierdzenie.</b>
 <br>
 <b>Dane rezerwacji</b>
 <br>
 Ilość dni: <b>
-    @if( $order->number_days == 1)
-        {{ $order->number_days }} dzień
-    @elseif ($order->number_days >= 2)
-        {{ $order->number_days }} dni
+    @if( $order_mail->number_days == 1)
+        {{ $order_mail->number_days }} dzień
+    @elseif ($order_mail->number_days >= 2)
+        {{ $order_mail->number_days }} dni
     @endif
 </b>
 <br>
 <p>
     Nr rezerwacji:
     <b>
-        {{ $order->id }}/{{ $arrivalOrder }}
+        {{ $order_mail->id }}/{{ $arrivalDate }}
     </b>
 </p>
 <p>
@@ -63,20 +63,20 @@ Ilość dni: <b>
         {{ $departureDate }}
     </b>
 </p>
-<p>Liczba osób do transferu: <b>{{ $order->number_peoples }}</b></p>
-<p>Nr rejestracyjny: {{ $order->car_number }}</p>
-<p>Marka samochodu: {{ $order->car_mark }}</p>
-<p>Model samochodu: {{ $order->car_model }}</p>
+<p>Liczba osób do transferu: <b>{{ $order_mail->number_peoples }}</b></p>
+<p>Nr rejestracyjny: {{ $order_mail->car_number }}</p>
+<p>Marka samochodu: {{ $order_mail->car_mark }}</p>
+<p>Model samochodu: {{ $order_mail->car_model }}</p>
 
 <b>Dane rezerwującego</b>
 
-<p>Imię i nazwisko: {{ $order->client_name }}&nbsp;{{ $order->client_surname }}</p>
-<p>Email: {{ $order->email }}</p>
-<p>Nr telefonu: {{ $order->phone_number }}</p>
+<p>Imię i nazwisko: {{ $order_mail->client_name }}&nbsp;{{ $order_mail->client_surname }}</p>
+<p>Email: {{ $order_mail->email }}</p>
+<p>Nr telefonu: {{ $order_mail->phone_number }}</p>
 
 <b>Informacja dotycząca płatności</b>
 
-<p>Do zapłaty za parkowanie: <b><span>{{ $order->price }}</span>&nbsp;PLN</b></p>
+<p>Do zapłaty za parkowanie: <b>{{ $order_mail->price }}</b>&nbsp;</p>
 <p>Płatność na parkingu gotówką lub kartą</p>
 
 <b>Położenie i dojazd</b>

@@ -9,6 +9,9 @@
     border-radius: 10px;
 
     .reservation-block-message {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
         margin-bottom: 0;
         padding: 20px;
         background-color: #0074B7;

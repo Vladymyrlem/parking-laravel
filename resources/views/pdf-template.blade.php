@@ -27,11 +27,11 @@
 <p>Potwierdzenie rezerwacji użytkownika <b>{{ $order->client_name }}</b> &nbsp; <b>{{ $order->client_surname }}</b></p>
 <p>numer:
     <b>
-        {{ $order->id }}/{{ $arrivalDate }}
+        {{ $order->id }}/{{ $arrivalOrder }}
     </b>
 </p>
 <p>
-    z dnia: {{ $order->arrival }}</p>
+    z dnia: {{ $orderDate }}</p>
 
 <br>
 <b>Proszę wydrukować niniejsze potwierdzenie.</b>
@@ -49,19 +49,19 @@ Ilość dni: <b>
 <p>
     Nr rezerwacji:
     <b>
-        {{ $order->id }}/{{ $arrivalDate }}
+        {{ $order->id }}/{{ $arrivalOrder }}
     </b>
 </p>
 <p>
     Rezewacja od:
     <b>
-        {{ $order->id }}/{{ $arrivalDate }}
+        {{ $arrivalDate }}
     </b>
 </p>
 <p>
     Rezewacja do:
     <b>
-        {{ $order->id }}/{{ $departureDate }}
+        {{ $departureDate }}
     </b>
 </p>
 <p>Liczba osób do transferu: <b>{{ $order->number_peoples }}</b></p>
@@ -77,7 +77,7 @@ Ilość dni: <b>
 
 <b>Informacja dotycząca płatności</b>
 
-<p>Do zapłaty za parkowanie: <b>{{ $order->price }}</b></p>
+<p>Do zapłaty za parkowanie: <b><span>{{ $order->price }}</span>&nbsp;PLN</b></p>
 <p>Płatność na parkingu gotówką lub kartą</p>
 
 <b>Położenie i dojazd</b>
@@ -102,8 +102,12 @@ Ilość dni: <b>
 
 <p>Dla każdego pojazdu wymagana jest osobna rezerwacja.</p>
 <p>Jeśli przyjeżdżają Państwo jako grupa, więcej niż jednym samochodem oraz liczba osób do transferu na i z
-    lotnisko przekracza 6 osób to kierowcy proszeni są, aby odwieźć pasażerów pod terminal lotniska razem z
+    lotnisko przekracza 8 osób to kierowcy proszeni są, aby odwieźć pasażerów pod terminal lotniska razem z
     bagażami, gdzie mają bezpłatny wjazd na teren portu lotniczego do 10 minut.
+</p>
+<p>
+    W przypadku, kiedy w aucie jest więcej niż 5 osób do transferu na terminal i z powrotem, kierowca powinien najpierw zawieść pasażerów pod terminal lotniska razem z bagażami, gdzie ma bezpłatny
+    wjazd na teren Portu Lotniczego do 10 minut. Następnie sam kierowca przyjezdża na parking ( zajmuje to 3 minuty). Podobna procedura jest przy powrocie, po odbiór auta przywozimy tylko kierowcę.
 </p>
 <p>Następnie na parking odprowadzają samochody sami kierowcy (zajmuje to do 3 minut). Pozwoli to usprawnić i
     przyspieszyć transfer do/z lotniska.</p>

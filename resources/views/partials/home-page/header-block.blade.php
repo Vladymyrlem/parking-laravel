@@ -7,16 +7,17 @@ margin-top: 94px">
         <div class="row">
             <div class="col-lg-7 col-12 header-left">
                 <div class="reservation" id="rezerwui">
+{{--                    @dd($newReservations)--}}
+{{--                    @if( count($newReservations) > 0 )--}}
 
-                    @if( count($newReservations) >= 1 )
-
-                    <div class="reservation-block-message d-flex flex-column align-items-center text-center">
+                        <div class="reservation-block-message text-center">
                             <p class="first-message">Brak wolnych miejsc na Parkingu Rondo w dniach:</p>
-                        <div class="reservation-blocked-dates" id="reservation-blocked-dates">
+                            <div class="reservation-blocked-dates" id="reservation-blocked-dates">
+                            </div>
+                            <p class="text-light">W razie zapytań prosimy o telefon - 606 550 570</p>
                         </div>
-                        <p class="text-light">W razie zapytań prosimy o telefon - 606 550 570</p>
-                    </div>
-                    @endif
+
+{{--                    @endif--}}
 
                     <form id="orderForm" enctype="multipart/form-data">
                         @csrf
@@ -26,8 +27,8 @@ margin-top: 94px">
                             <select name="order_car_select" id="order_car_select" class="strtoupper form_element" data-rule="required" data-msg="to pole jest wymagane">
                                 <optgroup label="Wybierz typ pojazdu">
                                     <option value="1" selected {{ old('order_car_select') == '1' ? 'selected' : '' }}>samochód osobowy</option>
-                                    <option value="2" {{ old('order_car_select') == '2' ? 'selected' : '' }}>samochód dostawczy</option>
-                                    <option value="3" {{ old('order_car_select') == '3' ? 'selected' : '' }}>SUV / VAN</option>
+{{--                                    <option value="2" {{ old('order_car_select') == '2' ? 'selected' : '' }}>samochód dostawczy</option>--}}
+                                    <option value="2" {{ old('order_car_select') == '2' ? 'selected' : '' }}>SUV / VAN</option>
                                 </optgroup>
                             </select>
                         </div>

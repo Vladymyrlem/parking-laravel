@@ -42,10 +42,19 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/jsCalendar.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/calendar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/animate.css') }}">
-{{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
+    {{--    <script src="{{ asset('js/navbar/responsive-nav.js') }}"></script>--}}
 
     {{--    @yield('styles')--}}
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    {{--    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20674909-1"></script>--}}
+    {{--    <script>--}}
+    {{--        window.dataLayer = window.dataLayer || [];--}}
+    {{--        function gtag(){dataLayer.push(arguments);}--}}
+    {{--        gtag('js', new Date());--}}
+
+    {{--        gtag('config', 'UA-20674909-1');--}}
+    {{--    </script>--}}
 </head>
 <body name="#start" id="top" class="js">
 <!-- Top Navbar -->
@@ -109,7 +118,7 @@
                 .filter(dateStr => new Date(dateStr.new_date) >= new Date().setHours(0, 0, 0, 0) - 1)
                 .sort((a, b) => new Date(a.new_date) - new Date(b.new_date));
 
-            console.log( 'reservationDates: ', reservationDates )
+            console.log('reservationDates: ', reservationDates)
 
             const orderForm = $('#orderForm');
             const ofInputsIds = ['#order_pick_up_date', '#order_drop_off_date'];
@@ -123,7 +132,7 @@
                 var datesArray = <?php echo json_encode($blockedDates); ?>;
                 console.log(datesArray);
                 var currentDate = new Date();
-
+                currentDate.setHours(0, 0, 0, 0);
                 // Filter out old dates
                 var filteredDatesArray = datesArray.filter(function (dateObj) {
                     var rawDate = new Date(dateObj['new_date']);
@@ -142,12 +151,11 @@
                 // console.log(joinedDates);
                 let count_blocked_days = formattedDates.length;
                 let reservation_block = $('.reservation-blocked-dates');
-                if (count_blocked_days >= 1) {
+                if (count_blocked_days > 0) {
                     {{--// Insert the joined dates into the div with class 'reservations-list'--}}
                     reservation_block.text(joinedDates);
                 } else {
-                    reservation_block.hide();
-                    $('.reservation-block-messages p.first-message').hide();
+                    $('.reservation-block-message').hide();
                 }
                 {{--// Insert the joined dates into the div with class 'reservations-list'--}}
                 // $('.reservation-blocked-dates').text(joinedDates);
@@ -172,10 +180,12 @@
             /*
              * Create Events for Inputs
              */
-            $(document).on( 'click', '.datetime input', function (event) {
+            $(document).on('click', '.datetime input', function (event) {
                 event.preventDefault();
 
-                $('.date_error').each( (i, elem) => { elem.remove(); })
+                $('.date_error').each((i, elem) => {
+                    elem.remove();
+                })
 
                 var $input = $(event.target);
                 $input.prop("readonly", true);
@@ -184,7 +194,7 @@
                 $(ofCalendar.calendar._target)
                     .removeClass(ofHideCalendarClassName)
                     .attr('data-input-active-id', $input.attr('id'))
-                    .css({ top: $dateTimeBox.position().top + $dateTimeBox.height() + 'px' })
+                    .css({top: $dateTimeBox.position().top + $dateTimeBox.height() + 'px'})
 
                 ofCalendar.selectDate = $input.val();
                 ofCalendar.calendar.refresh();
@@ -202,12 +212,12 @@
                     var to = $wrapperCalendar.attr('data-date-to');
                     var errorText = 'Data zakończenia musi być późniejsza niż data rozpoczęcia.';
 
-                    if ( isDateStart ) {
+                    if (isDateStart) {
 
                         if ((to && new Date(to).getTime() - new Date(date).getTime() > 0) === false) {
                             var errTxt = 'Data Od dnia musi być wcześniejsza niż data Do dnia.';
-                            console.log( errTxt );
-                            createError( errTxt );
+                            console.log(errTxt);
+                            createError(errTxt);
                         } else {
                             $inputActive.val(date)
                             $wrapperCalendar.attr('data-date-from', date)
@@ -217,8 +227,8 @@
 
                         if ((from && new Date(from).getTime() - new Date(date).getTime() < 0) === false) {
                             var errTxt = 'Data zakończenia musi być późniejsza niż data rozpoczęcia.';
-                            console.log( errTxt );
-                            createError( errTxt );
+                            console.log(errTxt);
+                            createError(errTxt);
                         } else {
                             $inputActive.val(date)
                             $wrapperCalendar.attr('data-date-to', date)
@@ -227,11 +237,9 @@
                     }
 
                     function createError(text) {
-                        $inputActive.closest('.datetime').css({ position: 'relative' })
+                        $inputActive.closest('.datetime').css({position: 'relative'})
                             .prepend(`<div class="date_error" style="position:absolute;z-index:1;top:calc(100% - 6px);left:0;color:red;font-size:12px;">${text}</div>`);
                     }
-
-
 
 
                     $wrapperCalendar.addClass(ofHideCalendarClassName)

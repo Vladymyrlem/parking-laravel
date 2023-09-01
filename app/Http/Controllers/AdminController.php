@@ -134,7 +134,7 @@
             $email = $request->input('email');
             // Implement your email sending logic here, using Laravel's Mail class or any other email package.
             // For simplicity, I'll use the `mail()` function.
-            Mail::mailer('ukrnet')->to('vladymyrlem@ukr.net')->send(new NewSubscriberNotification($request->email));
+            Mail::mailer('reservation')->to('kontakt@parkingrondo.pl')->send(new NewSubscriberNotification($request->email));
             // Save the email to a text file
             return response()->json(['message' => 'You have been subscribed successfully!']);
             //  }else {

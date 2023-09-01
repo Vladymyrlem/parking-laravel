@@ -54,7 +54,7 @@
         |
         */
 
-        'url' => env('APP_URL', 'http://parking-rondo.pl'),
+        'url' => env('APP_URL', 'https://parkingrondo.pl'),
 
         'asset_url' => env('ASSET_URL'),
 

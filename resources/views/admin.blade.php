@@ -98,11 +98,7 @@
                     <td>
                         <div class="d-flex flex-column">
                             @if ($parking->type_car == 1)
-
                                 Samochód osobowy
-                            @elseif ($parking->type_car == 2)
-
-                                Samochód dostawczy
                             @else
                                 SUV / VAN
                             @endif

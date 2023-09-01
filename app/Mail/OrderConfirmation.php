@@ -30,13 +30,16 @@
         public function toMail($notifiable)
         {
             $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y H:i');
+            $arrivalOrder = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y');
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->departure)->format('d/m/Y H:i');
+            $orderDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->created_at)->format('d/m/Y');
             $contacts = Contacts::all();
             return (new MailMessage)
-                ->subject('Potwierdzenie rezerwacji')
-                ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate, 'contacts' => $contacts])
+                ->subject('Nowa rezerwacja - potwierdzenie')
+                ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'arrivalOrder' => $arrivalOrder, 'departureDate' => $departureDate,
+                    'orderDate' => $orderDate, 'contacts' => $contacts])
                 ->attach($this->pdfFile, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf'])
-                ->to($this->formData->email)
+                ->to(config('mail.admin_address'))
                 ->cc(config('mail.admin_address')); // Use the admin email address from your .env
         }
 
@@ -44,12 +47,18 @@
         {
             $pdfFilePath = public_path('order/order_' . $this->formData->id . '.pdf');
             $arrivalDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y H:i');
+            $arrivalOrder = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->arrival)->format('d/m/Y');
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->departure)->format('d/m/Y H:i');
+            $orderDate = Carbon::createFromFormat('Y-m-d H:i:s', $this->formData->created_at)->format('d/m/Y');
             $contacts = Contacts::all();
 
-            return $this->view('email.order_confirmation')->with(['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate,
-                'contacts' => $contacts])
-                ->attach($pdfFilePath, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf']);
+            return $this->view('email.order_confirmation')->with(['order' => $this->formData, 'arrivalDate' => $arrivalDate,  'arrivalOrder' => $arrivalOrder, 'departureDate' => $departureDate,
+                'orderDate' => $orderDate, 'contacts' => $contacts])
+                ->subject('Nowa rezerwacja - potwierdzenie')
+                ->markdown('email.order_confirmation', ['order' => $this->formData, 'arrivalDate' => $arrivalDate, 'departureDate' => $departureDate, 'contacts' => $contacts])
+                ->attach($pdfFilePath, ['as' => 'order_' . $this->formData->id . '.pdf', 'mime' => 'application/pdf'])
+                ->to(config('mail.admin_address'))
+                ->cc(config('rezerwacje@parkingrondo.pl'));
         }
 
 
@@ -61,7 +70,7 @@
         public function envelope()
         {
             return new Envelope(
-                subject: 'Potwierdzenie rezerwacji',
+                subject: 'Nowa rezerwacja - potwierdzenie',
             );
         }
 

@@ -30,6 +30,7 @@
                 ->subject('New Subscriber')
                 ->line('A new subscriber has signed up:')
                 ->line('Email: ' . $this->subscriptionFormData->email)
+                ->to('kontakt@parkingrondo.pl')
                 ->action('View Subscribers', url('/subscribers'));
         }
     }
