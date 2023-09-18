@@ -7,6 +7,10 @@
         .content-header {
             margin-top: 0;
         }
+
+        .pagination {
+            display: flex !important
+        }
     </style>
     <!-- Content Header (Page header) -->
     <div class="content-header">
@@ -19,7 +23,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <div id="orders-table" name="#orders-table">
-        <div class="toolbar">
+        <div class="toolbar" id="customToolbar">
             <button id="b1" class="btn btn-secondary mb-1">przyjazd dzisiaj</button>
             <button id="b2" class="btn btn-secondary mb-1">wyjazd dzisiaj</button>
             <button id="b3" class="btn btn-secondary mb-1">z dzisiaj</button>
@@ -66,12 +70,11 @@
             </tr>
             </thead>
             <tbody>
-
             @foreach($parkings as $parking)
                 <tr>
                     <td class="id">{{ $parking->id }}</td>
                     <td class="created-date">{{ $parking->created_at }}
-                        <button class="btn btn-danger delete-btn" data-order-id="{{ $parking->id }}">Usuń</button>
+                        <button class="btn btn-danger delete-btn" value="{{ $parking->id }}" data-order-id="{{ $parking->id }}">Usuń</button>
                     </td>
                     <td class="created-date-without-time d-none">{{ getConvertedDate($parking->created_at) }}
                     </td>
@@ -115,6 +118,7 @@
             @endforeach
             </tbody>
         </table>
+
     </div>
     <!-- Main content -->
     <div class="content calendar-content pl-sm-3 pr-sm-3">
@@ -126,7 +130,12 @@
                 </div>
                 <div class="calendar__date_list_wrapper">
 
-                    <div class="calendar__add_date_preloader hidden"><div></div><div></div><div></div><div></div></div>
+                    <div class="calendar__add_date_preloader hidden">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
 
                     <ul class="calendar__date_list"></ul>
 

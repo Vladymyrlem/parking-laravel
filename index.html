@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<title>Witamy!</title>
+<style>
+
+    html, body {
+        font-family: "DejaVu Sans", sans-serif;
+        line-height: 1.5;
+        font-size: 12px;
+    }
+
+    .mail-container {
+        width: 100%;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    body, .mail-detail-content.simple-mail {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    body * {
+        font-family: 'DejaVu Sans', sans-serif;
+        color: rgba(60, 63, 63, 1);
+    }
+
+    .order-header {
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    h3 {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Bold', sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .blue-text, h4 {
+        color: #0074B7;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    header h3 {
+        margin-bottom: 0;
+    }
+
+    .order-header {
+        margin-bottom: 20px;
+    }
+
+    #client-title {
+        margin-bottom: 20px;
+    }
+
+    #client-title {
+        margin-bottom: 20px;
+    }
+
+    .client-data {
+        display: grid;
+        grid-column-gap: 25px;
+        grid-row-gap: 10px;
+        grid-template-columns: 188px auto;
+        grid-template-rows: auto;
+        align-items: center;
+        padding: 0 50px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+    }
+
+    .client-data h4, .client-data svg {
+        grid-column: span 2;
+    }
+
+    .client-data svg {
+        margin-bottom: 10px;
+    }
+
+    .data-name {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .data-value {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .data-value a {
+        text-decoration: none;
+    }
+
+    .price-value {
+        color: #0074B7;
+        font-family: 'DejaVu Sans Bold', sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%; /* 24px */
+    }
+
+    .order-data {
+        border: 1px solid #AFADAD;
+        padding: 25px 50px;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .order-grid {
+        display: grid;
+        grid-column-gap: 25px;
+        grid-row-gap: 10px;
+        grid-template-columns: 188px auto;
+        grid-template-rows: auto;
+        align-items: center;
+    }
+
+    .locations-block {
+        padding: 0 50px;
+    }
+
+    .contacts-data {
+        display: grid;
+        grid-column-gap: 25px;
+        grid-row-gap: 10px;
+        grid-template-columns: 188px auto;
+        grid-template-rows: auto;
+        padding: 0 50px;
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    #contacts-title {
+        margin-bottom: 20px;
+    }
+
+    .information-block {
+        margin-top: 40px
+    }
+
+    #info-title {
+        margin-bottom: 6px;
+    }
+
+    .information-block h4 {
+        margin-bottom: 20px;
+    }
+
+    .information-block p {
+        color: #757575;
+        font-family: 'DejaVu Sans', sans-serif;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 15px;
+    }
+
+    .information-block p:last-child {
+        margin-bottom: 0;
+    }
+
+    .map-link {
+        border-radius: 5px;
+        background: #0074B7;
+        width: 100%;
+        max-width: 205px;
+        display: flex;
+        padding: 16px 24px;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        align-self: stretch;
+        color: #FFF;
+        font-family: 'DejaVu Sans', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-top: 10px;
+        margin-bottom: 0;
+    }
+
+    .locations-block p {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        margin-bottom: 10px;
+    }
+
+    .locations-block img {
+        width: 150px;
+        height: 150px;
+    }
+
+    #locations-title {
+        margin-bottom: 20px;
+    }
+
+    .locations-block span {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    footer {
+        display: block;
+        padding-bottom: 30px;
+        margin-top: 42px;
+    }
+
+    footer p {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 3px;
+    }
+
+    footer a {
+        font-family: 'DejaVu Sans Medium', sans-serif;
+
+    }
+
+    footer p:first-child {
+        margin-bottom: 15px;
+    }
+
+    footer img {
+        float: right;
+        width: auto;
+        max-width: 230px;
+        margin-left: 20px;
+    }
+
+    @media screnn and (max-width: 560px) {
+        .client-data {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+    }
+</style>
+<body>
+<div class="mail-container">
+
+    <header class="row order-header align-items-center">
+        <div class="col-md-3 col-12 mb-md-0 mb-2"><h3>Witamy!</h3></div>
+        <div class="col-12 col-md-9 d-flex justify-content-md-end">
+            <img src="https://parkingrondo.pl/images/parking-logo.png" alt="Parking Logo">
+        </div>
+    </header>
+    <h3 id="client-title">Potwierdzenie rezerwacji użytkownika <br> Parking Rondo:</h3>
+    <div class="client-data grid-data">
+        <div class="data-name">Numer:</div>
+        <div class="data-value">
+            166/16/09/2023
+        </div>
+        <div class="data-name"> z dnia:</div>
+        <div class="data-value">15/09/2023</div>
+        <div class="data-name">Nazwa:</div>
+        <div class="data-value">
+            Weronika &nbsp; Plaskota
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="380" height="2" viewBox="0 0 380 2" fill="none">
+            <path d="M380 1H0" stroke="#AFADAD"/>
+        </svg>
+        <div class="data-name">Do zapłaty za parkowanie:</div>
+        <div class="data-value price-value">
+            119&nbsp;PLN
+        </div>
+        <h4>Płatność na parkingu gotówką lub kartą</h4>
+    </div>
+
+    <h3 id="order-title">Dane rezerwacji dni:</h3>
+    <h4>Proszę wydrukować niniejsze potwierdzenie.</h4>
+    <div class="order-data">
+        <div class="order-grid">
+            <div class="data-name">Ilość dni:</div>
+            <div class="data-value">4 dni</div>
+            <div class="data-name">Nr rezerwacji:</div>
+            <div class="data-value"> 166/16/09/2023</div>
+            <div class="data-name">Rezewacja od:</div>
+            <div class="data-value">16/09/2023 18:30</div>
+            <div class="data-name">Rezewacja do:</div>
+            <div class="data-value">20/09/2023 16:30</div>
+            <div class="data-name">Liczba osób do transferu:</div>
+            <div class="data-value">2</div>
+            <div class="data-name">Nr rejestracyjny:</div>
+            <div class="data-value">ES51405</div>
+            <div class="data-name">
+                Marka samochodu:
+            </div>
+            <div class="data-value">Opel</div>
+            <div class="data-name">
+                Model samochodu:
+            </div>
+            <div class="data-value">Meriva</div>
+        </div>
+    </div>
+    <h3 id="contacts-title">Dane rezerwującego</h3>
+    <div class="contacts-data">
+        <div class="data-name">
+            Imię i nazwisko:
+        </div>
+        <div class="data-value">
+            Weronika&nbsp;Plaskota
+        </div>
+        <div class="data-name">
+            Email:
+        </div>
+        <div class="data-value">
+            <a href="mailto:w.plaskota@op.pl" class="mailto-link" target="_blank">w.plaskota@op.pl</a>
+        </div>
+        <div class="data-name">
+            Nr telefonu:
+        </div>
+        <div class="data-value">
+            511476226
+        </div>
+    </div>
+
+    <h3 id="locations-title">Położenie i dojazd</h3>
+
+    <div class="locations-block row">
+        <p class="col-12">54-530 Wrocław, ul. Skarżyńskiego 2</p>
+        <p class="col-12">Współrzędne GPS: 51.109251,16.902584</p>
+        <div class="col-md-7 col-12 d-flex flex-column align-items-start justify-content-center">
+            <span>Zobacz na Google Maps:</span>
+            <a class="map-link" target="_blank"
+               href="https://www.google.com/maps/dir/parking+lotnisko+rondo/@51.109134,16.8325255,12z/data=!4m8!4m7!1m0!1m5!1m1!1s0x470fc0407288eb79:0x55c0c34a60491493!2m2!1d16.9025651!2d51.1091549"
+               rel="noopener">nawiguj!</a>
+        </div>
+        <img class="col-md-4 col-12" src="https://parkingrondo.pl/images/qr-code.svg" alt="Parking Qrcode">
+    </div>
+    <div class="information-block">
+        <h3 id="info-title">Informacje dodatkowe</h3>
+
+        <h4>Proszę wydrukować tę wiadomość i pokazać pracownikowi przy wjeździe na parking.</h4>
+
+        <p>
+            Przesiadka pasażerów oraz przepakowanie bagaży z auta klienta do busa transferowego oraz odwrotnie,
+            odbywa się wyłącznie w miejscu wskazanym przez obsługę parkingu.
+        </p>
+        <p>Samochód na wyznaczonym miejscu postojowym parkuje i odbiera tylko kierowca.</p>
+        <p>
+            Zakazane jest wjeżdżanie na miejsca postojowe wraz z pasażerami i bagażami oraz stawanie na więcej niż
+            jednym miejscu postojowym.
+        </p>
+
+        <p>Dla każdego pojazdu wymagana jest osobna rezerwacja.</p>
+        <p>Jeśli przyjeżdżają Państwo jako grupa, więcej niż jednym samochodem oraz liczba osób do transferu na i z
+            lotnisko przekracza 8 osób to kierowcy proszeni są, aby odwieźć pasażerów pod terminal lotniska razem z
+            bagażami, gdzie mają bezpłatny wjazd na teren portu lotniczego do 10 minut.
+        </p>
+        <p>
+            W przypadku, kiedy w aucie jest więcej niż 5 osób do transferu na terminal i z powrotem, kierowca powinien najpierw zawieść pasażerów pod terminal lotniska razem z bagażami, gdzie ma
+            bezpłatny
+            wjazd na teren Portu Lotniczego do 10 minut. Następnie sam kierowca przyjezdża na parking ( zajmuje to 3 minuty). Podobna procedura jest przy powrocie, po odbiór auta przywozimy tylko
+            kierowcę.
+        </p>
+        <p>Następnie na parking odprowadzają samochody sami kierowcy (zajmuje to do 3 minut). Pozwoli to usprawnić i
+            przyspieszyć transfer do/z lotniska.</p>
+
+        <p>Proszę zachować szczególną ostrożność na ul. Granicznej (odcinek między zjazdem z Autostradowej Obwodnicy
+            Wrocławia a Parkingiem Rondo) - <b>częste kontrole radarowe!</b></p>
+    </div>
+    <footer>
+        <p>Pozdrawiamy,</p>
+        <p>Parking Rondo Wrocław, ul. Skarżyńskiego 2</p>
+        <p>TEL: <a href="tel:606%20550%20570">606 550 570</a></p>
+        <img src="https://parkingrondo.pl/images/parking-logo.png" alt="Parking Logo">
+        <p>GSM: <a href="tel:+48%2071%20727%2092%2085" rel="noopener" target="_blank">lub&nbsp;+48
+            71 727 92 85</a></p>
+        <p><a target="_blank" href="http://www.parkingrondo.pl"
+              rel="noopener">http://www.parkingrondo.pl</a></p>
+        <p><a href="mailto:kontakt@parkingrondo.pl" class="mailto-link" target="_blank">kontakt@parkingrondo.pl</a>
+        </p>
+    </footer>
+</div>
+</body>
+</html>

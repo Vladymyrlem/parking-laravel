@@ -50,7 +50,6 @@
          */
         protected $casts = [
             'id' => 'integer',
-            'start_date' => 'date'
         ];
 
         /**
@@ -60,7 +59,6 @@
          */
         public static $rules = [
             'id' => 'required',
-            'dispatch_date' => 'required'
         ];
 
 

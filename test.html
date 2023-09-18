@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<link href="https://fonts.cdnfonts.com/css/spartan" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+<title>Witamy!</title>
+<style>
+
+    html, body {
+        font-family: "DejaVu Sans", sans-serif;
+        line-height: 1.5;
+        font-size: 12px;
+    }
+
+    .mail-container {
+        width: 100%;
+        max-width: 480px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+    }
+
+    body, .mail-detail-content.simple-mail {
+        margin-left: auto !important;
+        margin-right: auto !important;
+    }
+
+    body * {
+        font-family: 'DejaVu Sans', sans-serif;
+        color: rgba(60, 63, 63, 1);
+    }
+
+    .order-header {
+        align-items: center;
+        margin-bottom: 40px;
+    }
+
+    h3 {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Bold', sans-serif;
+        font-size: 20px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: normal;
+    }
+
+    p {
+        margin-bottom: 0;
+    }
+
+    .blue-text, h4 {
+        color: #0074B7;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    header h3 {
+        margin-bottom: 0;
+    }
+
+    header a {
+        color: #0074B7;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        margin-bottom: 10px;
+    }
+
+    header a:last-child {
+        margin-bottom: 0;
+    }
+
+    .order-header {
+        margin-bottom: 20px;
+    }
+
+    header img {
+        width: auto;
+        max-width: 240px;
+    }
+
+    #client-title {
+        margin-bottom: 20px;
+    }
+
+    #client-title {
+        margin-bottom: 20px;
+    }
+
+    .client-data {
+        display: grid;
+        grid-column-gap: 25px;
+        grid-row-gap: 10px;
+        grid-template-columns: 188px auto;
+        grid-template-rows: auto;
+        align-items: center;
+        padding: 0 50px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 40px;
+    }
+
+    .client-data h4, .client-data svg {
+        grid-column: span 2;
+    }
+
+    .client-data svg {
+        margin-bottom: 10px;
+    }
+
+    .data-name {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Regular', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+    }
+
+    .data-value {
+        color: #3C3F3F;
+        font-family: 'DejaVu Sans Medium', sans-serif;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+
+    .data-value a {
+        text-decoration: none;
+    }
+
+    .price-value {
+        color: #0074B7;
+        font-family: 'DejaVu Sans Bold', sans-serif;
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: 100%; /* 24px */
+    }
+
+    .order-data {
+        border: 1px solid #AFADAD;
+        padding: 25px 50px;
+        margin-top: 20px;
+        margin-bottom: 40px;
+    }
+
+    .order-grid {
+        display: grid;
+        grid-column-gap: 25px;
+        grid-row-gap: 10px;
+        grid-template-columns: 188px auto;
+        grid-template-rows: auto;
+        align-items: center;
+    }
+
+    @media screnn and (max-width: 560px) {
+        .client-data {
+            grid-template-columns: 1fr;
+            grid-template-rows: auto;
+        }
+    }
+</style>
+<body>
+<div class="mail-container">
+
+    <header class="row order-header align-items-center justify-content-md-between">
+        <div class="col-12 col-md-7 d-flex ">
+            <img src="https://parkingrondo.pl/images/parking-logo.png" alt="Parking Logo">
+        </div>
+        <div class="col-md-auto col-12 mb-md-0 mb-2 d-flex flex-column align-items-start">
+            <a href="tel:606%20550%20570">(48)&nbsp;606 550 570</a>
+            <a target="_blank" href="http://www.parkingrondo.pl"
+               rel="noopener">http://www.parkingrondo.pl</a>
+        </div>
+    </header>
+    <h3 id="client-title">Potwierdzenie rezerwacji użytkownika <br> Parking Rondo:</h3>
+    <div class="client-data grid-data">
+        <div class="data-name">Numer:</div>
+        <div class="data-value">
+            166/16/09/2023
+        </div>
+        <div class="data-name"> z dnia:</div>
+        <div class="data-value">15/09/2023</div>
+        <div class="data-name">Nazwa:</div>
+        <div class="data-value">
+            Weronika &nbsp; Plaskota
+        </div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="380" height="2" viewBox="0 0 380 2" fill="none">
+            <path d="M380 1H0" stroke="#AFADAD"/>
+        </svg>
+        <div class="data-name">Do zapłaty za parkowanie:</div>
+        <div class="data-value price-value">
+            119&nbsp;PLN
+        </div>
+        <h4>Płatność na parkingu gotówką lub kartą</h4>
+    </div>
+
+    <h3 id="order-title">Dane rezerwacji dni:</h3>
+    <h4>Proszę wydrukować niniejsze potwierdzenie.</h4>
+    <div class="order-data">
+        <div class="order-grid">
+            <div class="data-name">Ilość dni:</div>
+            <div class="data-value">4 dni</div>
+            <div class="data-name">Nr rezerwacji:</div>
+            <div class="data-value"> 166/16/09/2023</div>
+            <div class="data-name">Rezewacja od:</div>
+            <div class="data-value">16/09/2023 18:30</div>
+            <div class="data-name">Rezewacja do:</div>
+            <div class="data-value">20/09/2023 16:30</div>
+            <div class="data-name">Liczba osób do transferu:</div>
+            <div class="data-value">2</div>
+            <div class="data-name">Nr rejestracyjny:</div>
+            <div class="data-value">ES51405</div>
+            <div class="data-name">
+                Marka samochodu:
+            </div>
+            <div class="data-value">Opel</div>
+            <div class="data-name">
+                Model samochodu:
+            </div>
+            <div class="data-value">Meriva</div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

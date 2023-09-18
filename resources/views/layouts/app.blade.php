@@ -196,136 +196,144 @@
 @include('partials.modal.newsletter-modal')
 <script src="{{ asset('js/app.js') }}"></script>
 <script src="{{ asset('js/admin.js') }}"></script>
-<script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>
+{{--<script src="{{ asset('js/datatables/jquery.dataTables.min.js') }}"></script>--}}
 {{--<script src="{{ asset('js/navbar/fastclick.js') }}" async></script>--}}
 {{--<script src="{{ asset('js/navbar/scroll.js') }}" async></script>--}}
 {{--<script src="{{ asset('js/navbar/fixed-responsive-nav.js') }}" async></script>--}}
 <script src="{{ asset('js/navbar/navbar-fixed.js') }}" async></script>
-<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+{{--<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>--}}
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 <script src="{{ asset('js/bootstrap-table-pl-PL.js') }}"></script>
-<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>
+{{--<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>--}}
 {{--<script src="https://www.google.com/recaptcha/api.js" async defer></script>--}}
 <script>
-    const headerTable = $('#headerTable');
-    const toggleButton = $('#toggleRowsButton');
-
-    // Initial state: Show only one row
-    headerTable.find('tbody tr').not(':first').hide();
-
-    toggleButton.on('click', function () {
-        const hiddenRows = headerTable.find('tbody tr').not(':visible');
-
-        if (hiddenRows.length > 0) {
-            // Show all rows
-            hiddenRows.show();
-            toggleButton.text('Show Only One Row');
-        } else {
-            // Show only one row
-            headerTable.find('tbody tr').not(':first').hide();
-            toggleButton.text('Show All Rows');
-        }
-    });
+    $(document).ready(function () {
 
 
-    function dateSort(a, b) {
-        var aDate = new Date(a);
-        var bDate = new Date(b);
-        return aDate - bDate;
-    }
+        const headerTable = $('#headerTable');
+        const toggleButton = $('#toggleRowsButton');
 
-    $('#parkingTable').bootstrapTable({
-        locale: 'pl-PL',
-        toolbar: '.toolbar'
-    });
-    $('.delete-btn').on('click', function () {
-        var orderId = $(this).data('order-id');
+        // Initial state: Show only one row
+        headerTable.find('tbody tr').not(':first').hide();
 
-        $.ajax({
-            url: '/admin/delete-order/' + orderId, // Replace with your delete route URL
-            type: 'DELETE',
-            dataType: 'json',
-            success: function (response) {
-                // Remove the deleted row from the table
-                $('#parkingTable').bootstrapTable('remove', {field: 'id', values: [orderId]});
-                location.reload();
-            },
-            error: function (xhr, status, error) {
-                console.log(error);
+        toggleButton.on('click', function () {
+            const hiddenRows = headerTable.find('tbody tr').not(':visible');
+
+            if (hiddenRows.length > 0) {
+                // Show all rows
+                hiddenRows.show();
+                toggleButton.text('Show Only One Row');
+            } else {
+                // Show only one row
+                headerTable.find('tbody tr').not(':first').hide();
+                toggleButton.text('Show All Rows');
             }
         });
-    });
-    var todayDate = new Date().toISOString().slice(0, 10);
-    $('#b1').click(function () {
-        $('#parkingTable').bootstrapTable('filterBy', {
-            arrivalh: [todayDate]
-        });
-    });
-    $('#b2').click(function () {
-        $('#parkingTable').bootstrapTable('filterBy', {
-            departureh: [todayDate]
-        });
-    });
-    $('#b3').click(function () {
-        $('#parkingTable').bootstrapTable('filterBy', {
-            createdh: [todayDate]
-        });
-    });
 
-    function formatDate(date) {
-        var year = date.getFullYear();
-        var month = String(date.getMonth() + 1).padStart(2, '0');
-        var day = String(date.getDate()).padStart(2, '0');
-        return year + '-' + month + '-' + day;
-    }
 
-    $('#b4').click(function () {
-        var todayDate = new Date(); // Current date
-        var oneWeekAgo = new Date(todayDate);
-        oneWeekAgo.setDate(todayDate.getDate() - 7); // Subtract 7 days
-
-        var oneYearAgo = new Date(todayDate);
-        oneYearAgo.setFullYear(todayDate.getFullYear() - 1); // Subtract 1 year
-
-        var customStartDate = new Date(todayDate);
-        customStartDate.setDate(todayDate.getDate() - 7); // Subtract 7 days
-        customStartDate.setFullYear(todayDate.getFullYear() - 1); // Subtract 1 year
-
-        var dateArray = [];
-        var currentDate = new Date(customStartDate);
-        // console.log(customStartDate);
-
-        // Generate an array of dates starting from customStartDate up to oneWeekAgo
-        while (currentDate <= oneWeekAgo) {
-            dateArray.push(formatDate(currentDate));
-            currentDate.setDate(currentDate.getDate() + 1);
+        function dateSort(a, b) {
+            var aDate = new Date(a);
+            var bDate = new Date(b);
+            return aDate - bDate;
         }
-        // console.log(dateArray);
-        $('#parkingTable').bootstrapTable('filterBy', {
-            createdh: dateArray
-        });
-    });
 
-
-    $('#sortByToday').on('click', function () {
-        $('#parkingTable').bootstrapTable('filterBy', {
-            arrival: [todayDate]
-        });
-    });
-    $('#resetFilters').on('click', function () {
-        $('#parkingTable').bootstrapTable('destroy');
         $('#parkingTable').bootstrapTable({
-            toolbar: '#customToolbar'
+            locale: 'pl-PL',
+            toolbar: '.toolbar',
+            pagination: true,      // Enable pagination
+            pageSize: 25,    // Number of rows to display per page
+            server: true
         });
+
+        $('.delete-btn').on('click', function () {
+            var orderId = $(this).data('order-id');
+            var order_id = $(this).val();
+
+            $.ajax({
+                url: '/admin/delete-order/' + order_id,
+                type: 'DELETE',
+                dataType: 'json',
+                success: function (response) {
+                    // Remove the deleted row from the table
+                    $('#parkingTable').bootstrapTable('remove', {field: 'id', values: [order_id]});
+                    location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+        var todayDate = new Date().toISOString().slice(0, 10);
+        $('#b1').click(function () {
+            $('#parkingTable').bootstrapTable('filterBy', {
+                arrivalh: [todayDate]
+            });
+        });
+        $('#b2').click(function () {
+            $('#parkingTable').bootstrapTable('filterBy', {
+                departureh: [todayDate]
+            });
+        });
+        $('#b3').click(function () {
+            $('#parkingTable').bootstrapTable('filterBy', {
+                createdh: [todayDate]
+            });
+        });
+
+        function formatDate(date) {
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1).padStart(2, '0');
+            var day = String(date.getDate()).padStart(2, '0');
+            return year + '-' + month + '-' + day;
+        }
+
+        $('#b4').click(function () {
+            var todayDate = new Date(); // Current date
+            var oneWeekAgo = new Date(todayDate);
+            oneWeekAgo.setDate(todayDate.getDate() - 7); // Subtract 7 days
+
+            var oneYearAgo = new Date(todayDate);
+            oneYearAgo.setFullYear(todayDate.getFullYear() - 1); // Subtract 1 year
+
+            var customStartDate = new Date(todayDate);
+            customStartDate.setDate(todayDate.getDate() - 7); // Subtract 7 days
+            customStartDate.setFullYear(todayDate.getFullYear() - 1); // Subtract 1 year
+
+            var dateArray = [];
+            var currentDate = new Date(customStartDate);
+            // console.log(customStartDate);
+
+            // Generate an array of dates starting from customStartDate up to oneWeekAgo
+            while (currentDate <= oneWeekAgo) {
+                dateArray.push(formatDate(currentDate));
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+            // console.log(dateArray);
+            $('#parkingTable').bootstrapTable('filterBy', {
+                createdh: dateArray
+            });
+        });
+
+
+        $('#sortByToday').on('click', function () {
+            $('#parkingTable').bootstrapTable('filterBy', {
+                arrival: [todayDate]
+            });
+        });
+        $('#resetFilters').on('click', function () {
+            $('#parkingTable').bootstrapTable('destroy');
+            $('#parkingTable').bootstrapTable({
+                toolbar: '#customToolbar'
+            });
+        });
+        var $navbarToggler = $('.navbar-toggler');
+
+        $navbarToggler.on('click', function (e) {
+            $(this).toggleClass('active opened');
+            $('.js .navbar-collapse, .navbar-collapse').toggleClass('open show');
+
+        })
     });
-    var $navbarToggler = $('.navbar-toggler');
-
-    $navbarToggler.on('click', function (e) {
-        $(this).toggleClass('active opened');
-        $('.js .navbar-collapse, .navbar-collapse').toggleClass('open show');
-
-    })
-
 </script>
 <script>
     // Check if both checkbox and CAPTCHA are validated
@@ -386,7 +394,7 @@
             .filter(dateStr => new Date(dateStr.new_date) >= new Date().setHours(0, 0, 0, 0) - 1)
             .sort((a, b) => new Date(a.new_date) - new Date(b.new_date));
 
-        console.log( 'start: ', reservationDates )
+        console.log('start: ', reservationDates)
 
         var mainCalendar = new CalendarIk({
             dates: reservationDates,
@@ -399,22 +407,22 @@
             dateListClass: 'calendar__date_list',
         });
 
-        $(document).on( 'click', '.calendar__main_calendar .calendar_date ', function (event) {
-            if ( ! $(event.target).hasClass('disabled')) {
+        $(document).on('click', '.calendar__main_calendar .calendar_date ', function (event) {
+            if (!$(event.target).hasClass('disabled')) {
                 $('.calendar__add_date_btn').click();
                 $('.calendar__add_date_list').children().last().find('input')//.focus()
-                    .val( $(event.target).attr('data-calendar-date') )
+                    .val($(event.target).attr('data-calendar-date'))
             }
         })
 
-        $(document).on( 'click', '.calendar__add_date_item .calendar_date', function (event) {
-            if ( ! $(event.target).hasClass('disabled')) {
+        $(document).on('click', '.calendar__add_date_item .calendar_date', function (event) {
+            if (!$(event.target).hasClass('disabled')) {
                 var $td = $(event.target);
                 var date = $td.attr('data-calendar-date');
                 var $parent = $td.closest('.calendar__add_date_item');
                 var $input = $parent.find('input');
-                $input.val( date )
-                window.datesList.toggleClassList( $td.closest('.calendar__add_date_select') );
+                $input.val(date)
+                window.datesList.toggleClassList($td.closest('.calendar__add_date_select'));
             }
         })
 
@@ -427,7 +435,7 @@
 
             const selectedDates = {}; // Initialize the selectedDates object
 
-            $('.calendar__add_date_item').each( (i, item) => {
+            $('.calendar__add_date_item').each((i, item) => {
                 const input = $(item).find('input');
                 const value = input.val();
 
@@ -470,15 +478,15 @@
                 url: url + '/get-updated-dates-list',
                 success: function (response) {
                     if (response.success) {
-                        console.log( response.message )
+                        console.log(response.message)
 
                         const reservationDates = response.data
                             .filter(d => new Date(d) >= new Date().setHours(0, 0, 0, 0) - 1)
                             .sort((a, b) => new Date(a) - new Date(b))
-                            .map(d => ({ new_date: d }))
+                            .map(d => ({new_date: d}))
 
                         console.log('reservationDates: ', reservationDates)
-                        console.log('calendar: ',  window.datesList )
+                        console.log('calendar: ', window.datesList)
 
                         window.datesList.mainCalendar.dates = reservationDates;
                         window.datesList.mainCalendar.calendar.refresh();

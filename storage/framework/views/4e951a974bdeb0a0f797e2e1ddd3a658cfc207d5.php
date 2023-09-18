@@ -7,7 +7,24 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
-    <title><?php echo $__env->yieldContent('title', 'Parking Rondo'); ?></title>
+    <meta name="description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta name="keywords" content="parking, lotnisko, Wrocław, strzeżony, 24/7, RONDO, monitorowany, ubezpieczony">
+    <meta name="author" content="Parking Wrocław RONDO">
+    <meta name="robots" content="index, follow">
+    <title>Parking lotnisko Wrocław RONDO</title>
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Parking lotnisko Wrocław RONDO">
+    <meta property="og:description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta property="og:image" content="url logo">
+    <meta property="og:url" content="https://www.parkingwroclawrondo.com">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Parking lotnisko Wrocław RONDO">
+    <meta name="twitter:description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
+    <meta name="twitter:image" content="<?php echo e(asset('images/parking-logo.png')); ?>">
     <!-- Fav and touch icons -->
     
     
@@ -25,18 +42,25 @@
     <link rel="stylesheet" type="text/css" href="<?php echo e(asset('css/jsCalendar.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/calendar.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/animate.css')); ?>">
-    <script src="<?php echo e(asset('js/navbar/responsive-nav.js')); ?>"></script>
     
 
-    <?php echo $__env->yieldContent('styles'); ?>
+    
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    
+    
+    
+    
+    
+
+    
+    
 </head>
 <body name="#start" id="top" class="js">
 <!-- Top Navbar -->
 <?php echo $__env->make('partials.header', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
 
 <main class="">
-    <?php echo RecaptchaV3::initJs(); ?> <!-- Initialize reCAPTCHA script -->
     <?php echo $__env->yieldContent('content'); ?>
 </main>
 <?php echo $__env->make('partials.footer', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?>
@@ -46,9 +70,10 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" crossorigin="anonymous"></script>
-<script src="<?php echo e(asset('js/navbar/fastclick.js')); ?>" async></script>
-<script src="<?php echo e(asset('js/navbar/scroll.js')); ?>" async></script>
-<script src="<?php echo e(asset('js/navbar/fixed-responsive-nav.js')); ?>" async></script>
+
+
+
+<script src="<?php echo e(asset('js/navbar/navbar-fixed.js')); ?>"></script>
 
 <script type="text/javascript" src="<?php echo e(asset('js/jsCalendar/jsCalendar.min.js')); ?>"></script>
 <script type="text/javascript" src="<?php echo e(asset('js/jsCalendar/jsCalendar.lang.pl.js')); ?>"></script>
@@ -60,6 +85,7 @@
             infinite: false,
             variableWidth: false,
             centerMode: false,
+            adaptiveHeight: true,
             slidesToShow: 1,
             slidesToScroll: 1,
             arrows: false
@@ -68,7 +94,8 @@
             dots: true,
             infinite: false,
             variableWidth: false,
-            variableHeight: true,
+            variableHeight: false,
+            adaptiveHeight: true,
             centerMode: false,
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -81,76 +108,141 @@
     
     <script type="text/javascript">
         $(document).ready(function () {
-            window.$blockedDates = <?php echo json_encode($blockedDates); ?>;
+            var blockedDates = <?php echo json_encode($blockedDates); ?>;
 
-            const orderForm = document.querySelector('#orderForm');
+            var _reservationDates = <?php echo json_encode($blockedDates); ?>;
+            // Array(3) [ {…}, {…}, {…} ]
+            // [ { new_date: "2023-08-24" }, { new_date: "2023-08-25" }, { new_date: "2023-08-26" } ]
+
+            var reservationDates = _reservationDates
+                .filter(dateStr => new Date(dateStr.new_date) >= new Date().setHours(0, 0, 0, 0) - 1)
+                .sort((a, b) => new Date(a.new_date) - new Date(b.new_date));
+
+            console.log('reservationDates: ', reservationDates)
+
+            const orderForm = $('#orderForm');
             const ofInputsIds = ['#order_pick_up_date', '#order_drop_off_date'];
             const ofWrapperCalendarClassName = 'order_form_wrapper_calendar';
             const ofHideCalendarClassName = 'hide';
 
             /*
-                      * Create info text
-                      */
-            const textWrap = document.querySelector('#reservation-blocked-dates');
-            if (textWrap) {
-                textWrap.innerText = `${
-                    $blockedDates
-                        .filter(elem => {
-                            const currDate = new Date(elem.new_date.split('/').reverse().join('/') + ' 0:0:0:0');
-                            const date = new Date().setHours(0, 0, 0, 0);
-                            return currDate >= date;
-                        })
-                        .map(elem => elem.new_date)
-                        .join(', ')
-                }`;
-            }
+             * Create info text
+             */
+            (() => {
+                var datesArray = <?php echo json_encode($blockedDates); ?>;
+                console.log(datesArray);
+                var currentDate = new Date();
+                currentDate.setHours(0, 0, 0, 0);
+                // Filter out old dates
+                var filteredDatesArray = datesArray.filter(function (dateObj) {
+                    var rawDate = new Date(dateObj['new_date']);
+                    return rawDate >= currentDate;
+                });
 
+                // Convert filtered dates to custom format 'dd/mm/yyyy'
+                var formattedDates = filteredDatesArray.map(function (dateObj) {
+                    var rawDate = new Date(dateObj['new_date']);
+                    return ("0" + rawDate.getDate()).slice(-2) + "/" + ("0" + (rawDate.getMonth() + 1)).slice(-2) + "/" + rawDate.getFullYear();
+                });
+
+                // Join the formatted dates with commas
+                var joinedDates = formattedDates.join(', ');
+
+                // console.log(joinedDates);
+                let count_blocked_days = formattedDates.length;
+                let reservation_block = $('.reservation-blocked-dates');
+                if (count_blocked_days > 0) {
+                    
+                    reservation_block.text(joinedDates);
+                } else {
+                    $('.reservation-block-message').hide();
+                }
+                
+                // $('.reservation-blocked-dates').text(joinedDates);
+            })();
 
             /*
              * Create Wrapper For Calendar
              */
-            const ofWrapperCalendar = document.createElement('div');
-            ofWrapperCalendar.classList.add(ofWrapperCalendarClassName);
-            ofWrapperCalendar.classList.add(ofHideCalendarClassName);
-            orderForm.append(ofWrapperCalendar);
+            orderForm.append(`<div class="${ofWrapperCalendarClassName} ${ofHideCalendarClassName}"></div>`);
 
             /*
              * Create Calendar
              */
             window.ofCalendar = new CalendarIk({
-                dates: window.$blockedDates,
+                dates: <?php echo json_encode($blockedDates); ?>,
                 calendarWrapperClass: '.' + ofWrapperCalendarClassName,
-                ofInputDateFrom: document.querySelector(ofInputsIds[0]),
-                ofInputDateTo: document.querySelector(ofInputsIds[1]),
+                ofInputDateFrom: $(ofInputsIds[0]),
+                ofInputDateTo: $(ofInputsIds[1]),
             });
+
 
             /*
              * Create Events for Inputs
              */
-            ofInputsIds.forEach((input, i) => {
-                const $input = document.querySelector(input);
-                if ($input) {
+            $(document).on('click', '.datetime input', function (event) {
+                event.preventDefault();
 
-                    $input.setAttribute('data-input-id', i);
-                    $input.setAttribute('readonly', 'readonly');
+                $('.date_error').each((i, elem) => {
+                    elem.remove();
+                })
 
-                    $input.addEventListener('click', e => {
-                        e.preventDefault();
+                var $input = $(event.target);
+                $input.prop("readonly", true);
+                var $dateTimeBox = $input.closest('.datetime');
 
-                        // Set Calendar position
-                        const posForm = orderForm.getBoundingClientRect();
-                        const posInput = e.target.getBoundingClientRect();
-                        const posLeft = posInput.left - posForm.left + posInput.width;
-                        const posTop = posInput.top - posForm.top;
-                        ofCalendar.calendar._target.style.top = posTop + 'px';
-                        ofCalendar.calendar._target.style.left = posLeft + 'px';
+                $(ofCalendar.calendar._target)
+                    .removeClass(ofHideCalendarClassName)
+                    .attr('data-input-active-id', $input.attr('id'))
+                    .css({top: $dateTimeBox.position().top + $dateTimeBox.height() + 'px'})
 
-                        ofCalendar.calendar._target.classList.remove(ofHideCalendarClassName);
-                        ofCalendar.ofInputActive = $input;
-                        ofCalendar.ofInputActiveId = $input.dataset.inputId;
-                        ofCalendar.calendar.refresh();
-                        ofCalendar.setActionOnDateClick();
-                    })
+                ofCalendar.selectDate = $input.val();
+                ofCalendar.calendar.refresh();
+            })
+
+            $(document).on('click', '.calendar_date', function (event) {
+                var $td = $(event.target);
+                var $wrapperCalendar = $('.' + ofWrapperCalendarClassName);
+                var $inputActive = $('#' + $wrapperCalendar.attr('data-input-active-id'));
+                var isDateStart = '#' + $inputActive.attr('id') === ofInputsIds[0]// ? 'from' : 'to';
+
+                if (!$td.hasClass('disabled')) {
+                    var date = $td.attr('data-calendar-date');
+                    var from = $wrapperCalendar.attr('data-date-from');
+                    var to = $wrapperCalendar.attr('data-date-to');
+                    var errorText = 'Data zakończenia musi być późniejsza niż data rozpoczęcia.';
+
+                    if (isDateStart) {
+
+                        if ((to && new Date(to).getTime() - new Date(date).getTime() > 0) === false) {
+                            var errTxt = 'Data Od dnia musi być wcześniejsza niż data Do dnia.';
+                            console.log(errTxt);
+                            createError(errTxt);
+                        } else {
+                            $inputActive.val(date)
+                            $wrapperCalendar.attr('data-date-from', date)
+                        }
+
+                    } else {
+
+                        if ((from && new Date(from).getTime() - new Date(date).getTime() < 0) === false) {
+                            var errTxt = 'Data zakończenia musi być późniejsza niż data rozpoczęcia.';
+                            console.log(errTxt);
+                            createError(errTxt);
+                        } else {
+                            $inputActive.val(date)
+                            $wrapperCalendar.attr('data-date-to', date)
+                        }
+
+                    }
+
+                    function createError(text) {
+                        $inputActive.closest('.datetime').css({position: 'relative'})
+                            .prepend(`<div class="date_error" style="position:absolute;z-index:1;top:calc(100% - 6px);left:0;color:red;font-size:12px;">${text}</div>`);
+                    }
+
+
+                    $wrapperCalendar.addClass(ofHideCalendarClassName)
                 }
             })
 
@@ -181,6 +273,8 @@
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="<?php echo e(asset('js/gmap3.min.js')); ?>"></script>
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+
+
 <script>
     $(document).ready(function () {
         // Submit the form using Ajax
@@ -194,6 +288,33 @@
             const formData = {
                 email: $('input#newsletter_email').val()
             }
+            // $.ajax({
+            //     type: 'POST',
+            //     url: '/subscribe',
+            //     data: formData,
+            //     dataType: 'json',
+            //     contentType: false,
+            //     processData: false,
+            //     success: function (response) {
+            //         console.log(formData);
+            //         $('#successMessage').show();
+            //     },
+            //     error: function (error) {
+            //         console.log(error);
+            //         // Handle error response if needed
+            //     }
+            // });
+            // Get the reCAPTCHA response
+            // grecaptcha.ready(function () {
+            //     grecaptcha.execute('6LfCSLgnAAAAAAwp2E-HSCwKa6htwmFkFlyC9puJ', {action: 'newsletter-form'}).then(function (token) {
+            // Add the CSRF token and reCAPTCHA response to form data
+            // token = $('meta[name="_token"]').attr('content');
+            // formData.append('<input type="hidden" name="recaptcha_token" value="' + token + '">');
+
+            
+            
+
+            // Submit the form
             $.ajax({
                 type: 'POST',
                 url: '/subscribe',
@@ -202,7 +323,6 @@
                 contentType: false,
                 processData: false,
                 success: function (response) {
-                    console.log(formData);
                     $('#successMessage').show();
                 },
                 error: function (error) {
@@ -210,32 +330,8 @@
                     // Handle error response if needed
                 }
             });
-            // Get the reCAPTCHA response
-            grecaptcha.ready(function () {
-                grecaptcha.execute('6LeHhXsnAAAAAA8R-e12ZJPKy68yTcIAfeCvDjOK', {action: 'subscribe'}).then(function (token) {
-                    // Add the CSRF token and reCAPTCHA response to form data
-                    const formData = new FormData(form); // Use the stored reference to the form element
-                    formData.append('_token', '<?php echo e(csrf_token()); ?>');
-                    formData.append('g-recaptcha-response', token);
-
-                    // Submit the form
-                    $.ajax({
-                        type: 'POST',
-                        url: '/subscribe',
-                        data: formData,
-                        dataType: 'json',
-                        contentType: false,
-                        processData: false,
-                        success: function (response) {
-                            $('#successMessage').show();
-                        },
-                        error: function (error) {
-                            console.log(error);
-                            // Handle error response if needed
-                        }
-                    });
-                }.bind(this)); // Explicitly bind the context to the promise callback
-            });
+            //     }.bind(this)); // Explicitly bind the context to the promise callback
+            // });
         });
     });
 </script>
@@ -361,7 +457,6 @@
     var datesArray = <?php echo json_encode($blockedDates); ?>;
 
 </script>
-
 
 </body>
 </html>

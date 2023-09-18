@@ -3,6 +3,7 @@
     namespace App\Providers;
 
     use App\Models\Reservation;
+    use Illuminate\Support\Facades\URL;
     use Illuminate\Pagination\Paginator;
     use Illuminate\Support\Facades\Blade;
     use Illuminate\Support\ServiceProvider;
@@ -42,5 +43,8 @@
             Blade::directive('convertDate', function ($expression) {
                 return "<?php echo App\Helpers\getConvertedDate$expression; ?>";
             });
+            if (env('APP_ENV') == 'production') {
+                URL::forceScheme('https');
+            }
         }
     }

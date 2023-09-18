@@ -1,13 +1,13 @@
 <div class="col-md-12 mt-1 mb-2">
-    <button type="button" id="btn_add_service" class="btn btn-success">Add</button>
+    <button type="button" id="btn_add_service" class="btn btn-default mb-3">Dodać zaletę</button>
 </div>
 <div class="card">
     <div class="card-header text-center font-weight-bold">
-        <h2>Laravel 8 Ajax Book CRUD with DataTable Example Tutorial</h2>
+        <h2>Zalety</h2>
     </div>
 
     <div class="card-body">
-        <table class="table table-bordered" id="datatable-ajax-crud">
+        <table class="table table-bordered table-responsive-lg">
             <thead>
             <tr>
                 <th>Service Title</th>
@@ -26,10 +26,10 @@
                     </td>
                     <td>
                         <!-- Edit button -->
-                        <button type="button" class="btn btn-primary btn-sm btn-edit open_service_modal" value="<?php echo e($post->id); ?>">Edit</button>
+                        <button type="button" class="btn btn-primary btn-sm btn-edit open_service_modal" value="<?php echo e($post->id); ?>">Edycja</button>
 
                         <!-- Delete button -->
-                        <button type="button" class="btn btn-danger btn-sm" value="<?php echo e($post->id); ?>">Delete</button>
+                        <button type="button" class="btn btn-danger btn-sm" value="<?php echo e($post->id); ?>">Usuń</button>
                     </td>
                 </tr>
             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

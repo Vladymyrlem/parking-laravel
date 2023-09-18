@@ -8,10 +8,13 @@
     use App\Models\Price;
     use Barryvdh\DomPDF\Facade\Pdf;
     use Carbon\Carbon;
+    use Dompdf\Dompdf;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Blade;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Mail;
     use App\Mail\OrderConfirmation;
+    use Illuminate\Support\Facades\File;
 
     class ParkingController extends Controller
     {
@@ -60,19 +63,53 @@
             $departureDate = Carbon::createFromFormat('Y-m-d H:i:s', $order->departure)->format('d/m/Y H:i');
             $orderDate = now('Europe/Warsaw');
             $arrivalOrder = Carbon::createFromFormat('Y-m-d H:i:s', $order->arrival)->format('d/m/Y');
+            $logo = public_path('logomail.png');
 
             $contacts = Contacts::all();
-            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'departureDate', 'contacts', 'orderDate', 'arrivalOrder'));
+            $data = [
+                'order' => $order,
+                'arrivalDate' => $arrivalDate,
+                'departureDate' => $departureDate,
+                'contacts' => $contacts,
+                'orderDate' => $orderDate,
+                'arrivalOrder' => $arrivalOrder,
+                'logo' => $logo
+            ];
+            $renderedContent = Blade::render('pdf-template', $data);
+
+// Define the path to the HTML file
+            $htmlFilePath = public_path('pdf-template/index.html');
+
+// Clear the existing content of the HTML file
+            file_put_contents($htmlFilePath, '');
+
+// Save the newly rendered content to the HTML file
+            file_put_contents($htmlFilePath, $renderedContent);
+            $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'departureDate', 'contacts', 'orderDate', 'arrivalOrder', 'logo'));
+            $pdf->getDomPDF()->getOptions()->set('isPhpEnabled', true); // Enable PHP script execution in HTML
+            $pdf->getDomPDF()->getOptions()->set('isHtml5ParserEnabled', true); // Enable PHP script execution in HTML
+            $pdf->getDomPDF()->getOptions()->set('fontPath', public_path('fonts/')); // Set the path to your font files
+            $pdf->getDomPDF()->getOptions()->set('defaultFont', 'DejaVu Sans'); // Set the default font family
             $pdf->setOption('encoding', 'utf-8');
 
+            $templateContent = file_get_contents($htmlFilePath);
+
+// Append dynamic content to the template
+            $finalHtmlContent = $renderedContent;
+//            $view = view('pdf-template', $data); // Replace 'pdf-template' with your actual view name
+//            $html = $view->render();
             $filename = 'order_' . $order->id . '.pdf';
 
-            $pdf->save(public_path('order/' . $filename));
+            $pdf->loadHtml($finalHtmlContent)->setPaper('a4', 'portrait')->save(public_path('order/' . $filename));
 
-            $adminEmail ='rezerwacje@parkingrondo.pl'; // This will retrieve the admin email from the .env file
-            Mail::mailer('reservation')->to($order->email)->send(new OrderConfirmation($order, $filename));
-            Mail::mailer('reservation')->to($adminEmail)->send(new OrderConfirmation($order, $filename));
-            // Return the total price as a JSON response (optional)
+            $adminEmail = 'rezerwacje@parkingrondo.pl'; // This will retrieve the admin email from the .env file
+            Mail::mailer('reservation')->to($order->email)->send(
+                (new OrderConfirmation($order, $filename))->subject('Nowa rezerwacja - potwierdzenie')
+            );
+
+            Mail::mailer('reservation')->to($adminEmail)->send(
+                (new OrderConfirmation($order, $filename))->subject('Nowa rezerwacja - potwierdzenie')
+            );            // Return the total price as a JSON response (optional)
             return response()->json([
                 'message' => 'Order created successfully!',
                 'order' => $order,

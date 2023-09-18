@@ -5,6 +5,7 @@
   src: local("Lato Light"), local("Lato-Light"), url("../fonts/Lato-Light.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato-Light.woff2") format("woff2"), url("../fonts/Lato-Light.woff") format("woff"), url("../fonts/Lato-Light.ttf") format("truetype");
   font-weight: 300;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Lato Medium";
@@ -12,6 +13,7 @@
   src: local("Lato Medium"), local("Lato-Medium"), url("../fonts/Lato-Medium.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato-Medium.woff2") format("woff2"), url("../fonts/Lato-Medium.woff") format("woff"), url("../fonts/Lato-Medium.ttf") format("truetype");
   font-weight: 500;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Lato Bold";
@@ -19,6 +21,7 @@
   src: local("Lato Black"), local("Lato-Black"), url("../fonts/Lato-Black.eot?#iefix") format("embedded-opentype"), url("../fonts/Lato-Black.woff2") format("woff2"), url("../fonts/Lato-Black.woff") format("woff"), url("../fonts/Lato-Black.ttf") format("truetype");
   font-weight: 900;
   font-style: normal;
+  font-display: swap;
 }
 /*!
  * Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com

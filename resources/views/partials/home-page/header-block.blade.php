@@ -1,4 +1,4 @@
-<div class="header-block" id="header-block" name="#header-block" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 100%), url('{{asset('images/head-bkg.png')}}'),
+<div class="header-block" id="header-block" name="#header-block" style="background: linear-gradient(0deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.75) 100%), url('{{asset('images/head-bkg.webp')}}'),
 lightgray
         50% / cover
         no-repeat;

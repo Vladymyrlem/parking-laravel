@@ -22,15 +22,26 @@
       'PDF' => 'Barryvdh\\DomPDF\\Facade\\Pdf',
     ),
   ),
-  'josiasmontag/laravel-recaptchav3' => 
+  'biscolab/laravel-recaptcha' => 
   array (
     'providers' => 
     array (
-      0 => 'Lunaweb\\RecaptchaV3\\Providers\\RecaptchaV3ServiceProvider',
+      0 => 'Biscolab\\ReCaptcha\\ReCaptchaServiceProvider',
     ),
     'aliases' => 
     array (
-      'RecaptchaV3' => 'Lunaweb\\RecaptchaV3\\Facades\\RecaptchaV3',
+      'ReCaptcha' => 'Biscolab\\ReCaptcha\\Facades\\ReCaptcha',
+    ),
+  ),
+  'intervention/image' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'Intervention\\Image\\ImageServiceProvider',
+    ),
+    'aliases' => 
+    array (
+      'Image' => 'Intervention\\Image\\Facades\\Image',
     ),
   ),
   'laravel/sail' => 
@@ -112,15 +123,22 @@
       'Flare' => 'Spatie\\LaravelIgnition\\Facades\\Flare',
     ),
   ),
-  'yajra/laravel-datatables-oracle' => 
+  'spatie/laravel-sitemap' => 
   array (
     'providers' => 
     array (
-      0 => 'Yajra\\DataTables\\DataTablesServiceProvider',
+      0 => 'Spatie\\Sitemap\\SitemapServiceProvider',
+    ),
+  ),
+  'timehunter/laravel-google-recaptcha-v2' => 
+  array (
+    'providers' => 
+    array (
+      0 => 'TimeHunter\\LaravelGoogleReCaptchaV2\\Providers\\GoogleReCaptchaV2ServiceProvider',
     ),
     'aliases' => 
     array (
-      'DataTables' => 'Yajra\\DataTables\\Facades\\DataTables',
+      'GoogleReCaptchaV2' => 'TimeHunter\\LaravelGoogleReCaptchaV2\\Facades\\GoogleReCaptchaV2',
     ),
   ),
 );

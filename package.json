@@ -13,7 +13,8 @@
         "gulp-watch": "gulp watch",
         "gulp-scss": "gulp sass",
         "gulp": "gulp default",
-        "gulp-js": "gulp js"
+        "gulp-js": "gulp js",
+        "gulp-minify": "gulp minify-css"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",
@@ -38,6 +39,10 @@
         "@fullcalendar/daygrid": "^6.1.8",
         "@fullcalendar/interaction": "^6.1.8",
         "bootstrap-table": "^1.22.1",
-        "datatables.net-dt": "^1.13.5"
+        "datatables.net-dt": "^1.13.5",
+        "gulp-clean-css": "^4.3.0",
+        "gulp-filter": "^8.0.0",
+        "gulp-if": "^3.0.0",
+        "gulp-rename": "^2.0.0"
     }
 }
