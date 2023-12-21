@@ -52,6 +52,28 @@
         nav ul > li a {
             height: auto;
         }
+
+        #parkingTable > tfoot {
+            display: none;
+        }
+
+
+        @media screen and (min-width: 1024px) {
+            #parkingTable {
+                table-layout: fixed
+            }
+        }
+
+        /*#parkingTable > tbody > tr > td:first-child,*/
+        #parkingTable > thead > tr > th:first-child {
+            /*min-width: max-content !important;*/
+            /*width: auto;*/
+            /*display: flex;*/
+        }
+
+        #resetFilters{
+            margin-bottom: 5px;
+        }
     </style>
 
 </head>
@@ -66,7 +88,8 @@
                  class="brand-image"
                  style="opacity: 1">
         </a>
-        <button class="navbar-toggler position-relative collapsed" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent"
+        <button class="navbar-toggler position-relative collapsed" type="button" data-toggle="collapse"
+                data-target="#navbarContent" aria-controls="navbarContent"
                 aria-expanded="false" aria-label="Toggle navigation">
         </button>
         <nav class="navbar-collapse justify-content-end collapse" id="navbarContent" aria-expanded="false" style="">
@@ -80,11 +103,13 @@
                 <li class="menu-item"><a class="nav-link scroll-to" href="#contacts" data-scroll>Kontakt</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#titles" data-scroll>Sekcja nagłówków</a></li>
                 <li class="menu-item"><a class="nav-link scroll-to" href="#services" data-scroll>Zalety</a></li>
-                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Bloki tekstowe</a></li>
+                <li class="menu-item"><a class="nav-link scroll-to" href="#text-content" data-scroll>Bloki tekstowe</a>
+                </li>
                 <li class="nav-item dropdown ml-auto">
                     <a class="nav-link user-link" data-toggle="dropdown" href="#" aria-expanded="false">
                         {{ Auth::user()->name }}
-                        <svg class="" width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="" width="16" height="17" viewBox="0 0 16 17" fill="none"
+                             xmlns="http://www.w3.org/2000/svg">
                             <path d="M13.3538 6.85378L8.35378 11.8538C8.30735 11.9003 8.2522 11.9372 8.1915 11.9623C8.13081 11.9875 8.06574 12.0004 8.00003 12.0004C7.93433 12.0004 7.86926 11.9875 7
                             .80856 11.9623C7.74786 11.9372 7.69272 11.9003 7.64628 11.8538L2.64628 6.85378C2.55246 6.75996 2.49976 6.63272 2.49976 6.50003C2.49976 6.36735 2.55246 6.2401 2.64628 6
                             .14628C2.7401 6.05246 2.86735 5.99976 3.00003 5.99976C3.13272 5.99976 3.25996 6.05246 3.35378 6.14628L8.00003 10.7932L12.6463 6.14628C12.6927 6.09983 12.7479 6.06298 12
@@ -204,6 +229,8 @@
 {{--<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>--}}
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 <script src="{{ asset('js/bootstrap-table-pl-PL.js') }}"></script>
+<script src="{{ asset('js/paginathing.min.js') }}"></script>
+
 {{--<script src="https://unpkg.com/bootstrap-table@1.22.1/dist/extensions/export/bootstrap-table-export.min.js"></script>--}}
 {{--<script src="https://www.google.com/recaptcha/api.js" async defer></script>--}}
 <script>
@@ -240,10 +267,40 @@
         $('#parkingTable').bootstrapTable({
             locale: 'pl-PL',
             toolbar: '.toolbar',
-            pagination: true,      // Enable pagination
+            pagination: false,      // Enable pagination
             pageSize: 25,    // Number of rows to display per page
-            server: true
+            server: true,
+            columns: [
+                {
+                    field: 'id',
+                    checkbox: false,
+                    colspan: 1,
+                    rowspan: 1,
+                    align: 'left',
+                    valign: 'middle'
+                }
+            ]
         });
+        $('table#parkingTable tbody').paginathing({
+            perPage: 20,
+            limitPagination: 20,
+            prevNext: true,
+            firstLast: true,
+            prevText: '&laquo;',
+            nextText: '&raquo;',
+            firstText: 'Pierwszy',
+            lastText: 'Ostatni',
+            activeClass: 'active',
+
+        });
+
+        function headerStyle(column) {
+            return {
+                id: {
+                    css: {width: '15%'}
+                },
+            }[column.field]
+        }
 
         $('.delete-btn').on('click', function () {
             var orderId = $(this).data('order-id');
@@ -264,6 +321,7 @@
             });
         });
         var todayDate = new Date().toISOString().slice(0, 10);
+
         $('#b1').click(function () {
             $('#parkingTable').bootstrapTable('filterBy', {
                 arrivalh: [todayDate]

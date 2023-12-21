@@ -52,6 +52,28 @@ jQuery(function () {
     var day = parts[0];
     return year + '-' + month + '-' + day;
   }
+  function get_arr_dates(start, end) {
+    var date_start = new Date(start); // Початкова дата
+    var date_end = new Date(end); // Кінцева дата
+
+    var array_dates = [];
+    var date_curr = date_start;
+    while (date_curr <= date_end) {
+      array_dates.push(new Date(date_curr));
+      date_curr.setDate(date_curr.getDate() + 1);
+    }
+    return array_dates;
+  }
+
+  // Виклик функції та виведення результату в консоль
+
+  function includes_dates(arr1, arr2) {
+    return arr1.filter(function (date1) {
+      return arr2.some(function (date2) {
+        return date1.toDateString() === date2.toDateString();
+      });
+    });
+  }
   jQuery('#orderForm').submit(function (e) {
     e.preventDefault(); // Prevent form submission
 
@@ -143,43 +165,113 @@ jQuery(function () {
 
     // Create an empty object to store the key-value pairs
     var pricesObj = {};
+    var startPromotional = $('.start-promotional-value').text();
+    var endPromotional = $('.end-promotional-value').text();
+    var arrivalDate = moment(startDate + ' ' + startTime, 'YYYY-MM-DD HH:mm:ss');
+    var departureDate = moment(endDate + ' ' + endTime, 'YYYY-MM-DD HH:mm:ss');
 
     // Loop through each box_content element
+    var parkingArrivalDate = startDate;
+    var parkingDepartureDate = endDate;
     boxContentElements.each(function () {
-      // Extract the values from h2 and h4 elements
       var days = $(this).find('h2').text();
       var price_value = '';
-      if ($(this).hasClass('promo')) {
-        price_value = $(this).find('h4 span.promotional-price').text();
-      } else {
-        price_value = $(this).find('h4').text();
-      }
+      var promotionStartDate = $('.start-promotional-value').eq(0).text();
+      var promotionEndDate = $('.end-promotional-value').eq(0).text();
+      console.log(parkingArrivalDate, parkingDepartureDate);
+      console.log(promotionStartDate.split(' ')[0], promotionEndDate.split(' ')[0]);
+      // Дати початку і закінчення акції
 
-      // Convert the price to a number without the "PLN" part
-      // Add the key-value pair to the object
-      pricesObj[days] = parseFloat(price_value.replace('PLN', '').trim());
+      var d1 = get_arr_dates(promotionStartDate.split(' ')[0], promotionEndDate.split(' ')[0]);
+      var d2 = get_arr_dates(parkingArrivalDate, parkingDepartureDate);
+      // Перевірка, чи є перетин між проміжками дат
+      if (includes_dates(d1, d2).length > 0) {
+        var priceElement = $(this).find('h4');
+        var isPromo = !$(this).hasClass('promo');
+        if (isPromo) {
+          price_value = priceElement.text();
+          console.log('Standard price: ' + price_value);
+        } else {
+          price_value = priceElement.find('span.promotional-price-value').text();
+          console.log('Promotional price: ' + price_value);
+        }
+        console.log('You can get promotional');
+      } else {
+        price_value = $(this).find('h4 span.standart-price-value').text();
+        console.log('Standard price: ' + price_value);
+      }
+      pricesObj[days] = parseFloat(price_value);
     });
+
+    // Вивести результат
     var totalPrice = pricesObj[daysDifference];
+    console.log('Загальна ціна:', totalPrice);
 
     // Check if the differenceDays is greater than 15
     if (daysDifference > 15) {
       // Calculate the additional days beyond 15
       var additionalDays = daysDifference - 15;
+      var additionalPrice = additionalDays * 10;
 
       // Get the price for 15 days from the pricesObj
       var priceFor15Days = pricesObj['15'];
+      var promoPriceElement = $('#day-15').find('h4');
+      if ($('#day-15').hasClass('promo')) {
+        var _priceFor15Days = parseFloat(promoPriceElement.find('span.promotional-price-value').text());
+        console.log('Promotional 15 days');
+        console.log('Promotional 15 Price' + _priceFor15Days);
+        totalPrice = _priceFor15Days + additionalPrice;
+      } else {
+        var _priceFor15Days2 = pricesObj['15'];
+        console.log('Standart 15 Price' + _priceFor15Days2);
+        totalPrice = _priceFor15Days2 + additionalPrice;
+      }
 
       // Calculate the additional price for the extra days (additionalDays * 10)
-      var additionalPrice = additionalDays * 10;
 
       // Add the additional price to the total price (use priceFor15Days as the default price)
-      totalPrice = priceFor15Days + additionalPrice;
     }
+
     $('#checkout_price').val(totalPrice);
     $('#checkout_price_desc').html(totalPrice + '&nbsp;PLN');
     // Show the modal
     $('#checkoutModal').modal('show');
   });
+  var textElement = jQuery('.start-promotional'); // Отримуємо об'єкт jQuery
+  var text = textElement.text(); // Отримуємо текст з об'єкту jQuery
+
+  // Розділити текст за допомогою роздільника ':'
+  var parts = text.split(':');
+
+  // Отримати другу частину (дату) та видалити пробіли з початку та кінця рядка
+  var dateText = parts[1].trim();
+
+  // Розділити дату за допомогою '/'
+  var dateParts = dateText.split('/');
+
+  // Отримати день, місяць і рік
+  var day = dateParts[0];
+  var month = dateParts[1];
+  var year = dateParts[2];
+
+  // Створити нову дату в бажаному форматі (YYYY-MM-DD)
+  var formattedDate = year + '-' + month + '-' + day;
+
+  // console.log(formattedDate.replace('od', '')); // Вивести отформатовану дату у консолі
+  var datePromotional = document.querySelector('.start-promotional-value').textContent;
+
+  // Створити об'єкт Date з тексту (перетворення з рядка в дату)
+  var targetDate = new Date(datePromotional);
+
+  // Отримати поточну дату і час
+  var currentDate = new Date();
+
+  // Порівняти ці дати
+  //     if (currentDate >= targetDate) {
+  //         console.log('Дата досягнута або перевищена.');
+  //     } else {
+  //         console.log('Дата не досягнута.');
+  //     }
   $('#checkout_cancel_btn').on('click', function (e) {
     e.preventDefault();
     $('#form_checkout input[type="text"]').val('');
@@ -192,7 +284,6 @@ jQuery(function () {
     e.preventDefault();
     var submitButton = $('#checkout_submit_btn');
     var originalText = submitButton.text();
-    submitButton.text('przetwarzam...');
     $.ajaxSetup({
       headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -275,20 +366,26 @@ jQuery(function () {
       $('#validation_checkout_plate').removeClass('error');
       $('#validation_checkout_plate').text('');
     }
-    if (inputFirstname == '' || inputLastname == '' || inputPlate == '') {
+    var inputCarBrand = $('input#checkout_car_model').val();
+    if (inputCarBrand == '') {
+      $('#validation_checkout_car_model').addClass('error');
+      $('#validation_checkout_car_model').text('to pole jest wymagane');
+    } else {
+      $('#validation_checkout_car_model').removeClass('error');
+      $('#validation_checkout_car_model').text('');
+    }
+    if (inputFirstname == '' || inputLastname == '' || inputPlate == '' || inputCarBrand == '') {
       $('#checkout_form_msg').removeClass('hidden');
       $('#checkout_form_msg').text('WYPEŁNIJ POPRAWNIE WSZYSTKIE POLA!');
     } else {
       $('#checkout_form_msg').addClass('hidden');
+      submitButton.text('przetwarzam...');
     }
     if ($('input#checkout_car_brand').val() == '' || $('input#checkout_car_brand').val() != '') {
       $('#validation_checkout_car_brand').addClass('ok');
     }
-    if ($('input#checkout_car_model').val() == '' || $('input#checkout_car_model').val() != '') {
+    if ($('input#checkout_car_model').val() != '') {
       $('#validation_checkout_car_model').addClass('ok');
-    }
-    if ($('input#checkout_car_brand').val() == '' || $('input#checkout_car_brand').val() != '') {
-      $('#validation_checkout_car_brand').addClass('ok');
     }
   });
   /*

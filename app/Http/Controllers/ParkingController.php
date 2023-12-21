@@ -75,16 +75,20 @@
                 'arrivalOrder' => $arrivalOrder,
                 'logo' => $logo
             ];
-            $renderedContent = Blade::render('pdf-template', $data);
-
-// Define the path to the HTML file
-            $htmlFilePath = public_path('pdf-template/index.html');
+            $orderID = $order->id;
+            $htmlFilePath = public_path("pdf-template/order_{$orderID}.html");
 
 // Clear the existing content of the HTML file
             file_put_contents($htmlFilePath, '');
 
-// Save the newly rendered content to the HTML file
+// Render the content and save it to the HTML file
+            $renderedContent = Blade::render('pdf-template', $data);
+
+// Append the rendered content to the HTML file
             file_put_contents($htmlFilePath, $renderedContent);
+
+// Save the newly rendered content to the HTML file
+//            file_put_contents($htmlFilePath, $renderedContent);
             $pdf = PDF::loadView('pdf-template', compact('order', 'arrivalDate', 'departureDate', 'contacts', 'orderDate', 'arrivalOrder', 'logo'));
             $pdf->getDomPDF()->getOptions()->set('isPhpEnabled', true); // Enable PHP script execution in HTML
             $pdf->getDomPDF()->getOptions()->set('isHtml5ParserEnabled', true); // Enable PHP script execution in HTML

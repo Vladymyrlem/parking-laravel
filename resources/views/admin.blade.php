@@ -17,7 +17,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-12">
-                    <h1 class="m-0 text-center">{{ __('Tablica zamówień') }}</h1>
+                    <h1 class="m-0 text-center">{{ __('Rezerwacja') }}</h1>
                 </div><!-- /.col -->
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
@@ -39,22 +39,25 @@
                data-show-fullscreen="true"
                data-show-columns="false"
                data-show-columns-toggle-all="false"
+               data-sort-name="arrival"
+               data-sort-order="desc"
                data-detail-view="false"
                data-show-export="false"
                data-click-to-select="true"
                data-detail-formatter="detailFormatter"
                data-minimum-count-columns="2"
-               data-show-pagination-switch="true"
-               data-pagination="true"
+               data-show-pagination-switch="false"
+               data-pagination="false"
                data-id-field="id"
                data-page-size="25"
                data-toolbar=".toolbar"
+               data-header-style="headerStyle"
                data-page-list="[10, 25, 50, 100, all]"
-               data-show-footer="true">
+               data-show-footer="false">
             <thead>
             <tr>
 
-                <th data-field="id" data-sortable="true">numer</th>
+                <th data-field="id" data-sortable="true" data-width="7" data-width-unit="%">numer</th>
                 <th data-field="created_at" data-sortable="true">z dnia</th>
                 <th data-field="createdh" data-sortable="true" class="d-none">z dnia h</th>
                 <th data-field="arrival" data-sortable="true">przyjazd</th>
@@ -74,7 +77,9 @@
                 <tr>
                     <td class="id">{{ $parking->id }}</td>
                     <td class="created-date">{{ $parking->created_at }}
-                        <button class="btn btn-danger delete-btn" value="{{ $parking->id }}" data-order-id="{{ $parking->id }}">Usuń</button>
+                        <button class="btn btn-danger delete-btn" value="{{ $parking->id }}"
+                                data-order-id="{{ $parking->id }}">Usuń
+                        </button>
                     </td>
                     <td class="created-date-without-time d-none">{{ getConvertedDate($parking->created_at) }}
                     </td>
@@ -167,7 +172,9 @@
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <button id="btn_add" name="btn_add" class="btn btn-default pull-right mb-3">Dodaj nowy slide</button>
+                                <button id="btn_add" name="btn_add" class="btn btn-default pull-right mb-3">Dodaj nowy
+                                    slide
+                                </button>
                             </div>
                             <button id="toggleRowsButton" class="btn btn-primary">Pokaż wszystkie wierzy</button>
 
@@ -191,8 +198,12 @@
                                         <td> {{$headBlock->title}} </td>
                                         <td>{!! $headBlock->subtitle !!}</td>
                                         <td width="150">
-                                            <button class="btn btn-warning btn-detail open_header_modal" value="{{$headBlock->id}}">Edytuj</button>
-                                            <button class="btn btn-danger btn-delete delete-product" value="{{$headBlock->id}}">Usuń</button>
+                                            <button class="btn btn-warning btn-detail open_header_modal"
+                                                    value="{{$headBlock->id}}">Edytuj
+                                            </button>
+                                            <button class="btn btn-danger btn-delete delete-product"
+                                                    value="{{$headBlock->id}}">Usuń
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -259,7 +270,9 @@
                     <div class="row">
                         <div class="col-lg-12 margin-tb">
                             <div class="pull-right">
-                                <button id="btn_add_review" name="btn_add_review" class="btn btn-default pull-right mb-3">Dodaj nowe opinia</button>
+                                <button id="btn_add_review" name="btn_add_review"
+                                        class="btn btn-default pull-right mb-3">Dodaj nowe opinia
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -281,8 +294,12 @@
                                         <td>{{$review->content}}</td>
                                         <td>{{$review->author}}</td>
                                         <td width="150">
-                                            <button class="btn btn-warning btn-detail open_review_modal" value="{{$review->id}}">Edycja</button>
-                                            <button class="btn btn-danger btn-delete delete-review" value="{{$review->id}}">Usuń</button>
+                                            <button class="btn btn-warning btn-detail open_review_modal"
+                                                    value="{{$review->id}}">Edycja
+                                            </button>
+                                            <button class="btn btn-danger btn-delete delete-review"
+                                                    value="{{$review->id}}">Usuń
+                                            </button>
                                         </td>
                                     </tr>
                                 @endforeach

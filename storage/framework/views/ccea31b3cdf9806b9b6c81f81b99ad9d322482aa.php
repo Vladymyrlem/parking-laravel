@@ -21,7 +21,7 @@
         </div><!-- /.container-fluid -->
     </div>
     <div id="orders-table" name="#orders-table">
-        <div class="toolbar">
+        <div class="toolbar" id="customToolbar">
             <button id="b1" class="btn btn-secondary mb-1">przyjazd dzisiaj</button>
             <button id="b2" class="btn btn-secondary mb-1">wyjazd dzisiaj</button>
             <button id="b3" class="btn btn-secondary mb-1">z dzisiaj</button>
@@ -42,13 +42,13 @@
                data-click-to-select="true"
                data-detail-formatter="detailFormatter"
                data-minimum-count-columns="2"
-               data-show-pagination-switch="true"
-               data-pagination="true"
+               data-show-pagination-switch="false"
+               data-pagination="false"
                data-id-field="id"
                data-page-size="25"
                data-toolbar=".toolbar"
                data-page-list="[10, 25, 50, 100, all]"
-               data-show-footer="true">
+               data-show-footer="false">
             <thead>
             <tr>
 
@@ -73,7 +73,7 @@
                     <td class="id"><?php echo e($parking->id); ?></td>
                     <td class="created-date"><?php echo e($parking->created_at); ?>
 
-                        <button class="btn btn-danger delete-btn" data-order-id="<?php echo e($parking->id); ?>">Usuń</button>
+                        <button class="btn btn-danger delete-btn" value="<?php echo e($parking->id); ?>" data-order-id="<?php echo e($parking->id); ?>">Usuń</button>
                     </td>
                     <td class="created-date-without-time d-none"><?php echo e(getConvertedDate($parking->created_at)); ?>
 

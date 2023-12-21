@@ -52,6 +52,10 @@
         nav ul > li a {
             height: auto;
         }
+
+        #parkingTable > tfoot {
+            display: none;
+        }
     </style>
 
 </head>
@@ -207,6 +211,8 @@
 
 <script src="https://unpkg.com/bootstrap-table@1.22.1/dist/bootstrap-table.min.js"></script>
 <script src="<?php echo e(asset('js/bootstrap-table-pl-PL.js')); ?>"></script>
+<script src="<?php echo e(asset('js/paginathing.min.js')); ?>"></script>
+
 
 
 <script>
@@ -243,21 +249,33 @@
         $('#parkingTable').bootstrapTable({
             locale: 'pl-PL',
             toolbar: '.toolbar',
-            pagination: true,      // Enable pagination
+            pagination: false,      // Enable pagination
             pageSize: 25,    // Number of rows to display per page
             server: true
         });
+        $('table#parkingTable tbody').paginathing({
+            perPage: 20,
+            limitPagination: 20,
+            prevNext: true,
+            firstLast: true,
+            prevText: '&laquo;',
+            nextText: '&raquo;',
+            firstText: 'Pierwszy',
+            lastText: 'Ostatni',
+            activeClass: 'active',
 
+        });
         $('.delete-btn').on('click', function () {
             var orderId = $(this).data('order-id');
+            var order_id = $(this).val();
 
             $.ajax({
-                url: '/admin/delete-order/' + orderId, // Replace with your delete route URL
+                url: '/admin/delete-order/' + order_id,
                 type: 'DELETE',
                 dataType: 'json',
                 success: function (response) {
                     // Remove the deleted row from the table
-                    $('#parkingTable').bootstrapTable('remove', {field: 'id', values: [orderId]});
+                    $('#parkingTable').bootstrapTable('remove', {field: 'id', values: [order_id]});
                     location.reload();
                 },
                 error: function (xhr, status, error) {

@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
     <title>Witamy!</title>
     <style>
 
@@ -400,7 +399,7 @@
     </table>
 
     <h3 id="order-title">Dane rezerwacji dni:</h3>
-    <h4>Proszę wydrukować niniejsze potwierdzenie.</h4>
+    <h4>Proszę wydrukować niniejsze potwierdzenie<br>PDF, znajdujące w załączniku.</h4>
 
     <div class=" order-data">
         <table id="order-grid-table" class="order-grid">
@@ -514,15 +513,15 @@
     <table align="center" id="locations-table" class="locations-block" style="margin-left: auto; margin-right: auto;text-align:center;">
         <tbody>
         <tr>
-            <td  style="font-size: 16px!important;text-align:center;">54-530 Wrocław, ul. Skarżyńskiego 2</td>
+            <td style="font-size: 16px!important;text-align:center;">54-530 Wrocław, ul. Skarżyńskiego 2</td>
         </tr>
         <tr>
-            <td  style="font-size: 16px!important;text-align:center;">
+            <td style="font-size: 16px!important;text-align:center;">
                 Współrzędne GPS: {!! getContact('latitude') !!},{!! getContact('longitude') !!}
             </td>
         </tr>
         <tr class="foot-locations">
-            <td style="padding-top: 20px;text-align:center;" ><span style="margin-left: auto;margin-right: auto;width: 100%;text-align:center;">Zobacz na Google Maps:</span>
+            <td style="padding-top: 20px;text-align:center;"><span style="margin-left: auto;margin-right: auto;width: 100%;text-align:center;">Zobacz na Google Maps:</span>
                 <a class="map-link" target="_blank"
                    style="margin-left:auto;margin-right: auto;"
                    href="https://maps.app.goo.gl/ymq4oMUwmdJkE6HM9"
@@ -532,7 +531,7 @@
         </tr>
 
         <tr>
-            <td  style="text-align:center;padding-top:20px;">
+            <td style="text-align:center;padding-top:20px;">
                 <img style="margin-left:auto;margin-right: auto;" src="{{ asset('images/qrcode.png') }}" alt="">
             </td>
         </tr>

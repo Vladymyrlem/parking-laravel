@@ -14,7 +14,8 @@
         "gulp-scss": "gulp sass",
         "gulp": "gulp default",
         "gulp-js": "gulp js",
-        "gulp-minify": "gulp minify-css"
+        "gulp-minify": "gulp minify-css",
+        "gulp-watch": "gulp watch"
     },
     "devDependencies": {
         "@popperjs/core": "^2.11.6",

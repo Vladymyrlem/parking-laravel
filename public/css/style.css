@@ -1767,6 +1767,9 @@ h2.prices {
   }
 }
 @media screen and (max-width: 560px) {
+  .prices-grid {
+    grid-template-columns: 1fr;
+  }
   #prices .title {
     font-size: 28px;
   }
@@ -1791,7 +1794,7 @@ h2.prices {
     font-size: 25px !important;
   }
 }
-@media screen and (max-width: 475px) {
+@media screen and (max-width: 560px) {
   #prices .box_content {
     display: grid;
     grid-template-columns: 1fr;

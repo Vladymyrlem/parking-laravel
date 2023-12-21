@@ -191,6 +191,7 @@ jQuery(function () {
 
 });
 
+
 $(document).ready(function () {
     // Get the blocked dates from PHP variable (passed from the controller)
 

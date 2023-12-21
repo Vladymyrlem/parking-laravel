@@ -10,10 +10,10 @@
         <table class="table table-bordered table-responsive-lg">
             <thead>
             <tr>
-                <th>Service Title</th>
-                <th>Service Content</th>
-                <th>Image</th>
-                <th>Action</th>
+                <th>Tytuł usługi</th>
+                <th>Treść usługi</th>
+                <th>Obrazek</th>
+                <th>Akcja</th>
             </tr>
             </thead>
             <tbody id="services-list">

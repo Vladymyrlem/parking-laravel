@@ -204,3 +204,24 @@ $fa-font-path: '../webfonts';
         padding-right: 0 !important;
     }
 }
+
+#parkingTable {
+    > thead {
+        > tr > th {
+            width: auto;
+            max-width: max-content;
+            min-width: 5%
+        }
+    }
+
+    > tbody {
+        > tr > td {
+            width: auto;
+            max-width: max-content;
+            min-width: 5%
+
+        }
+    }
+
+}
+

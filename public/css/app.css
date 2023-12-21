@@ -10800,3 +10800,13 @@ ul#countries.active {
     padding-right: 0 !important;
   }
 }
+#parkingTable > thead > tr > th {
+  width: auto;
+  max-width: max-content;
+  min-width: 5%;
+}
+#parkingTable > tbody > tr > td {
+  width: auto;
+  max-width: max-content;
+  min-width: 5%;
+}

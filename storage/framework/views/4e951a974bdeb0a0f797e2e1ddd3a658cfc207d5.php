@@ -8,10 +8,13 @@
     <meta name="csrf-token" content="<?php echo e(csrf_token()); ?>">
 
     <meta name="description" content="Parking lotnisko Wrocław RONDO: strzeżony, ubezpieczony, monitorowany. Czynny 24/7, zaledwie 3 minuty od lotniska we Wrocławiu.">
-    <meta name="keywords" content="parking, lotnisko, Wrocław, strzeżony, 24/7, RONDO, monitorowany, ubezpieczony">
+    <meta name="keywords" content="parking, lotnisko, Wrocław, strzeżony, 24/7, RONDO, monitorowany, ubezpieczony, Parking lotnisko Wrocław, Parking Wrocław Strachowice, Lotnisko Wrocław im. Mikołaja Kopernika, Opłaty za parking na lotnisku Wrocław,
+    Parking krótkoterminowy lotnisko Wrocław, Parking długoterminowy Wrocław lotnisko, Rezerwacja miejsca parkingowego na lotnisku Wrocław,
+    Ceny parkingowe Wrocław lotnisko, Godziny otwarcia parkingu na lotnisku Wrocław">
     <meta name="author" content="Parking Wrocław RONDO">
     <meta name="robots" content="index, follow">
     <title>Parking lotnisko Wrocław RONDO</title>
+
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -34,8 +37,8 @@
     
     <link rel="stylesheet" href="<?php echo e(asset('css/slick.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/slick-theme.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('css/style.css')); ?>">
-    <link rel="stylesheet" href="<?php echo e(asset('css/app.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/style.min.css')); ?>">
+    <link rel="stylesheet" href="<?php echo e(asset('css/app.min.css')); ?>">
     <link rel="stylesheet" href="<?php echo e(asset('css/bootstrap.min.css')); ?>">
     
     
@@ -47,14 +50,18 @@
     
 
     <!-- Global site tag (gtag.js) - Google Analytics -->
-    
-    
-    
-    
-    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-20674909-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
 
-    
-    
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+
+        gtag('js', new Date());
+
+        gtag('config', 'UA-20674909-1');
+    </script>
 </head>
 <body name="#start" id="top" class="js">
 <!-- Top Navbar -->
@@ -272,7 +279,7 @@
 <script src="<?php echo e(asset('js/app.js')); ?>"></script>
 <script src="https://maps.google.com/maps/api/js?language=pl&amp;key=AIzaSyBLNkjdXiMOY5qXrYFl5NickaHfDEGcmsA"></script>
 <script src="<?php echo e(asset('js/gmap3.min.js')); ?>"></script>
-<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
 
 
 <script>

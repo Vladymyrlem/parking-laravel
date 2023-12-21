@@ -30,15 +30,17 @@
                                     <s><?php echo e($price->standart_price); ?> &nbsp;PLN</s>
                                 </span>
                                 <div class="promo-range d-flex flex-column">
-                                    <?php echo e(strftime('%d %B %Y %H:%M', strtotime($price->start_promotional_date))); ?>
-
+                                    
 
                                     <p class="start-promotional">od: <?php echo e(formatDate($price->start_promotional_date)); ?></p>
-                                    <p class="start-promotional">do: <?php echo e(formatDate($price->end_promotional_date)); ?></p>
+                                    <span class="start-promotional-value d-none"><?php echo e($price->start_promotional_date); ?></span>
+                                    <p class="end-promotional">do: <?php echo e(formatDate($price->end_promotional_date)); ?></p>
+                                    <span class="d-none end-promotional-value"><?php echo e($price->end_promotional_date); ?></span>
                                 </div>
                             <?php else: ?>
                                 <?php echo e($price->standart_price); ?> <small>PLN</small>
                             <?php endif; ?>
+                            <span class="standart-price-value d-none"><?php echo e($price->standart_price); ?></span>
                         </h4>
                     </div>
                 </div>
