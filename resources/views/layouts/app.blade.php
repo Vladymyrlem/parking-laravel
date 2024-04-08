@@ -71,7 +71,7 @@
             /*display: flex;*/
         }
 
-        #resetFilters{
+        #resetFilters {
             margin-bottom: 5px;
         }
     </style>
@@ -305,9 +305,10 @@
         $('.delete-btn').on('click', function () {
             var orderId = $(this).data('order-id');
             var order_id = $(this).val();
-
+            console.log(orderId);
+            console.log(order_id);
             $.ajax({
-                url: '/admin/delete-order/' + order_id,
+                url: `/admin/delete-order/${order_id}`,
                 type: 'DELETE',
                 dataType: 'json',
                 success: function (response) {

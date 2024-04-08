@@ -230,6 +230,17 @@
                     @include('partials.prices-block.table')
                     @include('partials.prices-block.create')
                 </div>
+                <img src="{{ asset('images/parking-logo.png') }}"
+                     alt="Parking Rondo Logo"
+                     class="brand-image mt-3 mb-3 ml-auto mr-auto"
+                     style="opacity: 1">
+                <!-- Prices Block -->
+                <div class="season-prices-block" id="season-prices" name="#season-prices">
+                    <h2 class="fs-2 text-center">Ceny sezonowe</h2>
+
+                    @include('partials.prices-block.seasons-table')
+                    @include('partials.prices-block.create-season')
+                </div>
                 <div class="modal" id="deleteConfirmationModal" tabindex="-1" role="dialog">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

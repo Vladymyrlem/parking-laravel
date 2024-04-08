@@ -427,7 +427,7 @@
             </tr>
             <tr class="data-row">
                 <td class="data-name" style="padding-right: 25px">
-                    Rezewacja od:
+                    Data przyjazdu:
                 </td>
                 <td class="data-value" style="padding-left: 25px">
                     {{ $arrivalDate }}
@@ -435,7 +435,7 @@
             </tr>
             <tr class="data-row">
                 <td class="data-name" style="padding-right: 25px">
-                    Rezewacja do:
+                    Data wyjazdu:
                 </td>
                 <td class="data-value" style="padding-left: 25px">
                     {{ $departureDate }}
@@ -510,7 +510,8 @@
 
     <h3 id="locations-title">Położenie i dojazd</h3>
 
-    <table align="center" id="locations-table" class="locations-block" style="margin-left: auto; margin-right: auto;text-align:center;">
+    <table align="center" id="locations-table" class="locations-block"
+           style="margin-left: auto; margin-right: auto;text-align:center;">
         <tbody>
         <tr>
             <td style="font-size: 16px!important;text-align:center;">54-530 Wrocław, ul. Skarżyńskiego 2</td>
@@ -521,7 +522,8 @@
             </td>
         </tr>
         <tr class="foot-locations">
-            <td style="padding-top: 20px;text-align:center;"><span style="margin-left: auto;margin-right: auto;width: 100%;text-align:center;">Zobacz na Google Maps:</span>
+            <td style="padding-top: 20px;text-align:center;"><span
+                    style="margin-left: auto;margin-right: auto;width: 100%;text-align:center;">Zobacz na Google Maps:</span>
                 <a class="map-link" target="_blank"
                    style="margin-left:auto;margin-right: auto;"
                    href="https://maps.app.goo.gl/ymq4oMUwmdJkE6HM9"
@@ -560,9 +562,11 @@
             bagażami, gdzie mają bezpłatny wjazd na teren portu lotniczego do 10 minut.
         </p>
         <p>
-            W przypadku, kiedy w aucie jest więcej niż 5 osób do transferu na terminal i z powrotem, kierowca powinien najpierw zawieść pasażerów pod terminal lotniska razem z bagażami, gdzie ma
+            W przypadku, kiedy w aucie jest więcej niż 5 osób do transferu na terminal i z powrotem, kierowca powinien
+            najpierw zawieść pasażerów pod terminal lotniska razem z bagażami, gdzie ma
             bezpłatny
-            wjazd na teren Portu Lotniczego do 10 minut. Następnie sam kierowca przyjezdża na parking ( zajmuje to 3 minuty). Podobna procedura jest przy powrocie, po odbiór auta przywozimy tylko
+            wjazd na teren Portu Lotniczego do 10 minut. Następnie sam kierowca przyjezdża na parking ( zajmuje to 3
+            minuty). Podobna procedura jest przy powrocie, po odbiór auta przywozimy tylko
             kierowcę.
         </p>
         <p>Następnie na parking odprowadzają samochody sami kierowcy (zajmuje to do 3 minut). Pozwoli to usprawnić i

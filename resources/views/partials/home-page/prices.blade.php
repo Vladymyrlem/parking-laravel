@@ -10,12 +10,10 @@
         <div class="row text-center prices-grid">
 
             @foreach($prices as $price)
-                {{--                <div class=" box">--}}
 
                 <div id="day-{{ $loop->iteration }}" class="text-center box_content @if( !empty($price->promotional_price) && $price->end_promotional_date >= $now )  promo @endif"
                      @if( !empty($price->promotional_price) && $price->end_promotional_date >= $now ) data-start-date="{{$price->start_promotional_date}}"
-                     data-end-date="{{ $price->end_promotional_date }}" @endif
-                >
+                     data-end-date="{{ $price->end_promotional_date }}" @endif>
                     <div class="top-price-box">
                         <h2>{{$price->count_days}}</h2>
                         <h3 class="subtitle">
@@ -52,19 +50,16 @@
                         </h4>
                     </div>
                 </div>
-                {{--                </div>--}}
             @endforeach
-            {{--            <div class=" box">--}}
-            <div class=" text-center box_content">
+            <div id="more-15-days" class=" text-center box_content">
                 <div class="top-price-box">
                     <h2>&gt; 15 dni</h2>
                     <h3 class="subtitle">każdy kolejny dzień</h3>
                 </div>
                 <div class="bottom-price-box">
-                    <h4>10.00 <small>PLN</small></h4>
+                    <h4>15.00 <small>PLN</small></h4>
                 </div>
             </div>
-            {{--            </div>--}}
         </div>
     </div>
 </section>

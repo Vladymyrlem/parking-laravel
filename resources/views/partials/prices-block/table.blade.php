@@ -31,6 +31,20 @@
                     <button class="btn btn-danger btn-delete delete-price" value="{{$price->id}}">Usuń cenę </button>
                 </td>
             </tr>
+            @if($price->count_days === '15+')
+            <tr id="pricerow-15-more">
+                <td>{{ $price->count_days }}</td>
+                <td>{{ $price->standart_price }}</td>
+                <td>{{ $price->promotional_price }}</td>
+                <td>{{ $price->start_promotional_date }}</td>
+                <td>{{ $price->end_promotional_date }}
+                </td>
+                <td width="250">
+                    <button class="btn btn-warning btn-detail open_price mr-2" value="{{$price->id}}"> Edycja ceny</button>
+                    <button class="btn btn-danger btn-delete delete-price" value="{{$price->id}}">Usuń cenę </button>
+                </td>
+            </tr>
+            @endif
         @endforeach
         </tbody>
     </table>

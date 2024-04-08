@@ -92,7 +92,23 @@
             $price->save();
             return response()->json($price);
         }
-
+        public function updateSeasonPrices($price_id, Request $request){
+            $price = Price::find($price_id);
+            $price->month_1 = $request->month_1;
+            $price->month_2 = $request->month_2;
+            $price->month_3 = $request->month_3;
+            $price->month_4 = $request->month_4;
+            $price->month_5 = $request->month_5;
+            $price->month_6 = $request->month_6;
+            $price->month_7 = $request->month_7;
+            $price->month_8 = $request->month_8;
+            $price->month_9 = $request->month_9;
+            $price->month_10 = $request->month_10;
+            $price->month_11 = $request->month_11;
+            $price->month_12 = $request->month_12;
+            $price->save();
+            return response()->json($price);
+        }
         /**
          * Remove the specified Prices from storage.
          *

@@ -43,7 +43,6 @@
                         <div class="contact-value phones-list d-flex flex-column">
                             <a href="tel:{!! getContact('phone_number_1') !!}">{!! getContact('phone_number_1') !!}</a>
                             <a href="tel:{!! getContact('phone_number_2') !!}">{!! getContact('phone_number_2') !!}</a>
-
                         </div>
                         <span class="contact-name">        {!!  getTitleBySlug('contact-gps') !!}
 </span>
@@ -60,7 +59,7 @@
             Wszelkie prawa zastrzeżone
         </span>
                 <div class="created-by">
-                    Created by <a href="https://entsolve.pl">Entsolve.pl</a>
+                    Created by <a href="https://entsolve.com">Entsolve.com</a>
                 </div>
             </div>
         </div>

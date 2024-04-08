@@ -220,7 +220,7 @@ jQuery(function () {
         if (daysDifference > 15) {
             // Calculate the additional days beyond 15
             const additionalDays = daysDifference - 15;
-            const additionalPrice = additionalDays * 10;
+            const additionalPrice = additionalDays * 15;
 
             // Get the price for 15 days from the pricesObj
             let priceFor15Days = pricesObj['15'];
@@ -255,7 +255,7 @@ jQuery(function () {
     var parts = text.split(':');
 
 // Отримати другу частину (дату) та видалити пробіли з початку та кінця рядка
-    var dateText = parts[1].trim();
+    var dateText = (parts[1] && typeof parts[1] === 'string') ? parts[1].trim() : '';
 
 // Розділити дату за допомогою '/'
     var dateParts = dateText.split('/');
@@ -270,8 +270,8 @@ jQuery(function () {
     var formattedDate = year + '-' + month + '-' + day;
 
     // console.log(formattedDate.replace('od', '')); // Вивести отформатовану дату у консолі
-    var datePromotional = document.querySelector('.start-promotional-value').textContent;
-
+    var datePromotionalElement = document.querySelector('.start-promotional-value');
+    var datePromotional = datePromotionalElement ? datePromotionalElement.textContent : '';
 // Створити об'єкт Date з тексту (перетворення з рядка в дату)
     var targetDate = new Date(datePromotional);
 
