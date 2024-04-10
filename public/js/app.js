@@ -187,23 +187,38 @@ jQuery(function () {
             console.log(parkingArrivalDate, parkingDepartureDate);
             console.log(promotionStartDate.split(' ')[0], promotionEndDate.split(' ')[0]);
 // Дати початку і закінчення акції
+            var isSeason = $(this).hasClass('season');
+            var isPromo = $(this).hasClass('promo');
+            var priceElement = $(this).find('h4');
 
             const d1 = get_arr_dates(promotionStartDate.split(' ')[0], promotionEndDate.split(' ')[0]);
             const d2 = get_arr_dates(parkingArrivalDate, parkingDepartureDate);
 // Перевірка, чи є перетин між проміжками дат
             if (includes_dates(d1, d2).length > 0) {
-                var priceElement = $(this).find('h4');
-                var isPromo = !$(this).hasClass('promo');
 
                 if (isPromo) {
-                    price_value = priceElement.text();
-                    console.log('Standard price: ' + price_value);
-                } else {
                     price_value = priceElement.find('span.promotional-price-value').text();
                     console.log('Promotional price: ' + price_value);
                 }
+                else if (isSeason){
+                    price_value = priceElement.find('span.promotional-price-month-value').text();
+                    console.log('Season price: ' + price_value);
+                }
+                else {
+                    price_value = priceElement.text();
+                    console.log('Standard price: ' + price_value);
+                }
                 console.log('You can get promotional');
-            } else {
+            }
+            else if (isPromo) {
+                price_value = priceElement.find('span.promotional-price-value').text();
+                console.log('Promotional price: ' + price_value);
+            }
+            else if (isSeason){
+                price_value = priceElement.find('span.promotional-price-month-value').text();
+                console.log('Season price: ' + price_value);
+            }
+            else {
                 price_value = $(this).find('h4 span.standart-price-value').text();
                 console.log('Standard price: ' + price_value);
             }
@@ -219,8 +234,9 @@ jQuery(function () {
 // Check if the differenceDays is greater than 15
         if (daysDifference > 15) {
             // Calculate the additional days beyond 15
+            more_price_value = $('span.more-price').text();
             const additionalDays = daysDifference - 15;
-            const additionalPrice = additionalDays * 15;
+            const additionalPrice = additionalDays * more_price_value;
 
             // Get the price for 15 days from the pricesObj
             let priceFor15Days = pricesObj['15'];
