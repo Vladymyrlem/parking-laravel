@@ -5,6 +5,7 @@
     use App\Http\Requests\CreatePricesRequest;
     use App\Http\Requests\UpdatePricesRequest;
     use App\Models\Price;
+    use App\Models\SeasonPrices;
     use Carbon\Carbon;
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Response;
@@ -31,10 +32,11 @@
         public function index(Request $request)
         {
             $prices = Price::all();
+            $seasonPrices = SeasonPrices::all();
             $price_promotional = Price::all('promotional_price');
             $start_promotional = Price::all('start_promotional_date');
             $end_promotional = Price::all('end_promotional_date');
-            return view('admin', compact('prices'));
+            return view('admin', compact('prices','seasonPrices'));
         }
 
         /**
@@ -62,7 +64,16 @@
             $price = Price::find($price_id);
             return response()->json($price);
         }
-
+        public function showSeasonPrices($price_id)
+        {
+            $price = SeasonPrices::find($price_id);
+            return response()->json($price);
+        }
+        public function storeSeasonPrices(Request $request)
+        {
+            $prices = SeasonPrices::create($request->input());
+            return response()->json($prices);
+        }
         /**
          * Update the specified Prices in storage.
          *
@@ -92,8 +103,10 @@
             $price->save();
             return response()->json($price);
         }
+
         public function updateSeasonPrices($price_id, Request $request){
-            $price = Price::find($price_id);
+            $price = SeasonPrices::find($price_id);
+            $price->count_days = $price_id;
             $price->month_1 = $request->month_1;
             $price->month_2 = $request->month_2;
             $price->month_3 = $request->month_3;
@@ -109,6 +122,7 @@
             $price->save();
             return response()->json($price);
         }
+
         /**
          * Remove the specified Prices from storage.
          *

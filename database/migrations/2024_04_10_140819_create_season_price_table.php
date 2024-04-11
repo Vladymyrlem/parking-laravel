@@ -15,15 +15,14 @@ return new class extends Migration
     {
         Schema::create('season_prices', function (Blueprint $table) {
             $table->id();
-            $table->string('season');
-            // Змінюємо тип колонки для кожного дня місяця (1-15) на string
-            for ($i = 1; $i <= 15; $i++) {
-                $table->string('day_'.$i.'_price')->nullable();
+            $table->integer('count_days')->default(0)->change();
+            for ($i = 1; $i <= 12; $i++) {
+                $previousColumn = $i - 1 > 0 ? 'month_'.($i-1) : null;
+                $table->decimal('month_'.$i, 8, 2)->nullable();
             }
-            // Змінюємо тип колонки для ціни за більше ніж 15 днів на string
-            $table->string('price_15_plus')->nullable();
             $table->timestamps();
         });
+
     }
 
     /**
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('season_prices');
+        Schema::dropIfExists('season_price');
     }
 };

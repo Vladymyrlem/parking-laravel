@@ -161,7 +161,7 @@ jQuery(function () {
         const startTime = getValueByName("order_pick_up_time");
         const endDate = getValueByName("order_drop_off_date");
         const endTime = getValueByName("order_drop_off_time");
-
+        console.log(endDate);
         const daysDifference = calculateDaysDifference(startDate, startTime, endDate, endTime);
         $('input#checkout_days').val(daysDifference);
         $('#checkout_days_desc').html(daysDifference);
@@ -178,10 +178,32 @@ jQuery(function () {
 // Loop through each box_content element
         var parkingArrivalDate = startDate;
         var parkingDepartureDate = endDate;
+
         boxContentElements.each(function () {
             const days = $(this).find('h2').text();
-            let price_value = '';
+            var priceElement = $(this).find('h4');
 
+            let price_value = '';
+            const parkingDepartureDateStr = parkingDepartureDate;
+            const resultDate = new Date(parkingDepartureDateStr);
+            let month; // Оголошення змінної на рівні батьківського блоку
+            let text
+            if (resultDate instanceof Date && !isNaN(resultDate)) {
+                month = (resultDate.getMonth() + 1).toString(); // Перетворення числа на рядок
+                text = $(this).find('span.month_' + month).text();
+                console.log(text);
+            } else {
+                console.log('Неправильний формат дати');
+            }
+            console.log(month);
+            var element = $(this).find('span.month_' + month);
+
+
+// Отримання текстового значення зі спана з відповідним класом
+            const monthPrice = $(this).find('span.month_' + month).text(); // Перетворення текстового значення на число
+            console.log(element);
+            console.log(monthPrice);
+            console.log($(this).find('span.month_' + month).text());
             var promotionStartDate = $('.start-promotional-value').eq(0).text();
             var promotionEndDate = $('.end-promotional-value').eq(0).text();
             console.log(parkingArrivalDate, parkingDepartureDate);
@@ -189,19 +211,17 @@ jQuery(function () {
 // Дати початку і закінчення акції
             var isSeason = $(this).hasClass('season');
             var isPromo = $(this).hasClass('promo');
-            var priceElement = $(this).find('h4');
 
             const d1 = get_arr_dates(promotionStartDate.split(' ')[0], promotionEndDate.split(' ')[0]);
             const d2 = get_arr_dates(parkingArrivalDate, parkingDepartureDate);
 // Перевірка, чи є перетин між проміжками дат
             if (includes_dates(d1, d2).length > 0) {
-
                 if (isPromo) {
                     price_value = priceElement.find('span.promotional-price-value').text();
                     console.log('Promotional price: ' + price_value);
                 }
                 else if (isSeason){
-                    price_value = priceElement.find('span.promotional-price-month-value').text();
+                    price_value = text;
                     console.log('Season price: ' + price_value);
                 }
                 else {
@@ -214,13 +234,20 @@ jQuery(function () {
                 price_value = priceElement.find('span.promotional-price-value').text();
                 console.log('Promotional price: ' + price_value);
             }
-            else if (isSeason){
-                price_value = priceElement.find('span.promotional-price-month-value').text();
-                console.log('Season price: ' + price_value);
-            }
-            else {
+            else if (isSeason) {
+                price_value = text;
+                if (!isNaN(parseFloat(price_value))) {
+                    console.log('Season price: ' + price_value);
+                } else {
+                    console.log('Некоректне числове значення для сезонної ціни');
+                }
+            } else {
                 price_value = $(this).find('h4 span.standart-price-value').text();
-                console.log('Standard price: ' + price_value);
+                if (!isNaN(parseFloat(price_value))) {
+                    console.log('Standard price: ' + price_value);
+                } else {
+                    console.log('Некоректне числове значення для стандартної ціни');
+                }
             }
             pricesObj[days] = parseFloat(price_value);
 
@@ -229,7 +256,11 @@ jQuery(function () {
 
 // Вивести результат
         let totalPrice = pricesObj[daysDifference];
-        console.log('Загальна ціна:', totalPrice);
+        if (!isNaN(totalPrice)) {
+            console.log('Загальна ціна:', totalPrice);
+        } else {
+            console.log('Некоректне числове значення для загальної ціни');
+        }
 
 // Check if the differenceDays is greater than 15
         if (daysDifference > 15) {

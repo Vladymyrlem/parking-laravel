@@ -12,9 +12,11 @@
          */
         public function up()
         {
-            Schema::table('sections_title', function (Blueprint $table) {
-                $table->string('subtitle');
-            });
+            if (!Schema::hasColumn('sections_title', 'subtitle')) {
+                Schema::table('sections_title', function (Blueprint $table) {
+                    $table->string('subtitle');
+                });
+            }
         }
 
         /**

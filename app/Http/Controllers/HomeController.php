@@ -8,6 +8,7 @@
     use App\Models\Information;
     use App\Models\Parking;
     use App\Models\Price;
+    use App\Models\SeasonPrices;
     use App\Models\Reservation;
     use App\Models\Reviews;
     use App\Models\Services;
@@ -40,7 +41,11 @@
          */
         public function index()
         {
-            $prices = Price::all();
+            $prices = Price::where('count_days', '<=', 15)->get();
+
+// Витягуємо усі ціни де колонка count_days рівна 16
+            $prices16 = Price::where('count_days', 16)->get();
+            $seasonPrices = SeasonPrices::all();
             $headBlocks = HeadBlock::all();
             $information = Information::all();
             $reservations = Reservation::all('new_date');
@@ -50,8 +55,8 @@
             $phoneNumber = DB::table('contacts')->value('phone_number_1');
             $address = DB::table('contacts')->value('address');
             $map_link = DB::table('contacts')->value('map_link');
-            $about_us_title = DB::table('about_us')->value('title');;
-            $about_us_content = DB::table('about_us')->value('content');;
+            $about_us_title = DB::table('about_us')->value('title');
+            $about_us_content = DB::table('about_us')->value('content');
             $blockedDates = [];
             // Loop through each reservation and get the custom date value
             foreach ($reservations as $reservation) {
@@ -67,7 +72,7 @@
                 return $reservation->new_date >= $today;
             });
             // Pass the $blockedDates variable to the view
-            return view('home', compact('headBlocks', 'prices', 'information', 'blockedDatesJson',
+            return view('home', compact('headBlocks', 'prices','prices16','seasonPrices', 'information', 'blockedDatesJson',
                 'reviews', 'phoneNumber', 'address', 'map_link', 'about_us_title', 'about_us_content', 'services', 'reservations', 'newReservations'));
         }
 

@@ -11,6 +11,7 @@
     use App\Models\Newsletter;
     use App\Models\Parking;
     use App\Models\Price;
+    use App\Models\SeasonPrices;
     use App\Models\Reservation;
     use App\Models\Reviews;
     use App\Models\SectionTitle;
@@ -46,7 +47,11 @@
          */
         public function index()
         {
-            $prices = Price::all();
+            $prices = Price::where('count_days', '<=', 15)->get();
+
+// Витягуємо усі ціни де колонка count_days рівна 16
+            $prices16 = Price::where('count_days', 16)->get();
+            $seasonPrices = SeasonPrices::all();
             $headBlocks = HeadBlock::all();
             $information = Information::all();
             $reviews = Reviews::all();
@@ -57,11 +62,11 @@
             $newsletter = Newsletter::all();
             $text_content = Content::all();
             $about_us = AboutUs::all();
-            $about_us_title = DB::table('about_us')->value('title');;
+            $about_us_title = DB::table('about_us')->value('title');
             $about_us_content = DB::table('about_us')->value('content');
             $parkings = Parking::all();
 
-            return view('admin', compact('prices', 'headBlocks', 'information', 'reviews', 'contacts',
+            return view('admin', compact('prices', 'seasonPrices', 'prices16','headBlocks', 'information', 'reviews', 'contacts',
                 'section_title', 'reservations', 'services', 'newsletter', 'text_content', 'about_us', 'about_us_title', 'about_us_content', 'parkings'));
         }
 

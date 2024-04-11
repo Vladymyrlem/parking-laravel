@@ -13,10 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::table('prices', function (Blueprint $table) {
-            for ($i = 1; $i <= 15; $i++) {
-                $table->string('month_'.$i.'_price')->nullable();
-            }
+        Schema::table('contacts', function (Blueprint $table) {
+            //
         });
     }
 
@@ -27,7 +25,7 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::table('prices', function (Blueprint $table) {
+        Schema::table('contacts', function (Blueprint $table) {
             //
         });
     }

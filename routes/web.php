@@ -55,7 +55,9 @@
         Route::put('/admin/prices/{price_id?}', [PricesController::class, 'updatePrices']);
         Route::delete('/admin/prices/{price_id}', [PricesController::class, 'destroyPrices']);
         Route::post('/admin/reservations', [AdminController::class, 'reservations']);
+        Route::get('/admin/season-prices/{price_id?}', [PricesController::class, 'showSeasonPrices']);
         Route::put('/admin/season-prices/{price_id?}', [PricesController::class, 'updateSeasonPrices']);
+        Route::post('/admin/season-prices', [PricesController::class, 'storeSeasonPrices']);
         Route::post('/submit-order/{order_id}', [ParkingController::class, 'showParking']);
         Route::delete('/submit-order/{order_id}', [ParkingController::class, 'destroy']);
         /*Header block*/

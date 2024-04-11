@@ -9,43 +9,36 @@
     <table class="table table-dark table-valign-middle table-responsive-lg" id="prices-table">
         <thead>
         <tr>
-            <th>January</th>
-            <th>February</th>
-            <th>March</th>
-            <th>April</th>
-            <th>May</th>
-            <th>June</th>
-            <th>July</th>
-            <th>August</th>
-            <th>September</th>
-            <th>October</th>
-            <th>November</th>
-            <th>December</th>
+            <th>Liczba dni</th>
+            <th>Styczeń</th>
+            <th>Luty</th>
+            <th>Marzec</th>
+            <th>Kwiecień</th>
+            <th>Maj</th>
+            <th>Czerwiec</th>
+            <th>Lipiec</th>
+            <th>Sierpień</th>
+            <th>Wrzesień</th>
+            <th>Październik</th>
+            <th>Listopad</th>
+            <th>Grudzień</th>
             <th colspan="3">Akcja</th>
         </tr>
         </thead>
         <tbody id="season-prices-list" name="season-prices-list">
-        @foreach($prices as $price)
+        @foreach($seasonPrices as $price)
             <tr id="pricerow-{{$price->id}}">
-                @for ($i = 1; $i <= 16; $i++)
-                    <td> {{ $price->{'month_' . $i} }} for month_{{ $i }}</td>
+                <td>{{ $price->count_days }}</td>
+
+            @for ($i = 1; $i <= 12; $i++)
+                    <td> {{ $price->{'month_' . $i} }}</td>
                 @endfor
                 <td width="250">
                     <button class="btn btn-warning btn-detail open_season_price mr-2" value="{{$price->id}}"> Edycja ceny</button>
                     <button class="btn btn-danger btn-delete delete-season-price" value="{{$price->id}}">Usuń cenę </button>
                 </td>
             </tr>
-            @if($price->count_days === '15+')
-            <tr id="pricerow-15-more">
-                @for ($i = 1; $i <= 16; $i++)
-                    <td> {{ $price->{'month_' . $i} }} for month_{{ $i }}</td>
-                @endfor
-                <td width="250">
-                    <button class="btn btn-warning btn-detail open_price mr-2" value="{{$price->id}}"> Edycja ceny</button>
-                    <button class="btn btn-danger btn-delete delete-price" value="{{$price->id}}">Usuń cenę </button>
-                </td>
-            </tr>
-            @endif
+
         @endforeach
         </tbody>
     </table>

@@ -5,6 +5,16 @@
     position: relative;
     z-index: 2;
     height: 100%;
+
+    h5{
+        color: var(--black, #151616);
+        /* H3 bold */
+        font-family: Lato Bold, sans-serif !important;
+        font-size: 30px;
+        font-style: normal;
+        font-weight: 900;
+        line-height: 33px; /* 110% */
+    }
 }
 
 .row.prices {
@@ -87,14 +97,14 @@ h2.prices {
         background: var(--prime, #0074B7);
 
         h4 {
-            font-size: 40px;
+            font-size: 36px;
             font-style: normal;
             font-weight: 700;
             line-height: normal;
         }
 
         small {
-            font-size: 30px;
+            font-size: 36px;
             font-style: normal;
             font-weight: 600;
             line-height: normal;
@@ -125,10 +135,18 @@ h2.prices {
 #prices .box_content h4 {
     color: var(--white, #FFF);
     font-family: Lato Medium, sans-serif !important;
-    font-size: 40px;
+    font-size: 36px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+    .more-price{
+        color: #ffffff;
+        font-family: Lato Medium,sans-serif !important;
+        font-size: 36px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
 }
 
 #prices .box_content small {
@@ -144,7 +162,7 @@ h2.prices {
 }
 
 #prices .box_content.promo h2,
-#prices .box_content.promo .subtitle {
+#prices .box_content.promo .subtitle{
     color: #00a82a;
 }
 
@@ -159,7 +177,7 @@ h2.prices {
 
 }
 
-#prices .box_content.promo {
+#prices .box_content.promo,#prices .box_content.season {
     .promo-range {
 
         p {
@@ -181,8 +199,40 @@ h2.prices {
 
     }
 }
+#prices .box_content.season .bottom-price-box{
+    background: var(--prime, #0074B7);
 
-#prices .box_content.promo .bottom-price-box {
+    .promotional-price {
+        color: #fff;
+        font-size: 32px;
+        padding: 10px;
+        font-weight: bold;
+        &.month-price{
+            display: flex;
+            justify-content :center;
+            gap: 10px;
+            font-family: Lato Medium,sans-serif !important;
+            font-size: 36px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            color: #fff;
+
+            small {
+                font-family: Lato Medium,sans-serif !important;
+                font-size: 36px;
+                font-style: normal;
+                font-weight: 700;
+            }
+        }
+        small {
+            color: #fff;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+    }
+}
+#prices .box_content.promo .bottom-price-box{
     background-color: #00a82a;
 
     .promotional-price {
@@ -190,7 +240,24 @@ h2.prices {
         font-size: 32px;
         padding: 10px;
         font-weight: bold;
-
+//&.month-price{
+//    display: flex;
+//    justify-content :center;
+//    gap: 10px;
+//    font-family: Lato Medium,sans-serif !important;
+//    font-size: 36px;
+//    font-style: normal;
+//    font-weight: 700;
+//    line-height: normal;
+//    color: #fff;
+//
+//    small {
+//        font-family: Lato Medium,sans-serif !important;
+//        font-size: 36px;
+//        font-style: normal;
+//        font-weight: 700;
+//    }
+//    }
         small {
             color: #fff;
             font-size: 12px;

@@ -17,8 +17,7 @@
             'standart_price',
             'promotional_price',
             'start_promotional_date',
-            'end_promotional_date'
-
+            'end_promotional_date',
         ];
 
         /**
